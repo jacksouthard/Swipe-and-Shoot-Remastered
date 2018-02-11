@@ -60,34 +60,36 @@ public class Weapon : MonoBehaviour {
 		fireRateTimer = fireRate;
 		canFire = false;
 
-		Vector3 start = bulletSpawns[0].position;
-		Vector3 end;
-		Vector3 direction = transform.rotation * Vector3.left;
-		direction = Quaternion.Euler(new Vector3 (Random.Range(-accuracy, accuracy), Random.Range(-accuracy, accuracy), 0f)) * direction;
+		foreach (var bulletSpawn in bulletSpawns) {
+			Vector3 start = bulletSpawn.position;
+			Vector3 end;
+			Vector3 direction = bulletSpawn.rotation * Vector3.left;
+			direction = Quaternion.Euler(new Vector3 (Random.Range(-accuracy, accuracy), Random.Range(-accuracy, accuracy), 0f)) * direction;
 
-		RaycastHit hit;
-		Physics.Raycast(start, direction, out hit, range);
+			RaycastHit hit;
+			Physics.Raycast(start, direction, out hit, range);
 
-//		if (true) {
-		if (hit.collider == null) {
-			// bullet misses
-			end = bulletSpawns[0].position + (direction.normalized * range);
+			//		if (true) {
+			if (hit.collider == null) {
+				// bullet misses
+				end = bulletSpawn.position + (direction.normalized * range);
 
-		} else {
-			// bullet hit
-			end = hit.point;
+			} else {
+				// bullet hit
+				end = hit.point;
 
-			// apply damage
-			GameObject hitGO = hit.collider.gameObject;
-			if (hitGO.GetComponentInParent<Health> () != null) {
-				hitGO.GetComponentInParent<Health> ().TakeDamage (damage);
-			} else if (hitGO.GetComponent<Health> () != null) {
-				hitGO.GetComponent<Health> ().TakeDamage (damage);
+				// apply damage
+				GameObject hitGO = hit.collider.gameObject;
+				if (hitGO.GetComponentInParent<Health> () != null) {
+					hitGO.GetComponentInParent<Health> ().TakeDamage (damage);
+				} else if (hitGO.GetComponent<Health> () != null) {
+					hitGO.GetComponent<Health> ().TakeDamage (damage);
+				}
 			}
-		}
-			
 
-		GameObject bulletRay = Instantiate (bulletRayPrefab, transform.position, Quaternion.identity, transform);
-		bulletRay.GetComponent<BulletRay> ().Init (start, end, 0.05f);
+
+			GameObject bulletRay = Instantiate (bulletRayPrefab, transform.position, Quaternion.identity, transform);
+			bulletRay.GetComponent<BulletRay> ().Init (start, end, 0.05f);
+		}
 	}
 }
