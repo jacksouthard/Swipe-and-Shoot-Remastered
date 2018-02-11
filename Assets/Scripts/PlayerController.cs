@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	//launches character in a direction
-	public void Swipe(Vector2 dir) {
+	public void Swipe (Vector2 dir) {
 		if (currentVechicle != null) {
 			currentVechicle.Dismount ();
 			currentVechicle = null;
