@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //controls the player character
 public class PlayerController : MonoBehaviour {
@@ -25,6 +26,9 @@ public class PlayerController : MonoBehaviour {
 
 	[Header("Picking Up")]
 	public float pickupTime;
+	public GameObject timerDisplay;
+	public GameObject timerBar;
+	public Text nextPickupText;
 
 	List<PickupTimer> curPickingupTimers = new List<PickupTimer>();
 
@@ -39,6 +43,8 @@ public class PlayerController : MonoBehaviour {
 		rb = gameObject.GetComponent<Rigidbody> ();
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
+
+		timerDisplay.transform.parent = null;
 	}
 
 	//launches character in a direction
@@ -96,6 +102,8 @@ public class PlayerController : MonoBehaviour {
 		if (state == MovementState.Grounded && !inVehicle) { //stand up
 			transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f), turnSpeed * Time.deltaTime);
 		}
+
+		DisplayPickupTimer ();
 	}
 
 	void Stop() {
@@ -135,34 +143,60 @@ public class PlayerController : MonoBehaviour {
 			return;
 		}
 
-		List<PickupTimer> completedTimers = new List<PickupTimer>();
 		foreach (var pickupTimer in curPickingupTimers) {
 			pickupTimer.timer -= Time.deltaTime;
 			if (pickupTimer.timer <= 0f) {
 				Pickup (pickupTimer.pickup);
-				completedTimers.Add (pickupTimer);
+				curPickingupTimers.Remove (pickupTimer);
+				return;
 			}
-		}
-
-		// remove completed timers
-		foreach (var completedTimer in completedTimers) {
-			curPickingupTimers.Remove (completedTimer);
 		}
 	}
 
 	void Pickup (GameObject pickup) {
+		foreach (var pickupTimer in curPickingupTimers) {
+			if (pickupTimer.pickup != pickup) {
+				pickupTimer.ResetTimer ();
+			}
+		}
+
 		WeaponPickup weaponPickup = pickup.GetComponent<WeaponPickup> ();
 		shooting.SetWeapon (weaponPickup.weaponData);
 		Destroy (pickup);
 	}
 
+	void DisplayPickupTimer() {
+		timerDisplay.SetActive (curPickingupTimers.Count > 0);
+
+		if (curPickingupTimers.Count == 0) {
+			return;
+		}
+
+		timerDisplay.transform.position = transform.position;
+
+		nextPickupText.text = curPickingupTimers [0].data.name;
+		timerBar.transform.localScale = new Vector3 (curPickingupTimers[0].percentage, 1f, 1f);
+	}
+
 	public class PickupTimer {
 		public GameObject pickup;
+		public WeaponManager.WeaponData data;
 		public float timer;
+
+		float originalTime;
 
 		public PickupTimer (GameObject _pickup, float _timer) {
 			pickup = _pickup;
 			timer = _timer;
+			originalTime = _timer;
+
+			data = pickup.GetComponent<WeaponPickup>().weaponData;
 		}
+
+		public void ResetTimer() {
+			timer = originalTime;
+		}
+
+		public float percentage { get { return timer / originalTime; } }
 	}
 }
