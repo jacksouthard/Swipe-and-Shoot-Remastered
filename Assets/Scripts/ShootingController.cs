@@ -13,6 +13,11 @@ public class ShootingController : MonoBehaviour {
 	public float parentSpeed; //speed at which the body rotates towards target
 	public float speed; //speed at which the hands rotate towards target
 
+	[Header("Throwing")]
+	public GameObject weaponPickupPrefab;
+	public float throwHeight;
+	public float throwVelocity;
+
 	bool isPlayer;
 	Transform player;
 	Health health;
@@ -29,12 +34,13 @@ public class ShootingController : MonoBehaviour {
 
 	public void SetWeapon(WeaponManager.WeaponData newWeapon) {
 		if (weapon != null) {
-			Destroy (weapon.gameObject);
+			ThrowWeapon ();
 		}
 
 		GameObject weaponObj = Instantiate (newWeapon.prefab, transform.GetChild(0));
 		weaponObj.transform.localPosition = Vector3.zero;
 		weaponObj.transform.localRotation = Quaternion.identity;
+		weaponObj.name = newWeapon.name;
 
 		weapon = weaponObj.GetComponent<Weapon>();
 		weapon.SetTarget(targetTag);
@@ -42,6 +48,14 @@ public class ShootingController : MonoBehaviour {
 		if (health != null) {
 			health.UpdateRenderers ();
 		}
+	}
+
+	void ThrowWeapon () {
+		Vector3 pos = transform.parent.TransformPoint(0f, throwHeight, 1f);
+		GameObject newPickup = Instantiate (weaponPickupPrefab, pos, Quaternion.identity);
+		WeaponManager.WeaponData newWeaponData = WeaponManager.instance.WeaponDataFromName (weapon.name);
+		newPickup.GetComponent<WeaponPickup> ().Init (newWeaponData);
+		newPickup.GetComponent<Rigidbody>().velocity = transform.parent.forward * throwVelocity;
 	}
 
 	void LateUpdate() {

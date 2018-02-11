@@ -23,6 +23,11 @@ public class PlayerController : MonoBehaviour {
 	public float verticalFactor; //the amount by which the y-vector of the launch force is scaled by relative to the launch magnitude
 	public float turnSpeed; //how fast the player returns to a standing position
 
+	[Header("Picking Up")]
+	public float pickupTime;
+
+	List<PickupTimer> curPickingupTimers = new List<PickupTimer>();
+
 	public bool inVehicle { get { return currentVechicle != null; } }
 
 	public Vechicle currentVechicle;
@@ -91,9 +96,61 @@ public class PlayerController : MonoBehaviour {
 	// picking up weapons
 	void OnTriggerEnter (Collider coll) {
 		if (coll.gameObject.tag == "Pickup") {
-			WeaponPickup weaponPickup = coll.gameObject.GetComponent<WeaponPickup> ();
-			shooting.SetWeapon (weaponPickup.weaponData);
-			Destroy (coll.gameObject);
+			// new pickup enter range
+			curPickingupTimers.Add (new PickupTimer (coll.gameObject, pickupTime));
+		}
+	}
+
+	void OnTriggerExit (Collider coll) {
+		if (coll.gameObject.tag == "Pickup") {
+			// pickup exit range
+			List<PickupTimer> exitedTimers = new List<PickupTimer>();
+			foreach (var pickupTimer in curPickingupTimers) {
+				if (pickupTimer.pickup == coll.gameObject) {
+					exitedTimers.Add (pickupTimer);
+				}
+			}
+
+			// remove exited timers
+			foreach (var exitedTimer in exitedTimers) {
+				curPickingupTimers.Remove (exitedTimer);
+			}
+		}
+	}
+
+	void Update () {
+		if (curPickingupTimers.Count == 0) {
+			return;
+		}
+
+		List<PickupTimer> completedTimers = new List<PickupTimer>();
+		foreach (var pickupTimer in curPickingupTimers) {
+			pickupTimer.timer -= Time.deltaTime;
+			if (pickupTimer.timer <= 0f) {
+				Pickup (pickupTimer.pickup);
+				completedTimers.Add (pickupTimer);
+			}
+		}
+
+		// remove completed timers
+		foreach (var completedTimer in completedTimers) {
+			curPickingupTimers.Remove (completedTimer);
+		}
+	}
+
+	void Pickup (GameObject pickup) {
+		WeaponPickup weaponPickup = pickup.GetComponent<WeaponPickup> ();
+		shooting.SetWeapon (weaponPickup.weaponData);
+		Destroy (pickup);
+	}
+
+	public class PickupTimer {
+		public GameObject pickup;
+		public float timer;
+
+		public PickupTimer (GameObject _pickup, float _timer) {
+			pickup = _pickup;
+			timer = _timer;
 		}
 	}
 }

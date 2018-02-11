@@ -16,6 +16,16 @@ public class WeaponManager : MonoBehaviour {
 		return weaponDatas [index];
 	}
 
+	public WeaponData WeaponDataFromName (string _name) {
+		foreach (var weaponData in weaponDatas) {
+			if (weaponData.name == _name) {
+				return weaponData;
+			}
+		}
+		print ("Could not find weapon with name: " + _name);
+		return weaponDatas [0];
+	}
+
 	[System.Serializable]
 	public class WeaponData {
 		public string name;
