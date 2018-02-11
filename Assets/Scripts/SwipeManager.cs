@@ -22,6 +22,8 @@ public class SwipeManager : MonoBehaviour {
 		player = GameObject.FindObjectOfType<PlayerController> ();
 		swipeLine = player.GetComponentInChildren<LineRenderer> ();
 		lm = GameObject.Find("Player").GetComponentInChildren<LineManager> ();
+
+		swipeLine.enabled = false;
 	}
 
 	void Update() {
