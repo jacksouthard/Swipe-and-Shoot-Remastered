@@ -22,7 +22,7 @@ public class Health : MonoBehaviour {
 			if (health < maxHealth) {
 				if (waitTimer <= 0f) {
 					// start regening
-					health += regenSpeed;
+					health += regenSpeed * Time.deltaTime;
 					if (health > maxHealth) {
 						health = maxHealth;
 					}

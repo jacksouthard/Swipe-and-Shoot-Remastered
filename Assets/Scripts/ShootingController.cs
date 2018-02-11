@@ -13,7 +13,16 @@ public class ShootingController : MonoBehaviour {
 	public float parentSpeed; //speed at which the body rotates towards target
 	public float speed; //speed at which the hands rotate towards target
 
+	bool isPlayer;
+	Transform player;
 	Weapon weapon;
+
+	void Awake() {
+		isPlayer = gameObject.GetComponentInParent<PlayerController> () != null;
+		if (!isPlayer) {
+			player = GameObject.FindObjectOfType<PlayerController> ().transform;
+		}
+	}
 
 	public void SetWeapon(WeaponManager.WeaponData newWeapon) {
 		if (weapon != null) {
@@ -32,7 +41,10 @@ public class ShootingController : MonoBehaviour {
 		if (weapon == null) {
 			return;
 		}
-		Transform target = GetNearestTarget ();
+		Transform target = (!isPlayer) ? player : GetNearestTarget ();
+		if (player) {
+			print (target.name);
+		}
 		if (target != null) {
 			RotateTowards (target);
 		}
@@ -40,10 +52,10 @@ public class ShootingController : MonoBehaviour {
 
 	void RotateTowards(Transform target) {
 		Quaternion parentRotation = transform.parent.rotation;
-		Vector3 diff = target.position - transform.position;
+		Vector3 diff = target.position - transform.position + (Vector3.up * 0.6f);
 		float angle = Mathf.Atan2 (diff.x, diff.z) * Mathf.Rad2Deg;
 
-		if (canRotate) {
+		if (isPlayer && canRotate) {
 			transform.parent.rotation = Quaternion.Lerp (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed);
 		}
 

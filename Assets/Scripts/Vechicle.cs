@@ -73,6 +73,7 @@ public class Vechicle : MonoBehaviour {
 		handsContainer.SetActive (true);
 
 		driver = true;
+		rb.interpolation = RigidbodyInterpolation.Extrapolate;
 	}
 
 	public void Dismount () {
@@ -84,6 +85,7 @@ public class Vechicle : MonoBehaviour {
 
 		driver = false;
 		nextEnterTime = Time.time + reentryWait;
+		rb.interpolation = RigidbodyInterpolation.None;
 	}
 
 	void Update () {

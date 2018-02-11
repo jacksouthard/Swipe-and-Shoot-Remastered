@@ -29,11 +29,13 @@ public class PlayerController : MonoBehaviour {
 	void Awake() {
 		rb = gameObject.GetComponent<Rigidbody> ();
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
+		rb.interpolation = RigidbodyInterpolation.Extrapolate;
 	}
 
 	//launches character in a direction
 	public void Swipe(Vector2 dir) {
 		if (currentVechicle != null) {
+			rb.interpolation = RigidbodyInterpolation.Extrapolate;
 			currentVechicle.Dismount ();
 			currentVechicle = null;
 		}
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 			Vechicle newVechicle = other.gameObject.GetComponentInParent<Vechicle> ();
 			if(newVechicle.canBeMounted) {
 				currentVechicle = newVechicle;
+				rb.interpolation = RigidbodyInterpolation.None;
 
 				currentVechicle.Mount (gameObject);
 				state = MovementState.Grounded;
