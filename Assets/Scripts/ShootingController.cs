@@ -46,7 +46,7 @@ public class ShootingController : MonoBehaviour {
 		weapon.SetTarget(targetTag);
 
 		if (health != null) {
-			health.UpdateRenderers ();
+			health.UpdateRenderersNextFrame ();
 		}
 	}
 

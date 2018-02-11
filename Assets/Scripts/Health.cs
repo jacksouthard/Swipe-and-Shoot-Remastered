@@ -31,6 +31,7 @@ public class Health : MonoBehaviour {
 	public float waitTimer;
 	public float health;
 
+	bool shouldUpdateRenderers;
 	MeshRenderer[] mrs;
 	List<Color[]> originalColors;
 
@@ -39,9 +40,16 @@ public class Health : MonoBehaviour {
 		UpdateRenderers ();
 	}
 
-	public void UpdateRenderers() {
+	public void UpdateRenderersNextFrame() {
+		shouldUpdateRenderers = true;
+	}
+
+	void UpdateRenderers() {
+		shouldUpdateRenderers = false;
+
 		mrs = GetComponentsInChildren<MeshRenderer>();
 		originalColors = new List<Color[]> ();
+
 		for(int i = 0; i < mrs.Length; i++) {
 			Color[] colors = new Color[mrs[i].materials.Length];
 			for (int j = 0; j < colors.Length; j++) {
@@ -79,6 +87,12 @@ public class Health : MonoBehaviour {
 			if (decayTimer <= 0f) {
 				Destroy (gameObject);
 			}
+		}
+	}
+
+	void LateUpdate() {
+		if (shouldUpdateRenderers) {
+			UpdateRenderers ();
 		}
 	}
 
