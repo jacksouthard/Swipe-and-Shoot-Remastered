@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour {
 	public float verticalFactor; //the amount by which the y-vector of the launch force is scaled by relative to the launch magnitude
 	public float turnSpeed; //how fast the player returns to a standing position
 
+	Vechicle currentVechicle;
+
 	Rigidbody rb;
 
 	void Awake() {
@@ -28,15 +30,29 @@ public class PlayerController : MonoBehaviour {
 
 	//launches character in a direction
 	public void Swipe(Vector2 dir) {
+		if (currentVechicle != null) {
+			currentVechicle.Demount ();
+			currentVechicle = null;
+		}
 		rb.constraints = RigidbodyConstraints.None;
 		rb.AddForce (new Vector3(dir.x, dir.magnitude * verticalFactor, dir.y) * swipeForce);
 		state = MovementState.Jumping;
 	}
 
 	void OnCollisionEnter(Collision other) {
-		//changes states when hit
-		if (state == MovementState.Jumping) {
-			state = MovementState.Tumbling;
+		if (other.collider.tag == "Vechicle") {
+			Vechicle newVechicle = other.gameObject.GetComponentInParent<Vechicle> ();
+			if(newVechicle.canBeMounted) {
+				currentVechicle = newVechicle;
+
+				currentVechicle.Mount (gameObject);
+				state = MovementState.Grounded;
+			}
+		} else {
+			//changes states when hit
+			if (state == MovementState.Jumping) {
+				state = MovementState.Tumbling;
+			}
 		}
 	}
 

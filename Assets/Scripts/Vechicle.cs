@@ -26,6 +26,8 @@ public class Vechicle : MonoBehaviour {
 	public int targetRotPercentage = 0;
 	public float curWheelSpeed = 0f;
 
+	float reentryWait = 1.0f;
+	float nextEnterTime;
 	bool driver = false;
 	GameObject handsContainer;
 	Transform seat;
@@ -58,7 +60,9 @@ public class Vechicle : MonoBehaviour {
 		}
 	}
 
-	public void Mounted (GameObject _mounter) {
+	public bool canBeMounted { get { return (Time.time >= nextEnterTime); } }
+
+	public void Mount (GameObject _mounter) {
 		mounter = _mounter;
 		mounter.GetComponent<BoxCollider> ().enabled = false;
 		mounter.GetComponent<Rigidbody> ().isKinematic = true;
@@ -79,6 +83,7 @@ public class Vechicle : MonoBehaviour {
 		handsContainer.SetActive (false);
 
 		driver = false;
+		nextEnterTime = Time.time + reentryWait;
 	}
 
 	void Update () {

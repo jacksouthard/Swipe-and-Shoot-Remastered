@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114882631292008744}
   m_Layer: 0
   m_Name: DL
-  m_TagString: Untagged
+  m_TagString: Vechicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 114242720448036024}
   m_Layer: 0
   m_Name: SR
-  m_TagString: Untagged
+  m_TagString: Vechicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 114481444696700598}
   m_Layer: 0
   m_Name: DR
-  m_TagString: Untagged
+  m_TagString: Vechicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 65924904074339410}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Vechicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 114553183456192094}
   m_Layer: 0
   m_Name: SL
-  m_TagString: Untagged
+  m_TagString: Vechicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -515,7 +515,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1755002622876324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.37, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4917746190641804}
