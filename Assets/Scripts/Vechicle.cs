@@ -75,7 +75,7 @@ public class Vechicle : MonoBehaviour {
 		driver = true;
 	}
 
-	public void Demount () {
+	public void Dismount () {
 		mounter.GetComponent<BoxCollider> ().enabled = true;
 		mounter.GetComponent<Rigidbody> ().isKinematic = false;
 		mounter.transform.parent = null;
