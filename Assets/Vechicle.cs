@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Vechicle : MonoBehaviour {
-	bool grounded = false;
-
-	int targetSpeedPercent = 0;
-	int targetRotPercentage = 0;
-
-	float curWheelSpeed = 0f;
-
 	[Header("Turning")]
 	public float turnSpeed;
 	public float rotationSpeedLimiter = 1f;
@@ -25,6 +18,13 @@ public class Vechicle : MonoBehaviour {
 	public float groundedAngDrag;
 	public float airDrag;
 	public float airAngDrag;
+
+	[Space(20)]
+	[Header("Debug")]
+	public bool grounded = false;
+	public int targetSpeedPercent = 0;
+	public int targetRotPercentage = 0;
+	public float curWheelSpeed = 0f;
 
 	// wheels
 	List<Wheel> steeringWheels = new List<Wheel>();
