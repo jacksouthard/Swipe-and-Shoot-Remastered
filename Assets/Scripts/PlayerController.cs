@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 	//launches character in a direction
 	public void Swipe(Vector2 dir) {
 		if (currentVechicle != null) {
-			currentVechicle.Demount ();
+			currentVechicle.Dismount ();
 			currentVechicle = null;
 		}
 		rb.constraints = RigidbodyConstraints.None;
