@@ -33,7 +33,7 @@ public class Vechicle : MonoBehaviour {
 
 	float reentryWait = 1.0f;
 	float nextEnterTime;
-	bool driver = false;
+	public bool driver = false;
 	GameObject handsContainer;
 	Transform seat;
 	GameObject mounter;

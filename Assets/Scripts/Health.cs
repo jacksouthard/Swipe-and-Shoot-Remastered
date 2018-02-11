@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Health : MonoBehaviour {
+	public enum Type {
+		Player,
+		Enemy,
+		Object,
+		Vechicle
+	}
+	public Type type;
+
 	public enum State
 	{
 		Alive,
@@ -38,6 +46,16 @@ public class Health : MonoBehaviour {
 	void Start () {
 		health = maxHealth;
 		UpdateRenderers ();
+
+		if (GetComponent<PlayerController> () != null) {
+			type = Type.Player;
+		} else if (GetComponent<EnemyController> () != null) {
+			type = Type.Enemy;
+		} else if (GetComponent<Vechicle> () != null) {
+			type = Type.Vechicle;
+		} else {
+			type = Type.Object;
+		}
 	}
 
 	public void UpdateRenderersNextFrame() {
@@ -110,7 +128,7 @@ public class Health : MonoBehaviour {
 	}
 
 	public void Die () {
-		if (GetComponent<PlayerController> () != null) {
+		if (type == Type.Player) {
 			// handel player death
 			print ("Player Death");
 			return;
@@ -119,7 +137,7 @@ public class Health : MonoBehaviour {
 		state = State.Dying;
 
 		// if enemy
-		if (GetComponent<EnemyController>() != null) {
+		if (type == Type.Enemy) {
 			gameObject.GetComponent<Rigidbody> ().isKinematic = false;
 
 			Destroy(GetComponent<NavMeshAgent> ());
@@ -129,6 +147,17 @@ public class Health : MonoBehaviour {
 
 			// notify spawner of death
 			Spawner.instance.EnemyDeath();
+		}
+
+		// if vechicle
+		if (type == Type.Vechicle) {
+			// test for player in vechicle
+			Vechicle vechicle = GetComponent<Vechicle>();
+//			if (vechicle.driver) {
+//				GetComponentInChildren<PlayerController> ().ExitVehicle ();
+//			}
+			// eventually spawn explosion
+			Destroy(vechicle);
 		}
 	}
 

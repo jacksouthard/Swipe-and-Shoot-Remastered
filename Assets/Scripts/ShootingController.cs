@@ -96,7 +96,7 @@ public class ShootingController : MonoBehaviour {
 
 		foreach (Collider obj in objectsInRange) {
 			if (obj.tag == targetTag) {
-				if (targetTag == "Enemy" && obj.GetComponent<Health>().state != Health.State.Alive) {
+				if (targetTag == "Enemy" && obj.GetComponentInParent<Health>().state != Health.State.Alive) {
 					continue;
 				}
 
