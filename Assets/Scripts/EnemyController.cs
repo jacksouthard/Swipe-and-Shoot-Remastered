@@ -11,10 +11,12 @@ public class EnemyController : MonoBehaviour {
 	float nextPathUpdate;
 	Transform player;
 	NavMeshAgent navAgent;
+	ShootingController shooting;
 
 	void Awake() {
 		player = GameObject.FindObjectOfType<PlayerController> ().transform;
 		navAgent = gameObject.GetComponent<NavMeshAgent> ();
+		shooting = gameObject.GetComponentInChildren<ShootingController> ();
 		//adjust speed here (stopping distance, movement speed, angular speed, etc.)
 	}
 
@@ -30,11 +32,16 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void UpdateTarget() {
-		if (Vector3.Distance (transform.position, player.position) < activeRange) {
+		float dist = Vector3.Distance (transform.position, player.position);
+		if (dist < activeRange) {
 			navAgent.enabled = true;
 			navAgent.SetDestination (player.position);
+
+			shooting.canRotate = (dist < navAgent.stoppingDistance);
 		} else {
 			navAgent.enabled = false;
+
+			shooting.canRotate = false;
 		}
 	}
 }

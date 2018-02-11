@@ -55,7 +55,7 @@ public class ShootingController : MonoBehaviour {
 		Vector3 diff = target.position - transform.position + (Vector3.up * 0.6f);
 		float angle = Mathf.Atan2 (diff.x, diff.z) * Mathf.Rad2Deg;
 
-		if (isPlayer && canRotate) {
+		if (canRotate) {
 			transform.parent.rotation = Quaternion.Lerp (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed);
 		}
 
