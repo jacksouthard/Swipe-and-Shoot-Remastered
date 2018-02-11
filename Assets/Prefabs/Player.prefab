@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightRatio: 5
-  distanceRatio: 1.8
+  distanceRatio: 9.5
   line: {fileID: 120433219360908302}
 --- !u!114 &114739835484656106
 MonoBehaviour:

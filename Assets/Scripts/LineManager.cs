@@ -23,7 +23,7 @@ public class LineManager : MonoBehaviour {
 		var positions = new List<Vector3> ();
 
 		Vector3 gravity = new Vector3 (0f, Physics.gravity.y / (resolution * resolution), 0f);
-		Vector3 velocity = (new Vector3(direction.x * distanceRatio, pc.verticalFactor * heightRatio, direction.y * distanceRatio)) / resolution;
+		Vector3 velocity = (new Vector3(direction.x * distanceRatio, direction.magnitude * pc.verticalFactor * heightRatio, direction.y * distanceRatio)) / resolution;
 
 		Vector3 currentPos = transform.position;
 		Vector3 lastPos = currentPos;

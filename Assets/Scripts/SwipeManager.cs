@@ -4,7 +4,7 @@ using UnityEngine;
 
 //controls all swipe input and sends it to the player
 public class SwipeManager : MonoBehaviour {
-	public float lineLength;
+	public float maxSwipeDistance;
 
 	Camera gameCam;
 	PlayerController player;
@@ -49,15 +49,10 @@ public class SwipeManager : MonoBehaviour {
 
 	//update LineRenderer
 	void UpdateLine(Vector2 curPos) {
-		Vector2 dir2d = CalculateDirection (curPos) * lineLength;
+		Vector2 dir2d = CalculateDirection (curPos);
 		Vector3 dir3d = new Vector3 (dir2d.x, 0f, dir2d.y);
 
-		Vector3 startPos = player.transform.position;
-		Vector3 endPos = startPos + dir3d;
-
 		lm.UpdateLineTrajectory(dir2d);
-//		swipeLine.SetPosition (0, startPos);
-//		swipeLine.SetPosition (1, endPos);
 	}
 
 	void EndSwipe(Vector2 endPos) {
@@ -71,7 +66,11 @@ public class SwipeManager : MonoBehaviour {
 	Vector2 CalculateDirection(Vector2 curPos) {
 		Vector2 dir = curPos - startPos;
 		dir = RotateVector (dir, -gameCam.transform.rotation.eulerAngles.y); //rotates the vector so that it aligns with the world angle
-		dir.Normalize();
+		dir /= (Screen.height / 2); //scale based on screen size
+
+		if (dir.magnitude > maxSwipeDistance) {
+			dir = dir.normalized * maxSwipeDistance;
+		}
 
 		return dir;
 	}
