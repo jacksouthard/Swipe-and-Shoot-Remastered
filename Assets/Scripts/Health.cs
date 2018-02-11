@@ -150,7 +150,7 @@ public class Health : MonoBehaviour {
 	IEnumerator HitAnimation() {
 		ChangeToColor (hitColor);
 		yield return new WaitForSeconds (hitWait);
-		if (state == State.Alive) {
+		if (state != State.Decaying) {
 			ResetColor ();
 		}
 	}
