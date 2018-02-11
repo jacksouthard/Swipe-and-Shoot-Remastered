@@ -26,6 +26,11 @@ public class Vechicle : MonoBehaviour {
 	public int targetRotPercentage = 0;
 	public float curWheelSpeed = 0f;
 
+	bool driver = false;
+	GameObject handsContainer;
+	Transform seat;
+	GameObject mounter;
+
 	// wheels
 	List<Wheel> steeringWheels = new List<Wheel>();
 	List<Wheel> drivingWheels = new List<Wheel>();
@@ -36,6 +41,11 @@ public class Vechicle : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 
 		UpdateDrag ();
+
+		// init mounting stuff
+		seat = transform.Find("Seat");
+		handsContainer = transform.Find("Hands").gameObject;
+		handsContainer.SetActive (false);
 
 		// init wheels
 		Wheel[] allWheels = GetComponentsInChildren<Wheel> ();
@@ -48,7 +58,34 @@ public class Vechicle : MonoBehaviour {
 		}
 	}
 
+	public void Mounted (GameObject _mounter) {
+		mounter = _mounter;
+		mounter.GetComponent<BoxCollider> ().enabled = false;
+		mounter.GetComponent<Rigidbody> ().isKinematic = true;
+		mounter.transform.parent = seat;
+		mounter.transform.localPosition = Vector3.zero;
+		mounter.transform.localRotation = Quaternion.identity;
+
+		handsContainer.SetActive (true);
+
+		driver = true;
+	}
+
+	public void Demount () {
+		mounter.GetComponent<BoxCollider> ().enabled = true;
+		mounter.GetComponent<Rigidbody> ().isKinematic = false;
+		mounter.transform.parent = null;
+
+		handsContainer.SetActive (false);
+
+		driver = false;
+	}
+
 	void Update () {
+		if (!driver) {
+			return;
+		}
+
 		// forward / backwards
 		if (Input.GetKey (KeyCode.UpArrow)) {
 			targetSpeedPercent = 1;
