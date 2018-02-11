@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour {
+	[Header("Stats")]
 	public float fireRate;
 	public float damage;
 	public float range;
@@ -15,7 +16,9 @@ public class Weapon : MonoBehaviour {
 
 	void Start () {
 		for (int i = 0; i < transform.childCount; i++) {
-			bulletSpawns.Add (transform.GetChild(i));
+			if (transform.GetChild (i).name.Contains("BulletSpawn")) {
+				bulletSpawns.Add (transform.GetChild (i));
+			}
 		}
 	}
 	
