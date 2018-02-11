@@ -48,11 +48,13 @@ public class Weapon : MonoBehaviour {
 			RaycastHit hitInfo;
 			Physics.SphereCast (bulletSpawns [0].position, 0.5f, -bulletSpawns[0].right, out hitInfo, range);
 
-			if (hitInfo.collider == null) {
+			if (hitInfo.collider == null || hitInfo.collider.tag != targetTag) {
 				return false;
 			}
 
-			return (hitInfo.collider.tag == targetTag);
+			Health otherHealth = hitInfo.collider.GetComponent<Health> ();
+
+			return (otherHealth == null || otherHealth.state == Health.State.Alive);
 		}
 	}
 
