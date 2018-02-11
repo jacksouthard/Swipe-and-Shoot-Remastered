@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	//launches character in a direction
-	public void Swipe(Vector2 dir) {
+	public void Swipe (Vector2 dir) {
 		if (currentVechicle != null) {
 			rb.interpolation = RigidbodyInterpolation.Extrapolate;
 			currentVechicle.Dismount ();

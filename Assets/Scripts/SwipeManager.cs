@@ -10,6 +10,8 @@ public class SwipeManager : MonoBehaviour {
 	PlayerController player;
 	LineRenderer swipeLine;
 
+	LineManager lm;
+
 	bool isTapping;
 	Vector2 startPos;
 
@@ -17,6 +19,7 @@ public class SwipeManager : MonoBehaviour {
 		gameCam = GameObject.FindObjectOfType<Camera> ();
 		player = GameObject.FindObjectOfType<PlayerController> ();
 		swipeLine = player.GetComponentInChildren<LineRenderer> ();
+		lm = GameObject.Find("Player").GetComponentInChildren<LineManager> ();
 	}
 
 	void Update() {
@@ -52,8 +55,9 @@ public class SwipeManager : MonoBehaviour {
 		Vector3 startPos = player.transform.position;
 		Vector3 endPos = startPos + dir3d;
 
-		swipeLine.SetPosition (0, startPos);
-		swipeLine.SetPosition (1, endPos);
+		lm.UpdateLineTrajectory(dir2d);
+//		swipeLine.SetPosition (0, startPos);
+//		swipeLine.SetPosition (1, endPos);
 	}
 
 	void EndSwipe(Vector2 endPos) {
