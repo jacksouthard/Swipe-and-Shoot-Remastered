@@ -42,9 +42,7 @@ public class ShootingController : MonoBehaviour {
 			return;
 		}
 		Transform target = (!isPlayer) ? player : GetNearestTarget ();
-		if (player) {
-			print (target.name);
-		}
+	
 		if (target != null) {
 			RotateTowards (target);
 		}

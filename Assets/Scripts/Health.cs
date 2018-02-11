@@ -67,12 +67,13 @@ public class Health : MonoBehaviour {
 	}
 
 	void Die () {
-		state = State.Dying;
 		if (GetComponent<PlayerController> () != null) {
 			// handel player death
 			print ("Player Death");
 			return;
 		}
+
+		state = State.Dying;
 
 		// if enemy
 		if (GetComponent<EnemyController>() != null) {
