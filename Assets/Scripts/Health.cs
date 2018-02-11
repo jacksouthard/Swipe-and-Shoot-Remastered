@@ -4,12 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Health : MonoBehaviour {
-	public float maxHealth;
-	public float regenSpeed;
-	public float regenWait;
-	public float dyingTimer;
-	public float decayTimer;
-
 	public enum State
 	{
 		Alive,
@@ -17,11 +11,44 @@ public class Health : MonoBehaviour {
 		Decaying
 	};
 	public State state = State.Alive;
+
+	[Header("Stats")]
+	public float maxHealth;
+
+	[Header("Regen")]
+	public float regenSpeed;
+	public float regenWait;
+
+	[Header("Hit")]
+	public float hitWait;
+	public Color hitColor;
+
+	[Header("Death")]
+	public float dyingTimer;
+	public float decayTimer;
+
+	[Header("Debug")]
 	public float waitTimer;
 	public float health;
 
+	MeshRenderer[] mrs;
+	List<Color[]> originalColors;
+
 	void Start () {
 		health = maxHealth;
+		UpdateRenderers ();
+	}
+
+	public void UpdateRenderers() {
+		mrs = GetComponentsInChildren<MeshRenderer>();
+		originalColors = new List<Color[]> ();
+		for(int i = 0; i < mrs.Length; i++) {
+			Color[] colors = new Color[mrs[i].materials.Length];
+			for (int j = 0; j < colors.Length; j++) {
+				colors [j] = mrs [i].materials [j].color;
+			}
+			originalColors.Add(colors);
+		}
 	}
 	
 	void Update () {
@@ -60,6 +87,8 @@ public class Health : MonoBehaviour {
 			health -= damage;
 			if (health <= 0f) {
 				Die ();
+			} else {
+				StartCoroutine (HitAnimation ());
 			}
 		}
 
@@ -101,10 +130,30 @@ public class Health : MonoBehaviour {
 		}
 
 		// set color to black
-		MeshRenderer[] mrs = GetComponentsInChildren<MeshRenderer>();
+		ChangeToColor(Color.black);
+	}
+
+	IEnumerator HitAnimation() {
+		ChangeToColor (hitColor);
+		yield return new WaitForSeconds (hitWait);
+		if (state == State.Alive) {
+			ResetColor ();
+		}
+	}
+
+	void ChangeToColor(Color color) {
 		foreach (var mr in mrs) {
 			foreach (var mat in mr.materials) {
-				mat.color = Color.black;
+				mat.color = color;
+			}
+		}
+	}
+
+	void ResetColor() {
+		for (int i = 0; i < mrs.Length; i++) {
+			int colorCount = originalColors [i].Length;
+			for (int j = 0; j < colorCount; j++) {
+				mrs [i].materials [j].color = originalColors [i] [j];
 			}
 		}
 	}

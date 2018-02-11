@@ -603,6 +603,7 @@ MonoBehaviour:
   swipeForce: 30000
   verticalFactor: 0.5
   turnSpeed: 10
+  currentVechicle: {fileID: 0}
 --- !u!114 &114641830526842376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -628,12 +629,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016c887d302bd4fb28e07a889197c8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   maxHealth: 20
   regenSpeed: 1
   regenWait: 0.5
+  hitWait: 0.05
+  hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
   dyingTimer: 0
   decayTimer: 0
-  state: 0
   waitTimer: 0
   health: 0
 --- !u!120 &120433219360908302

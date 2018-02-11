@@ -15,6 +15,7 @@ public class ShootingController : MonoBehaviour {
 
 	bool isPlayer;
 	Transform player;
+	Health health;
 	Weapon weapon;
 
 	void Awake() {
@@ -22,6 +23,8 @@ public class ShootingController : MonoBehaviour {
 		if (!isPlayer) {
 			player = GameObject.FindObjectOfType<PlayerController> ().transform;
 		}
+
+		health = gameObject.GetComponentInParent<Health> ();
 	}
 
 	public void SetWeapon(WeaponManager.WeaponData newWeapon) {
@@ -35,6 +38,10 @@ public class ShootingController : MonoBehaviour {
 
 		weapon = weaponObj.GetComponent<Weapon>();
 		weapon.SetTarget(targetTag);
+
+		if (health != null) {
+			health.UpdateRenderers ();
+		}
 	}
 
 	void LateUpdate() {
