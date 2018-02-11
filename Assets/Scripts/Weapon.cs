@@ -55,7 +55,7 @@ public class Weapon : MonoBehaviour {
 
 			if (hitInfo.collider.tag != targetTag) {
 				if (targetTag == "Player") {
-					Vechicle hitVehicle = hitInfo.collider.GetComponentInParent<Vechicle> ();
+					Vehicle hitVehicle = hitInfo.collider.GetComponentInParent<Vehicle> ();
 					if (hitVehicle == null || !hitVehicle.driver) {
 						return false;
 					}

@@ -8,7 +8,7 @@ public class Health : MonoBehaviour {
 		Player,
 		Enemy,
 		Object,
-		Vechicle
+		Vehicle
 	}
 	public Type type;
 
@@ -53,8 +53,8 @@ public class Health : MonoBehaviour {
 			type = Type.Player;
 		} else if (GetComponent<EnemyController> () != null) {
 			type = Type.Enemy;
-		} else if (GetComponent<Vechicle> () != null) {
-			type = Type.Vechicle;
+		} else if (GetComponent<Vehicle> () != null) {
+			type = Type.Vehicle;
 		} else {
 			type = Type.Object;
 		}
@@ -168,9 +168,9 @@ public class Health : MonoBehaviour {
 		}
 
 		// if vechicle
-		if (type == Type.Vechicle) {
+		if (type == Type.Vehicle) {
 			// test for player in vechicle
-			Vechicle vechicle = GetComponent<Vechicle>();
+			Vehicle vechicle = GetComponent<Vehicle>();
 			if (vechicle.driver) {
 				GetComponentInChildren<PlayerController> ().ExitVehicle ();
 			}

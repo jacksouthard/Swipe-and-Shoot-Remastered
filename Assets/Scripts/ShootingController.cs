@@ -68,7 +68,7 @@ public class ShootingController : MonoBehaviour {
 		}
 		Transform target;
 		if (!isPlayer) {
-			target = (pc.inVehicle) ? pc.currentVechicle.transform.Find("Center") : player;
+			target = (pc.inVehicle) ? pc.currentVehicle.transform.Find("Center") : player;
 		} else {
 			target = GetNearestTarget ();
 		}

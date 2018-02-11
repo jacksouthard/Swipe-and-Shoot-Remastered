@@ -80,7 +80,7 @@ public class SwipeManager : MonoBehaviour {
 	}
 
 	void UpdateVehicle(Vector2 curPos) {
-		player.currentVechicle.targetDirection = CalculateDirection (curPos);
+		player.currentVehicle.targetDirection = CalculateDirection (curPos);
 	}
 
 	void EndTap(Vector2 endPos) {
@@ -88,7 +88,7 @@ public class SwipeManager : MonoBehaviour {
 		isTapping = false;
 
 		if (player.inVehicle) {
-			player.currentVechicle.targetDirection = Vector2.zero;
+			player.currentVehicle.targetDirection = Vector2.zero;
 		}
 
 		Vector2 dir = CalculateDirection (endPos);

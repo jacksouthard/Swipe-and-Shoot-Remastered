@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vechicle : MonoBehaviour {
+public class Vehicle : MonoBehaviour {
 	[Header("Turning")]
 	public float turnSpeed;
 	public float rotationSpeedLimiter = 1f;

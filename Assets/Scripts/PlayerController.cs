@@ -32,9 +32,9 @@ public class PlayerController : MonoBehaviour {
 
 	List<PickupTimer> curPickingupTimers = new List<PickupTimer>();
 
-	public bool inVehicle { get { return currentVechicle != null; } }
+	public bool inVehicle { get { return currentVehicle != null; } }
 
-	public Vechicle currentVechicle;
+	public Vehicle currentVehicle;
 
 	Rigidbody rb;
 	ShootingController shooting;
@@ -59,12 +59,12 @@ public class PlayerController : MonoBehaviour {
 		nextAutoReset = Time.time + autoResetTime;
 	}
 
-	void EnterVehicle(Vechicle newVechicle) {
-		currentVechicle = newVechicle;
+	void EnterVehicle(Vehicle newVehicle) {
+		currentVehicle = newVehicle;
 		rb.interpolation = RigidbodyInterpolation.None;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-		currentVechicle.Mount (gameObject);
+		currentVehicle.Mount (gameObject);
 		state = MovementState.Grounded;
 
 		shooting.gameObject.SetActive (false);
@@ -73,21 +73,21 @@ public class PlayerController : MonoBehaviour {
 	public void ExitVehicle() {
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
-		rb.velocity = currentVechicle.GetComponent<Rigidbody> ().velocity;
+		rb.velocity = currentVehicle.GetComponent<Rigidbody> ().velocity;
 
 		state = MovementState.Jumping;
 
-		currentVechicle.Dismount ();
-		currentVechicle = null;
+		currentVehicle.Dismount ();
+		currentVehicle = null;
 
 		shooting.gameObject.SetActive (true);
 	}
 
 	void OnCollisionEnter(Collision other) {
-		if (other.collider.tag == "Vechicle") {
-			Vechicle newVechicle = other.gameObject.GetComponentInParent<Vechicle> ();
-			if(newVechicle != null && newVechicle.canBeMounted) {
-				EnterVehicle (newVechicle);
+		if (other.collider.tag == "Vehicle") {
+			Vehicle newVehicle = other.gameObject.GetComponentInParent<Vehicle> ();
+			if(newVehicle != null && newVehicle.canBeMounted) {
+				EnterVehicle (newVehicle);
 			}
 		} else {
 			//changes states when hit

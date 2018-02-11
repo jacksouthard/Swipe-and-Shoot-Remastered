@@ -15,6 +15,8 @@ public class Explosion : MonoBehaviour {
 				float dist = Vector3.Distance (rb.transform.position, transform.position);
 				Vector3 dir = (rb.transform.position - transform.position).normalized;
 				rb.AddForce(dir * force * forceCurve.Evaluate (dist / range));
+				//alternate formula: (-Mathf.Pow(dist / range, n) + 1) * force
+				//where n is the falloff range
 
 				hitRbs.Add (rb);
 			}
