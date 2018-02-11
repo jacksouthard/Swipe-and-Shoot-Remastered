@@ -45,6 +45,11 @@ public class LineManager : MonoBehaviour {
 	    BuildLine(positions);
 	}
 
+	public void SetLineColor(Color color) {
+		line.startColor = color;
+		line.endColor = color;
+	}
+
 	bool hasHitSomethingBesidesPlayer (Vector3 pos1, Vector3 pos2)
 	{
 		RaycastHit hitInfo;

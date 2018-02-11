@@ -28,7 +28,7 @@ public class SwipeManager : MonoBehaviour {
 
 	void Update() {
 		//on tap down
-		if (player.state == PlayerController.MovementState.Grounded && !isTapping && Input.GetMouseButtonDown (0)) {
+		if (!isTapping && Input.GetMouseButtonDown (0)) {
 			StartTap (Input.mousePosition);
 		}
 
@@ -71,6 +71,11 @@ public class SwipeManager : MonoBehaviour {
 	void UpdateLine(Vector2 curPos) {
 		Vector2 dir2d = CalculateDirection (curPos);
 
+		swipeLine.enabled = (dir2d.magnitude > swipeCancelRange);
+
+		Color lineColor = (player.state == PlayerController.MovementState.Grounded) ? Color.white : new Color(1, 1, 1, 0.125f);
+		lm.SetLineColor(lineColor);
+
 		lm.UpdateLineTrajectory(dir2d);
 	}
 
@@ -88,7 +93,7 @@ public class SwipeManager : MonoBehaviour {
 
 		Vector2 dir = CalculateDirection (endPos);
 
-		if (isSelectingPlayer && dir.magnitude > swipeCancelRange) {
+		if (isSelectingPlayer && player.state == PlayerController.MovementState.Grounded && dir.magnitude > swipeCancelRange) {
 			player.Swipe (dir);
 		}
 
