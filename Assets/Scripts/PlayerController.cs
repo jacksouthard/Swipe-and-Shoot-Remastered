@@ -44,9 +44,7 @@ public class PlayerController : MonoBehaviour {
 	//launches character in a direction
 	public void Swipe (Vector2 dir) {
 		if (inVehicle) {
-			rb.interpolation = RigidbodyInterpolation.Extrapolate;
-			currentVechicle.Dismount ();
-			currentVechicle = null;
+			ExitVehicle ();
 		}
 		rb.constraints = RigidbodyConstraints.None;
 		rb.AddForce (new Vector3(dir.x, dir.magnitude * verticalFactor, dir.y) * swipeForce);
@@ -54,15 +52,29 @@ public class PlayerController : MonoBehaviour {
 		nextAutoReset = Time.time + autoResetTime;
 	}
 
+	void EnterVehicle(Vechicle newVechicle) {
+		currentVechicle = newVechicle;
+		rb.interpolation = RigidbodyInterpolation.None;
+
+		currentVechicle.Mount (gameObject);
+		state = MovementState.Grounded;
+
+		shooting.gameObject.SetActive (false);
+	}
+
+	void ExitVehicle() {
+		rb.interpolation = RigidbodyInterpolation.Extrapolate;
+		currentVechicle.Dismount ();
+		currentVechicle = null;
+
+		shooting.gameObject.SetActive (true);
+	}
+
 	void OnCollisionEnter(Collision other) {
 		if (other.collider.tag == "Vechicle") {
 			Vechicle newVechicle = other.gameObject.GetComponentInParent<Vechicle> ();
 			if(newVechicle.canBeMounted) {
-				currentVechicle = newVechicle;
-				rb.interpolation = RigidbodyInterpolation.None;
-
-				currentVechicle.Mount (gameObject);
-				state = MovementState.Grounded;
+				EnterVehicle (newVechicle);
 			}
 		} else {
 			//changes states when hit
@@ -95,14 +107,14 @@ public class PlayerController : MonoBehaviour {
 
 	// picking up weapons
 	void OnTriggerEnter (Collider coll) {
-		if (coll.gameObject.tag == "Pickup") {
+		if (!inVehicle && coll.gameObject.tag == "Pickup") {
 			// new pickup enter range
 			curPickingupTimers.Add (new PickupTimer (coll.gameObject, pickupTime));
 		}
 	}
 
 	void OnTriggerExit (Collider coll) {
-		if (coll.gameObject.tag == "Pickup") {
+		if (!inVehicle && coll.gameObject.tag == "Pickup") {
 			// pickup exit range
 			List<PickupTimer> exitedTimers = new List<PickupTimer>();
 			foreach (var pickupTimer in curPickingupTimers) {
