@@ -40,6 +40,10 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
+	public void EnemyDeath () {
+		count--;
+	}
+
 	void SpawnEnemy () {
 		int index = Random.Range (0, spawnPoints.Count);
 		Vector3 spawnPoint = spawnPoints [index];

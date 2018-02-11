@@ -126,6 +126,9 @@ public class Health : MonoBehaviour {
 			Destroy(GetComponent<EnemyController> ());
 			Destroy(GetComponentInChildren<ShootingController> ());
 			Destroy (GetComponentInChildren<Weapon> ());
+
+			// notify spawner of death
+			Spawner.instance.EnemyDeath();
 		}
 	}
 
