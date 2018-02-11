@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour {
 	[Header("Control")]
 	public float activeRange;
 	public float pathUpdateRate;
+	public float durability; //max force before the enemy dies
 
 	float nextPathUpdate;
 	Transform player;
@@ -42,6 +43,19 @@ public class EnemyController : MonoBehaviour {
 			navAgent.enabled = false;
 
 			shooting.canRotate = false;
+		}
+	}
+
+	void OnTriggerEnter(Collider other) {
+		Rigidbody otherRb = other.gameObject.GetComponent<Rigidbody> ();
+		if (otherRb == null) {
+			return;
+		}
+
+		float appliedForce = otherRb.mass * (otherRb.velocity.magnitude / Time.deltaTime);
+
+		if (appliedForce >= durability) {
+			gameObject.GetComponent<Health> ().Die ();
 		}
 	}
 }

@@ -66,7 +66,7 @@ public class Health : MonoBehaviour {
 		waitTimer = regenWait;
 	}
 
-	void Die () {
+	public void Die () {
 		if (GetComponent<PlayerController> () != null) {
 			// handel player death
 			print ("Player Death");
@@ -77,12 +77,12 @@ public class Health : MonoBehaviour {
 
 		// if enemy
 		if (GetComponent<EnemyController>() != null) {
-			Rigidbody rb = gameObject.AddComponent<Rigidbody> ();
-			rb.mass = 80f; // 80 kg of enemy wieght
+			gameObject.GetComponent<Rigidbody> ().isKinematic = false;
 
-			GetComponent<NavMeshAgent> ().enabled = false;
-			GetComponent<EnemyController> ().enabled = false;
-			GetComponentInChildren<ShootingController> ().enabled = false;
+			Destroy(GetComponent<NavMeshAgent> ());
+			Destroy(GetComponent<EnemyController> ());
+			Destroy(GetComponentInChildren<ShootingController> ());
+			Destroy (GetComponentInChildren<Weapon> ());
 		}
 	}
 

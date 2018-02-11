@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4548100693626386}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HoldPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4183104223957724}
   - component: {fileID: 33690391136738204}
   - component: {fileID: 23075825734565120}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4547334123073260}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 4749004321617120}
   - component: {fileID: 33286890605955192}
   - component: {fileID: 23134786746822658}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 4774993449413734}
   - component: {fileID: 33427860886318396}
   - component: {fileID: 23353863196757360}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Helmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4839474154365418}
   - component: {fileID: 33933560342229812}
   - component: {fileID: 23512842652942972}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 4992247236573968}
   - component: {fileID: 120433219360908302}
   - component: {fileID: 114641830526842376}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SwipeLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 54092185246557292}
   - component: {fileID: 114638930987555470}
   - component: {fileID: 114739835484656106}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4117093363818068}
   - component: {fileID: 33398191123860166}
   - component: {fileID: 23116384069536804}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4445654954790468}
   - component: {fileID: 114474676868824902}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WeaponParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
