@@ -19,6 +19,10 @@ public class Vechicle : MonoBehaviour {
 	public float airDrag;
 	public float airAngDrag;
 
+	[Header("Reversing")]
+	public float reverseTime;
+	public float stuckThreshold;
+
 	[Space(20)]
 	[Header("Debug")]
 	public bool grounded = false;
@@ -36,6 +40,11 @@ public class Vechicle : MonoBehaviour {
 
 	Transform vectorArrow;
 
+	// reversing
+	Vector3 lastPos;
+	float curReverseTimer;
+	bool reversing = false;
+
 	// wheels
 	List<Wheel> steeringWheels = new List<Wheel>();
 	List<Wheel> drivingWheels = new List<Wheel>();
@@ -49,6 +58,8 @@ public class Vechicle : MonoBehaviour {
 
 		vectorArrow = transform.Find ("TargetVector");
 		vectorArrow.gameObject.SetActive (false);
+
+		lastPos = transform.position;
 
 		// init mounting stuff
 		seat = transform.Find("Seat");
@@ -102,7 +113,12 @@ public class Vechicle : MonoBehaviour {
 			vectorArrow.gameObject.SetActive (false);
 		} else {
 			// has input
-			targetSpeedPercent = 1; // eventually have tests for when to go backwards
+			if (!reversing) {
+				targetSpeedPercent = 1;
+			} else {
+				targetSpeedPercent = -1;
+
+			}
 
 			// calculate rotation direction
 			Vector2 right = new Vector2(transform.right.x, transform.right.z);
@@ -119,14 +135,13 @@ public class Vechicle : MonoBehaviour {
 			return;
 		}
 
-		// forward / backwards
-//		if (Input.GetKey (KeyCode.UpArrow)) {
-//			targetSpeedPercent = 1;
-//		} else if (Input.GetKey (KeyCode.DownArrow)) {
-//			targetSpeedPercent = -1;
-//		} else {
-//			targetSpeedPercent = 0;
-//		}
+		if (reversing) {
+			curReverseTimer -= Time.deltaTime;
+			if (curReverseTimer <= 0f) {
+				reversing = false;
+			}
+		}
+			
 		AdaptTargetDirection();
 
 		if (targetSpeedPercent == 0f) {
@@ -155,24 +170,40 @@ public class Vechicle : MonoBehaviour {
 		}
 
 		curWheelSpeed = Mathf.Clamp (curWheelSpeed, -1f, 1f);
-
-		// steering
-//		if (Input.GetKey (KeyCode.RightArrow)) {
-//			targetRotPercentage = 1;
-//		} else if (Input.GetKey (KeyCode.LeftArrow)) {
-//			targetRotPercentage = -1;
-//		} else {
-//			targetRotPercentage = 0;
-//		}
 	}
 
 	void FixedUpdate () {
 		CheckGrounded ();
 		if (grounded) {
+			if (!reversing) {
+				if (Stuck ()) {
+					// is stuck
+					Reverse ();
+				}
+			}
+
 			ApplyRotation ();
 			ApplyDrivingWheelForce ();
 			ApplySteeringWheelForce ();
+
+			lastPos = transform.position;
 		}
+	}
+
+	bool Stuck () {
+		if (curWheelSpeed >= 0.9f) {
+			Vector3 posDiff = transform.position - lastPos;
+			if (posDiff.magnitude <= stuckThreshold) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	void Reverse () {
+		reversing = true;
+		curReverseTimer = reverseTime;
 	}
 
 	void ApplyRotation () {
