@@ -56,6 +56,8 @@ public class ShootingController : MonoBehaviour {
 		WeaponManager.WeaponData newWeaponData = WeaponManager.instance.WeaponDataFromName (weapon.name);
 		newPickup.GetComponent<WeaponPickup> ().Init (newWeaponData);
 		newPickup.GetComponent<Rigidbody>().velocity = transform.parent.forward * throwVelocity;
+
+		Destroy (weapon.gameObject);
 	}
 
 	void LateUpdate() {
