@@ -49,7 +49,10 @@ public class EnemyController : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		Rigidbody otherRb = other.gameObject.GetComponent<Rigidbody> ();
 		if (otherRb == null) {
-			return;
+			otherRb = other.gameObject.GetComponentInParent<Rigidbody> ();
+			if (otherRb == null) {
+				return;
+			}
 		}
 
 		float appliedForce = otherRb.mass * (otherRb.velocity.magnitude / Time.deltaTime);

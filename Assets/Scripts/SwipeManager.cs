@@ -14,6 +14,7 @@ public class SwipeManager : MonoBehaviour {
 	LineManager lm;
 
 	bool isTapping;
+	bool isSelectingPlayer;
 	Vector2 startPos;
 
 	void Awake() {
@@ -26,33 +27,42 @@ public class SwipeManager : MonoBehaviour {
 	void Update() {
 		//on tap down
 		if (player.state == PlayerController.MovementState.Grounded && !isTapping && Input.GetMouseButtonDown (0)) {
-			if (player.inVehicle) {
-				RaycastHit hitInfo;
-				Physics.Raycast (gameCam.ScreenPointToRay (Input.mousePosition), out hitInfo, 100f, 1 << 2);
-				if (hitInfo.collider == null || hitInfo.collider.gameObject.name != "InteractionSphere") {
-					return;
-				}
-			}
-			StartSwipe (Input.mousePosition);
+			StartTap (Input.mousePosition);
 		}
 
 		//on tap up
 		if (isTapping && Input.GetMouseButtonUp (0)) {
-			EndSwipe (Input.mousePosition);
+			EndTap (Input.mousePosition);
 		}
 	}
 
 	void LateUpdate() {
 		if (isTapping) {
-			UpdateLine (Input.mousePosition);
+			if (isSelectingPlayer) {
+				UpdateLine (Input.mousePosition);
+			} else if (player.inVehicle) {
+				UpdateVehicle (Input.mousePosition);
+			}
 		}
 	}
 
-	void StartSwipe(Vector2 curPos) {
-		swipeLine.enabled = true;
-
+	void StartTap(Vector2 curPos) {
 		isTapping = true;
 		startPos = curPos; //save initial tap position
+
+		//check whether or not we are selecting the player
+		if (!player.inVehicle) {
+			isSelectingPlayer = true;
+		} else {
+			RaycastHit hitInfo;
+			Physics.Raycast (gameCam.ScreenPointToRay (curPos), out hitInfo, 100f, 1 << 2);
+
+			isSelectingPlayer = (hitInfo.collider != null && hitInfo.collider.gameObject.name == "InteractionSphere");
+		}
+
+		if (isSelectingPlayer) {
+			swipeLine.enabled = true;
+		}
 	}
 
 	//update LineRenderer
@@ -62,15 +72,25 @@ public class SwipeManager : MonoBehaviour {
 		lm.UpdateLineTrajectory(dir2d);
 	}
 
-	void EndSwipe(Vector2 endPos) {
+	void UpdateVehicle(Vector2 curPos) {
+		player.currentVechicle.targetDirection = CalculateDirection (curPos);
+	}
+
+	void EndTap(Vector2 endPos) {
 		swipeLine.enabled = false;
 		isTapping = false;
 
+		if (player.inVehicle) {
+			player.currentVechicle.targetDirection = Vector2.zero;
+		}
+
 		Vector2 dir = CalculateDirection (endPos);
 
-		if (dir.magnitude > swipeCancelRange) {
+		if (isSelectingPlayer && dir.magnitude > swipeCancelRange) {
 			player.Swipe (dir);
 		}
+
+		isSelectingPlayer = false;
 	}
 
 	Vector2 CalculateDirection(Vector2 curPos) {

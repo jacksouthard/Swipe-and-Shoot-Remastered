@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 
 	public bool inVehicle { get { return currentVechicle != null; } }
 
-	Vechicle currentVechicle;
+	public Vechicle currentVechicle;
 
 	Rigidbody rb;
 	ShootingController shooting;
