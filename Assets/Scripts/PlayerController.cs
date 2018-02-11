@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 
 	//launches character in a direction
 	public void Swipe(Vector2 dir) {
+		rb.constraints = RigidbodyConstraints.None;
 		rb.AddForce (new Vector3(dir.x, dir.magnitude * verticalFactor, dir.y) * swipeForce);
 		state = MovementState.Jumping;
 	}
@@ -55,5 +56,6 @@ public class PlayerController : MonoBehaviour {
 	void Stop() {
 		state = MovementState.Grounded;
 		rb.velocity = Vector3.zero;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
 	}
 }
