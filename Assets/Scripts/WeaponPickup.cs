@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponPickup : MonoBehaviour {
+	public string customType = "None";
+
 	bool inited = false;
 
 	public WeaponManager.WeaponData weaponData;
 
 	void Start () {
-		if (!inited) {
+		if (customType != "None") {
+			weaponData = WeaponManager.instance.WeaponDataFromName(customType);
+			UpdateRendering ();
+		} else if (!inited) {
 			weaponData = WeaponManager.instance.GetRandomData ();
 			UpdateRendering ();
 		}
