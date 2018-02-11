@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour {
 	public MovementState state;
 
 	[Header("Control")]
-	public float stoppingSpeed; //ground speed before the player returns to grounded state
+	public float stoppingSpeed; //ground speed before the player returns to standed state
+	public float stoppingAngle; //angle difference before the player returns to grounded state
 
 	[Header("Speed")]
 	public float swipeForce; //the amount by which the swiping force is scaled by
@@ -23,9 +24,11 @@ public class PlayerController : MonoBehaviour {
 	Vechicle currentVechicle;
 
 	Rigidbody rb;
+	ShootingController shooting;
 
 	void Awake() {
 		rb = gameObject.GetComponent<Rigidbody> ();
+		shooting = gameObject.GetComponentInChildren<ShootingController> ();
 	}
 
 	//launches character in a direction
@@ -51,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			//changes states when hit
 			if (state == MovementState.Jumping) {
+				shooting.canRotate = false;
 				state = MovementState.Tumbling;
 			}
 		}
@@ -64,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if (state == MovementState.Grounded) { //stand up
+		if (state == MovementState.Grounded && currentVechicle == null) { //stand up
 			transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f), turnSpeed * Time.deltaTime);
 		}
 	}
@@ -73,5 +77,6 @@ public class PlayerController : MonoBehaviour {
 		state = MovementState.Grounded;
 		rb.velocity = Vector3.zero;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		shooting.canRotate = true;
 	}
 }

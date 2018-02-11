@@ -70,8 +70,6 @@ GameObject:
   - component: {fileID: 4763683712947520}
   - component: {fileID: 33137462311859116}
   - component: {fileID: 23909837437495482}
-  - component: {fileID: 65867965845853670}
-  - component: {fileID: 54606948222087678}
   - component: {fileID: 114592187113800208}
   m_Layer: 0
   m_Name: M9
@@ -252,33 +250,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1609660296145830}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54606948222087678
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1658469826386734}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &65867965845853670
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1658469826386734}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9627265, y: 0.22881217, z: 0.5028472}
-  m_Center: {x: 0.21673511, y: 0.000000021242503, z: -0.08909753}
 --- !u!114 &114592187113800208
 MonoBehaviour:
   m_ObjectHideFlags: 1

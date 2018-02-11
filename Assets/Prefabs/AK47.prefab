@@ -38,8 +38,6 @@ GameObject:
   - component: {fileID: 4387344650234928}
   - component: {fileID: 33099009304421304}
   - component: {fileID: 23095187654129634}
-  - component: {fileID: 65416749339987136}
-  - component: {fileID: 54024002336370842}
   - component: {fileID: 114052097283498422}
   m_Layer: 0
   m_Name: AK47
@@ -254,33 +252,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1705808542375840}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54024002336370842
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1456361243191302}
-  serializedVersion: 2
-  m_Mass: 3
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &65416749339987136
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1456361243191302}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.996718, y: 0.20003104, z: 0.8326252}
-  m_Center: {x: -0.05749798, y: -0.00006449969, z: -0.09941951}
 --- !u!114 &114052097283498422
 MonoBehaviour:
   m_ObjectHideFlags: 1

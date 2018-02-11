@@ -10,6 +10,8 @@ public class Weapon : MonoBehaviour {
 	public float accuracy;
 	public GameObject bulletRayPrefab;
 
+	string targetTag;
+
 	bool canFire;
 	float fireRateTimer = 0f;
 	List<Transform> bulletSpawns = new List<Transform> ();
@@ -21,10 +23,14 @@ public class Weapon : MonoBehaviour {
 			}
 		}
 	}
+
+	public void SetTarget(string target) {
+		targetTag = target;
+	}
 	
 	void Update () {
 		if (canFire) {
-			if (Input.GetKey (KeyCode.Space)) {
+			if (shouldFire) {
 				Shoot ();
 			}
 		}
@@ -34,6 +40,19 @@ public class Weapon : MonoBehaviour {
 			if (fireRateTimer <= 0f) {
 				canFire = true;
 			}
+		}
+	}
+
+	bool shouldFire {
+		get {
+			RaycastHit hitInfo;
+			Physics.SphereCast (bulletSpawns [0].position, 0.5f, -bulletSpawns[0].right, out hitInfo, range);
+
+			if (hitInfo.collider == null) {
+				return false;
+			}
+
+			return (hitInfo.collider.tag == targetTag);
 		}
 	}
 
