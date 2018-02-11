@@ -5,6 +5,7 @@ using UnityEngine;
 //controls all swipe input and sends it to the player
 public class SwipeManager : MonoBehaviour {
 	public float maxSwipeDistance;
+	public float swipeCancelRange;
 
 	Camera gameCam;
 	PlayerController player;
@@ -25,6 +26,13 @@ public class SwipeManager : MonoBehaviour {
 	void Update() {
 		//on tap down
 		if (player.state == PlayerController.MovementState.Grounded && !isTapping && Input.GetMouseButtonDown (0)) {
+			if (player.inVehicle) {
+				RaycastHit hitInfo;
+				Physics.Raycast (gameCam.ScreenPointToRay (Input.mousePosition), out hitInfo, 100f, 1 << 2);
+				if (hitInfo.collider == null || hitInfo.collider.gameObject.name != "InteractionSphere") {
+					return;
+				}
+			}
 			StartSwipe (Input.mousePosition);
 		}
 
@@ -50,7 +58,6 @@ public class SwipeManager : MonoBehaviour {
 	//update LineRenderer
 	void UpdateLine(Vector2 curPos) {
 		Vector2 dir2d = CalculateDirection (curPos);
-		Vector3 dir3d = new Vector3 (dir2d.x, 0f, dir2d.y);
 
 		lm.UpdateLineTrajectory(dir2d);
 	}
@@ -60,7 +67,10 @@ public class SwipeManager : MonoBehaviour {
 		isTapping = false;
 
 		Vector2 dir = CalculateDirection (endPos);
-		player.Swipe (dir);
+
+		if (dir.magnitude > swipeCancelRange) {
+			player.Swipe (dir);
+		}
 	}
 
 	Vector2 CalculateDirection(Vector2 curPos) {

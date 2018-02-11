@@ -599,6 +599,7 @@ MonoBehaviour:
   state: 0
   stoppingSpeed: 1
   stoppingAngle: 30
+  autoResetTime: 0.5
   swipeForce: 30000
   verticalFactor: 0.5
   turnSpeed: 10
@@ -630,6 +631,9 @@ MonoBehaviour:
   maxHealth: 20
   regenSpeed: 1
   regenWait: 0.5
+  dyingTimer: 0
+  decayTimer: 0
+  state: 0
   waitTimer: 0
   health: 0
 --- !u!120 &120433219360908302
