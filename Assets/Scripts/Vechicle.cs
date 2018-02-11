@@ -22,6 +22,7 @@ public class Vechicle : MonoBehaviour {
 	[Space(20)]
 	[Header("Debug")]
 	public bool grounded = false;
+	public Vector2 targetDirection = Vector2.zero;
 	public int targetSpeedPercent = 0;
 	public int targetRotPercentage = 0;
 	public float curWheelSpeed = 0f;
@@ -33,6 +34,8 @@ public class Vechicle : MonoBehaviour {
 	Transform seat;
 	GameObject mounter;
 
+	Transform vectorArrow;
+
 	// wheels
 	List<Wheel> steeringWheels = new List<Wheel>();
 	List<Wheel> drivingWheels = new List<Wheel>();
@@ -43,6 +46,9 @@ public class Vechicle : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 
 		UpdateDrag ();
+
+		vectorArrow = transform.Find ("TargetVector");
+		vectorArrow.gameObject.SetActive (false);
 
 		// init mounting stuff
 		seat = transform.Find("Seat");
@@ -88,19 +94,40 @@ public class Vechicle : MonoBehaviour {
 		rb.interpolation = RigidbodyInterpolation.None;
 	}
 
+	void AdaptTargetDirection () {
+		if (targetDirection == Vector2.zero) {
+			// no input
+			targetRotPercentage = 0;
+			targetSpeedPercent = 0;
+			vectorArrow.gameObject.SetActive (false);
+		} else {
+			// has input
+			targetSpeedPercent = 1; // eventually have tests for when to go backwards
+
+			// calculate rotation direction
+			Vector2 right = new Vector2(transform.right.x, transform.right.z);
+			targetRotPercentage = Mathf.RoundToInt(Mathf.Sign (Vector2.Dot(right, targetDirection)));
+			// calculate arrow rotation
+			float targetAngle = Mathf.Atan2 (-targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+			vectorArrow.rotation = Quaternion.Euler (new Vector3 (0f, targetAngle, 0f));
+			vectorArrow.gameObject.SetActive (true);
+		}
+	}
+
 	void Update () {
 		if (!driver) {
 			return;
 		}
 
 		// forward / backwards
-		if (Input.GetKey (KeyCode.UpArrow)) {
-			targetSpeedPercent = 1;
-		} else if (Input.GetKey (KeyCode.DownArrow)) {
-			targetSpeedPercent = -1;
-		} else {
-			targetSpeedPercent = 0;
-		}
+//		if (Input.GetKey (KeyCode.UpArrow)) {
+//			targetSpeedPercent = 1;
+//		} else if (Input.GetKey (KeyCode.DownArrow)) {
+//			targetSpeedPercent = -1;
+//		} else {
+//			targetSpeedPercent = 0;
+//		}
+		AdaptTargetDirection();
 
 		if (targetSpeedPercent == 0f) {
 			// deccelerate if no input
@@ -130,13 +157,13 @@ public class Vechicle : MonoBehaviour {
 		curWheelSpeed = Mathf.Clamp (curWheelSpeed, -1f, 1f);
 
 		// steering
-		if (Input.GetKey (KeyCode.RightArrow)) {
-			targetRotPercentage = 1;
-		} else if (Input.GetKey (KeyCode.LeftArrow)) {
-			targetRotPercentage = -1;
-		} else {
-			targetRotPercentage = 0;
-		}
+//		if (Input.GetKey (KeyCode.RightArrow)) {
+//			targetRotPercentage = 1;
+//		} else if (Input.GetKey (KeyCode.LeftArrow)) {
+//			targetRotPercentage = -1;
+//		} else {
+//			targetRotPercentage = 0;
+//		}
 	}
 
 	void FixedUpdate () {
@@ -166,7 +193,7 @@ public class Vechicle : MonoBehaviour {
 				wheelsRatio += 1f / drivingWheels.Count;
 			}
 		}
-		Vector3 force = Vector3.right * maxSpeed * curWheelSpeed * wheelsRatio * rotationSpeedLimiter;
+		Vector3 force = Vector3.forward * maxSpeed * curWheelSpeed * wheelsRatio * rotationSpeedLimiter;
 		rb.AddRelativeForce (force);
 	}
 
@@ -177,7 +204,7 @@ public class Vechicle : MonoBehaviour {
 				wheelsRatio += 1f / steeringWheels.Count;
 			}
 		}
-		Vector3 force = Vector3.right * maxSpeed * curWheelSpeed * wheelsRatio * rotationSpeedLimiter;
+		Vector3 force = Vector3.forward * maxSpeed * curWheelSpeed * wheelsRatio * rotationSpeedLimiter;
 		rb.AddRelativeForce (force);
 	}
 
