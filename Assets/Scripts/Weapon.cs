@@ -54,7 +54,7 @@ public class Weapon : MonoBehaviour {
 
 			Health otherHealth = hitInfo.collider.GetComponent<Health> ();
 
-			return (otherHealth == null || otherHealth.state == Health.State.Alive);
+			return (otherHealth == null || otherHealth.state != Health.State.Decaying);
 		}
 	}
 
