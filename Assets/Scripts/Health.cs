@@ -56,9 +56,11 @@ public class Health : MonoBehaviour {
 	}
 
 	public void TakeDamage (float damage) {
-		health -= damage;
-		if (health <= 0f) {
-			Die ();
+		if (state == State.Alive) {
+			health -= damage;
+			if (health <= 0f) {
+				Die ();
+			}
 		}
 
 		waitTimer = regenWait;
@@ -74,6 +76,9 @@ public class Health : MonoBehaviour {
 
 		// if enemy
 		if (GetComponent<EnemyController>() != null) {
+			Rigidbody rb = gameObject.AddComponent<Rigidbody> ();
+			rb.mass = 80f; // 80 kg of enemy wieght
+
 			GetComponent<NavMeshAgent> ().enabled = false;
 			GetComponent<EnemyController> ().enabled = false;
 			GetComponentInChildren<ShootingController> ().enabled = false;
