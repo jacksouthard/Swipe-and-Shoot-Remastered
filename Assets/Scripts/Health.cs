@@ -153,9 +153,9 @@ public class Health : MonoBehaviour {
 		if (type == Type.Vechicle) {
 			// test for player in vechicle
 			Vechicle vechicle = GetComponent<Vechicle>();
-//			if (vechicle.driver) {
-//				GetComponentInChildren<PlayerController> ().ExitVehicle ();
-//			}
+			if (vechicle.driver) {
+				GetComponentInChildren<PlayerController> ().ExitVehicle ();
+			}
 			// eventually spawn explosion
 			Destroy(vechicle);
 		}

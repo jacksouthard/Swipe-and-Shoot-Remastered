@@ -19,6 +19,7 @@ public class ShootingController : MonoBehaviour {
 	public float throwVelocity;
 
 	bool isPlayer;
+	PlayerController pc;
 	Transform player;
 	Health health;
 	Weapon weapon;
@@ -26,7 +27,8 @@ public class ShootingController : MonoBehaviour {
 	void Awake() {
 		isPlayer = gameObject.GetComponentInParent<PlayerController> () != null;
 		if (!isPlayer) {
-			player = GameObject.FindObjectOfType<PlayerController> ().transform;
+			pc = GameObject.FindObjectOfType<PlayerController> ();
+			player = pc.transform.Find("Center");
 		}
 
 		health = gameObject.GetComponentInParent<Health> ();
@@ -64,7 +66,12 @@ public class ShootingController : MonoBehaviour {
 		if (weapon == null) {
 			return;
 		}
-		Transform target = (!isPlayer) ? player : GetNearestTarget ();
+		Transform target;
+		if (!isPlayer) {
+			target = (pc.inVehicle) ? pc.currentVechicle.transform.Find("Center") : player;
+		} else {
+			target = GetNearestTarget ();
+		}
 	
 		if (target != null) {
 			RotateTowards (target);
@@ -73,7 +80,7 @@ public class ShootingController : MonoBehaviour {
 
 	void RotateTowards(Transform target) {
 		Quaternion parentRotation = transform.parent.rotation;
-		Vector3 diff = target.position - transform.position + (Vector3.up * 0.6f);
+		Vector3 diff = target.position - transform.position;
 		float angle = Mathf.Atan2 (diff.x, diff.z) * Mathf.Rad2Deg;
 
 		if (canRotate) {
@@ -106,6 +113,10 @@ public class ShootingController : MonoBehaviour {
 					closestDistance = distance;
 				}
 			}
+		}
+
+		if (closestObj != null) {
+			closestObj = closestObj.Find ("Center");
 		}
 
 		return closestObj;

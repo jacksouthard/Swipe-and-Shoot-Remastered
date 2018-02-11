@@ -49,11 +49,22 @@ public class Weapon : MonoBehaviour {
 			RaycastHit hitInfo;
 			Physics.SphereCast (bulletSpawns [0].position, 0.5f, -bulletSpawns[0].right, out hitInfo, range);
 
-			if (hitInfo.collider == null || hitInfo.collider.tag != targetTag) {
+			if (hitInfo.collider == null) {
 				return false;
 			}
 
-			Health otherHealth = hitInfo.collider.GetComponent<Health> ();
+			if (hitInfo.collider.tag != targetTag) {
+				if (targetTag == "Player") {
+					Vechicle hitVehicle = hitInfo.collider.GetComponentInParent<Vechicle> ();
+					if (hitVehicle == null || !hitVehicle.driver) {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			}
+
+			Health otherHealth = hitInfo.collider.GetComponentInParent<Health> ();
 
 			return (otherHealth == null || otherHealth.state != Health.State.Decaying);
 		}

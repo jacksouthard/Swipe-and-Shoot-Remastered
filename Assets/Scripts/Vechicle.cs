@@ -98,6 +98,7 @@ public class Vechicle : MonoBehaviour {
 		mounter.GetComponent<Rigidbody> ().isKinematic = false;
 		mounter.transform.parent = null;
 
+		vectorArrow.gameObject.SetActive (false);
 		handsContainer.SetActive (false);
 
 		driver = false;

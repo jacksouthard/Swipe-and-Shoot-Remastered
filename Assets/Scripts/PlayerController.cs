@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour {
 		rb = gameObject.GetComponent<Rigidbody> ();
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
 
 		timerDisplay.transform.parent = null;
 	}
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour {
 	void EnterVehicle(Vechicle newVechicle) {
 		currentVechicle = newVechicle;
 		rb.interpolation = RigidbodyInterpolation.None;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
 
 		currentVechicle.Mount (gameObject);
 		state = MovementState.Grounded;
@@ -68,8 +70,13 @@ public class PlayerController : MonoBehaviour {
 		shooting.gameObject.SetActive (false);
 	}
 
-	void ExitVehicle() {
+	public void ExitVehicle() {
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		rb.velocity = currentVechicle.GetComponent<Rigidbody> ().velocity;
+
+		state = MovementState.Jumping;
+
 		currentVechicle.Dismount ();
 		currentVechicle = null;
 
@@ -79,7 +86,7 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionEnter(Collision other) {
 		if (other.collider.tag == "Vechicle") {
 			Vechicle newVechicle = other.gameObject.GetComponentInParent<Vechicle> ();
-			if(newVechicle.canBeMounted) {
+			if(newVechicle != null && newVechicle.canBeMounted) {
 				EnterVehicle (newVechicle);
 			}
 		} else {
