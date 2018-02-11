@@ -98,6 +98,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void Hit() {
+		nextAutoReset = Time.time + autoResetTime;
+		rb.constraints = RigidbodyConstraints.None;
+		shooting.canRotate = false;
+	}
+
 	void LateUpdate() {
 		if (state == MovementState.Tumbling || (state == MovementState.Jumping && Time.time > nextAutoReset)) {
 			Vector2 groundSpeed = new Vector2 (rb.velocity.x, rb.velocity.z);
@@ -106,7 +112,10 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if (state == MovementState.Grounded && !inVehicle) { //stand up
+		if (state == MovementState.Grounded && !inVehicle && Time.time > nextAutoReset) { //stand up
+			if (!shooting.canRotate) {
+				Stop ();
+			}
 			transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f), turnSpeed * Time.deltaTime);
 		}
 

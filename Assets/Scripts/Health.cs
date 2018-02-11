@@ -40,14 +40,16 @@ public class Health : MonoBehaviour {
 	public float health;
 
 	bool shouldUpdateRenderers;
-	MeshRenderer[] mrs;
+	PlayerController pc;
+	List<MeshRenderer> mrs;
 	List<Color[]> originalColors;
 
 	void Start () {
 		health = maxHealth;
 		UpdateRenderers ();
 
-		if (GetComponent<PlayerController> () != null) {
+		pc = GetComponent<PlayerController> ();
+		if (pc != null) {
 			type = Type.Player;
 		} else if (GetComponent<EnemyController> () != null) {
 			type = Type.Enemy;
@@ -65,10 +67,23 @@ public class Health : MonoBehaviour {
 	void UpdateRenderers() {
 		shouldUpdateRenderers = false;
 
-		mrs = GetComponentsInChildren<MeshRenderer>();
+		List<MeshRenderer> originalMrs = mrs;
+		mrs = new List<MeshRenderer>(GetComponentsInChildren<MeshRenderer>());
+
+		if (originalMrs != null) {
+			//reset any old meshrenderers
+			for (int i = 0; i < originalMrs.Count; i++) {
+				if (mrs.Contains (originalMrs [i])) {
+					for (int j = 0; j < originalColors [i].Length; j++) {
+						mrs [mrs.IndexOf (originalMrs [i])].materials [j].color = originalColors [i] [j];
+					}
+				}
+			}
+		}
+
 		originalColors = new List<Color[]> ();
 
-		for(int i = 0; i < mrs.Length; i++) {
+		for(int i = 0; i < mrs.Count; i++) {
 			Color[] colors = new Color[mrs[i].materials.Length];
 			for (int j = 0; j < colors.Length; j++) {
 				colors [j] = mrs [i].materials [j].color;
@@ -121,6 +136,9 @@ public class Health : MonoBehaviour {
 				Die ();
 			} else {
 				StartCoroutine (HitAnimation ());
+				if (type == Type.Player) {
+					pc.Hit ();
+				}
 			}
 		}
 
@@ -196,7 +214,7 @@ public class Health : MonoBehaviour {
 	}
 
 	void ResetColor() {
-		for (int i = 0; i < mrs.Length; i++) {
+		for (int i = 0; i < mrs.Count; i++) {
 			int colorCount = originalColors [i].Length;
 			for (int j = 0; j < colorCount; j++) {
 				mrs [i].materials [j].color = originalColors [i] [j];
