@@ -74,7 +74,7 @@ public class SwipeManager : MonoBehaviour {
 		swipeLine.enabled = (dir2d.magnitude > swipeCancelRange);
 
 		Color lineColor = (player.state == PlayerController.MovementState.Grounded) ? Color.white : new Color(1, 1, 1, 0.125f);
-		lm.SetLineColor(lineColor);
+		lm.line.material.color = lineColor;
 
 		lm.UpdateLineTrajectory(dir2d);
 	}
