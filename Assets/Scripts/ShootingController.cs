@@ -15,12 +15,23 @@ public class ShootingController : MonoBehaviour {
 
 	Weapon weapon;
 
-	public void SetWeapon(Weapon newWeapon) {
-		weapon = gameObject.GetComponentInChildren<Weapon> ();
+	public void SetWeapon(WeaponManager.WeaponData newWeapon) {
+		if (weapon != null) {
+			Destroy (weapon.gameObject);
+		}
+
+		GameObject weaponObj = Instantiate (newWeapon.prefab, transform.GetChild(0));
+		weaponObj.transform.localPosition = Vector3.zero;
+		weaponObj.transform.localRotation = Quaternion.identity;
+
+		weapon = weaponObj.GetComponent<Weapon>();
 		weapon.SetTarget(targetTag);
 	}
 
 	void LateUpdate() {
+		if (weapon == null) {
+			return;
+		}
 		Transform target = GetNearestTarget ();
 		if (target != null) {
 			RotateTowards (target);

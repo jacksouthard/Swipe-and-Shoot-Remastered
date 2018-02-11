@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
-	public static EnemySpawner instance;
+public class Spawner : MonoBehaviour {
+	public static Spawner instance;
 
-	public GameObject enemyPrefab;
-	public int maxEnemies;
+	public GameObject prefab;
+	public int maxObjects;
 	public float spawnRate;
 
-	int enemyCount = 0;
+	int count = 0;
 	float spawnTimer;
 
 	List<Vector3> spawnPoints = new List<Vector3>();
@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (enemyCount < maxEnemies) {
+		if (count < maxObjects) {
 			spawnTimer -= Time.deltaTime;
 			if (spawnTimer <= 0f) {
 				spawnTimer = spawnRate;
@@ -44,8 +44,8 @@ public class EnemySpawner : MonoBehaviour {
 		int index = Random.Range (0, spawnPoints.Count);
 		Vector3 spawnPoint = spawnPoints [index];
 
-		GameObject enemy = Instantiate (enemyPrefab, spawnPoint, Quaternion.identity, transform);
+		GameObject enemy = Instantiate (prefab, spawnPoint, Quaternion.identity, transform);
 
-		enemyCount++;
+		count++;
 	}
 }

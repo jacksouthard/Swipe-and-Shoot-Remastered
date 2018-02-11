@@ -79,4 +79,13 @@ public class PlayerController : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 		shooting.canRotate = true;
 	}
+
+	// picking up weapons
+	void OnTriggerEnter (Collider coll) {
+		if (coll.gameObject.tag == "Pickup") {
+			WeaponPickup weaponPickup = coll.gameObject.GetComponent<WeaponPickup> ();
+			shooting.SetWeapon (weaponPickup.weaponData);
+			Destroy (coll.gameObject);
+		}
+	}
 }

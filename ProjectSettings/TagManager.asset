@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Vechicle
+  - Pickup
+  - Enemy
   layers:
   - Default
   - TransparentFX
