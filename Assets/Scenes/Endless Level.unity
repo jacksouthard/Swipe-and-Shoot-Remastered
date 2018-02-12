@@ -2860,53 +2860,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 1755002622876324, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
-      propertyPath: m_TagString
-      value: Vechicle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1819630175581242, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
-      propertyPath: m_TagString
-      value: Vechicle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1478992025474082, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
-      propertyPath: m_TagString
-      value: Vechicle
-      objectReference: {fileID: 0}
-    - target: {fileID: 114407105206907962, guid: 3ec1756db85114a8c9053292e6d520aa,
-        type: 2}
-      propertyPath: maxHealth
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1005283428 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1755002622876324, guid: 3ec1756db85114a8c9053292e6d520aa,
-    type: 2}
-  m_PrefabInternal: {fileID: 1005283427}
---- !u!114 &1005283429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1005283428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 016c887d302bd4fb28e07a889197c8d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  state: 0
-  maxHealth: 20
-  regenSpeed: 1
-  regenWait: 30
-  hitWait: 0.05
-  hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
-  dyingTimer: 1
-  decayTimer: 2
-  waitTimer: 0
-  health: 0
 --- !u!1001 &1007012223
 Prefab:
   m_ObjectHideFlags: 0
@@ -3308,16 +3264,6 @@ Prefab:
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_RootOrder
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114739835484656106, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
-        type: 2}
-      propertyPath: maxHealth
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114739835484656106, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
-        type: 2}
-      propertyPath: regenSpeed
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
@@ -5455,6 +5401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6fdf9eb16a14fcaba7fba9ee1ceeb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 30
+  heightMinOffset: -1.5
+  heightMaxOffset: 5
   speed: 3
 --- !u!4 &1767673490 stripped
 Transform:
