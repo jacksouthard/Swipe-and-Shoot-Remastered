@@ -55,6 +55,10 @@ public class EnemyController : MonoBehaviour {
 		float appliedForce = otherRb.mass * (otherRb.velocity.magnitude / Time.deltaTime);
 
 		if (appliedForce >= durability) {
+			PlayerController pc = otherRb.GetComponent<PlayerController> ();
+			if (pc != null && pc.TrySwapWeapons (shooting.GetWeaponData ())) {
+				shooting.RemoveWeapon ();
+			}
 			gameObject.GetComponent<Health> ().Die ();
 		}
 	}

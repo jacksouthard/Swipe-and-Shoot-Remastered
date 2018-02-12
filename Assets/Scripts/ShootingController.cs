@@ -52,6 +52,14 @@ public class ShootingController : MonoBehaviour {
 		}
 	}
 
+	public void RemoveWeapon() {
+		Destroy (weapon.gameObject);
+
+		if (health != null) {
+			health.UpdateRenderersNextFrame ();
+		}
+	}
+
 	void ThrowWeapon () {
 		Vector3 pos = transform.parent.TransformPoint(0f, throwHeight, 1f);
 		GameObject newPickup = Instantiate (weaponPickupPrefab, pos, Quaternion.identity);
@@ -93,6 +101,10 @@ public class ShootingController : MonoBehaviour {
 
 	float ClampedAngle(float angle) {
 		return Mathf.Clamp (((angle + 180f) % 360f) - 180f, -clampAngle, clampAngle);
+	}
+		
+	public WeaponManager.WeaponData GetWeaponData() {
+		return (weapon != null) ? WeaponManager.instance.WeaponDataFromName (weapon.name) : null;
 	}
 
 	Transform GetNearestTarget() {

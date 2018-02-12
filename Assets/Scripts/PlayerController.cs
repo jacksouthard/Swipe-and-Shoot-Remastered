@@ -104,6 +104,15 @@ public class PlayerController : MonoBehaviour {
 		shooting.canRotate = false;
 	}
 
+	public bool TrySwapWeapons(WeaponManager.WeaponData weaponData) {
+		if (shooting.GetWeaponData () != null) {
+			return false;
+		}
+
+		shooting.SetWeapon (weaponData);
+		return true;
+	}
+
 	void LateUpdate() {
 		if (state == MovementState.Tumbling || (state == MovementState.Jumping && Time.time > nextAutoReset)) {
 			Vector2 groundSpeed = new Vector2 (rb.velocity.x, rb.velocity.z);
