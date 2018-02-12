@@ -40,7 +40,6 @@ public class Health : MonoBehaviour {
 	public float health;
 
 	bool shouldUpdateRenderers;
-	PlayerController pc;
 	List<MeshRenderer> mrs;
 	List<Color[]> originalColors;
 
@@ -48,8 +47,7 @@ public class Health : MonoBehaviour {
 		health = maxHealth;
 		UpdateRenderers ();
 
-		pc = GetComponent<PlayerController> ();
-		if (pc != null) {
+		if (GetComponent<PlayerController> () != null) {
 			type = Type.Player;
 		} else if (GetComponent<EnemyController> () != null) {
 			type = Type.Enemy;
@@ -136,9 +134,6 @@ public class Health : MonoBehaviour {
 				Die ();
 			} else {
 				StartCoroutine (HitAnimation ());
-				if (type == Type.Player) {
-					pc.Hit ();
-				}
 			}
 		}
 
