@@ -268,8 +268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0.4
-  damage: 1.5
-  range: 10
+  damage: 1.2
+  range: 8
   accuracy: 3
   speedMultiplier: 1.5
   bulletRayPrefab: {fileID: 1303374916533454, guid: 387e19391ca184c4789e4926758050be,

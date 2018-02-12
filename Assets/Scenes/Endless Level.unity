@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 538262599}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44824833, g: 0.49827528, b: 0.5755825, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000004, guid: 7bd38373036244af1be0e601cd6ded02,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -5472,6 +5473,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114483894460093812, guid: 8ae6053396c4c4904811ea88ed7c7f90,
+        type: 2}
+      propertyPath: weaponDatas.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4752561261188338, guid: 8ae6053396c4c4904811ea88ed7c7f90, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5504,6 +5510,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114483894460093812, guid: 8ae6053396c4c4904811ea88ed7c7f90,
+        type: 2}
+      propertyPath: weaponDatas.Array.data[3].name
+      value: Gatling Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 114483894460093812, guid: 8ae6053396c4c4904811ea88ed7c7f90,
+        type: 2}
+      propertyPath: weaponDatas.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 1253796618953862, guid: 8b1c13fa03ee448ccbaa7e312874b937,
+        type: 2}
+    - target: {fileID: 114483894460093812, guid: 8ae6053396c4c4904811ea88ed7c7f90,
+        type: 2}
+      propertyPath: weaponDatas.Array.data[3].mesh
+      value: 
+      objectReference: {fileID: 4300004, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ae6053396c4c4904811ea88ed7c7f90, type: 2}
   m_IsPrefabParent: 0
