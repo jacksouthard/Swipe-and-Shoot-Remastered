@@ -831,8 +831,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   state: 0
-  maxHealth: 20
-  regenSpeed: 1
+  maxHealth: 40
+  regenSpeed: 5
   regenWait: 0.5
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
