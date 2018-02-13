@@ -32,9 +32,9 @@ public class LineManager : MonoBehaviour {
 			positions.Add (currentPos);
 
 			//stop adding positions if we hit something
-//			if (hasHitSomethingBesidesPlayer (lastPos, currentPos)) {
-//				break;
-//			}
+			if (hasHitSomethingBesidesPlayer (lastPos, currentPos)) {
+				break;
+			}
 
 			lastPos = currentPos;
 
@@ -53,19 +53,14 @@ public class LineManager : MonoBehaviour {
 	bool hasHitSomethingBesidesPlayer (Vector3 pos1, Vector3 pos2)
 	{
 		RaycastHit hitInfo;
-		bool hasHitSomething = Physics.Linecast (pos1, pos2, out hitInfo);
+		bool hasHitSomething = Physics.Linecast (pos1, pos2, out hitInfo, 1<<10);
 		if (!hasHitSomething) {
 			return false;
 		} else {
 			print (hitInfo.collider.gameObject.tag);
 //			may have hit player and it doesn't count
-			if (hitInfo.collider.gameObject.tag == "Untagged" || hitInfo.collider.gameObject.tag == "Enemy") {
-				return true;
-			} else {
-				return false;
-
-			}
-//			return true;
+		
+			return true;
 		}
 	}
 	 
