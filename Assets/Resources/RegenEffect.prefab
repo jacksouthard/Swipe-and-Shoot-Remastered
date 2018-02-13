@@ -113,7 +113,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1542516083
+  randomSeed: 1212777029
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -755,7 +755,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -767,18 +767,36 @@ ParticleSystem:
         - serializedVersion: 2
           time: 0
           value: 0
+          inSlope: 4.2173524
+          outSlope: 4.2173524
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 0.058738247
+          value: 0.90397996
+          inSlope: 1.5377549
+          outSlope: 1.5377549
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 0.26905018
+          value: 1
           inSlope: 0
-          outSlope: 1
+          outSlope: 0
+          tangentMode: 0
+        - serializedVersion: 2
+          time: 0.7252034
+          value: 0.65806115
+          inSlope: -1.7700145
+          outSlope: -1.7700145
           tangentMode: 0
         - serializedVersion: 2
           time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 0
+          value: 0
+          inSlope: -3.9194067
+          outSlope: -3.9194067
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_RotationOrder: 0
       minCurve:
         serializedVersion: 2
         m_Curve:
@@ -1032,8 +1050,8 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 56283
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
@@ -1041,7 +1059,7 @@ ParticleSystem:
         atime7: 0
         m_Mode: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

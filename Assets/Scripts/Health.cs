@@ -229,7 +229,9 @@ public class Health : MonoBehaviour {
 
 	void EndRegen () {
 		if (curRegenEffect != null) {
-			Destroy (curRegenEffect);
+			curRegenEffect.GetComponent<ParticleSystem> ().Stop ();
+			Destroy (curRegenEffect, 1.0f);
+			curRegenEffect = null;
 		}
 		waitTimer = regenWait;
 		regening = false;
