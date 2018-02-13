@@ -255,7 +255,6 @@ GameObject:
   - component: {fileID: 114336433453438512}
   - component: {fileID: 54869579448232278}
   - component: {fileID: 114407105206907962}
-  - component: {fileID: 114670934048456524}
   m_Layer: 0
   m_Name: ATV
   m_TagString: Vechicle
@@ -1231,7 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4678f3dbd7cd4ccbb5dd0bfc4186212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 10000
+  turnSpeed: 12000
   rotationSpeedLimiter: 1
   rotationSpeedLimitRatio: 1.5
   maxSpeed: 40000
@@ -1241,8 +1240,7 @@ MonoBehaviour:
   groundedAngDrag: 5
   airDrag: 0
   airAngDrag: 5
-  reverseTime: 2
-  stuckThreshold: 0.01
+  reverseEngageAngle: 110
   grounded: 0
   targetDirection: {x: 0, y: 0}
   targetSpeedPercent: 0
@@ -1295,28 +1293,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onGround: 0
---- !u!114 &114670934048456524
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1755002622876324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 016c887d302bd4fb28e07a889197c8d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  state: 0
-  maxHealth: 20
-  regenSpeed: 1
-  regenWait: 30
-  hitWait: 0.05
-  hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
-  dyingTimer: 1
-  decayTimer: 2
-  waitTimer: 0
-  health: 0
 --- !u!114 &114882631292008744
 MonoBehaviour:
   m_ObjectHideFlags: 1

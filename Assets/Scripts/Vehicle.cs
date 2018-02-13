@@ -20,8 +20,7 @@ public class Vehicle : MonoBehaviour {
 	public float airAngDrag;
 
 	[Header("Reversing")]
-	public float reverseTime;
-	public float stuckThreshold;
+	public float reverseEngageAngle = 90f;
 
 	[Space(20)]
 	[Header("Debug")]
@@ -41,9 +40,7 @@ public class Vehicle : MonoBehaviour {
 	Transform vectorArrow;
 
 	// reversing
-	Vector3 lastPos;
-	float curReverseTimer;
-	bool reversing = false;
+	int reverseMutliplier = 1;
 
 	// wheels
 	List<Wheel> steeringWheels = new List<Wheel>();
@@ -58,8 +55,6 @@ public class Vehicle : MonoBehaviour {
 
 		vectorArrow = transform.Find ("TargetVector");
 		vectorArrow.gameObject.SetActive (false);
-
-		lastPos = transform.position;
 
 		// init mounting stuff
 		seat = transform.Find("Seat");
@@ -113,14 +108,6 @@ public class Vehicle : MonoBehaviour {
 			targetSpeedPercent = 0;
 			vectorArrow.gameObject.SetActive (false);
 		} else {
-			// has input
-			if (!reversing) {
-				targetSpeedPercent = 1;
-			} else {
-				targetSpeedPercent = -1;
-
-			}
-
 			// calculate rotation direction
 			Vector2 right = new Vector2(transform.right.x, transform.right.z);
 			targetRotPercentage = Mathf.RoundToInt(Mathf.Sign (Vector2.Dot(right, targetDirection)));
@@ -128,19 +115,31 @@ public class Vehicle : MonoBehaviour {
 			float targetAngle = Mathf.Atan2 (-targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
 			vectorArrow.rotation = Quaternion.Euler (new Vector3 (0f, targetAngle, 0f));
 			vectorArrow.gameObject.SetActive (true);
+
+			// calculate weather to reverse or not
+			float vechicleAngle = transform.eulerAngles.y;
+			while (vechicleAngle > 360f) {
+				vechicleAngle -= 360f;
+			}
+			if (vechicleAngle > 180f) {
+				vechicleAngle = -180 + (vechicleAngle - 180f);
+			}
+
+			float angleDiff = targetAngle - vechicleAngle; 
+			if (Mathf.Abs (angleDiff + 90f) > reverseEngageAngle) {
+				// enter reverse mode
+				reverseMutliplier = -1;
+				targetSpeedPercent = -1;
+			} else {
+				reverseMutliplier = 1;
+				targetSpeedPercent = 1;
+			}
 		}
 	}
 
 	void Update () {
 		if (!driver) {
 			return;
-		}
-
-		if (reversing) {
-			curReverseTimer -= Time.deltaTime;
-			if (curReverseTimer <= 0f) {
-				reversing = false;
-			}
 		}
 			
 		AdaptTargetDirection();
@@ -176,35 +175,10 @@ public class Vehicle : MonoBehaviour {
 	void FixedUpdate () {
 		CheckGrounded ();
 		if (grounded) {
-			if (!reversing) {
-				if (Stuck ()) {
-					// is stuck
-					Reverse ();
-				}
-			}
-
 			ApplyRotation ();
 			ApplyDrivingWheelForce ();
 			ApplySteeringWheelForce ();
-
-			lastPos = transform.position;
 		}
-	}
-
-	bool Stuck () {
-		if (curWheelSpeed >= 0.9f) {
-			Vector3 posDiff = transform.position - lastPos;
-			if (posDiff.magnitude <= stuckThreshold) {
-				return true;
-			}
-		}
-		return false;
-
-	}
-
-	void Reverse () {
-		reversing = true;
-		curReverseTimer = reverseTime;
 	}
 
 	void ApplyRotation () {
@@ -214,7 +188,7 @@ public class Vehicle : MonoBehaviour {
 				wheelsRatio += 1f / steeringWheels.Count;
 			}
 		}
-		rb.AddRelativeTorque (Vector3.up * targetRotPercentage * turnSpeed * Mathf.Abs (curWheelSpeed) * wheelsRatio);
+		rb.AddRelativeTorque (Vector3.up * targetRotPercentage * turnSpeed * Mathf.Abs (curWheelSpeed) * wheelsRatio * reverseMutliplier);
 		rotationSpeedLimiter = Mathf.Clamp01(Mathf.Abs(rotationSpeedLimitRatio / rb.angularVelocity.y));
 	}
 
