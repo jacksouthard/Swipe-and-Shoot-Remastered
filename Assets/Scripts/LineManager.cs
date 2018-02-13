@@ -57,9 +57,6 @@ public class LineManager : MonoBehaviour {
 		if (!hasHitSomething) {
 			return false;
 		} else {
-			print (hitInfo.collider.gameObject.tag);
-//			may have hit player and it doesn't count
-		
 			return true;
 		}
 	}
