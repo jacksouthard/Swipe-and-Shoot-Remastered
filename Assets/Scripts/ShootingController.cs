@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShootingController : MonoBehaviour {
-	public bool canRotate;
+	public bool canRotateParent;
 
 	[Header("Control")]
 	public string targetTag;
@@ -18,11 +18,15 @@ public class ShootingController : MonoBehaviour {
 	public float throwHeight;
 	public float throwVelocity;
 
+	public bool targetInRange { get { return target != null; } }
+	public bool hasWeapon { get { return weapon != null; } }
+
 	bool isPlayer;
 	PlayerController pc;
 	Transform player;
 	Health health;
 	Weapon weapon;
+	Transform target;
 
 	void Awake() {
 		isPlayer = gameObject.GetComponentInParent<PlayerController> () != null;
@@ -35,7 +39,7 @@ public class ShootingController : MonoBehaviour {
 	}
 
 	public void SetWeapon(WeaponManager.WeaponData newWeapon) {
-		if (weapon != null) {
+		if (hasWeapon) {
 			ThrowWeapon ();
 		}
 
@@ -71,10 +75,9 @@ public class ShootingController : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		if (weapon == null) {
+		if (!hasWeapon) {
 			return;
 		}
-		Transform target;
 		if (!isPlayer) {
 			target = (pc.inVehicle) ? pc.currentVehicle.transform.Find("Center") : player;
 		} else {
@@ -91,7 +94,7 @@ public class ShootingController : MonoBehaviour {
 		Vector3 diff = target.position - transform.position;
 		float angle = Mathf.Atan2 (diff.x, diff.z) * Mathf.Rad2Deg;
 
-		if (canRotate) {
+		if (canRotateParent) {
 			transform.parent.rotation = Quaternion.Lerp (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed * weapon.speedMultiplier);
 		}
 
@@ -99,12 +102,20 @@ public class ShootingController : MonoBehaviour {
 		transform.localRotation = Quaternion.Euler(ClampedAngle(transform.localRotation.eulerAngles.x), ClampedAngle(transform.localRotation.eulerAngles.y), 0f);
 	}
 
+	public void OverrideRotateParent(float angle) {
+		Quaternion parentRotation = transform.parent.rotation;
+
+		if (canRotateParent) {
+			transform.parent.rotation = Quaternion.Lerp (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed);
+		}
+	}
+
 	float ClampedAngle(float angle) {
 		return Mathf.Clamp (((angle + 180f) % 360f) - 180f, -clampAngle, clampAngle);
 	}
 		
 	public WeaponManager.WeaponData GetWeaponData() {
-		return (weapon != null) ? WeaponManager.instance.WeaponDataFromName (weapon.name) : null;
+		return (hasWeapon) ? WeaponManager.instance.WeaponDataFromName (weapon.name) : null;
 	}
 
 	Transform GetNearestTarget() {

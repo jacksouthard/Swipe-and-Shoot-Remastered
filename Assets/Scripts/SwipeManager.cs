@@ -41,6 +41,7 @@ public class SwipeManager : MonoBehaviour {
 	void LateUpdate() {
 		if (isTapping) {
 			if (isSelectingPlayer) {
+				player.TryRotateInDir (CalculateDirection(Input.mousePosition).normalized);
 				UpdateLine (Input.mousePosition);
 			} else if (player.inVehicle) {
 				UpdateVehicle (Input.mousePosition);
@@ -69,14 +70,14 @@ public class SwipeManager : MonoBehaviour {
 
 	//update LineRenderer
 	void UpdateLine(Vector2 curPos) {
-		Vector2 dir2d = CalculateDirection (curPos);
+		Vector2 dir = CalculateDirection (curPos);
 
-		swipeLine.enabled = (dir2d.magnitude > swipeCancelRange);
+		swipeLine.enabled = (dir.magnitude > swipeCancelRange);
 
 		Color lineColor = (player.state == PlayerController.MovementState.Grounded) ? Color.white : new Color(1, 1, 1, 0.125f);
 		lm.line.material.color = lineColor;
 
-		lm.UpdateLineTrajectory(dir2d);
+		lm.UpdateLineTrajectory(dir);
 	}
 
 	void UpdateVehicle(Vector2 curPos) {

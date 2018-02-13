@@ -38,11 +38,11 @@ public class EnemyController : MonoBehaviour {
 			navAgent.enabled = true;
 			navAgent.SetDestination (player.position);
 
-			shooting.canRotate = (dist < navAgent.stoppingDistance);
+			shooting.canRotateParent = (dist < navAgent.stoppingDistance);
 		} else {
 			navAgent.enabled = false;
 
-			shooting.canRotate = false;
+			shooting.canRotateParent = false;
 		}
 	}
 

@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			//changes states when hit
 			if (state == MovementState.Jumping) {
-				shooting.canRotate = false;
+				shooting.canRotateParent = false;
 				state = MovementState.Tumbling;
 			}
 		}
@@ -101,16 +101,25 @@ public class PlayerController : MonoBehaviour {
 	public void Hit() {
 		nextAutoReset = Time.time + autoResetTime;
 		rb.constraints = RigidbodyConstraints.None;
-		shooting.canRotate = false;
+		shooting.canRotateParent = false;
 	}
 
 	public bool TrySwapWeapons(WeaponManager.WeaponData weaponData) {
-		if (shooting.GetWeaponData () != null) {
+		if (shooting.hasWeapon) {
 			return false;
 		}
 
 		shooting.SetWeapon (weaponData);
 		return true;
+	}
+
+	public void TryRotateInDir(Vector2 dir) {
+		if (shooting.targetInRange) {
+			return;
+		}
+
+		float angle = Mathf.Atan2 (dir.x, dir.y) * Mathf.Rad2Deg;
+		shooting.OverrideRotateParent (angle);
 	}
 
 	void LateUpdate() {
@@ -122,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		if (state == MovementState.Grounded && !inVehicle && Time.time > nextAutoReset) { //stand up
-			if (!shooting.canRotate) {
+			if (!shooting.canRotateParent) {
 				Stop ();
 			}
 			transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f), turnSpeed * Time.deltaTime);
@@ -135,7 +144,7 @@ public class PlayerController : MonoBehaviour {
 		state = MovementState.Grounded;
 		rb.velocity = Vector3.zero;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
-		shooting.canRotate = true;
+		shooting.canRotateParent = true;
 	}
 
 	// picking up weapons
