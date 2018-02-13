@@ -118,9 +118,13 @@ public class Vehicle : MonoBehaviour {
 
 			// calculate weather to reverse or not
 			float vechicleAngle = transform.eulerAngles.y;
-			while (vechicleAngle > 360f) {
-				vechicleAngle -= 360f;
-			}
+			vechicleAngle %= 360f;
+//			while (vechicleAngle > 360f) {
+//				vechicleAngle -= 360f;
+//			}
+//			while (vechicleAngle < -360f) {
+//				vechicleAngle += 360f;
+//			}
 			if (vechicleAngle > 180f) {
 				vechicleAngle = -180 + (vechicleAngle - 180f);
 			}
