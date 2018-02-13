@@ -43,7 +43,14 @@ public class Health : MonoBehaviour {
 	List<MeshRenderer> mrs;
 	List<Color[]> originalColors;
 
+	// regening
+	bool regening = false;
+	GameObject regenEffectPrefab;
+	GameObject curRegenEffect;
+
 	void Start () {
+		regenEffectPrefab = Resources.Load ("RegenEffect") as GameObject;
+
 		health = maxHealth;
 		UpdateRenderers ();
 
@@ -92,18 +99,24 @@ public class Health : MonoBehaviour {
 	
 	void Update () {
 		if (state == State.Alive) {
-			if (health < maxHealth) {
-				if (waitTimer <= 0f) {
-					// start regening
-					health += regenSpeed * Time.deltaTime;
-					if (health > maxHealth) {
-						health = maxHealth;
+			if (!regening) {
+				if (health < maxHealth) {
+					if (waitTimer <= 0f) {
+						// start regening
+						StartRegen ();
+					} else {
+						// incriment timer
+						waitTimer -= Time.deltaTime;
 					}
-				} else {
-					// incriment timer
-					waitTimer -= Time.deltaTime;
+				}
+			} else {
+				health += regenSpeed * Time.deltaTime;
+				if (health > maxHealth) {
+					EndRegen();
+					health = maxHealth;
 				}
 			}
+
 		}
 
 		if (state == State.Dying) {
@@ -137,7 +150,7 @@ public class Health : MonoBehaviour {
 			}
 		}
 
-		waitTimer = regenWait;
+		EndRegen ();
 	}
 
 	public void Die () {
@@ -206,6 +219,20 @@ public class Health : MonoBehaviour {
 				mat.color = color;
 			}
 		}
+	}
+
+	void StartRegen () {
+		curRegenEffect = Instantiate (regenEffectPrefab);
+		curRegenEffect.GetComponent<RegenEffect> ().Init (transform);
+		regening = true;
+	}
+
+	void EndRegen () {
+		if (curRegenEffect != null) {
+			Destroy (curRegenEffect);
+		}
+		waitTimer = regenWait;
+		regening = false;
 	}
 
 	void ResetColor() {

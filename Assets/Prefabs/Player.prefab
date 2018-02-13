@@ -833,7 +833,7 @@ MonoBehaviour:
   state: 0
   maxHealth: 40
   regenSpeed: 5
-  regenWait: 0.5
+  regenWait: 1
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   dyingTimer: 0
