@@ -118,6 +118,14 @@ public class ShootingController : MonoBehaviour {
 		return (hasWeapon) ? WeaponManager.instance.WeaponDataFromName (weapon.name) : null;
 	}
 
+	public void Die() {
+		if (hasWeapon) {
+			Destroy (weapon);
+		}	
+
+		Destroy (this);
+	}
+
 	Transform GetNearestTarget() {
 		Collider[] objectsInRange = Physics.OverlapSphere (transform.position, weapon.range);
 

@@ -138,6 +138,13 @@ public class Health : MonoBehaviour {
 		if (shouldUpdateRenderers) {
 			UpdateRenderers ();
 		}
+
+		if (state == State.Alive && transform.position.y < GameManager.instance.killHeight) {
+			Die ();
+			if (type == Type.Player) {
+				Destroy (GetComponent<Rigidbody> ());
+			}
+		}
 	}
 
 	public void TakeDamage (float damage) {
@@ -148,15 +155,20 @@ public class Health : MonoBehaviour {
 			} else {
 				StartCoroutine (HitAnimation ());
 			}
-		}
 
-		EndRegen ();
+			EndRegen ();
+		}
 	}
 
 	public void Die () {
+		EndRegen ();
+
 		if (type == Type.Player) {
 			// handel player death
-			print ("Player Death");
+			ResetColor();
+			gameObject.GetComponent<PlayerController>().Die();
+			GameManager.instance.GameOver ();
+			Destroy (this);
 			return;
 		}
 
@@ -168,9 +180,7 @@ public class Health : MonoBehaviour {
 
 			Destroy(GetComponent<NavMeshAgent> ());
 			Destroy(GetComponent<EnemyController> ());
-			Destroy(GetComponentInChildren<ShootingController> ());
-			Destroy (GetComponentInChildren<Weapon> ());
-
+			GetComponentInChildren<ShootingController> ().Die ();
 			// notify spawner of death
 			Spawner.instance.EnemyDeath();
 		}

@@ -147,6 +147,12 @@ public class PlayerController : MonoBehaviour {
 		shooting.canRotateParent = true;
 	}
 
+	public void Die() {
+		rb.constraints = RigidbodyConstraints.None;
+		shooting.Die ();
+		Destroy (this);
+	}
+
 	// picking up weapons
 	void OnTriggerEnter (Collider coll) {
 		if (!inVehicle && coll.gameObject.tag == "Pickup") {
