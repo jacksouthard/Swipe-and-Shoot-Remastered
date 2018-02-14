@@ -118,19 +118,10 @@ public class Vehicle : MonoBehaviour {
 
 			// calculate weather to reverse or not
 			float vechicleAngle = transform.eulerAngles.y;
-			vechicleAngle %= 360f;
-//			while (vechicleAngle > 360f) {
-//				vechicleAngle -= 360f;
-//			}
-//			while (vechicleAngle < -360f) {
-//				vechicleAngle += 360f;
-//			}
-			if (vechicleAngle > 180f) {
-				vechicleAngle = -180 + (vechicleAngle - 180f);
-			}
+			vechicleAngle = ((vechicleAngle + 90f) % 360f) - 180f;
 
 			float angleDiff = targetAngle - vechicleAngle; 
-			if (Mathf.Abs (angleDiff + 90f) > reverseEngageAngle) {
+			if (Mathf.Abs (angleDiff) > reverseEngageAngle) {
 				// enter reverse mode
 				reverseMutliplier = -1;
 				targetSpeedPercent = -1;
