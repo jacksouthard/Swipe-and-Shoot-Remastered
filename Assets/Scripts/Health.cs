@@ -192,6 +192,9 @@ public class Health : MonoBehaviour {
 			if (vechicle.driver) {
 				GetComponentInChildren<PlayerController> ().ExitVehicle ();
 			}
+
+			GameObject explosion = (GameObject) Instantiate (Resources.Load("Explosion") as GameObject, transform.Find("Center").position, Quaternion.identity);
+			explosion.GetComponent<Explosion> ().Initiate (5f, 5000f);
 			// eventually spawn explosion
 			Destroy(vechicle);
 		}
