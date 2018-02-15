@@ -111,9 +111,11 @@ public class Vehicle : MonoBehaviour {
 			// calculate rotation direction
 			Vector2 right = new Vector2(transform.right.x, transform.right.z);
 			targetRotPercentage = Mathf.RoundToInt(Mathf.Sign (Vector2.Dot(right, targetDirection)));
-			// calculate arrow rotation
 			float targetAngle = Mathf.Atan2 (-targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
-			vectorArrow.rotation = Quaternion.Euler (new Vector3 (0f, targetAngle, 0f));
+
+			// calculate arrow rotation
+			float localArrowAngle = targetAngle - transform.eulerAngles.y;
+			vectorArrow.localRotation = Quaternion.Euler (new Vector3 (0f, localArrowAngle, 0f));
 			vectorArrow.gameObject.SetActive (true);
 
 			// calculate weather to reverse or not
