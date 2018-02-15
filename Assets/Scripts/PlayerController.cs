@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour {
 		timerDisplay.transform.position = transform.position;
 
 		nextPickupText.text = curPickingupTimers [0].data.name;
-		timerBar.transform.localScale = new Vector3 (curPickingupTimers[0].percentage, 1f, 1f);
+		timerBar.transform.localScale = new Vector3 (1f - curPickingupTimers[0].percentage, 1f, 1f);
 	}
 
 	public class PickupTimer {
