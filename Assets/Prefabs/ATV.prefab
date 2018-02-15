@@ -602,7 +602,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1755002622876324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.18, y: 0, z: -0.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4917746190641804}
@@ -1240,7 +1240,7 @@ MonoBehaviour:
   groundedAngDrag: 5
   airDrag: 0
   airAngDrag: 5
-  reverseEngageAngle: 110
+  reverseEngageAngle: 90
   grounded: 0
   targetDirection: {x: 0, y: 0}
   targetSpeedPercent: 0
@@ -1265,7 +1265,7 @@ MonoBehaviour:
   regenWait: 30
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
-  dyingTimer: 1
+  dyingTimer: 0
   decayTimer: 2
   waitTimer: 0
   health: 0
