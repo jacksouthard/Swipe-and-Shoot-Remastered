@@ -86,6 +86,8 @@ public class ShootingController : MonoBehaviour {
 	
 		if (target != null) {
 			RotateTowards (target);
+		} else {
+			ResetRotation ();
 		}
 	}
 
@@ -108,6 +110,10 @@ public class ShootingController : MonoBehaviour {
 		if (canRotateParent) {
 			transform.parent.rotation = Quaternion.Lerp (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed);
 		}
+	}
+
+	void ResetRotation() {
+		transform.localRotation = Quaternion.Lerp (transform.localRotation, Quaternion.identity, Time.deltaTime * parentSpeed);
 	}
 
 	float ClampedAngle(float angle) {
