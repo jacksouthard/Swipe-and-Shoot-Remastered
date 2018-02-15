@@ -7,6 +7,9 @@ public class SwipeManager : MonoBehaviour {
 	public float maxSwipeDistance;
 	public float swipeCancelRange;
 
+	[Header("UI")]
+	public RectTransform joystickVisual;
+
 	Camera gameCam;
 	PlayerController player;
 	LineRenderer swipeLine;
@@ -24,6 +27,7 @@ public class SwipeManager : MonoBehaviour {
 		lm = GameObject.Find("Player").GetComponentInChildren<LineManager> ();
 
 		swipeLine.enabled = false;
+		joystickVisual.gameObject.SetActive (false);
 	}
 
 	void Update() {
@@ -52,6 +56,9 @@ public class SwipeManager : MonoBehaviour {
 	void StartTap(Vector2 curPos) {
 		isTapping = true;
 		startPos = curPos; //save initial tap position
+
+		joystickVisual.gameObject.SetActive (true);
+		joystickVisual.position = startPos;
 
 		//check whether or not we are selecting the player
 		if (!player.inVehicle) {
@@ -85,6 +92,7 @@ public class SwipeManager : MonoBehaviour {
 	}
 
 	void EndTap(Vector2 endPos) {
+		joystickVisual.gameObject.SetActive (false);
 		swipeLine.enabled = false;
 		isTapping = false;
 
