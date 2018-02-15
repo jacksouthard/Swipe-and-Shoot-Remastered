@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour {
 		currentVehicle.Mount (gameObject);
 		state = MovementState.Grounded;
 
+		shooting.canRotateParent = false;
 		shooting.gameObject.SetActive (false);
 	}
 
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour {
 		currentVehicle.Dismount ();
 		currentVehicle = null;
 
+		shooting.canRotateParent = true;
 		shooting.gameObject.SetActive (true);
 	}
 
