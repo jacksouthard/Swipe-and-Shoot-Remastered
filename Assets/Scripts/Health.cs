@@ -182,7 +182,10 @@ public class Health : MonoBehaviour {
 			Destroy(GetComponent<EnemyController> ());
 			GetComponentInChildren<ShootingController> ().Die ();
 			// notify spawner of death
-			Spawner.instance.EnemyDeath();
+
+			if (Spawner.instance != null) {
+				Spawner.instance.EnemyDeath ();
+			}
 		}
 
 		// if vechicle
