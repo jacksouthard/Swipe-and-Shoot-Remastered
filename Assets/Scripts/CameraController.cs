@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 	[Header("Constriants")]
 	public float radius;
+	public Vector2 center;
 	public float heightMinOffset;
 	public float heightMaxOffset;
 
@@ -33,10 +34,11 @@ public class CameraController : MonoBehaviour {
 
 	Vector3 CalculateTargetPos() {
 		Vector2 playerPos2D = new Vector2 (player.position.x, player.position.z);
-		float curRadius = playerPos2D.magnitude;
+		Vector2 diff = playerPos2D - center;
+		float curRadius = diff.magnitude;
 		if (curRadius > radius) {
 			// outside of allowed zone
-			playerPos2D = playerPos2D.normalized * radius;
+			playerPos2D = (diff.normalized * radius) + center;
 		}
 
 		float height = Mathf.Clamp (player.position.y, heightMinOffset, heightMaxOffset);
