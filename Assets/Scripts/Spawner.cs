@@ -8,14 +8,17 @@ public class Spawner : MonoBehaviour {
 	public GameObject prefab;
 	public int maxObjects;
 	public float spawnRate;
+	public float minSpawnRange;
 
 	int count = 0;
 	float spawnTimer;
 
+	Transform player;
 	List<Vector3> spawnPoints = new List<Vector3>();
 
 	void Awake () {
 		instance = this;
+		player = GameObject.FindObjectOfType<PlayerController> ().transform;
 	}
 
 	void Start () {
@@ -45,11 +48,20 @@ public class Spawner : MonoBehaviour {
 	}
 
 	void SpawnEnemy () {
-		int index = Random.Range (0, spawnPoints.Count);
-		Vector3 spawnPoint = spawnPoints [index];
+		Vector3 spawnPoint = FindValidSpawnPoint ();
 
 		GameObject enemy = Instantiate (prefab, spawnPoint, Quaternion.identity, transform);
 
 		count++;
+	}
+
+	Vector3 FindValidSpawnPoint() {
+		Vector3 spawnPoint;
+		do {
+			int index = Random.Range (0, spawnPoints.Count);
+			spawnPoint = spawnPoints [index];
+		} while (Vector3.Distance(spawnPoint, player.position) < minSpawnRange);
+
+		return spawnPoint;
 	}
 }
