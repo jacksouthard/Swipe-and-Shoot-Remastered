@@ -19,7 +19,19 @@ public class CameraController : MonoBehaviour {
 		offset = transform.position - player.position;
 	}
 
+	public void ResetPosition() {
+		Vector3 targetPos = CalculateTargetPos ();
+
+		transform.position = targetPos + offset;
+	}
+
 	void LateUpdate() {
+		Vector3 targetPos = CalculateTargetPos ();
+
+		transform.position = Vector3.Lerp (transform.position, targetPos + offset, Time.deltaTime * speed);
+	}
+
+	Vector3 CalculateTargetPos() {
 		Vector2 playerPos2D = new Vector2 (player.position.x, player.position.z);
 		float curRadius = playerPos2D.magnitude;
 		if (curRadius > radius) {
@@ -28,8 +40,6 @@ public class CameraController : MonoBehaviour {
 		}
 
 		float height = Mathf.Clamp (player.position.y, heightMinOffset, heightMaxOffset);
-		Vector3 targetPos = new Vector3 (playerPos2D.x, height, playerPos2D.y);
-
-		transform.position = Vector3.Lerp (transform.position, targetPos + offset, Time.deltaTime * speed);
+		return new Vector3 (playerPos2D.x, height, playerPos2D.y);
 	}
 }

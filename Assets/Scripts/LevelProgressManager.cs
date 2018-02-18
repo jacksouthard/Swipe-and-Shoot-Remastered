@@ -19,6 +19,9 @@ public class LevelProgressManager : MonoBehaviour {
 		checkpointText.SetActive (false);
 
 		InitCheckpoints ();
+	}
+
+	void Start() {
 		MovePlayer ();
 	}
 
@@ -31,6 +34,7 @@ public class LevelProgressManager : MonoBehaviour {
 	void MovePlayer() {
 		if (curCheckpointId > 0) {
 			GameObject.FindObjectOfType<PlayerController> ().transform.position = transform.GetChild (curCheckpointId - 1).position;
+			GameObject.FindObjectOfType<CameraController> ().ResetPosition ();
 		}
 	}
 
