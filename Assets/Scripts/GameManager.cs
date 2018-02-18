@@ -41,10 +41,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		gameOverScreen.SetActive (true);
-		isGameOver = true;
+		if (LevelProgressManager.instance == null || !LevelProgressManager.instance.isComplete) {
+			gameOverScreen.SetActive (true);
+			isGameOver = true;
 
-		EndLevel ();
+			EndLevel ();
+		}
 	}
 
 	public void EndLevel() {
