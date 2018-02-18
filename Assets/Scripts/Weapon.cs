@@ -7,15 +7,13 @@ public class Weapon : MonoBehaviour {
 	public float fireRate;
 	public float damage;
 	public float range;
-	public float accuracy;
 	public float speedMultiplier;
-	public GameObject bulletRayPrefab;
 
 	string targetTag;
 
 	bool canFire;
 	float fireRateTimer = 0f;
-	List<Transform> bulletSpawns = new List<Transform> ();
+	protected List<Transform> bulletSpawns = new List<Transform> ();
 
 	void Start () {
 		for (int i = 0; i < transform.childCount; i++) {
@@ -47,7 +45,7 @@ public class Weapon : MonoBehaviour {
 	bool shouldFire {
 		get {
 			RaycastHit hitInfo;
-			Physics.SphereCast (bulletSpawns [0].position, 0.5f, -bulletSpawns[0].right, out hitInfo, range);
+			Physics.SphereCast (bulletSpawns [0].position, 0.5f, bulletSpawns[0].forward, out hitInfo, range, ~((1 << 2) | (1 << 11))); //ignore IgnoreRaycast and Projectile layers
 
 			if (hitInfo.collider == null) {
 				return false;
@@ -70,46 +68,8 @@ public class Weapon : MonoBehaviour {
 		}
 	}
 
-	void Shoot () {
+	protected virtual void Shoot () {
 		fireRateTimer = fireRate;
 		canFire = false;
-
-		foreach (var bulletSpawn in bulletSpawns) {
-			Vector3 start = bulletSpawn.position;
-			Vector3 end;
-			Vector3 direction = bulletSpawn.rotation * Vector3.left;
-			direction = Quaternion.Euler(new Vector3 (Random.Range(-accuracy, accuracy), Random.Range(-accuracy, accuracy), 0f)) * direction;
-
-			RaycastHit hit;
-			Physics.Raycast(start, direction, out hit, range);
-
-			//		if (true) {
-			if (hit.collider == null) {
-				// bullet misses
-				end = bulletSpawn.position + (direction.normalized * range);
-
-			} else {
-				// bullet hit
-				end = hit.point;
-
-				// apply damage
-				GameObject hitGO = hit.collider.gameObject;
-				if (hitGO.GetComponentInParent<Health> () != null) {
-					hitGO.GetComponentInParent<Health> ().TakeDamage (damage);
-				} else if (hitGO.GetComponent<Health> () != null) {
-					hitGO.GetComponent<Health> ().TakeDamage (damage);
-				}
-
-				// apply bullet force
-				if (hitGO.GetComponent<Rigidbody> () != null) {
-					// has rigid body
-					Vector3 force = direction.normalized * damage * 3000f; // default force multiplier
-					hitGO.GetComponent<Rigidbody> ().AddForceAtPosition (force, end);
-				}
-			}
-
-			GameObject bulletRay = Instantiate (bulletRayPrefab, transform.position, Quaternion.identity, transform);
-			bulletRay.GetComponent<BulletRay> ().Init (start, end, 0.05f);
-		}
 	}
 }
