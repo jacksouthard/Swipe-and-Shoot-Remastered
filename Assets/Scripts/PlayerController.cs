@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour {
 
 		shooting.canRotateParent = false;
 		shooting.gameObject.SetActive (false);
+
+		curPickingupTimers.Clear ();
 	}
 
 	public void ExitVehicle() {
@@ -188,23 +190,28 @@ public class PlayerController : MonoBehaviour {
 		foreach (var pickupTimer in curPickingupTimers) {
 			pickupTimer.timer -= Time.deltaTime;
 			if (pickupTimer.timer <= 0f) {
-				Pickup (pickupTimer.pickup);
+				Pickup (pickupTimer);
 				curPickingupTimers.Remove (pickupTimer);
 				return;
 			}
 		}
 	}
 
-	void Pickup (GameObject pickup) {
+	void Pickup (PickupTimer timer) {
 		foreach (var pickupTimer in curPickingupTimers) {
-			if (pickupTimer.pickup != pickup) {
+			if (pickupTimer != timer) {
 				pickupTimer.ResetTimer ();
 			}
 		}
 
-		WeaponPickup weaponPickup = pickup.GetComponent<WeaponPickup> ();
-		shooting.SetWeapon (weaponPickup.weaponData);
-		Destroy (pickup);
+		if (timer.type == PickupTimer.Type.Weapon) {
+			WeaponPickup weaponPickup = timer.pickup.GetComponent<WeaponPickup> ();
+			shooting.SetWeapon (weaponPickup.weaponData);
+		} else if (timer.type == PickupTimer.Type.Objective) {
+			LevelProgressManager.instance.CompleteLevel ();
+		}
+
+		Destroy (timer.pickup);
 	}
 
 	void DisplayPickupTimer() {
@@ -216,14 +223,21 @@ public class PlayerController : MonoBehaviour {
 
 		timerDisplay.transform.position = transform.position;
 
-		nextPickupText.text = curPickingupTimers [0].data.name;
+		nextPickupText.text = curPickingupTimers [0].name;
 		timerBar.transform.localScale = new Vector3 (1f - curPickingupTimers[0].percentage, 1f, 1f);
 	}
 
 	public class PickupTimer {
+		public enum Type {
+			Weapon,
+			Objective
+		};
+
+		public Type type;
+
 		public GameObject pickup;
-		public WeaponManager.WeaponData data;
 		public float timer;
+		public string name;
 
 		float originalTime;
 
@@ -232,7 +246,20 @@ public class PlayerController : MonoBehaviour {
 			timer = _timer;
 			originalTime = _timer;
 
-			data = pickup.GetComponent<WeaponPickup>().weaponData;
+			DetermineType();
+		}
+
+		void DetermineType() {
+			WeaponPickup weaponPickup = pickup.GetComponent<WeaponPickup> ();
+			if (weaponPickup != null) {
+				name = weaponPickup.weaponData.name;
+				type = Type.Weapon;
+				return;
+			}
+
+			//if we add costume pickups, check for it here
+			name = pickup.name;
+			type = Type.Objective;
 		}
 
 		public void ResetTimer() {
