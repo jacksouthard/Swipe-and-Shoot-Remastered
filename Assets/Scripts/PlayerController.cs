@@ -38,9 +38,12 @@ public class PlayerController : MonoBehaviour {
 
 	Rigidbody rb;
 	ShootingController shooting;
+	Health health;
 
 	void Awake() {
 		rb = gameObject.GetComponent<Rigidbody> ();
+		health = gameObject.GetComponent<Health> ();
+
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -85,6 +88,8 @@ public class PlayerController : MonoBehaviour {
 
 		shooting.canRotateParent = true;
 		shooting.gameObject.SetActive (true);
+
+		health.ResetColor ();
 	}
 
 	void OnCollisionEnter(Collision other) {

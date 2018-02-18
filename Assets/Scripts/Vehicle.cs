@@ -36,6 +36,7 @@ public class Vehicle : MonoBehaviour {
 	GameObject handsContainer;
 	Transform seat;
 	GameObject mounter;
+	Health health;
 
 	Transform vectorArrow;
 
@@ -50,6 +51,7 @@ public class Vehicle : MonoBehaviour {
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
+		health = GetComponent<Health> ();
 
 		UpdateDrag ();
 
@@ -86,6 +88,8 @@ public class Vehicle : MonoBehaviour {
 
 		driver = true;
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
+
+		health.UpdateRenderersNextFrame ();
 	}
 
 	public void Dismount () {
@@ -99,6 +103,8 @@ public class Vehicle : MonoBehaviour {
 		driver = false;
 		nextEnterTime = Time.time + reentryWait;
 		rb.interpolation = RigidbodyInterpolation.None;
+
+		health.UpdateRenderersNextFrame ();
 	}
 
 	void AdaptTargetDirection () {

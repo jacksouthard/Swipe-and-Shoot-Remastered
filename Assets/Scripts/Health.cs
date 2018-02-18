@@ -253,7 +253,7 @@ public class Health : MonoBehaviour {
 		regening = false;
 	}
 
-	void ResetColor() {
+	public void ResetColor() {
 		for (int i = 0; i < mrs.Count; i++) {
 			int colorCount = originalColors [i].Length;
 			for (int j = 0; j < colorCount; j++) {
