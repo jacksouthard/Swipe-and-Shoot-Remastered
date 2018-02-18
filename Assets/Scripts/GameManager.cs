@@ -43,8 +43,16 @@ public class GameManager : MonoBehaviour {
 	public void GameOver() {
 		gameOverScreen.SetActive (true);
 		isGameOver = true;
+
+		EndLevel ();
+	}
+
+	public void EndLevel() {
 		Destroy (gameObject.GetComponent<SwipeManager> ());
-		Destroy (GameObject.FindObjectOfType<Spawner> ()); //no new enemies!
+		Spawner enemySpawner = GameObject.FindObjectOfType<Spawner> ();
+		if(enemySpawner != null) {
+			Destroy (enemySpawner); //no new enemies!
+		}
 	}
 
 	public void Restart() {
