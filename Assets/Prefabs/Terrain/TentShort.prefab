@@ -37,6 +37,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4384624033642912}
+  - component: {fileID: 65710970647235374}
+  - component: {fileID: 114492380367744300}
   m_Layer: 0
   m_Name: TentShort
   m_TagString: Untagged
@@ -117,7 +119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1176737144599562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.47, y: 0, z: -3.58}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4766717924023996}
@@ -373,3 +375,26 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300016, guid: 19c9c8fbac43640cd824d5be09e9de78, type: 3}
+--- !u!65 &65710970647235374
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1176737144599562}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12, y: 3, z: 10}
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &114492380367744300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1176737144599562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1c69dbec2f74004806c35d51e785bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
