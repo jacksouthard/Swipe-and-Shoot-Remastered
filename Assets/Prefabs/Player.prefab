@@ -804,7 +804,7 @@ MonoBehaviour:
   stoppingSpeed: 1
   stoppingAngle: 30
   autoResetTime: 0.5
-  swipeForce: 30000
+  swipeForce: 120000
   verticalFactor: 0.5
   turnSpeed: 10
   pickupTime: 2
@@ -823,8 +823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4af003058a94554a666c0fd3772e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightRatio: 5
-  distanceRatio: 9.5
+  heightRatio: 20
+  distanceRatio: 38
   line: {fileID: 120433219360908302}
 --- !u!114 &114739835484656106
 MonoBehaviour:
