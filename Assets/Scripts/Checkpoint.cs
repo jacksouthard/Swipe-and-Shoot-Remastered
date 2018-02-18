@@ -33,8 +33,6 @@ public class Checkpoint : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if ((id > LevelProgressManager.curCheckpointId) && other.GetComponentInParent<PlayerController> ()) {
 			LevelProgressManager.instance.TriggerCheckpoint (id);
-
-			print ("Checkpoint " + id + " passed.");
 		}
 	}
 }

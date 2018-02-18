@@ -6,13 +6,17 @@ public class LevelProgressManager : MonoBehaviour {
 	public static LevelProgressManager instance;
 	public static int curCheckpointId;
 
+	[Header("UI")]
 	public GameObject winScreen;
+	public GameObject checkpointText;
+	public float notificationTime;
 
 	public bool isComplete;
 
 	void Awake() {
 		instance = this;
 		winScreen.SetActive (false);
+		checkpointText.SetActive (false);
 
 		InitCheckpoints ();
 		MovePlayer ();
@@ -38,5 +42,12 @@ public class LevelProgressManager : MonoBehaviour {
 
 	public void TriggerCheckpoint(int checkpointId) {
 		curCheckpointId = checkpointId;
+		StartCoroutine (ShowCheckpointReached());
+	}
+
+	IEnumerator ShowCheckpointReached() {
+		checkpointText.SetActive (true);
+		yield return new WaitForSeconds (notificationTime);
+		checkpointText.SetActive (false);
 	}
 }
