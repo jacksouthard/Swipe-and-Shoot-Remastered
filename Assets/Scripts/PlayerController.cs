@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour {
 	public float verticalFactor; //the amount by which the y-vector of the launch force is scaled by relative to the launch magnitude
 	public float turnSpeed; //how fast the player returns to a standing position
 
+	[Header("Weapon")]
+	public string defaultWeaponName = "None";
+
 	[Header("Picking Up")]
 	public float pickupTime;
 	public GameObject timerDisplay;
@@ -49,6 +52,10 @@ public class PlayerController : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 
 		timerDisplay.transform.parent = null;
+
+		if (defaultWeaponName != "None") {
+			shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName (defaultWeaponName));
+		}
 	}
 
 	//launches character in a direction
