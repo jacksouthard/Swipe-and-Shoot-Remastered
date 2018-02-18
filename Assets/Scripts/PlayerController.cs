@@ -219,11 +219,11 @@ public class PlayerController : MonoBehaviour {
 		if (timer.type == PickupTimer.Type.Weapon) {
 			WeaponPickup weaponPickup = timer.pickup.GetComponent<WeaponPickup> ();
 			shooting.SetWeapon (weaponPickup.weaponData);
+			Destroy (timer.pickup);
 		} else if (timer.type == PickupTimer.Type.Objective) {
 			LevelProgressManager.instance.CompleteLevel ();
+			Destroy (timer.pickup.GetComponent<Collider> ());
 		}
-
-		Destroy (timer.pickup);
 	}
 
 	void DisplayPickupTimer() {

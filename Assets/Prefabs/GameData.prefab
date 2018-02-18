@@ -75,3 +75,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData:
   - name: Endless
+  - name: Level 1

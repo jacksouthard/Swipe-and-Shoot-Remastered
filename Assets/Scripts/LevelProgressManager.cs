@@ -27,13 +27,13 @@ public class LevelProgressManager : MonoBehaviour {
 
 	void InitCheckpoints() {
 		for (int i = 0; i < transform.childCount; i++) {
-			transform.GetChild (i).GetComponent<Checkpoint> ().Init (i + 1);
+			transform.GetChild (i).GetComponent<Checkpoint> ().Init (i);
 		}
 	}
 
 	void MovePlayer() {
 		if (curCheckpointId > 0) {
-			GameObject.FindObjectOfType<PlayerController> ().transform.position = transform.GetChild (curCheckpointId - 1).position;
+			GameObject.FindObjectOfType<PlayerController> ().transform.position = transform.GetChild (curCheckpointId).position;
 			GameObject.FindObjectOfType<CameraController> ().ResetPosition ();
 		}
 	}
