@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vehicle : MonoBehaviour {
+public class Vehicle : Rideable {
 	[Header("Turning")]
 	public float turnSpeed;
 	public float rotationSpeedLimiter = 1f;
@@ -30,12 +30,6 @@ public class Vehicle : MonoBehaviour {
 	public int targetRotPercentage = 0;
 	public float curWheelSpeed = 0f;
 
-	float reentryWait = 1.0f;
-	float nextEnterTime;
-	public bool driver = false;
-	GameObject handsContainer;
-	Transform seat;
-	GameObject mounter;
 	Health health;
 
 	Transform vectorArrow;
@@ -47,21 +41,17 @@ public class Vehicle : MonoBehaviour {
 	List<Wheel> steeringWheels = new List<Wheel>();
 	List<Wheel> drivingWheels = new List<Wheel>();
 
-	Rigidbody rb;
+	void Awake () {
+		base.Initiate ();
+	}
 
 	void Start () {
-		rb = GetComponent<Rigidbody> ();
 		health = GetComponent<Health> ();
 
 		UpdateDrag ();
 
 		vectorArrow = transform.Find ("TargetVector");
 		vectorArrow.gameObject.SetActive (false);
-
-		// init mounting stuff
-		seat = transform.Find("Seat");
-		handsContainer = transform.Find("Hands").gameObject;
-		handsContainer.SetActive (false);
 
 		// init wheels
 		Wheel[] allWheels = GetComponentsInChildren<Wheel> ();
@@ -73,36 +63,15 @@ public class Vehicle : MonoBehaviour {
 			}
 		}
 	}
-
-	public bool canBeMounted { get { return (Time.time >= nextEnterTime); } }
-
-	public void Mount (GameObject _mounter) {
-		mounter = _mounter;
-		mounter.GetComponent<BoxCollider> ().enabled = false;
-		mounter.GetComponent<Rigidbody> ().isKinematic = true;
-		mounter.transform.parent = seat;
-		mounter.transform.localPosition = Vector3.zero;
-		mounter.transform.localRotation = Quaternion.identity;
-
-		handsContainer.SetActive (true);
-
-		driver = true;
-		rb.interpolation = RigidbodyInterpolation.Extrapolate;
-
+		
+	public override void Mount (GameObject _mounter) {
+		base.Mount (_mounter);
 		health.UpdateRenderersNextFrame ();
 	}
 
-	public void Dismount () {
-		mounter.GetComponent<BoxCollider> ().enabled = true;
-		mounter.GetComponent<Rigidbody> ().isKinematic = false;
-		mounter.transform.parent = null;
-
+	public override void Dismount () {
+		base.Dismount ();
 		vectorArrow.gameObject.SetActive (false);
-		handsContainer.SetActive (false);
-
-		driver = false;
-		nextEnterTime = Time.time + reentryWait;
-		rb.interpolation = RigidbodyInterpolation.None;
 
 		health.UpdateRenderersNextFrame ();
 	}

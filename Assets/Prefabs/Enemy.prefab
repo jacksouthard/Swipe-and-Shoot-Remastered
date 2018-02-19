@@ -428,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 528daaf5fd5b947b9b186bb2f2050263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeRange: 20
+  activeRange: 15
   pathUpdateRate: 1
   durability: 20000
 --- !u!114 &114181140001443892
