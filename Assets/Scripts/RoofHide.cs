@@ -32,13 +32,35 @@ public class RoofHide : MonoBehaviour {
 	}
 
 	void OnTriggerEnter (Collider coll) {
+		bool player = false;
 		if (coll.tag == "Player") {
+			player = true;
+		} else if (coll.GetComponentInParent<Rideable> ()) {
+			// rideable object entered zone
+			Rideable rideable = coll.GetComponentInParent<Rideable> ();
+			if (rideable.driver) {
+				player = true;
+			}
+		}
+
+		if (player) {
 			targetColor = fadedColor;
 		}
 	}
 
 	void OnTriggerExit (Collider coll) {
+		bool player = false;
 		if (coll.tag == "Player") {
+			player = true;
+		} else if (coll.GetComponentInParent<Rideable> ()) {
+			// rideable object entered zone
+			Rideable rideable = coll.GetComponentInParent<Rideable> ();
+			if (rideable.driver) {
+				player = true;
+			}
+		}
+
+		if (player) {
 			targetColor = originalColor;
 		}
 	}
