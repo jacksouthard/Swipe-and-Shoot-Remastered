@@ -7,6 +7,11 @@ public class LevelProgressManager : MonoBehaviour {
 	public static int curCheckpointId;
 	public static string lastWeaponName;
 
+	[Header("Objective")]
+	public GameObject objectiveScreenIndicator;
+	public GameObject objectiveWorldIndicator;
+	public Transform objective;
+
 	[Header("UI")]
 	public GameObject winScreen;
 	public GameObject checkpointText;
@@ -21,12 +26,25 @@ public class LevelProgressManager : MonoBehaviour {
 		checkpointText.SetActive (false);
 		pc = GameObject.FindObjectOfType<PlayerController> ();
 
+		SetupObjectiveUI ();
 		InitCheckpoints ();
 	}
 
 	void Start() {
 		if (curCheckpointId > 0) {
 			UpdatePlayer ();
+		}
+	}
+
+	void SetupObjectiveUI() {
+		//show/hide indicators
+		objectiveScreenIndicator.SetActive (objective != null);
+		objectiveWorldIndicator.SetActive (objective != null);
+
+		if (objective != null) {
+			objectiveScreenIndicator.GetComponent<EdgeView> ().target = objective.gameObject; //set target
+			objectiveWorldIndicator.transform.position = objective.position; //move to target
+			objectiveWorldIndicator.transform.parent = null; //unparent
 		}
 	}
 
