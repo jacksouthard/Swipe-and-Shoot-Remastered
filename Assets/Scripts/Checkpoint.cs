@@ -26,7 +26,7 @@ public class Checkpoint : MonoBehaviour {
 		}
 
 		foreach (Collider enemyCol in enemisInCol) {
-			Destroy (enemyCol.transform.root.gameObject);
+			Destroy (enemyCol.GetComponentInParent<EnemyController>().gameObject);
 		}
 	}
 

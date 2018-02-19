@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 
 	[Header("Weapon")]
 	public string defaultWeaponName = "None";
+	public string curWeaponName { get { return shooting.curWeaponName; } }
 
 	[Header("Picking Up")]
 	public float pickupTime;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour {
 
 	public bool inVehicle { get { return currentVehicle != null; } }
 
-	public Vehicle currentVehicle;
+	public Rideable currentVehicle;
 
 	Rigidbody rb;
 	ShootingController shooting;
@@ -52,9 +53,12 @@ public class PlayerController : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 
 		timerDisplay.transform.parent = null;
+	}
 
-		if (defaultWeaponName != "None") {
-			shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName (defaultWeaponName));
+	void Start() {
+		string weaponToUse = (LevelProgressManager.instance != null && !string.IsNullOrEmpty(LevelProgressManager.lastWeaponName)) ? LevelProgressManager.lastWeaponName : defaultWeaponName;
+		if (weaponToUse != "None") {
+			shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName (weaponToUse));
 		}
 	}
 
@@ -69,7 +73,7 @@ public class PlayerController : MonoBehaviour {
 		nextAutoReset = Time.time + autoResetTime;
 	}
 
-	void EnterVehicle(Vehicle newVehicle) {
+	void EnterVehicle(Rideable newVehicle) {
 		currentVehicle = newVehicle;
 		rb.interpolation = RigidbodyInterpolation.None;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -101,7 +105,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision other) {
 		if (other.collider.tag == "Vehicle") {
-			Vehicle newVehicle = other.gameObject.GetComponentInParent<Vehicle> ();
+			Rideable newVehicle = other.gameObject.GetComponentInParent<Rideable> ();
 			if(newVehicle != null && newVehicle.canBeMounted) {
 				EnterVehicle (newVehicle);
 			}

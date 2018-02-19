@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelProgressManager : MonoBehaviour {
 	public static LevelProgressManager instance;
 	public static int curCheckpointId;
+	public static string lastWeaponName;
 
 	[Header("UI")]
 	public GameObject winScreen;
@@ -12,17 +13,21 @@ public class LevelProgressManager : MonoBehaviour {
 	public float notificationTime;
 
 	public bool isComplete;
+	PlayerController pc;
 
 	void Awake() {
 		instance = this;
 		winScreen.SetActive (false);
 		checkpointText.SetActive (false);
+		pc = GameObject.FindObjectOfType<PlayerController> ();
 
 		InitCheckpoints ();
 	}
 
 	void Start() {
-		MovePlayer ();
+		if (curCheckpointId > 0) {
+			UpdatePlayer ();
+		}
 	}
 
 	void InitCheckpoints() {
@@ -31,11 +36,10 @@ public class LevelProgressManager : MonoBehaviour {
 		}
 	}
 
-	void MovePlayer() {
-		if (curCheckpointId > 0) {
-			GameObject.FindObjectOfType<PlayerController> ().transform.position = transform.GetChild (curCheckpointId).position;
-			GameObject.FindObjectOfType<CameraController> ().ResetPosition ();
-		}
+	void UpdatePlayer() {
+		pc.transform.position = transform.GetChild (curCheckpointId).position;
+
+		GameObject.FindObjectOfType<CameraController> ().ResetPosition ();
 	}
 
 	public void CompleteLevel() {
@@ -46,6 +50,7 @@ public class LevelProgressManager : MonoBehaviour {
 
 	public void TriggerCheckpoint(int checkpointId) {
 		curCheckpointId = checkpointId;
+		lastWeaponName = pc.curWeaponName;
 		StartCoroutine (ShowCheckpointReached());
 	}
 

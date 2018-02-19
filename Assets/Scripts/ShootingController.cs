@@ -20,6 +20,7 @@ public class ShootingController : MonoBehaviour {
 
 	public bool targetInRange { get { return target != null; } }
 	public bool hasWeapon { get { return weapon != null; } }
+	public string curWeaponName { get { return (hasWeapon) ? weapon.name : "None"; } }
 
 	bool isPlayer;
 	PlayerController pc;
