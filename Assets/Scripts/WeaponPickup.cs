@@ -14,7 +14,7 @@ public class WeaponPickup : MonoBehaviour {
 			weaponData = WeaponManager.instance.WeaponDataFromName(customType);
 			UpdateRendering ();
 		} else if (!inited) {
-			weaponData = WeaponManager.instance.GetRandomData ();
+			weaponData = WeaponManager.instance.GetWeaponDataFromLootTable ();
 			UpdateRendering ();
 		}
 	}
