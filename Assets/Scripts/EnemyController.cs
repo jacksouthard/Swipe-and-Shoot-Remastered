@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour {
 
 	void Start() {
 		nextPathUpdate = Time.time;
-		gameObject.GetComponentInChildren<ShootingController> ().SetWeapon (WeaponManager.instance.GetRandomData ());
+		gameObject.GetComponentInChildren<ShootingController> ().SetWeapon (WeaponManager.instance.GetWeaponDataFromLootTable ());
 	}
 
 	void LateUpdate() {
