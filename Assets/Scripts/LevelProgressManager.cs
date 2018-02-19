@@ -17,11 +17,14 @@ public class LevelProgressManager : MonoBehaviour {
 	public GameObject checkpointText;
 	public float notificationTime;
 
+	public bool allEnemiesKilled { get { return enemyParent.childCount == 0; } }
 	public bool isComplete;
 	PlayerController pc;
+	Transform enemyParent;
 
 	void Awake() {
 		instance = this;
+		enemyParent = GameObject.Find ("Enemies").transform;
 		winScreen.SetActive (false);
 		checkpointText.SetActive (false);
 		pc = GameObject.FindObjectOfType<PlayerController> ();

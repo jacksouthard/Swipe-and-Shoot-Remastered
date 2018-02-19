@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour {
 	[System.Serializable]
 	public class LevelData {
 		public string name;
+		public bool requiresElimination;
 	}	
 
 	void Awake() {

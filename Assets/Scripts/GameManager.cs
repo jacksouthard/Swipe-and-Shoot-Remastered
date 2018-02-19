@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	[Header("Game Start")]
 	public GameObject startScreen;
 	public Text levelTitle;
+	public Text requirements;
 
 	[Header("Game Over")]
 	public GameObject gameOverScreen;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour {
 
 	void InitLevelData() {
 		levelTitle.text = LevelManager.instance.levelData [levelId].name;
+		requirements.text = "Special requirements: " + ((LevelManager.instance.levelData [levelId].requiresElimination) ? "Kill all enemies" : "None");
 		startScreen.SetActive (true);
 		gameOverScreen.SetActive (false);
 	}
