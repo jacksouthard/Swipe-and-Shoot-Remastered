@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Rideable : MonoBehaviour {
+	public bool dismountable;
+	public bool controllable;
+
 	float reentryWait = 1.0f;
 	float nextEnterTime;
 
@@ -45,14 +48,16 @@ public class Rideable : MonoBehaviour {
 	}
 
 	public virtual void Dismount () {
-		mounter.GetComponent<BoxCollider> ().enabled = true;
-		mounter.GetComponent<Rigidbody> ().isKinematic = false;
-		mounter.transform.parent = null;
+		if (dismountable) {
+			mounter.GetComponent<BoxCollider> ().enabled = true;
+			mounter.GetComponent<Rigidbody> ().isKinematic = false;
+			mounter.transform.parent = null;
 
-		handsContainer.SetActive (false);
+			handsContainer.SetActive (false);
 
-		driver = false;
-		nextEnterTime = Time.time + reentryWait;
-		rb.interpolation = RigidbodyInterpolation.None;
+			driver = false;
+			nextEnterTime = Time.time + reentryWait;
+			rb.interpolation = RigidbodyInterpolation.None;
+		}
 	}
 }

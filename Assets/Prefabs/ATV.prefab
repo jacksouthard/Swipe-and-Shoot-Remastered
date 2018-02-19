@@ -1230,6 +1230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4678f3dbd7cd4ccbb5dd0bfc4186212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dismountable: 1
+  controllable: 1
+  driver: 0
+  rb: {fileID: 0}
   turnSpeed: 12000
   rotationSpeedLimiter: 1
   rotationSpeedLimitRatio: 1.5
@@ -1246,7 +1250,6 @@ MonoBehaviour:
   targetSpeedPercent: 0
   targetRotPercentage: 0
   curWheelSpeed: 0
-  driver: 0
 --- !u!114 &114407105206907962
 MonoBehaviour:
   m_ObjectHideFlags: 1

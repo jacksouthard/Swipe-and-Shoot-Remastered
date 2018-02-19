@@ -70,10 +70,12 @@ public class Vehicle : Rideable {
 	}
 
 	public override void Dismount () {
-		base.Dismount ();
-		vectorArrow.gameObject.SetActive (false);
+		if (dismountable) {
+			base.Dismount ();
+			vectorArrow.gameObject.SetActive (false);
 
-		health.UpdateRenderersNextFrame ();
+			health.UpdateRenderersNextFrame ();
+		}
 	}
 
 	void AdaptTargetDirection () {

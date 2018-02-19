@@ -54,24 +54,47 @@ public class SwipeManager : MonoBehaviour {
 	}
 
 	void StartTap(Vector2 curPos) {
-		isTapping = true;
-		startPos = curPos; //save initial tap position
-
-		joystickVisual.gameObject.SetActive (true);
-		joystickVisual.position = startPos;
-
 		//check whether or not we are selecting the player
 		if (!player.inVehicle) {
+			// not in vehicle
 			isSelectingPlayer = true;
 		} else {
-			RaycastHit hitInfo;
-			Physics.Raycast (gameCam.ScreenPointToRay (curPos), out hitInfo, 100f, 1 << 2);
+			// in vehicle
+			if (!player.currentVehicle.dismountable) {
+				// cannot leave vehicle
+				isSelectingPlayer = false;
+			} else {
+				// can leave vehicle
+				RaycastHit hitInfo;
+				Physics.Raycast (gameCam.ScreenPointToRay (curPos), out hitInfo, 100f, 1 << 2);
 
-			isSelectingPlayer = (hitInfo.collider != null && hitInfo.collider.gameObject.name == "InteractionSphere");
+				isSelectingPlayer = (hitInfo.collider != null && hitInfo.collider.gameObject.name == "InteractionSphere");
+			}
 		}
 
-		if (isSelectingPlayer) {
-			swipeLine.enabled = true;
+		bool startTap = false;
+		if (player.inVehicle) {
+			// in vehicle
+			if (player.currentVehicle.controllable && !isSelectingPlayer) {
+				startTap = true;
+			}
+			if (isSelectingPlayer) {
+				startTap = true;
+			}
+		} else {
+			startTap = true;
+		}
+
+		if (startTap) {
+			isTapping = true;
+			startPos = curPos; //save initial tap position
+
+			joystickVisual.gameObject.SetActive (true);
+			joystickVisual.position = startPos;
+
+			if (isSelectingPlayer) {
+				swipeLine.enabled = true;
+			}
 		}
 	}
 
