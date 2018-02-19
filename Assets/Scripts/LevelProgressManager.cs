@@ -32,28 +32,31 @@ public class LevelProgressManager : MonoBehaviour {
 
 	void InitCheckpoints() {
 		for (int i = 0; i < transform.childCount; i++) {
-			transform.GetChild (i).GetComponent<Checkpoint> ().Init (i);
+			transform.GetChild (i).GetComponent<Checkpoint> ().Init (i); //initialize each checkpoint (child objects of this transform)
 		}
 	}
 
 	void UpdatePlayer() {
-		pc.transform.position = transform.GetChild (curCheckpointId).position;
+		pc.transform.position = transform.GetChild (curCheckpointId).position; //move player to last checkpoint
 
-		GameObject.FindObjectOfType<CameraController> ().ResetPosition ();
+		GameObject.FindObjectOfType<CameraController> ().ResetPosition (); //move camera
 	}
 
+	//ends the level
 	public void CompleteLevel() {
 		winScreen.SetActive (true);
 		isComplete = true;
 		GameManager.instance.EndLevel ();
 	}
 
+	//called when a player enters a checkpoint
 	public void TriggerCheckpoint(int checkpointId) {
 		curCheckpointId = checkpointId;
 		lastWeaponName = pc.curWeaponName;
 		StartCoroutine (ShowCheckpointReached());
 	}
 
+	//notification for when a checkpoint has been passed
 	IEnumerator ShowCheckpointReached() {
 		checkpointText.SetActive (true);
 		yield return new WaitForSeconds (notificationTime);

@@ -65,10 +65,12 @@ public class Health : MonoBehaviour {
 		}
 	}
 
+	//waits until next frame before updating MeshRenderers
 	public void UpdateRenderersNextFrame() {
 		shouldUpdateRenderers = true;
 	}
 
+	//updates list of all MeshRenderers - call whenever a child object is added/removed
 	void UpdateRenderers() {
 		shouldUpdateRenderers = false;
 
@@ -221,6 +223,7 @@ public class Health : MonoBehaviour {
 		ChangeToColor(Color.black);
 	}
 
+	//changes color to red for a moment
 	IEnumerator HitAnimation() {
 		ChangeToColor (hitColor);
 		yield return new WaitForSeconds (hitWait);
@@ -228,7 +231,8 @@ public class Health : MonoBehaviour {
 			ResetColor ();
 		}
 	}
-
+	 
+	//sets all MeshRenderers to a certain color
 	void ChangeToColor(Color color) {
 		foreach (var mr in mrs) {
 			foreach (var mat in mr.materials) {
@@ -253,6 +257,7 @@ public class Health : MonoBehaviour {
 		regening = false;
 	}
 
+	//resets to original color
 	public void ResetColor() {
 		for (int i = 0; i < mrs.Count; i++) {
 			int colorCount = originalColors [i].Length;

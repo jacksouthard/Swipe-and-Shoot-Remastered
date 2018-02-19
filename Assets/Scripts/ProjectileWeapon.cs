@@ -12,13 +12,14 @@ public class ProjectileWeapon : Weapon {
 		base.Shoot ();
 
 		foreach (var bulletSpawn in bulletSpawns) {
+			//projectile object
 			GameObject newProjectile = (GameObject)Instantiate (projectile, bulletSpawn.position, bulletSpawn.rotation);
 
 			Rigidbody projectileRb = newProjectile.GetComponent<Rigidbody> ();
-			projectileRb.velocity = newProjectile.transform.forward * projectileSpeed;
-			projectileRb.velocity += transform.GetComponentInParent<Rigidbody> ().velocity;
+			projectileRb.velocity = newProjectile.transform.forward * projectileSpeed; //shoot forward
+			projectileRb.velocity += transform.GetComponentInParent<Rigidbody> ().velocity; //take parent velocity into account
 
-			Destroy (newProjectile, projectileLifeTime);
+			Destroy (newProjectile, projectileLifeTime); //destroy after a certain amount of time
 		}
 	}
 }

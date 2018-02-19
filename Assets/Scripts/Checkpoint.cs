@@ -13,6 +13,7 @@ public class Checkpoint : MonoBehaviour {
 		}
 	}
 
+	//clears all enemies in collider range
 	void ClearEnemies() {
 		Collider col = gameObject.GetComponent<Collider> ();
 		Collider[] enemisInCol = null;
@@ -30,6 +31,7 @@ public class Checkpoint : MonoBehaviour {
 		}
 	}
 
+	//triggers only if my id is higher than the furthest checkpoint
 	void OnTriggerEnter(Collider other) {
 		if ((id > LevelProgressManager.curCheckpointId) && other.GetComponentInParent<PlayerController> ()) {
 			LevelProgressManager.instance.TriggerCheckpoint (id);

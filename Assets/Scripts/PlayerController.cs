@@ -52,10 +52,11 @@ public class PlayerController : MonoBehaviour {
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 
-		timerDisplay.transform.parent = null;
+		timerDisplay.transform.parent = null; //timer moves independently from player
 	}
 
 	void Start() {
+		//set starting weapon
 		string weaponToUse = (LevelProgressManager.instance != null && !string.IsNullOrEmpty(LevelProgressManager.lastWeaponName)) ? LevelProgressManager.lastWeaponName : defaultWeaponName;
 		if (weaponToUse != "None") {
 			shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName (weaponToUse));
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints.None;
 		rb.AddForce (new Vector3(dir.x, dir.magnitude * verticalFactor, dir.y) * swipeForce);
 		state = MovementState.Jumping;
-		nextAutoReset = Time.time + autoResetTime;
+		nextAutoReset = Time.time + autoResetTime; //so you can't get stuck in jumping state
 	}
 
 	void EnterVehicle(Rideable newVehicle) {
@@ -107,7 +108,7 @@ public class PlayerController : MonoBehaviour {
 		if (other.collider.tag == "Vehicle") {
 			Rideable newVehicle = other.gameObject.GetComponentInParent<Rideable> ();
 			if(newVehicle != null && newVehicle.canBeMounted) {
-				EnterVehicle (newVehicle);
+				EnterVehicle (newVehicle); //enter vehicle when you hit something tagged with vehicle
 			}
 		} else {
 			//changes states when hit
@@ -124,6 +125,7 @@ public class PlayerController : MonoBehaviour {
 		shooting.canRotateParent = false;
 	}
 
+	//takes enemy weapon if you don't have one
 	public bool TrySwapWeapons(WeaponManager.WeaponData weaponData) {
 		if (shooting.hasWeapon) {
 			return false;
@@ -133,6 +135,7 @@ public class PlayerController : MonoBehaviour {
 		return true;
 	}
 
+	//rotates in direction of swipe unless an enemy is in range
 	public void TryRotateInDir(Vector2 dir) {
 		if (shooting.targetInRange) {
 			return;
@@ -160,6 +163,7 @@ public class PlayerController : MonoBehaviour {
 		DisplayPickupTimer ();
 	}
 
+	//once player has slowed down enough, reset for next swipe
 	void Stop() {
 		state = MovementState.Grounded;
 		rb.velocity = Vector3.zero;
@@ -205,7 +209,7 @@ public class PlayerController : MonoBehaviour {
 
 		foreach (var pickupTimer in curPickingupTimers) {
 			pickupTimer.timer -= Time.deltaTime;
-			if (pickupTimer.timer <= 0f) {
+			if (pickupTimer.timer <= 0f) { //if a timer has run out, pick it up
 				Pickup (pickupTimer);
 				curPickingupTimers.Remove (pickupTimer);
 				return;
@@ -213,6 +217,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	//picks up object associated with this timer
 	void Pickup (PickupTimer timer) {
 		foreach (var pickupTimer in curPickingupTimers) {
 			if (pickupTimer != timer) {
@@ -230,6 +235,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	//display timer information
 	void DisplayPickupTimer() {
 		timerDisplay.SetActive (curPickingupTimers.Count > 0);
 
@@ -265,6 +271,7 @@ public class PlayerController : MonoBehaviour {
 			DetermineType();
 		}
 
+		//setup timer based on object
 		void DetermineType() {
 			WeaponPickup weaponPickup = pickup.GetComponent<WeaponPickup> ();
 			if (weaponPickup != null) {

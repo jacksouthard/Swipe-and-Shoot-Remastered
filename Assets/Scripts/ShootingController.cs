@@ -33,17 +33,18 @@ public class ShootingController : MonoBehaviour {
 		isPlayer = gameObject.GetComponentInParent<PlayerController> () != null;
 		if (!isPlayer) {
 			pc = GameObject.FindObjectOfType<PlayerController> ();
-			player = pc.transform.Find("Center");
+			player = pc.transform.Find("Center"); //target is the player's "center"
 		}
 
 		health = gameObject.GetComponentInParent<Health> ();
 	}
 
+	//updates current weapon and throws out old weapon
 	public void SetWeapon(WeaponManager.WeaponData newWeapon) {
 		if (hasWeapon) {
 			ThrowWeapon ();
 		}
-
+			
 		GameObject weaponObj = Instantiate (newWeapon.prefab, transform.GetChild(0));
 		weaponObj.transform.localPosition = Vector3.zero;
 		weaponObj.transform.localRotation = Quaternion.identity;
@@ -57,6 +58,7 @@ public class ShootingController : MonoBehaviour {
 		}
 	}
 
+	//instantly removes current weapon
 	public void RemoveWeapon() {
 		Destroy (weapon.gameObject);
 
@@ -79,6 +81,8 @@ public class ShootingController : MonoBehaviour {
 		if (!hasWeapon) {
 			return;
 		}
+
+		//choose target
 		if (!isPlayer) {
 			target = (pc.inVehicle) ? pc.currentVehicle.transform.Find("Center") : player;
 		} else {
@@ -88,16 +92,17 @@ public class ShootingController : MonoBehaviour {
 		if (target != null) {
 			RotateTowards (target);
 		} else {
-			ResetRotation ();
+			ResetRotation (); //idle position
 		}
 	}
 
+	//point towards a target
 	void RotateTowards(Transform target) {
 		Quaternion parentRotation = transform.parent.rotation;
 		Vector3 diff = target.position - transform.position;
 		float angle = Mathf.Atan2 (diff.x, diff.z) * Mathf.Rad2Deg;
 
-		if (canRotateParent) {
+		if (canRotateParent) { //rotates character towards target
 			transform.parent.rotation = Quaternion.Lerp (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed * weapon.speedMultiplier);
 		}
 
@@ -105,6 +110,7 @@ public class ShootingController : MonoBehaviour {
 		transform.localRotation = Quaternion.Euler(ClampedAngle(transform.localRotation.eulerAngles.x), ClampedAngle(transform.localRotation.eulerAngles.y), 0f);
 	}
 
+	//rotates parent in a direction (for when player looks in direction of swipe)
 	public void OverrideRotateParent(float angle) {
 		Quaternion parentRotation = transform.parent.rotation;
 
@@ -133,6 +139,7 @@ public class ShootingController : MonoBehaviour {
 		Destroy (this);
 	}
 
+	//find nearest in range
 	Transform GetNearestTarget() {
 		Collider[] objectsInRange = Physics.OverlapSphere (transform.position, weapon.range);
 

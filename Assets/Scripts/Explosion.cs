@@ -14,7 +14,7 @@ public class Explosion : MonoBehaviour {
 			if (rb != null && !hitRbs.Contains (rb)) {
 				float dist = Vector3.Distance (rb.transform.position, transform.position);
 				Vector3 dir = (rb.transform.position - transform.position).normalized;
-				rb.AddForce(dir * force * forceCurve.Evaluate (dist / range));
+				rb.AddForce(dir * force * forceCurve.Evaluate (dist / range)); //apply force to all rigidbodies in range
 				//alternate formula: (-Mathf.Pow(dist / range, n) + 1) * force
 				//where n is the falloff range
 
