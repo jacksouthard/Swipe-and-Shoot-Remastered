@@ -198,6 +198,7 @@ public class Health : MonoBehaviour {
 				GetComponentInChildren<PlayerController> ().ExitVehicle ();
 			}
 
+			gameObject.GetComponent<Rigidbody> ().drag = 0;
 			GameObject explosion = (GameObject) Instantiate (Resources.Load("Explosion") as GameObject, transform.Find("Center").position, Quaternion.identity);
 			explosion.GetComponent<Explosion> ().Initiate (5f, 5000f);
 			// eventually spawn explosion
