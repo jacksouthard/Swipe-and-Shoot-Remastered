@@ -14,8 +14,6 @@ public class LevelProgressManager : MonoBehaviour {
 
 	[Header("UI")]
 	public GameObject winScreen;
-	public GameObject checkpointText;
-	public float notificationTime;
 
 	public bool allEnemiesKilled { get { return enemyParent.childCount == 0; } }
 	public bool isComplete;
@@ -26,7 +24,6 @@ public class LevelProgressManager : MonoBehaviour {
 		instance = this;
 		enemyParent = GameObject.Find ("Enemies").transform;
 		winScreen.SetActive (false);
-		checkpointText.SetActive (false);
 		pc = GameObject.FindObjectOfType<PlayerController> ();
 
 		SetupObjectiveUI ();
@@ -74,13 +71,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public void TriggerCheckpoint(int checkpointId) {
 		curCheckpointId = checkpointId;
 		lastWeaponName = pc.curWeaponName;
-		StartCoroutine (ShowCheckpointReached());
-	}
 
-	//notification for when a checkpoint has been passed
-	IEnumerator ShowCheckpointReached() {
-		checkpointText.SetActive (true);
-		yield return new WaitForSeconds (notificationTime);
-		checkpointText.SetActive (false);
+		NotificationManager.instance.ShowBanner ("CHECKPOINT REACHED");
 	}
 }

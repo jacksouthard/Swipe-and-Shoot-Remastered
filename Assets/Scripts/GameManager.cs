@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
-	public bool isPaused;
 	public int levelId;
 	public float killHeight;
 
@@ -22,7 +21,7 @@ public class GameManager : MonoBehaviour {
 	void Awake() {
 		instance = this;
 		InitLevelData ();
-		SetPaused (true);
+		TimeManager.SetPaused (true);
 	}
 
 	void InitLevelData() {
@@ -33,13 +32,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void StartGame() {
-		SetPaused (false);
+		TimeManager.SetPaused (false);
 		startScreen.SetActive (false);
-	}
-
-	public void SetPaused(bool pause) {
-		isPaused = pause;
-		Time.timeScale = (isPaused) ? 0f : 1f;
 	}
 
 	public void GameOver() {

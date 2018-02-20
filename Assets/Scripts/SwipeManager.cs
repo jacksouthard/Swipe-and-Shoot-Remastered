@@ -32,7 +32,7 @@ public class SwipeManager : MonoBehaviour {
 
 	void Update() {
 		//on tap down
-		if (!isTapping && Input.GetMouseButtonDown (0) && !GameManager.instance.isPaused) {
+		if (!isTapping && Input.GetMouseButtonDown (0) && !TimeManager.isPaused) {
 			StartTap (Input.mousePosition);
 		}
 
