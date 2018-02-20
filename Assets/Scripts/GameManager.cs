@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	public static bool firstTime = true; //reset this when we go to the main menu
 
-	public int levelId;
 	public float killHeight;
 
 	[Header("Game Start")]
@@ -29,7 +28,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void InitLevelData() {
-		levelData = LevelManager.instance.levelData [levelId];
+		levelData = LevelManager.instance.levelData [SceneManager.GetActiveScene().buildIndex - 1];
 		levelTitle.text = levelData.name;
 		requirements.text = "Special requirements: " + (levelData.requiresElimination ? "Kill all enemies" : "None");
 		startScreen.SetActive (true);

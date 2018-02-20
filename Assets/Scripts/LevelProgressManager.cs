@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelProgressManager : MonoBehaviour {
 	public static LevelProgressManager instance;
 	public static int curCheckpointId;
-	public static string lastWeaponName;
+	public static string lastWeaponName = "None";
 
 	[Header("Objective")]
 	public GameObject objectiveScreenIndicator;
@@ -73,5 +73,10 @@ public class LevelProgressManager : MonoBehaviour {
 		lastWeaponName = pc.curWeaponName;
 
 		NotificationManager.instance.ShowBanner ("CHECKPOINT REACHED");
+	}
+
+	public static void Reset() {
+		curCheckpointId = 0;
+		lastWeaponName = "None";
 	}
 }

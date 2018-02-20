@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Start() {
 		//set starting weapon
-		string weaponToUse = (LevelProgressManager.instance != null && !string.IsNullOrEmpty(LevelProgressManager.lastWeaponName)) ? LevelProgressManager.lastWeaponName : defaultWeaponName;
+		string weaponToUse = (LevelProgressManager.lastWeaponName != "None") ? LevelProgressManager.lastWeaponName : defaultWeaponName;
 		if (weaponToUse != "None") {
 			shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName (weaponToUse));
 		}
