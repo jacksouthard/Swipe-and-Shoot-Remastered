@@ -47,7 +47,7 @@ public class NotificationManager : MonoBehaviour {
 	public void ShowBanner(string message) {
 		banners.Add (message);
 
-		if (banners [0] == message) {
+		if (banners.Count == 1) {
 			StartCoroutine (PlayBanner());
 		}
 	}
@@ -72,7 +72,7 @@ public class NotificationManager : MonoBehaviour {
 	public void ShowSplash(string message) {
 		splashes.Add (message);
 
-		if (splashes[0] == message) {
+		if (splashes.Count == 1) {
 			DisplaySplash ();
 			SetAnim (splashAnim, true); //only play animation the first time
 		}
