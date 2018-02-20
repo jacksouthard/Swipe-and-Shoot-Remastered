@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
+	public static bool firstTime = true; //reset this when we go to the main menu
+
 	public int levelId;
 	public float killHeight;
 
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour {
 	public GameObject gameOverScreen;
 	public bool isGameOver;
 
+	LevelManager.LevelData levelData;
+
 	void Awake() {
 		instance = this;
 		InitLevelData ();
@@ -25,8 +29,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void InitLevelData() {
-		levelTitle.text = LevelManager.instance.levelData [levelId].name;
-		requirements.text = "Special requirements: " + ((LevelManager.instance.levelData [levelId].requiresElimination) ? "Kill all enemies" : "None");
+		levelData = LevelManager.instance.levelData [levelId];
+		levelTitle.text = levelData.name;
+		requirements.text = "Special requirements: " + (levelData.requiresElimination ? "Kill all enemies" : "None");
 		startScreen.SetActive (true);
 		gameOverScreen.SetActive (false);
 	}
@@ -34,6 +39,14 @@ public class GameManager : MonoBehaviour {
 	public void StartGame() {
 		TimeManager.SetPaused (false);
 		startScreen.SetActive (false);
+
+		if (firstTime) {
+			firstTime = false;
+
+			foreach (string message in levelData.startingMessages) {
+				NotificationManager.instance.ShowSplash (message);
+			}
+		}
 	}
 
 	public void GameOver() {

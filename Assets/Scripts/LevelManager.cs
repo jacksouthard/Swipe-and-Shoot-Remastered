@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour {
 	public class LevelData {
 		public string name;
 		public bool requiresElimination;
+		public List<string> startingMessages;
 	}	
 
 	void Awake() {
