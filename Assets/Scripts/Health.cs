@@ -48,6 +48,13 @@ public class Health : MonoBehaviour {
 	GameObject regenEffectPrefab;
 	GameObject curRegenEffect;
 
+	//separate to vehicle health script
+	public Transform smokeCenter;
+	GameObject smokeEffectPrefab;
+	GameObject fireEffectPrefab;
+	GameObject smokeEffect;
+	GameObject fireEffect;
+
 	void Start () {
 		regenEffectPrefab = Resources.Load ("RegenEffect") as GameObject;
 
@@ -60,6 +67,8 @@ public class Health : MonoBehaviour {
 			type = Type.Enemy;
 		} else if (GetComponent<Vehicle> () != null) {
 			type = Type.Vehicle;
+			smokeEffectPrefab = Resources.Load ("SmokeEffect") as GameObject;
+			fireEffectPrefab = Resources.Load ("FireEffect") as GameObject;
 		} else {
 			type = Type.Object;
 		}
@@ -152,6 +161,22 @@ public class Health : MonoBehaviour {
 	public void TakeDamage (float damage) {
 		if (state == State.Alive) {
 			health -= damage;
+
+			//move to vehicle health
+			if (smokeEffect == null) {
+				if ((health / maxHealth) <= 0.5f) {
+					smokeEffect = (GameObject)Instantiate (smokeEffectPrefab, smokeCenter.position, Quaternion.identity);
+					smokeEffect.GetComponent<EffectFollow> ().Init (smokeCenter);
+				}
+			}
+
+			if (fireEffect == null) {
+				if ((health / maxHealth) <= 0.25f) {
+					fireEffect = (GameObject)Instantiate (fireEffectPrefab, smokeCenter.position, Quaternion.identity);
+					fireEffect.GetComponent<EffectFollow> ().Init (smokeCenter);
+				}
+			}
+
 			if (health <= 0f) {
 				Die ();
 			} else {
@@ -203,6 +228,9 @@ public class Health : MonoBehaviour {
 			explosion.GetComponent<Explosion> ().Initiate (5f, 5000f);
 			// eventually spawn explosion
 			Destroy(vechicle);
+
+			fireEffect.GetComponent<EffectFollow> ().End ();
+			smokeEffect.GetComponent<EffectFollow> ().End ();
 		}
 	}
 
@@ -244,14 +272,13 @@ public class Health : MonoBehaviour {
 
 	void StartRegen () {
 		curRegenEffect = Instantiate (regenEffectPrefab);
-		curRegenEffect.GetComponent<RegenEffect> ().Init (transform);
+		curRegenEffect.GetComponent<EffectFollow> ().Init (transform);
 		regening = true;
 	}
 
 	void EndRegen () {
 		if (curRegenEffect != null) {
-			curRegenEffect.GetComponent<ParticleSystem> ().Stop ();
-			Destroy (curRegenEffect, 1.0f);
+			curRegenEffect.GetComponent<EffectFollow> ().End ();
 			curRegenEffect = null;
 		}
 		waitTimer = regenWait;

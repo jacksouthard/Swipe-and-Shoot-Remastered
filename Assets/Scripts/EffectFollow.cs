@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RegenEffect : MonoBehaviour {
+public class EffectFollow : MonoBehaviour {
 	Transform target;
 	bool initiated = false;
 
@@ -11,9 +11,14 @@ public class RegenEffect : MonoBehaviour {
 		initiated = true;
 	}
 	
-	void Update () {
+	void LateUpdate () {
 		if (initiated) {
 			transform.position = target.position;
 		}
+	}
+
+	public void End() {
+		GetComponent<ParticleSystem> ().Stop ();
+		Destroy (gameObject, 1.0f); //wait before actually destroying
 	}
 }
