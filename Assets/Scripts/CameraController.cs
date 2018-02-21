@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour {
 
 	void Awake() {
 		player = GameObject.FindObjectOfType<PlayerController> ().transform;
-		offset = transform.position - player.position;
+		offset = transform.position;
 	}
 
 	public void ResetPosition() {

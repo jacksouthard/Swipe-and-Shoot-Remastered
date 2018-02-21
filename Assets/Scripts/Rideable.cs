@@ -48,16 +48,14 @@ public class Rideable : MonoBehaviour {
 	}
 
 	public virtual void Dismount () {
-		if (dismountable) {
-			mounter.GetComponent<BoxCollider> ().enabled = true;
-			mounter.GetComponent<Rigidbody> ().isKinematic = false;
-			mounter.transform.parent = null;
+		mounter.GetComponent<BoxCollider> ().enabled = true;
+		mounter.GetComponent<Rigidbody> ().isKinematic = false;
+		mounter.transform.parent = null;
 
-			handsContainer.SetActive (false);
+		handsContainer.SetActive (false);
 
-			driver = false;
-			nextEnterTime = Time.time + reentryWait;
-			rb.interpolation = RigidbodyInterpolation.None;
-		}
+		driver = false;
+		nextEnterTime = Time.time + reentryWait;
+		rb.interpolation = RigidbodyInterpolation.None;
 	}
 }
