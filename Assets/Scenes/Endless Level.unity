@@ -2821,21 +2821,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114638930987555470, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
-        type: 2}
-      propertyPath: swipeForce
-      value: 120000
-      objectReference: {fileID: 0}
-    - target: {fileID: 114641830526842376, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
-        type: 2}
-      propertyPath: distanceRatio
-      value: 38
-      objectReference: {fileID: 0}
-    - target: {fileID: 114641830526842376, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
-        type: 2}
-      propertyPath: heightRatio
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
   m_IsPrefabParent: 0

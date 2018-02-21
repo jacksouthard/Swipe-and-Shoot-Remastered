@@ -381,7 +381,6 @@ MonoBehaviour:
   objectiveWorldIndicator: {fileID: 1351903717746474}
   objective: {fileID: 0}
   winScreen: {fileID: 1871514472995966}
-  notificationTime: 2
   isComplete: 0
 --- !u!114 &114642373022206448
 MonoBehaviour:
@@ -424,9 +423,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: fd3a21631c8a4484db82d62d979109aa, type: 3}
     m_FontSize: 14
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 100
