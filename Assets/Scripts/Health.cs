@@ -10,6 +10,7 @@ public class Health : MonoBehaviour {
 		Object,
 		Vehicle
 	}
+	[HideInInspector]
 	public Type type;
 
 	public enum State
@@ -18,6 +19,7 @@ public class Health : MonoBehaviour {
 		Dying,
 		Decaying
 	};
+	[HideInInspector]
 	public State state = State.Alive;
 
 	[Header("Stats")]
@@ -44,19 +46,14 @@ public class Health : MonoBehaviour {
 	List<Color[]> originalColors;
 
 	// regening
+	static GameObject regenEffectPrefab;
 	bool regening = false;
-	GameObject regenEffectPrefab;
 	GameObject curRegenEffect;
 
-	//separate to vehicle health script
-	public Transform smokeCenter;
-	GameObject smokeEffectPrefab;
-	GameObject fireEffectPrefab;
-	GameObject smokeEffect;
-	GameObject fireEffect;
-
 	void Start () {
-		regenEffectPrefab = Resources.Load ("RegenEffect") as GameObject;
+		if (regenEffectPrefab == null) {
+			regenEffectPrefab = Resources.Load ("RegenEffect") as GameObject;
+		}
 
 		health = maxHealth;
 		UpdateRenderers ();
@@ -65,10 +62,8 @@ public class Health : MonoBehaviour {
 			type = Type.Player;
 		} else if (GetComponent<EnemyController> () != null) {
 			type = Type.Enemy;
-		} else if (GetComponent<Vehicle> () != null) {
+		} else if (this is VehicleHealth) {
 			type = Type.Vehicle;
-			smokeEffectPrefab = Resources.Load ("SmokeEffect") as GameObject;
-			fireEffectPrefab = Resources.Load ("FireEffect") as GameObject;
 		} else {
 			type = Type.Object;
 		}
@@ -158,24 +153,9 @@ public class Health : MonoBehaviour {
 		}
 	}
 
-	public void TakeDamage (float damage) {
+	public virtual void TakeDamage (float damage) {
 		if (state == State.Alive) {
 			health -= damage;
-
-			//move to vehicle health
-			if (smokeEffect == null) {
-				if ((health / maxHealth) <= 0.5f) {
-					smokeEffect = (GameObject)Instantiate (smokeEffectPrefab, smokeCenter.position, Quaternion.identity);
-					smokeEffect.GetComponent<EffectFollow> ().Init (smokeCenter);
-				}
-			}
-
-			if (fireEffect == null) {
-				if ((health / maxHealth) <= 0.25f) {
-					fireEffect = (GameObject)Instantiate (fireEffectPrefab, smokeCenter.position, Quaternion.identity);
-					fireEffect.GetComponent<EffectFollow> ().Init (smokeCenter);
-				}
-			}
 
 			if (health <= 0f) {
 				Die ();
@@ -187,7 +167,7 @@ public class Health : MonoBehaviour {
 		}
 	}
 
-	public void Die () {
+	public virtual void Die () {
 		EndRegen ();
 
 		if (type == Type.Player) {
@@ -213,24 +193,6 @@ public class Health : MonoBehaviour {
 			if (Spawner.instance != null) {
 				Spawner.instance.EnemyDeath ();
 			}
-		}
-
-		// if vechicle
-		if (type == Type.Vehicle) {
-			// test for player in vechicle
-			Vehicle vechicle = GetComponent<Vehicle>();
-			if (vechicle.driver) {
-				GetComponentInChildren<PlayerController> ().ExitVehicle ();
-			}
-
-			gameObject.GetComponent<Rigidbody> ().drag = 0;
-			GameObject explosion = (GameObject) Instantiate (Resources.Load("Explosion") as GameObject, transform.Find("Center").position, Quaternion.identity);
-			explosion.GetComponent<Explosion> ().Initiate (5f, 5000f);
-			// eventually spawn explosion
-			Destroy(vechicle);
-
-			fireEffect.GetComponent<EffectFollow> ().End ();
-			smokeEffect.GetComponent<EffectFollow> ().End ();
 		}
 	}
 
