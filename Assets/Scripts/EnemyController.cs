@@ -30,6 +30,10 @@ public class EnemyController : MonoBehaviour {
 		if (Time.time > nextPathUpdate) {
 			UpdateTarget ();	
 		}
+
+		if (Vector3.Distance (transform.position, player.position) < navAgent.stoppingDistance - 0.5f) { //give a little room for error
+			transform.position += (transform.position - player.position).normalized * navAgent.speed * Time.deltaTime / 2; //back up slower than they move normally
+		}
 	}
 
 	void UpdateTarget() {
