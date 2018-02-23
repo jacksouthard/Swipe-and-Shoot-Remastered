@@ -65,6 +65,10 @@ MonoBehaviour:
     name: M9
     prefab: {fileID: 1658469826386734, guid: 318a8f75cfbe642fb9afd60cf4bec3e9, type: 2}
     mesh: {fileID: 4300000, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+  - tier: 3
+    name: Minigun
+    prefab: {fileID: 1581784488398458, guid: c9d55c630766941e7aa20cb16975b6c7, type: 2}
+    mesh: {fileID: 4300014, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1
