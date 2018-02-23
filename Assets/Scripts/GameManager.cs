@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void Restart(bool fullReset = false) {
+	public void Restart(bool fullReset = true) {
 		if (fullReset) {
 			LevelProgressManager.Reset ();
 		}
