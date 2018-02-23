@@ -6,7 +6,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public static LevelProgressManager instance;
 	public static int curCheckpointId;
 	public static string lastWeaponName = "None";
-
+	
 	[Header("Objective")]
 	public GameObject objectiveScreenIndicator;
 	public GameObject objectiveWorldIndicator;
@@ -23,6 +23,7 @@ public class LevelProgressManager : MonoBehaviour {
 	void Awake() {
 		instance = this;
 		enemyParent = GameObject.Find ("Enemies").transform;
+
 		winScreen.SetActive (false);
 		pc = GameObject.FindObjectOfType<PlayerController> ();
 
@@ -73,6 +74,14 @@ public class LevelProgressManager : MonoBehaviour {
 		lastWeaponName = pc.curWeaponName;
 
 		NotificationManager.instance.ShowBanner ("CHECKPOINT REACHED");
+	}
+
+	public void Restart() {
+		GameManager.instance.Restart ();
+	}
+
+	public void ReturnToMain() {
+		GameManager.instance.ReturnToMain ();
 	}
 
 	public static void Reset() {

@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
+
+		startScreen.SetActive (true);
+		gameOverScreen.SetActive (false);
+
 		InitLevelData ();
 		TimeManager.SetPaused (true);
 	}
@@ -31,8 +35,6 @@ public class GameManager : MonoBehaviour {
 		levelData = LevelManager.instance.levelData [SceneManager.GetActiveScene().buildIndex - 1];
 		levelTitle.text = levelData.name;
 		requirements.text = "Special requirements: " + (levelData.requiresElimination ? "Kill all enemies" : "None");
-		startScreen.SetActive (true);
-		gameOverScreen.SetActive (false);
 	}
 
 	public void StartGame() {
@@ -50,11 +52,20 @@ public class GameManager : MonoBehaviour {
 
 	public void GameOver() {
 		if (LevelProgressManager.instance == null || !LevelProgressManager.instance.isComplete) {
+			SetupGameOverScreen ();
 			gameOverScreen.SetActive (true);
 			isGameOver = true;
 
 			EndLevel ();
 		}
+	}
+
+	void SetupGameOverScreen() {
+		Button continueButton = gameOverScreen.transform.Find ("Window").Find("Buttons").Find("ContinueButton").GetComponent<Button>();
+		continueButton.interactable = LevelProgressManager.curCheckpointId > 0;
+
+		Text buttonText = continueButton.GetComponentInChildren<Text> ();
+		buttonText.color = new Color (buttonText.color.r, buttonText.color.g, buttonText.color.b, (LevelProgressManager.curCheckpointId > 0) ? 1f : 0.5f);
 	}
 
 	public void EndLevel() {
@@ -65,7 +76,14 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void Restart() {
+	public void Restart(bool fullReset = false) {
+		if (fullReset) {
+			LevelProgressManager.Reset ();
+		}
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+	}
+
+	public void ReturnToMain() {
+		SceneManager.LoadScene (0);
 	}
 }
