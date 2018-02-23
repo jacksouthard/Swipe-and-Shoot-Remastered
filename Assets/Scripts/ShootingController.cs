@@ -103,10 +103,10 @@ public class ShootingController : MonoBehaviour {
 		float angle = Mathf.Atan2 (diff.x, diff.z) * Mathf.Rad2Deg;
 
 		if (canRotateParent) { //rotates character towards target
-			transform.parent.rotation = Quaternion.Lerp (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed * weapon.speedMultiplier);
+			transform.parent.rotation = Quaternion.RotateTowards (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed * weapon.speedMultiplier);
 		}
 
-		transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(diff), Time.deltaTime * speed * weapon.speedMultiplier);
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(diff), Time.deltaTime * speed * weapon.speedMultiplier);
 		transform.localRotation = Quaternion.Euler(ClampedAngle(transform.localRotation.eulerAngles.x), ClampedAngle(transform.localRotation.eulerAngles.y), 0f);
 	}
 
@@ -115,12 +115,12 @@ public class ShootingController : MonoBehaviour {
 		Quaternion parentRotation = transform.parent.rotation;
 
 		if (canRotateParent) {
-			transform.parent.rotation = Quaternion.Lerp (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed);
+			transform.parent.rotation = Quaternion.RotateTowards (transform.parent.rotation, Quaternion.Euler (parentRotation.eulerAngles.x, angle, parentRotation.eulerAngles.z), Time.deltaTime * parentSpeed);
 		}
 	}
 
 	void ResetRotation() {
-		transform.localRotation = Quaternion.Lerp (transform.localRotation, Quaternion.identity, Time.deltaTime * parentSpeed);
+		transform.localRotation = Quaternion.RotateTowards (transform.localRotation, Quaternion.identity, Time.deltaTime * parentSpeed);
 	}
 
 	float ClampedAngle(float angle) {

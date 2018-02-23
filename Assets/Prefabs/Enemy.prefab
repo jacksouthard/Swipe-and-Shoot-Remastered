@@ -445,8 +445,8 @@ MonoBehaviour:
   canRotateParent: 0
   targetTag: Player
   clampAngle: 60
-  parentSpeed: 1
-  speed: 2
+  parentSpeed: 40
+  speed: 160
   weaponPickupPrefab: {fileID: 0}
   throwHeight: 0
   throwVelocity: 0

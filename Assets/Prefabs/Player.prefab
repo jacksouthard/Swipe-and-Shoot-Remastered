@@ -583,8 +583,8 @@ MonoBehaviour:
   canRotateParent: 0
   targetTag: Enemy
   clampAngle: 90
-  parentSpeed: 5
-  speed: 20
+  parentSpeed: 200
+  speed: 800
   weaponPickupPrefab: {fileID: 1576351328228362, guid: 190d4d7c0e3b44f12bb8ff2b63158d75,
     type: 2}
   throwHeight: 0.5
