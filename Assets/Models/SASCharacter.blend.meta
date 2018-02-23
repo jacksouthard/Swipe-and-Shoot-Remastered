@@ -3,7 +3,7 @@ guid: 3b7d2f637f83f4b25b312b4385283752
 timeCreated: 1518318391
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: Cube
     100002: Cube_001
@@ -13,6 +13,7 @@ ModelImporter:
     100010: Cube_007
     100012: Cube_008
     100014: //RootNode
+    100016: Cylinder_005
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -21,6 +22,7 @@ ModelImporter:
     400010: Cube_007
     400012: Cube_008
     400014: //RootNode
+    400016: Cylinder_005
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -28,6 +30,7 @@ ModelImporter:
     2300008: Cube_004
     2300010: Cube_007
     2300012: Cube_008
+    2300014: Cylinder_005
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -35,6 +38,7 @@ ModelImporter:
     3300008: Cube_004
     3300010: Cube_007
     3300012: Cube_008
+    3300014: Cylinder_005
     4300000: Cube_008
     4300002: Cube_007
     4300004: Cube_003
@@ -42,12 +46,50 @@ ModelImporter:
     4300008: Cube_002
     4300010: Cube_001
     4300012: Cube
+    4300014: Cylinder_005
     7400000: Default Take
     9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel
+    second: {fileID: 2100000, guid: a8019cc71955d4584bf84683e66753f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Barrel_001
+    second: {fileID: 2100000, guid: 4cf1477a58f85429885674d98af8a9a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Face__Face
+    second: {fileID: 2100000, guid: 5a8b3e54960f441b68e1a42ed1e28418, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Helmet
+    second: {fileID: 2100000, guid: 3db4d747ed70440d491e5fa819b7fd17, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Magazine
+    second: {fileID: 2100000, guid: 62cfb0eb86f3c406086af855e30f83d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Magazine_001
+    second: {fileID: 2100000, guid: 10897153666db4e03986dff826509fd0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 2dfdd86bf08014a49b2e930993cc2260, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -60,6 +102,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -84,6 +127,8 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88

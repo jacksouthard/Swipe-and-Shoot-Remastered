@@ -24,12 +24,15 @@ public class WeaponManager : MonoBehaviour {
 		if (random < 50) {
 			// tier 0
 			randomTier = 0;
-		} else if (random < 85) {
+		} else if (random < 80) {
 			// tier 1
 			randomTier = 1;
-		} else {
+		} else if (random < 95) {
 			// tier 2
 			randomTier = 2;
+		} else {
+			// tier 3
+			randomTier = 3;
 		}
 		return GetRandomDataOfTier (randomTier);
 	}
