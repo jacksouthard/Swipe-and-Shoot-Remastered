@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour {
 	[Header("Game Over")]
 	public GameObject gameOverScreen;
 	public bool isGameOver;
+	bool isGameWon { get { return LevelProgressManager.instance != null && LevelProgressManager.instance.isComplete; } }
+
+	[Header("Pause")]
+	public GameObject pauseScreen;
 
 	LevelManager.LevelData levelData;
 
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour {
 
 		startScreen.SetActive (true);
 		gameOverScreen.SetActive (false);
+		pauseScreen.SetActive (false);
 
 		InitLevelData ();
 		TimeManager.SetPaused (true);
@@ -50,8 +55,15 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void PauseGame(bool shouldPause) {
+		if (!isGameOver && !isGameWon) {
+			pauseScreen.SetActive (shouldPause);
+			TimeManager.SetPaused (shouldPause);
+		}
+	}
+
 	public void GameOver() {
-		if (LevelProgressManager.instance == null || !LevelProgressManager.instance.isComplete) {
+		if (!isGameWon) {
 			SetupGameOverScreen ();
 			gameOverScreen.SetActive (true);
 			isGameOver = true;
