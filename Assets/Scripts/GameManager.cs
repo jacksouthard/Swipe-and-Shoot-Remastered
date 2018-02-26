@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	public static bool firstTime = true; //reset this when we go to the main menu
 
-	public float killHeight;
-
 	[Header("Game Start")]
 	public GameObject startScreen;
 	public Text levelTitle;

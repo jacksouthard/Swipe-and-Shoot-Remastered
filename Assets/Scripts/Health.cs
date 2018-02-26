@@ -125,6 +125,10 @@ public class Health : MonoBehaviour {
 
 		}
 
+		if (type == Type.Player) {
+			return;
+		}
+
 		if (state == State.Dying) {
 			dyingTimer -= Time.deltaTime;
 			if (dyingTimer <= 0f) {
@@ -144,13 +148,6 @@ public class Health : MonoBehaviour {
 		if (shouldUpdateRenderers) {
 			UpdateRenderers ();
 		}
-
-		if (state == State.Alive && transform.position.y < GameManager.instance.killHeight) {
-			Die ();
-			if (type == Type.Player) {
-				Destroy (GetComponent<Rigidbody> ());
-			}
-		}
 	}
 
 	public virtual void TakeDamage (float damage) {
@@ -168,6 +165,11 @@ public class Health : MonoBehaviour {
 	}
 
 	public virtual void Die () {
+		if (state != State.Alive) {
+			return;
+		}
+
+		state = State.Dying;
 		EndRegen ();
 
 		if (type == Type.Player) {
@@ -175,11 +177,8 @@ public class Health : MonoBehaviour {
 			ResetColor();
 			gameObject.GetComponent<PlayerController>().Die();
 			GameManager.instance.GameOver ();
-			Destroy (this);
 			return;
 		}
-
-		state = State.Dying;
 
 		// if enemy
 		if (type == Type.Enemy) {

@@ -44,6 +44,10 @@ public class VehicleHealth : Health {
 	public override void Die() {
 		base.Die ();
 
+		if (state != State.Alive) {
+			return;
+		}
+
 		// test for player in vechicle
 		Vehicle vechicle = GetComponent<Vehicle>();
 		if (vechicle.driver) {
