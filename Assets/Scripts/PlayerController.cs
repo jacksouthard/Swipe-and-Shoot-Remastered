@@ -230,7 +230,7 @@ public class PlayerController : MonoBehaviour {
 			shooting.SetWeapon (weaponPickup.weaponData);
 			Destroy (timer.pickup);
 		} else if (timer.type == PickupTimer.Type.Objective) {
-			LevelProgressManager.instance.CompleteLevel ();
+			LevelProgressManager.instance.CompleteObjective ();
 			Destroy (timer.pickup.GetComponent<Collider> ());
 		}
 	}

@@ -2,6 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Objective {
+	public enum Type {
+		Pickup,
+		Zone,
+		KillCount
+	}
+
+	public Type type;
+
+	public GameObject go; //object to set up
+	public GameObject newObjects; //optional objects to enable after completing this objective
+}
+
 public class LevelProgressManager : MonoBehaviour {
 	public static LevelProgressManager instance;
 	public static int curCheckpointId;
@@ -10,7 +24,7 @@ public class LevelProgressManager : MonoBehaviour {
 	[Header("Objective")]
 	public GameObject objectiveScreenIndicator;
 	public GameObject objectiveWorldIndicator;
-	public Transform objective;
+	public List<Objective> objectives = new List<Objective>();
 
 	[Header("UI")]
 	public GameObject winScreen;
@@ -27,25 +41,14 @@ public class LevelProgressManager : MonoBehaviour {
 		winScreen.SetActive (false);
 		pc = GameObject.FindObjectOfType<PlayerController> ();
 
-		SetupObjectiveUI ();
 		InitCheckpoints ();
+		InitNextObjective ();
+		UpdateObjectiveUI ();
 	}
 
 	void Start() {
 		if (curCheckpointId > 0) {
 			UpdatePlayer ();
-		}
-	}
-
-	void SetupObjectiveUI() {
-		//show/hide indicators
-		objectiveScreenIndicator.SetActive (objective != null);
-		objectiveWorldIndicator.SetActive (objective != null);
-
-		if (objective != null) {
-			objectiveScreenIndicator.GetComponent<EdgeView> ().target = objective.gameObject; //set target
-			objectiveWorldIndicator.transform.position = objective.position; //move to target
-			objectiveWorldIndicator.transform.parent = null; //unparent
 		}
 	}
 
@@ -55,10 +58,61 @@ public class LevelProgressManager : MonoBehaviour {
 		}
 	}
 
+	void InitNextObjective() {
+		if (objectives.Count == 0) {
+			Debug.LogError ("No objectives to set up");
+			return;
+		}
+
+		switch (objectives[0].type) {
+			case Objective.Type.Pickup:
+				objectives[0].go.tag = "Pickup";
+				break;
+			case Objective.Type.Zone:
+				objectives[0].go.GetComponent<PlayerTrigger> ().enterActions.AddListener (CompleteObjective);
+				break;
+			case Objective.Type.KillCount:
+				//TODO
+				break;
+		}
+	}
+
+	void UpdateObjectiveUI() {
+		objectiveWorldIndicator.transform.parent = null; //unparent
+
+		bool hasIndicators = objectives.Count > 0 && objectives [0].type != Objective.Type.KillCount;
+
+		//show/hide indicators
+		objectiveScreenIndicator.SetActive (hasIndicators);
+		objectiveWorldIndicator.SetActive (hasIndicators);
+
+		if (hasIndicators) {
+			objectiveScreenIndicator.GetComponent<EdgeView> ().Init(objectives[0].go); //set target
+			objectiveWorldIndicator.transform.position = objectives[0].go.transform.position; //move to target
+		}
+	}
+
 	void UpdatePlayer() {
 		pc.transform.position = transform.GetChild (curCheckpointId).position; //move player to last checkpoint
 
 		GameObject.FindObjectOfType<CameraController> ().ResetPosition (); //move camera
+	}
+
+	//assumes player is completing objectives in order for now
+	public void CompleteObjective() {
+		if(objectives[0].newObjects != null) {
+			objectives [0].newObjects.SetActive (true);
+		}
+
+		objectives.RemoveAt (0);
+
+		if (objectives.Count == 0) {
+			CompleteLevel ();
+		} else {
+			InitNextObjective ();
+		}
+
+		UpdateObjectiveUI ();
 	}
 
 	//ends the level

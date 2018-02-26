@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class EdgeView : MonoBehaviour {
-
-	public GameObject target;
+	GameObject target;
 
 	const float margin = 15f;	// margin from edge of screen
 	float edgeOffset;
@@ -29,10 +28,14 @@ public class EdgeView : MonoBehaviour {
 	MeshRenderer targetRend;
 	GameObject image;
 
+	public void Init(GameObject newTarget) {
+		target = newTarget;
+		targetRend = target.GetComponentInChildren<MeshRenderer> ();
+	}
+
 	void Start () {
 		center = GameObject.FindObjectOfType<CameraController>().transform;
 		canvas = transform.parent.GetComponent<RectTransform>();
-		targetRend = target.GetComponentInChildren<MeshRenderer> ();
 		image = transform.GetComponentInChildren<Image> ().gameObject;
 
 		edgeOffset = margin + (this.GetComponent<RectTransform>().rect.width / 2);
@@ -57,8 +60,7 @@ public class EdgeView : MonoBehaviour {
 		UpdateVisibility();
 	}
 
-	void SetPositionAndRotation ()
-	{
+	void SetPositionAndRotation () {
 		Vector3 targetVector = (target.transform.position - center.position);
 		float angle = CalculateAngle (transform.forward, targetVector);
 
