@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
 	[Header("Control")]
+	public bool moves = true;
 	public float activeRange;
 	public float pathUpdateRate;
 	public float durability; //max force before the enemy dies
@@ -24,9 +25,20 @@ public class EnemyController : MonoBehaviour {
 	void Start() {
 		nextPathUpdate = Time.time;
 		gameObject.GetComponentInChildren<ShootingController> ().SetWeapon (WeaponManager.instance.GetWeaponDataFromLootTable ());
+
+		if (!moves) {
+			shooting.canRotateParent = true;
+			if (navAgent != null) {
+				Destroy (navAgent);
+			}
+		}
 	}
 
 	void LateUpdate() {
+		if (!moves) {
+			return;
+		}
+
 		if (Time.time > nextPathUpdate) {
 			UpdateTarget ();	
 		}
@@ -65,5 +77,22 @@ public class EnemyController : MonoBehaviour {
 			}
 			gameObject.GetComponent<Health> ().Die ();
 		}
+	}
+
+	public void Die() {
+		gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+
+		if (moves) {
+			Destroy (navAgent);
+		}
+
+		shooting.Die ();
+		// notify spawner of death
+
+		if (Spawner.instance != null) {
+			Spawner.instance.EnemyDeath ();
+		}
+
+		Destroy(this);
 	}
 }

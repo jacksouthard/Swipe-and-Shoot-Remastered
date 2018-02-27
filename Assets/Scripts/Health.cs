@@ -182,16 +182,7 @@ public class Health : MonoBehaviour {
 
 		// if enemy
 		if (type == Type.Enemy) {
-			gameObject.GetComponent<Rigidbody> ().isKinematic = false;
-
-			Destroy(GetComponent<NavMeshAgent> ());
-			Destroy(GetComponent<EnemyController> ());
-			GetComponentInChildren<ShootingController> ().Die ();
-			// notify spawner of death
-
-			if (Spawner.instance != null) {
-				Spawner.instance.EnemyDeath ();
-			}
+			GetComponent<EnemyController> ().Die ();
 		}
 	}
 
