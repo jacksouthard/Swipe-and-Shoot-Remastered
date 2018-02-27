@@ -28,7 +28,9 @@ public class RoofHide : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		roofRenderer.material.color = Color.Lerp (roofRenderer.material.color, targetColor, Time.deltaTime * fadeSpeed);
+		foreach (var material in roofRenderer.materials) {
+			material.color = Color.Lerp (roofRenderer.material.color, targetColor, Time.deltaTime * fadeSpeed);
+		}
 	}
 
 	void OnTriggerEnter (Collider coll) {
