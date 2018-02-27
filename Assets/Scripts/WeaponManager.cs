@@ -21,10 +21,10 @@ public class WeaponManager : MonoBehaviour {
 		int randomTier;
 
 		// hardcoded tier propabilities
-		if (random < 50) {
+		if (random < 45) {
 			// tier 0
 			randomTier = 0;
-		} else if (random < 80) {
+		} else if (random < 75) {
 			// tier 1
 			randomTier = 1;
 		} else if (random < 95) {
