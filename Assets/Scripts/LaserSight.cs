@@ -5,12 +5,24 @@ using UnityEngine;
 public class LaserSight : MonoBehaviour {
 	public float maxRange = 200f;
 	LineRenderer lr;
+	Vector3 lastPos;
 
 	void Start () {
 		lr = GetComponent<LineRenderer> ();
+		lastPos = transform.position;
+		UpdateLaser ();
+	}
+
+	void LateUpdate () {
+		Vector3 diff = transform.position - lastPos;
+		if (diff.magnitude > 0.005f) {
+			UpdateLaser ();
+		}
+
+		lastPos = transform.position;
 	}
 	
-	void Update () {
+	void UpdateLaser () {
 		RaycastHit hit;
 		Physics.Raycast(transform.position, transform.forward, out hit, maxRange);
 
