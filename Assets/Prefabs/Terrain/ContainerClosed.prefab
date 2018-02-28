@@ -178,7 +178,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100018, guid: 693f3a583db44499cad17b656a0b990f, type: 3}
+  - {fileID: 2100000, guid: ec5b9eabc58c54a59bc02e7a9089a95d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -212,7 +212,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100018, guid: 693f3a583db44499cad17b656a0b990f, type: 3}
+  - {fileID: 2100000, guid: ec5b9eabc58c54a59bc02e7a9089a95d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -246,7 +246,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100018, guid: 693f3a583db44499cad17b656a0b990f, type: 3}
+  - {fileID: 2100000, guid: ec5b9eabc58c54a59bc02e7a9089a95d, type: 2}
   - {fileID: 2100000, guid: 693f3a583db44499cad17b656a0b990f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -281,7 +281,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100018, guid: 693f3a583db44499cad17b656a0b990f, type: 3}
+  - {fileID: 2100000, guid: ec5b9eabc58c54a59bc02e7a9089a95d, type: 2}
   - {fileID: 2100000, guid: 693f3a583db44499cad17b656a0b990f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0

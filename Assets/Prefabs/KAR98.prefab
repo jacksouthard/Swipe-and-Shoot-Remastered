@@ -274,7 +274,7 @@ MonoBehaviour:
   fireRate: 2
   damage: 7
   range: 20
-  speedMultiplier: 0.05
+  speedMultiplier: 0.1
   accuracy: 1
   bulletRayPrefab: {fileID: 1303374916533454, guid: 387e19391ca184c4789e4926758050be,
     type: 2}
