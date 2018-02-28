@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4947553569898930}
   - component: {fileID: 65238195470757966}
   - component: {fileID: 114239377038625486}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TentLong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,3 +544,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f1c69dbec2f74004806c35d51e785bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeSpeed: 5
