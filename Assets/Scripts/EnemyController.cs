@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
+	public string defaultWeapon = "Random";
+
 	[Header("Control")]
 	public bool moves = true;
 	public float activeRange;
@@ -24,7 +26,6 @@ public class EnemyController : MonoBehaviour {
 
 	void Start() {
 		nextPathUpdate = Time.time;
-		gameObject.GetComponentInChildren<ShootingController> ().SetWeapon (WeaponManager.instance.GetWeaponDataFromLootTable ());
 
 		if (!moves) {
 			shooting.canRotateParent = true;
@@ -32,6 +33,11 @@ public class EnemyController : MonoBehaviour {
 				Destroy (navAgent);
 			}
 		}
+
+		if (defaultWeapon == "None") {
+			return;
+		}
+		shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName(defaultWeapon));
 	}
 
 	void LateUpdate() {

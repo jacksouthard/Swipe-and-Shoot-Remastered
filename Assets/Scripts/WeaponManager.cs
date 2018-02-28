@@ -38,6 +38,10 @@ public class WeaponManager : MonoBehaviour {
 	}
 
 	public WeaponData WeaponDataFromName (string _name) {
+		if (_name == "Random") {
+			return GetWeaponDataFromLootTable ();
+		}
+
 		foreach (var weaponData in weaponDatas) {
 			if (weaponData.name == _name) {
 				return weaponData;
