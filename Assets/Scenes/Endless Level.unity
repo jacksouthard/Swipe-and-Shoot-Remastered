@@ -432,7 +432,7 @@ Transform:
   - {fileID: 1760053425}
   - {fileID: 346690782}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &55166248
 GameObject:
@@ -465,7 +465,7 @@ Transform:
   - {fileID: 1551515006}
   - {fileID: 1809431360}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &92220608
 Prefab:
@@ -1888,7 +1888,7 @@ Transform:
   - {fileID: 353171322}
   - {fileID: 947403259}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &268816115
 MonoBehaviour:
@@ -2861,7 +2861,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
@@ -5153,7 +5153,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
@@ -9522,7 +9522,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400020, guid: 6451d0b9ddbb5440cb0e1d2c5b2f47d5, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 6451d0b9ddbb5440cb0e1d2c5b2f47d5, type: 3}
       propertyPath: m_Name
@@ -9646,7 +9646,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 6451d0b9ddbb5440cb0e1d2c5b2f47d5, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 6451d0b9ddbb5440cb0e1d2c5b2f47d5, type: 3}
       propertyPath: m_RootOrder
@@ -9654,7 +9654,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 6451d0b9ddbb5440cb0e1d2c5b2f47d5, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 100010, guid: 6451d0b9ddbb5440cb0e1d2c5b2f47d5, type: 3}
       propertyPath: m_StaticEditorFlags

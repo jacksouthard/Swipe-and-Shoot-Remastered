@@ -22,6 +22,10 @@ ModelImporter:
     100028: Cylinder
     100030: //RootNode
     100032: Cube_013
+    100034: Cube_014
+    100036: Cube_015
+    100038: Cube_016
+    100040: BackWall
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -39,6 +43,10 @@ ModelImporter:
     400028: Cylinder
     400030: //RootNode
     400032: Cube_013
+    400034: Cube_014
+    400036: Cube_015
+    400038: Cube_016
+    400040: BackWall
     2100000: Plate
     2100002: Metal
     2100004: Concrete__Barrier
@@ -67,6 +75,10 @@ ModelImporter:
     2300026: Cube_017
     2300028: Cylinder
     2300030: Cube_013
+    2300032: Cube_014
+    2300034: Cube_015
+    2300036: Cube_016
+    2300038: BackWall
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -83,6 +95,10 @@ ModelImporter:
     3300026: Cube_017
     3300028: Cylinder
     3300030: Cube_013
+    3300032: Cube_014
+    3300034: Cube_015
+    3300036: Cube_016
+    3300038: BackWall
     4300000: Cube_017
     4300002: Cube_012
     4300004: Cube_011
@@ -99,6 +115,10 @@ ModelImporter:
     4300026: Cube_001
     4300028: Cube
     4300030: Cube_013
+    4300032: Cube_016
+    4300034: Cube_015
+    4300036: Cube_014
+    4300038: BackWall
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
