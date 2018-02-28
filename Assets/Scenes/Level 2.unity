@@ -6975,6 +6975,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: M9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
   m_IsPrefabParent: 0
@@ -7396,6 +7401,11 @@ Prefab:
     - target: {fileID: 1582026075492044, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
       propertyPath: m_Name
       value: Enemy (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: M9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
@@ -14146,6 +14156,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: M9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
   m_IsPrefabParent: 0
@@ -15599,6 +15614,11 @@ Prefab:
     - target: {fileID: 1582026075492044, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
       propertyPath: m_Name
       value: Enemy (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: M9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
@@ -21311,6 +21331,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: M9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
   m_IsPrefabParent: 0
@@ -22431,6 +22456,11 @@ Prefab:
     - target: {fileID: 1582026075492044, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
       propertyPath: m_Name
       value: Enemy (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: M9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
@@ -24589,6 +24619,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: M9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
   m_IsPrefabParent: 0
@@ -24853,6 +24888,11 @@ Prefab:
         type: 2}
       propertyPath: moves
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: AK47
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
@@ -26421,6 +26461,11 @@ Prefab:
     - target: {fileID: 1582026075492044, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
       propertyPath: m_Name
       value: Enemy (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: AK47
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
@@ -31189,6 +31234,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: AK47
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
   m_IsPrefabParent: 0
@@ -32465,6 +32515,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: AK47
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
   m_IsPrefabParent: 0
@@ -32515,6 +32570,11 @@ Prefab:
     - target: {fileID: 1582026075492044, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
       propertyPath: m_Name
       value: Enemy (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: M4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
@@ -34672,6 +34732,11 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: AK47
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
   m_IsPrefabParent: 0
@@ -34873,6 +34938,11 @@ Prefab:
     - target: {fileID: 1582026075492044, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
       propertyPath: m_Name
       value: Enemy (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: M9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
@@ -35715,6 +35785,11 @@ Prefab:
     - target: {fileID: 1582026075492044, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
       propertyPath: m_Name
       value: Enemy (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114043136345272100, guid: 1ef19b14680ed42d1a3467fa45db251c,
+        type: 2}
+      propertyPath: defaultWeapon
+      value: Minigun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
