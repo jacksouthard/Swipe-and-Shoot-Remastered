@@ -42,8 +42,6 @@ public class VehicleHealth : Health {
 	}
 
 	public override void Die() {
-		base.Die ();
-
 		if (state != State.Alive) {
 			return;
 		}
@@ -65,5 +63,7 @@ public class VehicleHealth : Health {
 		if (smokeEffect != null) {
 			smokeEffect.GetComponent<EffectFollow> ().End ();
 		}
+
+		base.Die ();
 	}
 }

@@ -89,9 +89,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void ExitVehicle() {
-		rb.interpolation = RigidbodyInterpolation.Extrapolate;
-		rb.constraints = RigidbodyConstraints.FreezeRotation;
-		rb.velocity = currentVehicle.GetComponent<Rigidbody> ().velocity;
+		if (rb != null) {
+			rb.interpolation = RigidbodyInterpolation.Extrapolate;
+			rb.constraints = RigidbodyConstraints.FreezeRotation;
+			rb.velocity = currentVehicle.GetComponent<Rigidbody> ().velocity;
+		}
 
 		state = MovementState.Jumping;
 
@@ -172,6 +174,9 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Die() {
+		if (inVehicle) {
+			return;
+		}
 		rb.constraints = RigidbodyConstraints.None;
 		shooting.Die ();
 		Destroy (this);

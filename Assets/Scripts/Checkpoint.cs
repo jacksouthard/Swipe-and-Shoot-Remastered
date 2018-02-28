@@ -33,8 +33,25 @@ public class Checkpoint : MonoBehaviour {
 
 	//triggers only if my id is higher than the furthest checkpoint
 	void OnTriggerEnter(Collider other) {
-		if ((id > LevelProgressManager.curCheckpointId) && other.GetComponentInParent<PlayerController> ()) {
+		if (shouldTriggerCheckpoint(other)) {
 			LevelProgressManager.instance.TriggerCheckpoint (id);
 		}
+	}
+
+	bool shouldTriggerCheckpoint(Collider other) {
+		if (id <= LevelProgressManager.curCheckpointId) {
+			return false;
+		}
+
+		if (other.GetComponentInParent<PlayerController> ()) {
+			return true;
+		}
+
+		Vehicle otherVehicle = other.GetComponentInParent<Vehicle> ();
+		if (otherVehicle != null) {
+			return otherVehicle.driver;
+		}
+
+		return false;
 	}
 }

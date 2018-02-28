@@ -65,10 +65,15 @@ public class SwipeManager : MonoBehaviour {
 				isSelectingPlayer = false;
 			} else {
 				// can leave vehicle
-				RaycastHit hitInfo;
-				Physics.Raycast (gameCam.ScreenPointToRay (curPos), out hitInfo, 100f, 1 << 2);
+				RaycastHit[] hitInfos = Physics.RaycastAll (gameCam.ScreenPointToRay (curPos), 100f, 1 << 2);
 
-				isSelectingPlayer = (hitInfo.collider != null && hitInfo.collider.gameObject.name == "InteractionSphere");
+				isSelectingPlayer = false;
+				foreach (RaycastHit hitInfo in hitInfos) {
+					if(hitInfo.collider != null && hitInfo.collider.gameObject.name == "InteractionSphere") {
+						isSelectingPlayer = true;
+						break;
+					}
+				}
 			}
 		}
 
