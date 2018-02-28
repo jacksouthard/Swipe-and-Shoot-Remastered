@@ -20,7 +20,7 @@ public class Checkpoint : MonoBehaviour {
 
 		if (col is BoxCollider) {
 			BoxCollider boxCol = col as BoxCollider;
-			enemisInCol = Physics.OverlapBox (transform.position + boxCol.center, boxCol.size / 2, transform.rotation, 1<<8);
+			enemisInCol = Physics.OverlapBox (transform.position + boxCol.center, boxCol.size, transform.rotation, 1<<8);
 		} else if (col is SphereCollider) {
 			SphereCollider sphereCol = col as SphereCollider;
 			enemisInCol = Physics.OverlapSphere (sphereCol.center, sphereCol.radius, 1<<8);
