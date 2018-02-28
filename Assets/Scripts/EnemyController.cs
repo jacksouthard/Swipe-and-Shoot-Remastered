@@ -41,12 +41,12 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		if (!moves) {
-			return;
-		}
-
 		if (Time.time > nextPathUpdate) {
 			UpdateTarget ();	
+		}
+
+		if (!moves) {
+			return;
 		}
 
 		if (Vector3.Distance (transform.position, player.position) < navAgent.stoppingDistance - 0.5f) { //give a little room for error
@@ -56,14 +56,22 @@ public class EnemyController : MonoBehaviour {
 
 	void UpdateTarget() {
 		float dist = Vector3.Distance (transform.position, player.position);
+		nextPathUpdate = Time.time + pathUpdateRate;
+
 		if (dist < activeRange) {
-			navAgent.enabled = true;
-			navAgent.SetDestination (player.position);
+			if (moves) {
+				navAgent.enabled = true;
+				navAgent.SetDestination (player.position);
+			}
 
-			shooting.canRotateParent = (dist < navAgent.stoppingDistance);
+			shooting.enabled = true;
+			shooting.canRotateParent = (moves) ? (dist < navAgent.stoppingDistance) : true;
 		} else {
-			navAgent.enabled = false;
+			if (moves) {
+				navAgent.enabled = false;
+			}
 
+			shooting.enabled = false;
 			shooting.canRotateParent = false;
 		}
 	}
