@@ -7483,7 +7483,7 @@ GameObject:
   - component: {fileID: 327022288}
   - component: {fileID: 327022287}
   - component: {fileID: 327022289}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hill2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9325,7 +9325,7 @@ GameObject:
   - component: {fileID: 439120469}
   - component: {fileID: 439120468}
   - component: {fileID: 439120467}
-  m_Layer: 1
+  m_Layer: 2
   m_Name: EndZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9858,7 +9858,7 @@ GameObject:
   - component: {fileID: 460675569}
   - component: {fileID: 460675568}
   - component: {fileID: 460675570}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11750,7 +11750,7 @@ GameObject:
   - component: {fileID: 577746102}
   - component: {fileID: 577746104}
   - component: {fileID: 577746103}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cliff1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13330,7 +13330,7 @@ GameObject:
   - component: {fileID: 666814720}
   - component: {fileID: 666814722}
   - component: {fileID: 666814721}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BridgeCliff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14015,7 +14015,7 @@ GameObject:
   - component: {fileID: 698415472}
   - component: {fileID: 698415474}
   - component: {fileID: 698415473}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cliff2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27736,7 +27736,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 293157055}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SASLevel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28016,7 +28016,7 @@ GameObject:
   - component: {fileID: 1470966892}
   - component: {fileID: 1470966891}
   - component: {fileID: 1470966893}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hill1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
