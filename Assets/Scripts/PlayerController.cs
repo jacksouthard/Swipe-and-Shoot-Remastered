@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 
 		timerDisplay.transform.parent = null; //timer moves independently from player
+
+		health.onDeath += Die;
 	}
 
 	void Start() {
@@ -180,6 +182,8 @@ public class PlayerController : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints.None;
 		shooting.Die ();
 		Destroy (this);
+
+		GameManager.instance.GameOver ();
 	}
 
 	// picking up weapons

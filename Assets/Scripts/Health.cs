@@ -4,15 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Health : MonoBehaviour {
-	public enum Type {
-		Player,
-		Enemy,
-		Object,
-		Vehicle
-	}
-	[HideInInspector]
-	public Type type;
-
 	public enum State
 	{
 		Alive,
@@ -36,11 +27,25 @@ public class Health : MonoBehaviour {
 	[Header("Death")]
 	public float dyingTimer;
 	public float decayTimer;
+	public System.Action onDeath;
+
+	[Header("Smoke")]
+	public bool smokes;
+	public Transform smokeCenter;
+
+	static bool prefabsSet = false;
+	static GameObject smokeEffectPrefab;
+	static GameObject fireEffectPrefab;
+	static GameObject explosionEffectPrefab;
+
+	GameObject smokeEffect;
+	GameObject fireEffect;
 
 	[Header("Debug")]
 	public float waitTimer;
 	public float health;
 
+	bool isPlayer;
 	bool shouldUpdateRenderers;
 	List<MeshRenderer> mrs;
 	List<Color[]> originalColors;
@@ -50,23 +55,21 @@ public class Health : MonoBehaviour {
 	bool regening = false;
 	GameObject curRegenEffect;
 
-	void Start () {
-		if (regenEffectPrefab == null) {
+	void Awake() {
+		if (!prefabsSet) {
+			prefabsSet = true;
 			regenEffectPrefab = Resources.Load ("RegenEffect") as GameObject;
-		}
 
+			smokeEffectPrefab = Resources.Load ("SmokeEffect") as GameObject;
+			fireEffectPrefab = Resources.Load ("FireEffect") as GameObject;
+		}
+	}
+
+	void Start () {
 		health = maxHealth;
 		UpdateRenderers ();
 
-		if (GetComponent<PlayerController> () != null) {
-			type = Type.Player;
-		} else if (GetComponent<EnemyController> () != null) {
-			type = Type.Enemy;
-		} else if (this is VehicleHealth) {
-			type = Type.Vehicle;
-		} else {
-			type = Type.Object;
-		}
+		isPlayer = (GetComponent<PlayerController> () != null);
 	}
 
 	//waits until next frame before updating MeshRenderers
@@ -125,7 +128,7 @@ public class Health : MonoBehaviour {
 
 		}
 
-		if (type == Type.Player) {
+		if (isPlayer) {
 			return;
 		}
 
@@ -150,7 +153,7 @@ public class Health : MonoBehaviour {
 		}
 	}
 
-	public virtual void TakeDamage (float damage) {
+	public void TakeDamage (float damage) {
 		if (state == State.Alive) {
 			health -= damage;
 
@@ -161,28 +164,45 @@ public class Health : MonoBehaviour {
 			}
 
 			EndRegen ();
+
+			if (!smokes) {
+				return;
+			}
+
+			if (smokeEffect == null) {
+				if ((health / maxHealth) <= 0.5f) {
+					smokeEffect = (GameObject)Instantiate (smokeEffectPrefab, smokeCenter.position, Quaternion.identity);
+					smokeEffect.GetComponent<EffectFollow> ().Init (smokeCenter);
+				}
+			}
+
+			if (fireEffect == null) {
+				if ((health / maxHealth) <= 0.25f) {
+					fireEffect = (GameObject)Instantiate (fireEffectPrefab, smokeCenter.position, Quaternion.identity);
+					fireEffect.GetComponent<EffectFollow> ().Init (smokeCenter);
+				}
+			}
 		}
 	}
 
-	public virtual void Die () {
+	public void Die () {
 		if (state != State.Alive) {
 			return;
 		}
 
 		state = State.Dying;
 		EndRegen ();
+		ResetColor();
 
-		if (type == Type.Player) {
-			// handel player death
-			ResetColor();
-			gameObject.GetComponent<PlayerController>().Die();
-			GameManager.instance.GameOver ();
-			return;
+		if (fireEffect != null) {
+			fireEffect.GetComponent<EffectFollow> ().End ();
+		}
+		if (smokeEffect != null) {
+			smokeEffect.GetComponent<EffectFollow> ().End ();
 		}
 
-		// if enemy
-		if (type == Type.Enemy) {
-			GetComponent<EnemyController> ().Die ();
+		if (onDeath != null) {
+			onDeath.Invoke ();
 		}
 	}
 

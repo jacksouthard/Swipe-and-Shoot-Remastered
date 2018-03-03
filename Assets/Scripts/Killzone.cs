@@ -8,7 +8,8 @@ public class Killzone : MonoBehaviour {
 		if (otherHealth != null) {
 			if (otherHealth.state == Health.State.Alive) {
 				otherHealth.Die ();
-				if (otherHealth.type == Health.Type.Player) {
+
+				if (otherHealth.GetComponent<PlayerController>() != null) {
 					Destroy (other.GetComponentInParent<Rigidbody> ());
 				}
 			}

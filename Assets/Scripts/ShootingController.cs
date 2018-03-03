@@ -8,6 +8,7 @@ public class ShootingController : MonoBehaviour {
 	[Header("Control")]
 	public string targetTag;
 	public float clampAngle;
+	public bool shouldUpdateTarget = true;
 
 	[Header("Speed")]
 	public float parentSpeed; //speed at which the body rotates towards target
@@ -21,6 +22,7 @@ public class ShootingController : MonoBehaviour {
 	public bool targetInRange { get { return target != null; } }
 	public bool hasWeapon { get { return weapon != null; } }
 	public string curWeaponName { get { return (hasWeapon) ? weapon.name : "None"; } }
+	public float range { get { return (hasWeapon) ? weapon.range : 0; } }
 
 	bool isPlayer;
 	PlayerController pc;
@@ -83,16 +85,28 @@ public class ShootingController : MonoBehaviour {
 		}
 
 		//choose target
-		if (!isPlayer) {
-			target = (pc.inVehicle) ? pc.currentVehicle.transform.Find("Center") : player;
-		} else {
-			target = GetNearestTarget ();
+		if (shouldUpdateTarget) {
+			if (!isPlayer) {
+				target = (pc.inVehicle) ? pc.currentVehicle.transform.Find ("Center") : player;
+			} else {
+				target = GetNearestTarget ();
+			}
 		}
 	
 		if (target != null) {
 			RotateTowards (target);
 		} else {
 			ResetRotation (); //idle position
+		}
+	}
+
+	public void OverrideSwitchTargets(Transform newTarget) {
+		if (newTarget == player) {
+			shouldUpdateTarget = true;
+			target = (pc.inVehicle) ? pc.currentVehicle.transform.Find ("Center") : player;
+		} else {
+			shouldUpdateTarget = false;
+			target = newTarget;
 		}
 	}
 

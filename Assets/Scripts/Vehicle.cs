@@ -47,6 +47,7 @@ public class Vehicle : Rideable {
 
 	void Start () {
 		health = GetComponent<Health> ();
+		health.onDeath += Die;
 
 		UpdateDrag ();
 
@@ -237,5 +238,19 @@ public class Vehicle : Rideable {
 		foreach (var wheel in steeringWheels) {
 			wheel.onGround = false;
 		}
+	}
+
+	public void Die() {
+		// test for player in vechicle
+		if (driver) {
+			GetComponentInChildren<PlayerController> ().ExitVehicle ();
+		}
+
+		gameObject.GetComponent<Rigidbody> ().drag = 0;
+
+		Explosion explosion = Explosion.Create (transform.Find("Center").position);
+		explosion.GetComponent<Explosion> ().Initiate (5f, 5000f);
+
+		Destroy(this);
 	}
 }

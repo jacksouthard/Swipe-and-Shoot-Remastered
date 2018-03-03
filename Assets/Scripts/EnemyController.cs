@@ -1,27 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour {
+public class EnemyController : AIController {
 	public string defaultWeapon = "Random";
 
 	[Header("Control")]
 	public bool moves = true;
-	public float activeRange;
-	public float pathUpdateRate;
 	public float durability; //max force before the enemy dies
 
-	float nextPathUpdate;
-	Transform player;
-	NavMeshAgent navAgent;
 	ShootingController shooting;
 
-	void Awake() {
-		player = GameObject.FindObjectOfType<PlayerController> ().transform;
-		navAgent = gameObject.GetComponent<NavMeshAgent> ();
+	protected override void Init() {
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
-		//adjust speed here (stopping distance, movement speed, angular speed, etc.)
+
+		prioritizesFirstTarget = true;
+
+		base.Init ();
+
+		backsUp = moves;
 	}
 
 	void Start() {
@@ -38,42 +35,31 @@ public class EnemyController : MonoBehaviour {
 			return;
 		}
 		shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName(defaultWeapon));
+
+		priorityRange = shooting.range;
 	}
 
-	void LateUpdate() {
-		if (Time.time > nextPathUpdate) {
-			UpdateTarget ();	
-		}
-
-		if (!moves) {
-			return;
-		}
-
-		if (Vector3.Distance (transform.position, player.position) < navAgent.stoppingDistance - 0.5f) { //give a little room for error
-			transform.position += (transform.position - player.position).normalized * navAgent.speed * Time.deltaTime / 2; //back up slower than they move normally
-		}
+	protected override void UpdateTarget () {
+		base.UpdateTarget ();
+		SetTargets (GameManager.allEnemyTargets);
 	}
 
-	void UpdateTarget() {
-		float dist = Vector3.Distance (transform.position, player.position);
-		nextPathUpdate = Time.time + pathUpdateRate;
-
-		if (dist < activeRange) {
-			if (moves) {
-				navAgent.enabled = true;
-				navAgent.SetDestination (player.position);
-			}
-
-			shooting.enabled = true;
-			shooting.canRotateParent = (moves) ? (dist < navAgent.stoppingDistance) : true;
-		} else {
-			if (moves) {
-				navAgent.enabled = false;
-			}
-
-			shooting.enabled = false;
-			shooting.canRotateParent = false;
+	protected override void Activate () {
+		if(moves) {
+			base.Activate ();
 		}
+
+		shooting.enabled = true;
+		shooting.canRotateParent = (moves) ? (dist < navAgent.stoppingDistance) : true;
+	}
+
+	protected override void Deactivate () {
+		if (moves) {
+			base.Deactivate ();
+		}
+
+		shooting.enabled = false;
+		shooting.canRotateParent = false;
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -89,17 +75,15 @@ public class EnemyController : MonoBehaviour {
 			if (pc != null && pc.TrySwapWeapons (shooting.GetWeaponData ())) {
 				shooting.RemoveWeapon ();
 			}
-			gameObject.GetComponent<Health> ().Die ();
+			health.Die ();
 		}
 	}
 
-	public void Die() {
-		gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+	protected override void SwitchTargets () {
+		shooting.OverrideSwitchTargets (target);
+	}
 
-		if (moves) {
-			Destroy (navAgent);
-		}
-
+	public override void Die() {
 		shooting.Die ();
 		// notify spawner of death
 
@@ -107,6 +91,6 @@ public class EnemyController : MonoBehaviour {
 			Spawner.instance.EnemyDeath ();
 		}
 
-		Destroy(this);
+		base.Die ();
 	}
 }

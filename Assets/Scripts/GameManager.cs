@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	public static bool firstTime = true; //reset this when we go to the main menu
+	public static List<Transform> allEnemyTargets = new List<Transform>();
 
 	[Header("Game Start")]
 	public GameObject startScreen;
@@ -29,6 +30,9 @@ public class GameManager : MonoBehaviour {
 		startScreen.SetActive (true);
 		gameOverScreen.SetActive (false);
 		pauseScreen.SetActive (false);
+
+		allEnemyTargets = new List<Transform> ();
+		allEnemyTargets.Add (GameObject.FindObjectOfType<PlayerController>().transform);
 
 		InitLevelData ();
 		TimeManager.SetPaused (true);
@@ -61,7 +65,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		if (!isGameWon) {
+		if (!isGameWon && !isGameOver) {
 			SetupGameOverScreen ();
 			gameOverScreen.SetActive (true);
 			isGameOver = true;

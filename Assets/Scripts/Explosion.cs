@@ -3,7 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour {
+	static GameObject prefab;
 	public AnimationCurve forceCurve;
+
+	public static Explosion Create(Vector3 position) {
+		if (prefab == null) {
+			prefab = Resources.Load ("Explosion") as GameObject;
+		}
+
+		GameObject explosion = (GameObject) Instantiate (prefab, position, Quaternion.identity);
+		return explosion.GetComponent<Explosion> ();
+	}
 
 	public void Initiate(float range, float force) {
 		List<Rigidbody> hitRbs = new List<Rigidbody> ();
