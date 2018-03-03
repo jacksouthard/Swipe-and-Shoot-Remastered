@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rideable : MonoBehaviour {
 	public bool dismountable;
 	public bool controllable;
+	public bool isEnemyMountable;
 
 	float reentryWait = 1.0f;
 	float nextEnterTime;
@@ -34,6 +35,7 @@ public class Rideable : MonoBehaviour {
 	public bool canBeMounted { get { return (Time.time >= nextEnterTime); } }
 
 	public virtual void Mount (GameObject _mounter) {
+		// universal
 		mounter = _mounter;
 		mounter.GetComponent<BoxCollider> ().enabled = false;
 		mounter.GetComponent<Rigidbody> ().isKinematic = true;
@@ -45,9 +47,17 @@ public class Rideable : MonoBehaviour {
 
 		driver = true;
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
+
+		// if enemy
+		EnemyController em = mounter.GetComponentInParent<EnemyController>();
+		if (em != null) {
+			em.enabled = false;
+			mounter.GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = false;
+		}
 	}
 
 	public virtual void Dismount () {
+		// universal
 		mounter.GetComponent<BoxCollider> ().enabled = true;
 		mounter.GetComponent<Rigidbody> ().isKinematic = false;
 		mounter.transform.parent = null;
@@ -57,5 +67,13 @@ public class Rideable : MonoBehaviour {
 		driver = false;
 		nextEnterTime = Time.time + reentryWait;
 		rb.interpolation = RigidbodyInterpolation.None;
+
+		// if enemy
+		EnemyController em = mounter.GetComponentInParent<EnemyController>();
+		if (em != null) {
+			em.EjectFromVehicle ();
+			em.enabled = true;
+			mounter.GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = true;
+		}
 	}
 }

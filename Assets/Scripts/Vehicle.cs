@@ -243,7 +243,11 @@ public class Vehicle : Rideable {
 	public void Die() {
 		// test for player in vechicle
 		if (driver) {
-			GetComponentInChildren<PlayerController> ().ExitVehicle ();
+			if (GetComponentInChildren<PlayerController> () != null) {
+				GetComponentInChildren<PlayerController> ().ExitVehicle ();
+			} else if (GetComponentInChildren<EnemyController> () != null) {
+				GetComponentInChildren<EnemyController> ().EjectFromVehicle ();
+			}
 		}
 
 		gameObject.GetComponent<Rigidbody> ().drag = 0;

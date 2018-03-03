@@ -22,6 +22,7 @@ public class EnemyController : AIController {
 	}
 
 	void Start() {
+		rb = GetComponent<Rigidbody> ();
 		nextPathUpdate = Time.time;
 
 		if (!moves) {
@@ -77,6 +78,42 @@ public class EnemyController : AIController {
 			}
 			health.Die ();
 		}
+	}
+
+	// vehicles
+	Rideable currentVehicle;
+	Rigidbody rb;
+	void OnCollisionEnter(Collision other) {
+		if (other.collider.tag == "Vehicle") {
+			Rideable newVehicle = other.gameObject.GetComponentInParent<Rideable> ();
+			if(newVehicle != null && newVehicle.canBeMounted && newVehicle.isEnemyMountable) {
+				EnterVehicle (newVehicle); //enter vehicle when you hit something tagged with vehicle
+			}
+		}
+	}
+
+	void EnterVehicle(Rideable newVehicle) {
+		currentVehicle = newVehicle;
+		rb.interpolation = RigidbodyInterpolation.None;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+		currentVehicle.Mount (gameObject);
+
+		shooting.canRotateParent = false;
+		shooting.gameObject.SetActive (false);
+	}
+
+	public void EjectFromVehicle() {
+		rb.interpolation = RigidbodyInterpolation.Extrapolate;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		rb.velocity = currentVehicle.GetComponent<Rigidbody> ().velocity;
+			
+		currentVehicle = null;
+
+		shooting.canRotateParent = true;
+		shooting.gameObject.SetActive (true);
+
+		health.ResetColor ();
 	}
 
 	protected override void SwitchTargets () {

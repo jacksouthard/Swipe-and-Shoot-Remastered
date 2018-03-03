@@ -241,5 +241,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dismountable: 0
   controllable: 0
+  isEnemyMountable: 1
   driver: 0
   rb: {fileID: 0}
