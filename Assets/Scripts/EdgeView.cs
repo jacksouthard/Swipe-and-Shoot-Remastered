@@ -24,7 +24,6 @@ public class EdgeView : MonoBehaviour {
 	Camera gameCam;
 	Vector3 offset; //offset from center
 	RectTransform canvas;
-	MeshRenderer targetRend;
 	GameObject image;
 
 	void Awake() {
@@ -35,7 +34,6 @@ public class EdgeView : MonoBehaviour {
 
 	public void Init(GameObject newTarget) {
 		target = newTarget;
-		targetRend = target.GetComponentInChildren<MeshRenderer> ();
 		offset = gameCam.transform.forward * Mathf.Sqrt (2) * (gameCam.transform.position.y - target.transform.position.y); //gets point in the center of the camera's view
 	}
 
