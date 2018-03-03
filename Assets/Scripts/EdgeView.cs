@@ -21,23 +21,25 @@ public class EdgeView : MonoBehaviour {
 	float canvasWidth;
 	float canvasHeight;
 
-	private float distanceToTarget;
-
-	Transform center;
+	Camera gameCam;
+	Vector3 offset; //offset from center
 	RectTransform canvas;
 	MeshRenderer targetRend;
 	GameObject image;
 
+	void Awake() {
+		gameCam = GameObject.FindObjectOfType<Camera>();
+		canvas = transform.parent.GetComponent<RectTransform>();
+		image = transform.GetComponentInChildren<Image> ().gameObject;
+	}
+
 	public void Init(GameObject newTarget) {
 		target = newTarget;
 		targetRend = target.GetComponentInChildren<MeshRenderer> ();
+		offset = gameCam.transform.forward * Mathf.Sqrt (2) * (gameCam.transform.position.y - target.transform.position.y); //gets point in the center of the camera's view
 	}
 
 	void Start () {
-		center = GameObject.FindObjectOfType<CameraController>().transform;
-		canvas = transform.parent.GetComponent<RectTransform>();
-		image = transform.GetComponentInChildren<Image> ().gameObject;
-
 		edgeOffset = margin + (this.GetComponent<RectTransform>().rect.width / 2);
 
 		canvasWidth = canvas.rect.width;
@@ -61,8 +63,8 @@ public class EdgeView : MonoBehaviour {
 	}
 
 	void SetPositionAndRotation () {
-		Vector3 targetVector = (target.transform.position - center.position);
-		float angle = CalculateAngle (transform.forward, targetVector);
+		Vector3 targetVector = (target.transform.position - (gameCam.transform.position + offset));
+		float angle = CalculateAngle (transform.forward, targetVector) - gameCam.transform.rotation.eulerAngles.y; //rotate based on camera's rotation
 
 		// position
 		Vector2 position = Vector2.zero;
@@ -97,7 +99,8 @@ public class EdgeView : MonoBehaviour {
 	}
 
 	void UpdateVisibility () {
-		image.SetActive (!targetRend.isVisible);
+		Vector3 viewportPoint = gameCam.WorldToViewportPoint (target.transform.position);
+		image.SetActive (!(viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 && viewportPoint.z > 0));
 	}
 
 	//From https://gist.github.com/shiwano/0f236469cd2ce2f4f585
