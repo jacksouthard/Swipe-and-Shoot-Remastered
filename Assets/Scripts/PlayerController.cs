@@ -240,7 +240,13 @@ public class PlayerController : MonoBehaviour {
 			Destroy (timer.pickup);
 		} else if (timer.type == PickupTimer.Type.Objective) {
 			LevelProgressManager.instance.CompleteObjective ();
-			Destroy (timer.pickup.GetComponent<Collider> ());
+			EscortController escort = timer.pickup.GetComponentInParent<EscortController> ();
+			if (escort == null) {
+				Destroy (timer.pickup.GetComponent<Collider> ());
+			} else {
+				escort.Enable ();
+				timer.pickup.tag = "Player";
+			}
 		}
 	}
 

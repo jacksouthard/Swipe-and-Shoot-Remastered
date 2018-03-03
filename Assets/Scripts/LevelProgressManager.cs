@@ -42,6 +42,7 @@ public class LevelProgressManager : MonoBehaviour {
 		pc = GameObject.FindObjectOfType<PlayerController> ();
 
 		InitCheckpoints ();
+		PrepareObjectives ();
 		InitNextObjective ();
 		UpdateObjectiveUI ();
 	}
@@ -55,6 +56,14 @@ public class LevelProgressManager : MonoBehaviour {
 	void InitCheckpoints() {
 		for (int i = 0; i < transform.childCount; i++) {
 			transform.GetChild (i).GetComponent<Checkpoint> ().Init (i); //initialize each checkpoint (child objects of this transform)
+		}
+	}
+
+	void PrepareObjectives() {
+		foreach(Objective objective in objectives) {
+			if (objective.newObjects != null) {
+				objective.newObjects.SetActive (false);
+			}
 		}
 	}
 
