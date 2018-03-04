@@ -30,6 +30,8 @@ public class EnemyController : AIController {
 			if (navAgent != null) {
 				Destroy (navAgent);
 			}
+		} else {
+			navAgent.stoppingDistance = shooting.range - 4;
 		}
 
 		if (defaultWeapon == "None") {

@@ -41,6 +41,9 @@ public class AllyController : AIController {
 		base.UpdateTarget ();
 
 		SetTargets ((shooting.target != null) ? shooting.target : player);
+		if (moves) {
+			navAgent.stoppingDistance = (shooting.target != null) ? (shooting.range - 4) : 3; //default stopping distance is 3
+		}
 	}
 
 	protected override void Activate () {
