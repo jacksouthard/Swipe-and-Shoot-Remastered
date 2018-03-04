@@ -24,12 +24,13 @@ public class ShootingController : MonoBehaviour {
 	public string curWeaponName { get { return (hasWeapon) ? weapon.name : "None"; } }
 	public float range { get { return (hasWeapon) ? weapon.range : 0; } }
 
+	public Transform target { get; private set; }
+
 	bool isPlayer;
 	PlayerController pc;
 	Transform player;
 	Health health;
 	Weapon weapon;
-	Transform target;
 
 	void Awake() {
 		isPlayer = gameObject.GetComponentInParent<PlayerController> () != null;
@@ -86,7 +87,7 @@ public class ShootingController : MonoBehaviour {
 
 		//choose target
 		if (shouldUpdateTarget) {
-			if (!isPlayer) {
+			if (targetTag == "Player") {
 				target = (pc.inVehicle) ? pc.currentVehicle.transform.Find ("Center") : player;
 			} else {
 				target = GetNearestTarget ();

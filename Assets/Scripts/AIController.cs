@@ -54,34 +54,40 @@ public class AIController : MonoBehaviour {
 		if (possibleTargets.Count == 0) {
 			return;
 		}
+			
+		float closestDistance = Mathf.Infinity;
+		Transform closestTarget = null;
 
-		if (possibleTargets.Count == 1) {
-			dist = Vector3.Distance (transform.position, possibleTargets[0].position);
-			target = possibleTargets [0];
-		} else {
-			float closestDistance = Mathf.Infinity;
-			Transform closestTarget = null;
+		for (int i = 0; i < possibleTargets.Count; i++) {
+			float newDistance = Vector3.Distance (transform.position, possibleTargets [i].position);
+			if (newDistance < closestDistance) {
+				closestDistance = newDistance;
+				closestTarget = possibleTargets [i];
 
-			for (int i = 0; i < possibleTargets.Count; i++) {
-				float newDistance = Vector3.Distance (transform.position, possibleTargets [i].position);
-				if (newDistance < closestDistance) {
-					closestDistance = newDistance;
-					closestTarget = possibleTargets [i];
-
-					if (i == 0 && prioritizesFirstTarget && closestDistance < priorityRange) {
-						break;
-					}
+				if (i == 0 && prioritizesFirstTarget && closestDistance < priorityRange) {
+					break;
 				}
 			}
+		}
 
-			dist = closestDistance;
+		dist = closestDistance;
 
-			if (target != closestTarget) {
-				target = closestTarget;
-				SwitchTargets ();
-			}
+		if (target != closestTarget) {
+			target = closestTarget;
+			SwitchTargets ();
 		}
 			
+		if (dist < activeRange) {
+			Activate ();
+		} else {
+			Deactivate ();
+		}
+	}
+
+	protected void SetTargets(Transform newTarget) {
+		dist = Vector3.Distance (transform.position, newTarget.position);
+		target = newTarget;
+
 		if (dist < activeRange) {
 			Activate ();
 		} else {

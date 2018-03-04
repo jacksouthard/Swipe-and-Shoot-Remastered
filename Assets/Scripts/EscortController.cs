@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EscortController : AIController {
-	List<Transform> targetList = new List<Transform>();
+	Transform player;
 
 	protected override void Init () {
+		player = GameObject.FindObjectOfType<PlayerController>().transform;
+
 		base.Init ();
 
 		enabled = false;
-		targetList.Add(GameObject.FindObjectOfType<PlayerController>().transform);
 	}
 
 	public void Enable() {
@@ -19,7 +20,7 @@ public class EscortController : AIController {
 
 	protected override void UpdateTarget () {
 		base.UpdateTarget ();
-		SetTargets (targetList);
+		SetTargets (player);
 	}
 
 	public override void Die() {
