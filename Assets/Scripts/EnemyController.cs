@@ -30,8 +30,6 @@ public class EnemyController : AIController {
 			if (navAgent != null) {
 				Destroy (navAgent);
 			}
-		} else {
-			navAgent.stoppingDistance = shooting.range - 4;
 		}
 
 		if (defaultWeapon == "None") {
@@ -40,6 +38,10 @@ public class EnemyController : AIController {
 		shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName(defaultWeapon));
 
 		priorityRange = shooting.range;
+
+		if(moves) {
+			navAgent.stoppingDistance = shooting.range - 4;
+		}
 	}
 
 	protected override void UpdateTarget () {
