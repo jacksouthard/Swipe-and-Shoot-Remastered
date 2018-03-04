@@ -63,6 +63,7 @@ public class AllyController : AIController {
 
 	public override void Die() {
 		shooting.Die ();
+		GameManager.allEnemyTargets.Remove (transform);
 
 		base.Die ();
 	}

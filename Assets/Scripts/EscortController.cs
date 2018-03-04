@@ -24,6 +24,8 @@ public class EscortController : AIController {
 	}
 
 	public override void Die() {
+		GameManager.allEnemyTargets.Remove (transform);
+
 		base.Die ();
 
 		GameManager.instance.GameOver ();
