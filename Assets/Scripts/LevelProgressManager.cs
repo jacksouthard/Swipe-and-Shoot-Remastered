@@ -29,6 +29,9 @@ public class LevelProgressManager : MonoBehaviour {
 	[Header("UI")]
 	public GameObject winScreen;
 
+	[Header("Debug")]
+	public int startingCheckpoint = 0;
+
 	public bool allEnemiesKilled { get { return enemyParent.childCount == 0; } }
 	public bool isComplete;
 	PlayerController pc;
@@ -37,6 +40,10 @@ public class LevelProgressManager : MonoBehaviour {
 	void Awake() {
 		instance = this;
 		enemyParent = GameObject.Find ("Enemies").transform;
+
+		if (curCheckpointId == 0) {
+			curCheckpointId = startingCheckpoint;
+		}
 
 		winScreen.SetActive (false);
 		pc = GameObject.FindObjectOfType<PlayerController> ();
