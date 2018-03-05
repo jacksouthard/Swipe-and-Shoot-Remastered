@@ -12,6 +12,10 @@ ModelImporter:
     100008: PilotBody
     100010: PilotHead
     100012: PilotHelmet
+    100014: Sphere
+    100016: Sphere_001
+    100018: Cords
+    100020: Parachute_Top
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -19,30 +23,48 @@ ModelImporter:
     400008: PilotBody
     400010: PilotHead
     400012: PilotHelmet
+    400014: Sphere
+    400016: Sphere_001
+    400018: Cords
+    400020: Parachute_Top
     2100000: leather
     2100002: Fuzz
     2100004: Face__Face
     2100006: Goggle
     2100008: Glass
     2100010: Helmet
+    2100012: Cord
+    2100014: Parachute
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
     2300006: PilotBody
     2300008: PilotHead
     2300010: PilotHelmet
+    2300012: Sphere
+    2300014: Sphere_001
+    2300016: Cords
+    2300018: Parachute_Top
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
     3300006: PilotBody
     3300008: PilotHead
     3300010: PilotHelmet
+    3300012: Sphere
+    3300014: Sphere_001
+    3300016: Cords
+    3300018: Parachute_Top
     4300000: Cube
     4300002: Cube_001
     4300004: Cube_002
     4300006: PilotBody
     4300008: PilotHead
     4300010: PilotHelmet
+    4300012: Sphere_001
+    4300014: Sphere
+    4300016: Cords
+    4300018: Parachute_Top
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
