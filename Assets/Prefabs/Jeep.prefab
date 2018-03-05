@@ -1685,6 +1685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dismountable: 1
   controllable: 1
+  isEnemyMountable: 0
   driver: 0
   rb: {fileID: 0}
   turnSpeed: 30000
@@ -1723,10 +1724,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1021421258689220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18f3a6eeaddfc4b7e8cab69914bc6610, type: 3}
+  m_Script: {fileID: 11500000, guid: 016c887d302bd4fb28e07a889197c8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   state: 0
   maxHealth: 50
   regenSpeed: 1
@@ -1735,9 +1735,10 @@ MonoBehaviour:
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   dyingTimer: 0
   decayTimer: 2
+  smokes: 1
+  smokeCenter: {fileID: 4842594379769888}
   waitTimer: 0
   health: 0
-  smokeCenter: {fileID: 4842594379769888}
 --- !u!114 &114560355684533852
 MonoBehaviour:
   m_ObjectHideFlags: 1
