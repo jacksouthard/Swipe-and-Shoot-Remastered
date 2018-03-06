@@ -252,8 +252,7 @@ public class Vehicle : Rideable {
 
 		gameObject.GetComponent<Rigidbody> ().drag = 0;
 
-		Explosion explosion = Explosion.Create (transform.Find("Center").position);
-		explosion.GetComponent<Explosion> ().Initiate (5f, 5000f);
+		Explosion.Create (transform.Find("Center").position, 5, 5000, 15);
 
 		Destroy(this);
 	}
