@@ -110,7 +110,10 @@ public class EnemyController : AIController {
 		Alert ();
 		Collider[] enemiesInRange = Physics.OverlapSphere (transform.position, alertRange, 1 << 8);
 		foreach (Collider enemy in enemiesInRange) {
-			enemy.GetComponentInParent<EnemyController> ().Alert();
+			EnemyController controller = GetComponentInParent<EnemyController> ();
+			if (controller != null) {
+				controller.Alert ();
+			}
 		}
 	}
 
