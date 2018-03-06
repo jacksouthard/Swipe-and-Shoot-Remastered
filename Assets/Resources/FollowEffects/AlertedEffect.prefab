@@ -37,6 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4326178903924192}
+  - component: {fileID: 114464812403599958}
   m_Layer: 0
   m_Name: AlertedEffect
   m_TagString: Untagged
@@ -91,6 +92,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114464812403599958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1237592182857286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd189ddeaf1ef46f280425df3684629e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114554984637642502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,7 +181,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224142602797768182
 RectTransform:
