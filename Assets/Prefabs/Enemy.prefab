@@ -430,6 +430,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeRange: 15
   pathUpdateRate: 1
+  backsUp: 1
+  defaultWeapon: Random
+  alerted: 0
+  alertTime: 10
+  alertRange: 5
+  alertFactor: 10
+  moves: 1
   durability: 20000
 --- !u!114 &114181140001443892
 MonoBehaviour:
@@ -445,6 +452,7 @@ MonoBehaviour:
   canRotateParent: 0
   targetTag: Player
   clampAngle: 60
+  shouldUpdateTarget: 1
   parentSpeed: 40
   speed: 160
   weaponPickupPrefab: {fileID: 0}
@@ -461,7 +469,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016c887d302bd4fb28e07a889197c8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   state: 0
   maxHealth: 7
   regenSpeed: 0
@@ -470,6 +477,8 @@ MonoBehaviour:
   hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
   dyingTimer: 1
   decayTimer: 2
+  smokes: 0
+  smokeCenter: {fileID: 0}
   waitTimer: 0
   health: 5000
 --- !u!195 &195055659698591936

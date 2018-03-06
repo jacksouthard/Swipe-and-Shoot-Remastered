@@ -23,6 +23,7 @@ public class Health : MonoBehaviour {
 	[Header("Hit")]
 	public float hitWait;
 	public Color hitColor;
+	public System.Action onHit;
 
 	[Header("Death")]
 	public float dyingTimer;
@@ -33,13 +34,8 @@ public class Health : MonoBehaviour {
 	public bool smokes;
 	public Transform smokeCenter;
 
-	static bool prefabsSet = false;
-	static GameObject smokeEffectPrefab;
-	static GameObject fireEffectPrefab;
-	static GameObject explosionEffectPrefab;
-
-	GameObject smokeEffect;
-	GameObject fireEffect;
+	EffectFollow smokeEffect;
+	EffectFollow fireEffect;
 
 	[Header("Debug")]
 	public float waitTimer;
@@ -51,19 +47,8 @@ public class Health : MonoBehaviour {
 	List<Color[]> originalColors;
 
 	// regening
-	static GameObject regenEffectPrefab;
 	bool regening = false;
-	GameObject curRegenEffect;
-
-	void Awake() {
-		if (!prefabsSet) {
-			prefabsSet = true;
-			regenEffectPrefab = Resources.Load ("RegenEffect") as GameObject;
-
-			smokeEffectPrefab = Resources.Load ("SmokeEffect") as GameObject;
-			fireEffectPrefab = Resources.Load ("FireEffect") as GameObject;
-		}
-	}
+	EffectFollow curRegenEffect;
 
 	void Start () {
 		health = maxHealth;
@@ -157,6 +142,10 @@ public class Health : MonoBehaviour {
 		if (state == State.Alive) {
 			health -= damage;
 
+			if (onHit != null) {
+				onHit.Invoke ();
+			}
+
 			if (health <= 0f) {
 				Die ();
 			} else {
@@ -171,15 +160,13 @@ public class Health : MonoBehaviour {
 
 			if (smokeEffect == null) {
 				if ((health / maxHealth) <= 0.5f) {
-					smokeEffect = (GameObject)Instantiate (smokeEffectPrefab, smokeCenter.position, Quaternion.identity);
-					smokeEffect.GetComponent<EffectFollow> ().Init (smokeCenter);
+					smokeEffect = EffectFollow.Create ("SmokeEffect", smokeCenter);
 				}
 			}
 
 			if (fireEffect == null) {
 				if ((health / maxHealth) <= 0.25f) {
-					fireEffect = (GameObject)Instantiate (fireEffectPrefab, smokeCenter.position, Quaternion.identity);
-					fireEffect.GetComponent<EffectFollow> ().Init (smokeCenter);
+					fireEffect = EffectFollow.Create ("FireEffect", smokeCenter);
 				}
 			}
 		}
@@ -195,10 +182,10 @@ public class Health : MonoBehaviour {
 		ResetColor();
 
 		if (fireEffect != null) {
-			fireEffect.GetComponent<EffectFollow> ().End ();
+			fireEffect.End ();
 		}
 		if (smokeEffect != null) {
-			smokeEffect.GetComponent<EffectFollow> ().End ();
+			smokeEffect.End ();
 		}
 
 		if (onDeath != null) {
@@ -243,14 +230,13 @@ public class Health : MonoBehaviour {
 	}
 
 	void StartRegen () {
-		curRegenEffect = Instantiate (regenEffectPrefab);
-		curRegenEffect.GetComponent<EffectFollow> ().Init (transform);
+		curRegenEffect = EffectFollow.Create("RegenEffect", transform);
 		regening = true;
 	}
 
 	void EndRegen () {
 		if (curRegenEffect != null) {
-			curRegenEffect.GetComponent<EffectFollow> ().End ();
+			curRegenEffect.End ();
 			curRegenEffect = null;
 		}
 		waitTimer = regenWait;

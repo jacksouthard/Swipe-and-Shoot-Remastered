@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class EnemyController : AIController {
 	public string defaultWeapon = "Random";
+	public bool alerted;
+	public float alertTime;
+	public float alertRange;
+	public float alertFactor;
 
 	[Header("Control")]
 	public bool moves = true;
 	public float durability; //max force before the enemy dies
 
 	ShootingController shooting;
+	float alertTimer;
+	float originalActiveRange;
+	EffectFollow alertedEffect;
 
 	protected override void Init() {
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
@@ -19,6 +26,8 @@ public class EnemyController : AIController {
 		base.Init ();
 
 		backsUp = moves;
+		originalActiveRange = activeRange;
+		health.onHit = TriggerAlert;
 	}
 
 	void Start() {
@@ -41,6 +50,15 @@ public class EnemyController : AIController {
 
 		if(moves) {
 			navAgent.stoppingDistance = shooting.range - 4;
+		}
+	}
+
+	void Update() {
+		if (alerted) {
+			alertTimer -= Time.deltaTime;
+			if (alertTimer <= 0) {
+				Unalert ();
+			}
 		}
 	}
 
@@ -82,6 +100,37 @@ public class EnemyController : AIController {
 			}
 			health.Die ();
 		}
+	}
+
+	public void TriggerAlert() {
+		if (alerted) {
+			return;
+		}
+
+		Alert ();
+		Collider[] enemiesInRange = Physics.OverlapSphere (transform.position, alertRange, 1 << 8);
+		foreach (Collider enemy in enemiesInRange) {
+			enemy.GetComponentInParent<EnemyController> ().Alert();
+		}
+	}
+
+	public void Alert() {
+		alerted = true;
+		alertTimer = alertTime;
+
+		if (health.state == Health.State.Alive) {
+			activeRange = originalActiveRange + alertFactor;
+			if (alertedEffect == null) {
+				alertedEffect = EffectFollow.Create ("AlertedEffect", transform);
+			}
+		}
+	}
+
+	public void Unalert() {
+		alerted = false;
+		activeRange = originalActiveRange;
+		alertedEffect.End ();
+		alertedEffect = null;
 	}
 
 	// vehicles
@@ -126,6 +175,10 @@ public class EnemyController : AIController {
 
 	public override void Die() {
 		shooting.Die ();
+
+		if (alertedEffect != null) {
+			Unalert ();
+		}
 		// notify spawner of death
 
 		if (Spawner.instance != null) {
