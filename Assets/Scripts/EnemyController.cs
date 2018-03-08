@@ -16,7 +16,7 @@ public class EnemyController : AIController {
 	ShootingController shooting;
 	float alertTimer;
 	float originalActiveRange;
-	EffectFollow alertedEffect;
+	EffectFollow currentVisualEffect;
 
 	protected override void Init() {
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
@@ -74,6 +74,12 @@ public class EnemyController : AIController {
 
 		shooting.enabled = true;
 		shooting.canRotateParent = (moves) ? (dist < navAgent.stoppingDistance) : true;
+
+		if (dist < shooting.range) {
+			SwitchEffects ("SightedEffect");
+		} else {
+			SwitchEffects ("AlertedEffect");
+		}
 	}
 
 	protected override void Deactivate () {
@@ -83,6 +89,10 @@ public class EnemyController : AIController {
 
 		shooting.enabled = false;
 		shooting.canRotateParent = false;
+
+		if (currentVisualEffect != null) {
+			RemoveEffect ();
+		}
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -123,17 +133,15 @@ public class EnemyController : AIController {
 
 		if (health.state == Health.State.Alive) {
 			activeRange = originalActiveRange + alertFactor;
-			if (alertedEffect == null) {
-				alertedEffect = EffectFollow.Create ("AlertedEffect", transform);
-			}
 		}
 	}
 
 	public void Unalert() {
 		alerted = false;
 		activeRange = originalActiveRange;
-		alertedEffect.End ();
-		alertedEffect = null;
+		if (currentVisualEffect.name == "AlertedEffect") {
+			RemoveEffect ();
+		}
 	}
 
 	// vehicles
@@ -179,8 +187,8 @@ public class EnemyController : AIController {
 	public override void Die() {
 		shooting.Die ();
 
-		if (alertedEffect != null) {
-			Unalert ();
+		if (currentVisualEffect != null) {
+			RemoveEffect ();
 		}
 		// notify spawner of death
 
@@ -189,5 +197,17 @@ public class EnemyController : AIController {
 		}
 
 		base.Die ();
+	}
+
+	void SwitchEffects(string effectName) {
+		if (currentVisualEffect != null) {
+			currentVisualEffect.End ();
+		}
+		currentVisualEffect = EffectFollow.Create (effectName, transform);
+	}
+
+	void RemoveEffect() {
+		currentVisualEffect.End ();
+		currentVisualEffect = null;
 	}
 }

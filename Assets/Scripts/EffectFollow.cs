@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectFollow : MonoBehaviour {
+	public string name;
+
 	Transform target;
 	bool initiated = false;
 
@@ -18,6 +20,7 @@ public class EffectFollow : MonoBehaviour {
 		GameObject newEffect = (GameObject)Instantiate (prefabs[name], parent.position, Quaternion.identity);
 		EffectFollow follower = newEffect.GetComponent<EffectFollow> ();
 		follower.Init (parent);
+		follower.name = name;
 		return follower;
 	}
 
