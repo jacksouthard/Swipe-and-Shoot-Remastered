@@ -136,6 +136,11 @@ public class LevelProgressManager : MonoBehaviour {
 		UpdateObjectiveUI ();
 	}
 
+	public void EnterCutsceneVehicle() {
+		objectiveScreenIndicator.SetActive (false);
+		objectiveWorldIndicator.SetActive (false);
+	}
+
 	//ends the level
 	public void CompleteLevel() {
 		winScreen.SetActive (true);

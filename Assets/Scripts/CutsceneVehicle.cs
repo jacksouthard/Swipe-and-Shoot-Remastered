@@ -14,6 +14,7 @@ public class CutsceneVehicle : Rideable {
 	public override void Mount (GameObject _mounter) {
 		base.Mount (_mounter);
 		anim.enabled = true;
+		LevelProgressManager.instance.EnterCutsceneVehicle ();
 	}
 
 	//call this at the end of the animation
