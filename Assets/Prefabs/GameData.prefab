@@ -92,6 +92,10 @@ MonoBehaviour:
     requiresElimination: 0
     startingMessages:
     - Drive to the enemy base and free the pilot
+  - name: Level 3
+    requiresElimination: 0
+    startingMessages:
+    - Infiltrate the base and steal the chopper!
   - name: Endless
     requiresElimination: 0
     startingMessages: []

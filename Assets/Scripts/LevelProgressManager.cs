@@ -7,7 +7,8 @@ public class Objective {
 	public enum Type {
 		Pickup,
 		Zone,
-		KillCount
+		KillCount,
+		Vehicle
 	}
 
 	public Type type;
@@ -89,6 +90,10 @@ public class LevelProgressManager : MonoBehaviour {
 				break;
 			case Objective.Type.KillCount:
 				//TODO
+				break;
+			case Objective.Type.Vehicle:
+				//TODO
+//				objectives[0].go.GetComponent<PlayerTrigger> ().enterActions.AddListener (CompleteObjective);
 				break;
 		}
 	}
