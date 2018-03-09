@@ -5,6 +5,14 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
 	public static Dictionary<string, Spawner> spawners = new Dictionary<string, Spawner>();
 
+	public enum SpawnMode
+	{
+		Random,
+		RoundRobin
+	}
+	public SpawnMode spawnMode;
+	int curIndex = 0;
+
 	public GameObject prefab;
 	public int maxObjects;
 	public float spawnRate;
@@ -40,6 +48,10 @@ public class Spawner : MonoBehaviour {
 		}
 
 		spawnTimer = spawnRate;
+
+		if (spawnMode == SpawnMode.RoundRobin) {
+			curIndex = Random.Range (0, spawnPoints.Count - 1);
+		}
 	}
 	
 	void Update () {
@@ -48,7 +60,7 @@ public class Spawner : MonoBehaviour {
 			if (spawnTimer <= 0f) {
 				spawnTimer = spawnRate;
 
-				SpawnEnemy ();
+				SpawnObject ();
 			}
 		}
 	}
@@ -57,8 +69,15 @@ public class Spawner : MonoBehaviour {
 		count--;
 	}
 
-	void SpawnEnemy () {
-		Vector3 spawnPoint = FindValidSpawnPoint ();
+	void SpawnObject () {
+		Vector3 spawnPoint;
+		if (spawnMode == SpawnMode.Random) {
+			spawnPoint = FindValidSpawnPoint ();
+		} else {
+			int newIndex = NextIndex (curIndex);
+			spawnPoint = spawnPoints [newIndex];
+			curIndex = newIndex;
+		}
 
 		GameObject enemy = Instantiate (prefab, spawnPoint, Quaternion.identity, transform);
 
@@ -73,5 +92,13 @@ public class Spawner : MonoBehaviour {
 		} while (Vector3.Distance(spawnPoint, player.position) < minSpawnRange);
 
 		return spawnPoint;
+	}
+
+	int NextIndex (int _curIndex) {
+		if (_curIndex == spawnPoints.Count - 1) {
+			return 0;
+		} else {
+			return _curIndex + 1;
+		}
 	}
 }
