@@ -10,7 +10,6 @@ public class LevelManager : MonoBehaviour {
 	[System.Serializable]
 	public class LevelData {
 		public string name;
-		public bool requiresElimination;
 		public List<string> startingMessages;
 	}	
 
