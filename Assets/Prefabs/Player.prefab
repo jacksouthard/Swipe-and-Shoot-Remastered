@@ -665,6 +665,20 @@ MonoBehaviour:
   verticalFactor: 0.5
   turnSpeed: 10
   defaultWeaponName: None
+  equipment:
+  - name: 
+    type: 0
+    prefab: {fileID: 0}
+    mesh: {fileID: 0}
+  - name: 
+    type: 0
+    prefab: {fileID: 0}
+    mesh: {fileID: 0}
+  - name: 
+    type: 0
+    prefab: {fileID: 0}
+    mesh: {fileID: 0}
+  equipmentParent: {fileID: 0}
   pickupTime: 2
   timerDisplay: {fileID: 1554879363731970}
   timerBar: {fileID: 1022813109609684}
@@ -704,7 +718,7 @@ MonoBehaviour:
   dyingTimer: 0
   decayTimer: 0
   smokes: 0
-  smokeCenter: {fileID: 0}
+  smokeCenter: {fileID: 4413794412513888}
   waitTimer: 0
   health: 0
 --- !u!114 &114764613351889654

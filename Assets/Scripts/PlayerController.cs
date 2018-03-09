@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour {
 	public string defaultWeaponName = "None";
 	public string curWeaponName { get { return shooting.curWeaponName; } }
 
+	[Header("Equipment")]
+	public EquipmentData[] equipment = new EquipmentData[3]; //there are 3 types of equipment
+	public Transform equipmentParent;
+
 	[Header("Picking Up")]
 	public float pickupTime;
 	public GameObject timerDisplay;
@@ -224,6 +228,13 @@ public class PlayerController : MonoBehaviour {
 				return;
 			}
 		}
+	}
+
+	public void SwitchEquipment(EquipmentData data) {
+		int index = (int) data.type;
+		//take off equipment from here
+		equipment [index] = data;
+		Instantiate (data.prefab, transform.position, transform.rotation, transform);
 	}
 
 	//picks up object associated with this timer

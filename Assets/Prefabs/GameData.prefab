@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4138976885120154}
   - component: {fileID: 114518143162024506}
   - component: {fileID: 114994002116265576}
+  - component: {fileID: 114744312554882860}
   m_Layer: 0
   m_Name: GameData
   m_TagString: Untagged
@@ -73,6 +74,22 @@ MonoBehaviour:
     name: KAR98
     prefab: {fileID: 1075525103937924, guid: bbdd710eef6764b0eaf31b1f8ae404e7, type: 2}
     mesh: {fileID: 4300018, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+--- !u!114 &114744312554882860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021587275389494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1067461e7482b45d5bee7975e5b92365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentDatas:
+  - name: BodyArmor
+    type: 1
+    prefab: {fileID: 1713186567975090, guid: 0b3eaa05031f546b6b46ba2d0fb2fea6, type: 2}
+    mesh: {fileID: 4300022, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,16 +103,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData:
   - name: Level 1
-    requiresElimination: 0
     startingMessages: []
   - name: Level 2
-    requiresElimination: 0
     startingMessages:
     - Drive to the enemy base and free the pilot
   - name: Level 3
-    requiresElimination: 0
     startingMessages:
     - Infiltrate the base and steal the chopper!
   - name: Endless
-    requiresElimination: 0
     startingMessages: []
