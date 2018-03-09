@@ -18,6 +18,12 @@ ModelImporter:
     100020: Kar98
     100022: Cube_005
     100024: BodyArmor
+    100026: Cylinder
+    100028: Jetpack
+    100030: AK47
+    100032: M4
+    100034: M9
+    100036: Minigun
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -31,6 +37,12 @@ ModelImporter:
     400020: Kar98
     400022: Cube_005
     400024: BodyArmor
+    400026: Cylinder
+    400028: Jetpack
+    400030: AK47
+    400032: M4
+    400034: M9
+    400036: Minigun
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -43,6 +55,12 @@ ModelImporter:
     2300018: Kar98
     2300020: Cube_005
     2300022: BodyArmor
+    2300024: Cylinder
+    2300026: Jetpack
+    2300028: AK47
+    2300030: M4
+    2300032: M9
+    2300034: Minigun
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -55,6 +73,12 @@ ModelImporter:
     3300018: Kar98
     3300020: Cube_005
     3300022: BodyArmor
+    3300024: Cylinder
+    3300026: Jetpack
+    3300028: AK47
+    3300030: M4
+    3300032: M9
+    3300034: Minigun
     4300000: Cube_008
     4300002: Cube_007
     4300004: Cube_003
@@ -67,6 +91,12 @@ ModelImporter:
     4300018: Kar98
     4300020: Cube_005
     4300022: BodyArmor
+    4300024: Cylinder
+    4300026: Jetpack
+    4300028: M9
+    4300030: AK47
+    4300032: M4
+    4300034: Minigun
     7400000: Default Take
     9500000: //RootNode
   externalObjects:

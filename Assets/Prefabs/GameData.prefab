@@ -57,19 +57,19 @@ MonoBehaviour:
   - tier: 1
     name: AK47
     prefab: {fileID: 1456361243191302, guid: 19a223af2554743fc88527aeaa0e675b, type: 2}
-    mesh: {fileID: 4300002, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    mesh: {fileID: 4300030, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
   - tier: 2
     name: M4
     prefab: {fileID: 1253796618953862, guid: f785f505ac88d4cd6a2513131e551657, type: 2}
-    mesh: {fileID: 4300004, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    mesh: {fileID: 4300032, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
   - tier: 0
     name: M9
     prefab: {fileID: 1658469826386734, guid: 318a8f75cfbe642fb9afd60cf4bec3e9, type: 2}
-    mesh: {fileID: 4300000, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    mesh: {fileID: 4300028, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
   - tier: 3
     name: Minigun
     prefab: {fileID: 1581784488398458, guid: c9d55c630766941e7aa20cb16975b6c7, type: 2}
-    mesh: {fileID: 4300014, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    mesh: {fileID: 4300034, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
   - tier: -1
     name: KAR98
     prefab: {fileID: 1075525103937924, guid: bbdd710eef6764b0eaf31b1f8ae404e7, type: 2}
