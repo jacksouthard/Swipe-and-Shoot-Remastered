@@ -16,6 +16,8 @@ ModelImporter:
     100016: Cylinder_005
     100018: Plane
     100020: Kar98
+    100022: Cube_005
+    100024: BodyArmor
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -27,6 +29,8 @@ ModelImporter:
     400016: Cylinder_005
     400018: Plane
     400020: Kar98
+    400022: Cube_005
+    400024: BodyArmor
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -37,6 +41,8 @@ ModelImporter:
     2300014: Cylinder_005
     2300016: Plane
     2300018: Kar98
+    2300020: Cube_005
+    2300022: BodyArmor
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -47,6 +53,8 @@ ModelImporter:
     3300014: Cylinder_005
     3300016: Plane
     3300018: Kar98
+    3300020: Cube_005
+    3300022: BodyArmor
     4300000: Cube_008
     4300002: Cube_007
     4300004: Cube_003
@@ -57,6 +65,8 @@ ModelImporter:
     4300014: Cylinder_005
     4300016: Plane
     4300018: Kar98
+    4300020: Cube_005
+    4300022: BodyArmor
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
@@ -70,6 +80,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Barrel_001
     second: {fileID: 2100000, guid: 4cf1477a58f85429885674d98af8a9a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BodyArmor0
+    second: {fileID: 2100000, guid: fa1b9d5a02bba40a5afe84abb89b8028, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BodyArmor1
+    second: {fileID: 2100000, guid: c80c16e5342a0499097808723a475438, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

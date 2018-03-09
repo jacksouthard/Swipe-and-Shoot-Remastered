@@ -1,0 +1,38 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Airdrop : MonoBehaviour {
+//	string payload;
+	Animator anim;
+	public GameObject pickupPrefab;
+
+	// Use this for initialization
+	void Start () {
+		anim = GetComponent<Animator> ();
+	}
+	
+	void OnCollisionEnter (Collision coll) {
+		if (coll.gameObject.layer == 10) {
+			Deploy ();
+		}
+	}
+
+	void Deploy () {
+		anim.SetTrigger ("Open");
+	}
+
+	void SpawnPayload () {
+		WeaponManager.WeaponData data = WeaponManager.instance.GetWeaponDataFromLootTable ();
+		GameObject pickup = Instantiate (pickupPrefab, transform.TransformPoint(Vector3.up * 0.2f), Quaternion.identity);
+		pickup.GetComponent<WeaponPickup> ().Init (data);
+	}
+
+	void Despawn () {
+		if (Spawner.spawners["AirdropSpawner"] != null) {
+			Spawner.spawners["AirdropSpawner"].SpawnerObjectDespawn ();
+		}
+
+		Destroy (gameObject);
+	}
+}

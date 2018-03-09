@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour {
 	void Awake() {
 		TimeManager.SetPaused (false);
 		LevelProgressManager.Reset ();
+		Spawner.spawners.Clear ();
 		LoadLevelData (0);//later replace with last level
 	}
 

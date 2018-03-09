@@ -77,6 +77,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1174189102112646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4413794412513888}
+  m_Layer: 0
+  m_Name: Equipment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1185852970960236
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +273,19 @@ Transform:
   m_Father: {fileID: 4776769612598714}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!4 &4413794412513888
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174189102112646}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4776769612598714}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4445654954790468
 Transform:
   m_ObjectHideFlags: 1
@@ -270,7 +298,7 @@ Transform:
   m_Children:
   - {fileID: 4548100693626386}
   m_Father: {fileID: 4776769612598714}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4539101891434398
 Transform:
@@ -283,7 +311,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4776769612598714}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4548100693626386
 Transform:
@@ -310,7 +338,7 @@ Transform:
   m_Children:
   - {fileID: 224791876649410594}
   m_Father: {fileID: 4776769612598714}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4749004321617120
 Transform:
@@ -351,6 +379,7 @@ Transform:
   - {fileID: 4117093363818068}
   - {fileID: 4749004321617120}
   - {fileID: 4774993449413734}
+  - {fileID: 4413794412513888}
   - {fileID: 4992247236573968}
   - {fileID: 4445654954790468}
   - {fileID: 4880122470445218}
@@ -370,7 +399,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4776769612598714}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4992247236573968
 Transform:
@@ -383,7 +412,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4776769612598714}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23116384069536804
 MeshRenderer:
@@ -583,6 +612,7 @@ MonoBehaviour:
   canRotateParent: 0
   targetTag: Enemy
   clampAngle: 90
+  shouldUpdateTarget: 1
   parentSpeed: 200
   speed: 800
   weaponPickupPrefab: {fileID: 1576351328228362, guid: 190d4d7c0e3b44f12bb8ff2b63158d75,
@@ -665,7 +695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016c887d302bd4fb28e07a889197c8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   state: 0
   maxHealth: 40
   regenSpeed: 5
@@ -674,6 +703,8 @@ MonoBehaviour:
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   dyingTimer: 0
   decayTimer: 0
+  smokes: 0
+  smokeCenter: {fileID: 0}
   waitTimer: 0
   health: 0
 --- !u!114 &114764613351889654

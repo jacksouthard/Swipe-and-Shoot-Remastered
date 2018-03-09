@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
-	public static Spawner instance;
+	public static Dictionary<string, Spawner> spawners = new Dictionary<string, Spawner>();
 
 	public GameObject prefab;
 	public int maxObjects;
@@ -17,8 +17,18 @@ public class Spawner : MonoBehaviour {
 	List<Vector3> spawnPoints = new List<Vector3>();
 
 	void Awake () {
-		instance = this;
+		if (spawners.Count == 0) {
+			LoadSpawners ();
+		}
+
 		player = GameObject.FindObjectOfType<PlayerController> ().transform;
+	}
+
+	void LoadSpawners() {
+		Spawner[] allSpawners = GameObject.FindObjectsOfType<Spawner> ();
+		foreach (Spawner spawner in allSpawners) {
+			spawners.Add (spawner.gameObject.name, spawner);
+		}
 	}
 
 	void Start () {
@@ -43,7 +53,7 @@ public class Spawner : MonoBehaviour {
 		}
 	}
 
-	public void EnemyDeath () {
+	public void SpawnerObjectDespawn () {
 		count--;
 	}
 

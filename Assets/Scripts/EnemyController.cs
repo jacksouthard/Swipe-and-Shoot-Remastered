@@ -192,8 +192,8 @@ public class EnemyController : AIController {
 		}
 		// notify spawner of death
 
-		if (Spawner.instance != null) {
-			Spawner.instance.EnemyDeath ();
+		if (Spawner.spawners["EnemySpawner"] != null) {
+			Spawner.spawners["EnemySpawner"].SpawnerObjectDespawn ();
 		}
 
 		base.Die ();
