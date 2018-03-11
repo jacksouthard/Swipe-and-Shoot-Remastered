@@ -24,6 +24,8 @@ ModelImporter:
     100032: M4
     100034: M9
     100036: Minigun
+    100038: BodyArmor_002
+    100040: BodyArmorFlat
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -43,6 +45,8 @@ ModelImporter:
     400032: M4
     400034: M9
     400036: Minigun
+    400038: BodyArmor_002
+    400040: BodyArmorFlat
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -61,6 +65,8 @@ ModelImporter:
     2300030: M4
     2300032: M9
     2300034: Minigun
+    2300036: BodyArmor_002
+    2300038: BodyArmorFlat
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -79,6 +85,8 @@ ModelImporter:
     3300030: M4
     3300032: M9
     3300034: Minigun
+    3300036: BodyArmor_002
+    3300038: BodyArmorFlat
     4300000: Cube_008
     4300002: Cube_007
     4300004: Cube_003
@@ -97,6 +105,8 @@ ModelImporter:
     4300030: AK47
     4300032: M4
     4300034: Minigun
+    4300036: BodyArmor_002
+    4300038: BodyArmorFlat
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
