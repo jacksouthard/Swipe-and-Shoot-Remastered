@@ -25,7 +25,7 @@ public class Airdrop : MonoBehaviour {
 	void SpawnPayload () {
 		Data data = DataManager<Data>.GetAnyRandomData ();
 		GameObject pickup = Instantiate (pickupPrefab, transform.TransformPoint(Vector3.up * 0.2f), Quaternion.identity);
-		pickup.GetComponent<Pickup> ().Init (data);
+		pickup.GetComponent<Pickup> ().Init (data, true);
 	}
 
 	void Despawn () {

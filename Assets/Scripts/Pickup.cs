@@ -6,6 +6,10 @@ public class Pickup : MonoBehaviour {
 	public string customType = "None";
 	public string assetType;
 
+	// despawning
+	bool despawn;
+	float despawnTimer = 20f;
+
 	bool inited = false;
 
 	public Data data;
@@ -20,16 +24,26 @@ public class Pickup : MonoBehaviour {
 		}
 	}
 
-	public void Init (Data _data) {
+	public void Init (Data _data, bool _despawn) {
 		data = _data;
 		assetType = data.GetAssetType ();
 
 		UpdateRendering ();
 
 		inited = true;
+		despawn = _despawn;
 	}
 
 	void UpdateRendering () {
 		GetComponent<MeshFilter> ().mesh = data.mesh;
+	}
+
+	void Update () {
+		if (despawn) {
+			despawnTimer -= Time.deltaTime;
+			if (despawnTimer <= 0f) {
+				Destroy (gameObject);
+			}
+		}
 	}
 }

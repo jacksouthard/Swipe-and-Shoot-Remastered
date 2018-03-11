@@ -26,6 +26,10 @@ ModelImporter:
     100036: Minigun
     100038: BodyArmor_002
     100040: BodyArmorFlat
+    100042: 1200px-RPG-7_real_life
+    100044: Cylinder_001
+    100046: Rocket
+    100048: RPG
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -47,6 +51,10 @@ ModelImporter:
     400036: Minigun
     400038: BodyArmor_002
     400040: BodyArmorFlat
+    400042: 1200px-RPG-7_real_life
+    400044: Cylinder_001
+    400046: Rocket
+    400048: RPG
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -67,6 +75,10 @@ ModelImporter:
     2300034: Minigun
     2300036: BodyArmor_002
     2300038: BodyArmorFlat
+    2300040: 1200px-RPG-7_real_life
+    2300042: Cylinder_001
+    2300044: Rocket
+    2300046: RPG
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -87,6 +99,10 @@ ModelImporter:
     3300034: Minigun
     3300036: BodyArmor_002
     3300038: BodyArmorFlat
+    3300040: 1200px-RPG-7_real_life
+    3300042: Cylinder_001
+    3300044: Rocket
+    3300046: RPG
     4300000: Cube_008
     4300002: Cube_007
     4300004: Cube_003
@@ -107,9 +123,18 @@ ModelImporter:
     4300034: Minigun
     4300036: BodyArmor_002
     4300038: BodyArmorFlat
+    4300040: Cylinder_001
+    4300042: 1200px-RPG-7_real_life
+    4300044: Rocket
+    4300046: RPG
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 1200px-RPG-7_real_life__1200px-RPG-7_real_life_jpg
+    second: {fileID: 2100000, guid: 1d72122cfe63e428e8581c4b2fc7eae8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -150,6 +175,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Magazine_001
     second: {fileID: 2100000, guid: 10897153666db4e03986dff826509fd0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocket
+    second: {fileID: 2100000, guid: e358fd96c1fc54c20a2eba4e7316aa67, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

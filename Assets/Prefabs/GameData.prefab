@@ -74,6 +74,10 @@ MonoBehaviour:
     prefab: {fileID: 1075525103937924, guid: bbdd710eef6764b0eaf31b1f8ae404e7, type: 2}
     mesh: {fileID: 4300018, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
     tier: -1
+  - name: RPG
+    prefab: {fileID: 1872636546965686, guid: 5d9f50fda1aa5441798144693901e3fc, type: 2}
+    mesh: {fileID: 4300046, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    tier: 3
 --- !u!114 &114246819811646816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,7 +92,7 @@ MonoBehaviour:
   datas:
   - name: Body Armor
     prefab: {fileID: 1713186567975090, guid: 0b3eaa05031f546b6b46ba2d0fb2fea6, type: 2}
-    mesh: {fileID: 4300022, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    mesh: {fileID: 4300038, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
     type: 1
   - name: Jetpack
     prefab: {fileID: 1248845869312164, guid: b23e12a60c2d845c9bb063154f60fbad, type: 2}

@@ -342,7 +342,7 @@ public class PlayerController : MonoBehaviour {
 	void ThrowPickup (Data data) {
 		Vector3 pos = transform.TransformPoint(0f, throwHeight, 1f);
 		GameObject newPickup = Instantiate (pickupPrefab, pos, Quaternion.identity);
-		newPickup.GetComponent<Pickup> ().Init (data);
+		newPickup.GetComponent<Pickup> ().Init (data, true);
 		newPickup.GetComponent<Rigidbody>().velocity = transform.forward * throwVelocity;
 	}
 
