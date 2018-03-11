@@ -1069,8 +1069,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60eb33551fec44f62afcf64402be8fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 0
-  rotationSpeed: 0
 --- !u!54 &174414310
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2030,8 +2028,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnMode: 0
   prefab: {fileID: 1582026075492044, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
-  maxObjects: 7
-  spawnRate: 3
+  maxObjects: 50
+  spawnRate: 1.5
   minSpawnRange: 10
 --- !u!4 &271308407 stripped
 Transform:
@@ -3015,6 +3013,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114638930987555470, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
+        type: 2}
+      propertyPath: startingEquipment.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3046,6 +3049,16 @@ Prefab:
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638930987555470, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
+        type: 2}
+      propertyPath: defaultWeaponName
+      value: RPG
+      objectReference: {fileID: 0}
+    - target: {fileID: 114638930987555470, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
+        type: 2}
+      propertyPath: startingEquipment.Array.data[0]
+      value: Jetpack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
