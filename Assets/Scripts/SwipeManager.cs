@@ -24,7 +24,7 @@ public class SwipeManager : MonoBehaviour {
 		gameCam = GameObject.FindObjectOfType<Camera> ();
 		player = GameObject.FindObjectOfType<PlayerController> ();
 		swipeLine = player.GetComponentInChildren<LineRenderer> ();
-		lm = GameObject.Find("Player").GetComponentInChildren<LineManager> ();
+		lm = player.GetComponentInChildren<LineManager> ();
 
 		swipeLine.enabled = false;
 		joystickVisual.gameObject.SetActive (false);

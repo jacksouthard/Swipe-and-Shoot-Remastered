@@ -17,7 +17,7 @@ public class LineManager : MonoBehaviour {
 
 	public void UpdateLineTrajectory (Vector2 direction)
 	{
-		int maxSegments = 20;
+		int maxSegments = 30;
 		float resolution = 10f; // factor to increase number of segments
 
 		var positions = new List<Vector3> ();

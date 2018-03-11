@@ -237,14 +237,52 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void SwitchEquipment(EquipmentData data) {
-		int index = (int) data.type;
+	void SwitchWeapon(WeaponData data) {
+		if (shooting.hasWeapon) {
+			ThrowPickup (shooting.GetWeaponData().ToAssetData());
+		}
+		shooting.SetWeapon (data as WeaponData);
+	}
+
+	void SwitchEquipment(EquipmentData data) {
+		int index = (int)data.type;
+
+		if (equipmentObjects[index] != null) {
+			RemoveEquipmentBuff (equipment[index]);
+			ThrowPickup (equipment[index]);
+			Destroy (equipmentObjects [index]);
+		}
+		ApplyEquipmentBuff (data);
+
 		equipment [index] = data;
 
 		GameObject newEquipment = (GameObject) Instantiate (data.prefab, transform.position, transform.rotation, transform);
 		equipmentObjects [index] = newEquipment;
 
 		health.UpdateRenderersNextFrame ();
+	}
+
+	void RemoveEquipmentBuff(EquipmentData data) {
+		switch (data.name) {
+			case "Body Armor":
+				health.maxHealth -= 20f;
+				health.health = Mathf.Min (health.health, health.maxHealth);
+				break;
+			case "Jetpack":
+				verticalFactor -= 1.5f;
+				break;
+		}
+	}
+
+	void ApplyEquipmentBuff(EquipmentData data) {
+		switch (data.name) {
+			case "Body Armor":
+				health.maxHealth += 20f;
+				break;
+			case "Jetpack":
+				verticalFactor += 1.5f;
+				break;
+		}
 	}
 
 	//picks up object associated with this timer
@@ -258,19 +296,9 @@ public class PlayerController : MonoBehaviour {
 		if (timer.type == PickupTimer.Type.Drop) {
 			Pickup drop = timer.pickup.GetComponent<Pickup> ();
 			if (drop.data.GetAssetType () == "Weapon") {
-				if (shooting.hasWeapon) {
-					ThrowPickup (shooting.GetWeaponData().ToAssetData());
-				}
-				shooting.SetWeapon (drop.data as WeaponData);
+				SwitchWeapon (drop.data as WeaponData);
 			} else if (drop.data.GetAssetType() == "Equipment") {
-				EquipmentData newEquipmentData = drop.data as EquipmentData;
-				int index = (int)newEquipmentData.type;
-
-				if (equipmentObjects[index] != null) {
-					ThrowPickup (equipment[index]);
-					Destroy (equipmentObjects [index]);
-				}
-				SwitchEquipment (newEquipmentData);
+				SwitchEquipment (drop.data as EquipmentData);
 			}
 			Destroy (timer.pickup);
 		} else if (timer.type == PickupTimer.Type.Objective) {
