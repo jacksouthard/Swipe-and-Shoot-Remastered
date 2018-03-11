@@ -44,7 +44,7 @@ public class EnemyController : AIController {
 		if (defaultWeapon == "None") {
 			return;
 		}
-		shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName(defaultWeapon));
+		shooting.SetWeapon (WeaponManager.instance.GetDataFromName(defaultWeapon));
 
 		priorityRange = shooting.range;
 
@@ -192,7 +192,7 @@ public class EnemyController : AIController {
 		}
 		// notify spawner of death
 
-		if (Spawner.spawners["EnemySpawner"] != null) {
+		if (Spawner.spawners.ContainsKey("EnemySpawner")) {
 			Spawner.spawners["EnemySpawner"].SpawnerObjectDespawn ();
 		}
 

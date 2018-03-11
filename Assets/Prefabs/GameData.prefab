@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4138976885120154}
-  - component: {fileID: 114518143162024506}
+  - component: {fileID: 114227078029244328}
+  - component: {fileID: 114246819811646816}
   - component: {fileID: 114994002116265576}
-  - component: {fileID: 114744312554882860}
   m_Layer: 0
   m_Name: GameData
   m_TagString: Untagged
@@ -42,7 +42,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114518143162024506
+--- !u!114 &114227078029244328
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -50,31 +50,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1021587275389494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d8ba8d423084de2b323044818d5ece, type: 3}
+  m_Script: {fileID: 11500000, guid: 5203c1814ce6046469c06094e620402a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDatas:
-  - tier: 1
-    name: AK47
+  datas:
+  - name: AK47
     prefab: {fileID: 1456361243191302, guid: 19a223af2554743fc88527aeaa0e675b, type: 2}
     mesh: {fileID: 4300030, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
-  - tier: 2
-    name: M4
+    tier: 1
+  - name: M4
     prefab: {fileID: 1253796618953862, guid: f785f505ac88d4cd6a2513131e551657, type: 2}
     mesh: {fileID: 4300032, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
-  - tier: 0
-    name: M9
+    tier: 2
+  - name: M9
     prefab: {fileID: 1658469826386734, guid: 318a8f75cfbe642fb9afd60cf4bec3e9, type: 2}
     mesh: {fileID: 4300028, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
-  - tier: 3
-    name: Minigun
+    tier: 0
+  - name: Minigun
     prefab: {fileID: 1581784488398458, guid: c9d55c630766941e7aa20cb16975b6c7, type: 2}
     mesh: {fileID: 4300034, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
-  - tier: -1
-    name: KAR98
+    tier: 3
+  - name: KAR98
     prefab: {fileID: 1075525103937924, guid: bbdd710eef6764b0eaf31b1f8ae404e7, type: 2}
     mesh: {fileID: 4300018, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
---- !u!114 &114744312554882860
+    tier: -1
+--- !u!114 &114246819811646816
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -82,14 +82,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1021587275389494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1067461e7482b45d5bee7975e5b92365, type: 3}
+  m_Script: {fileID: 11500000, guid: 6bfc9e29a776945a783b4fc9611a2e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipmentDatas:
-  - name: BodyArmor
-    type: 1
+  datas:
+  - name: Body Armor
     prefab: {fileID: 1713186567975090, guid: 0b3eaa05031f546b6b46ba2d0fb2fea6, type: 2}
     mesh: {fileID: 4300022, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    type: 1
+  - name: Jetpack
+    prefab: {fileID: 1248845869312164, guid: b23e12a60c2d845c9bb063154f60fbad, type: 2}
+    mesh: {fileID: 4300026, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    type: 0
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1

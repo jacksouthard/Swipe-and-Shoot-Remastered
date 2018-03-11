@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4413794412513888}
   m_Layer: 0
-  m_Name: Equipment
+  m_Name: EquipmentParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -615,10 +615,6 @@ MonoBehaviour:
   shouldUpdateTarget: 1
   parentSpeed: 200
   speed: 800
-  weaponPickupPrefab: {fileID: 1576351328228362, guid: 190d4d7c0e3b44f12bb8ff2b63158d75,
-    type: 2}
-  throwHeight: 0.5
-  throwVelocity: 5
 --- !u!114 &114554513914816582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -667,22 +663,26 @@ MonoBehaviour:
   defaultWeaponName: None
   equipment:
   - name: 
-    type: 0
     prefab: {fileID: 0}
     mesh: {fileID: 0}
+    type: 0
   - name: 
-    type: 0
     prefab: {fileID: 0}
     mesh: {fileID: 0}
+    type: 0
   - name: 
-    type: 0
     prefab: {fileID: 0}
     mesh: {fileID: 0}
-  equipmentParent: {fileID: 0}
+    type: 0
+  equipmentParent: {fileID: 4413794412513888}
   pickupTime: 2
   timerDisplay: {fileID: 1554879363731970}
   timerBar: {fileID: 1022813109609684}
   nextPickupText: {fileID: 114971349092067154}
+  pickupPrefab: {fileID: 1300268370610314, guid: 660d960f2c0db4ab98341d71d79b7708,
+    type: 2}
+  throwHeight: 0.5
+  throwVelocity: 5
   currentVehicle: {fileID: 0}
 --- !u!114 &114641830526842376
 MonoBehaviour:

@@ -2,36 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquipmentManager : MonoBehaviour {
+public class EquipmentManager : DataManager<EquipmentData> {
 	public static EquipmentManager instance;
 
-	public EquipmentData[] equipmentDatas;
-
-	void Awake () {
+	void Awake() {
 		instance = this;
-	}
-
-	public EquipmentData EquipmentDataFromName (string _name) {
-		foreach (var equipmentData in equipmentDatas) {
-			if (equipmentData.name == _name) {
-				return equipmentData;
-			}
-		}
-		print ("Could not find equipment with name: " + _name);
-		return equipmentDatas [0];
+		SetPointers ();
 	}
 }
 
 [System.Serializable]
-public class EquipmentData {
+public class EquipmentData : Data {
 	public enum Type {
 		Back = 0,
 		Chest = 1,
 		Head = 2
 	}
 
-	public string name;
 	public Type type;
-	public GameObject prefab;
-	public Mesh mesh;
+
+	public override string GetAssetType () {
+		return "Equipment";
+	}
 }

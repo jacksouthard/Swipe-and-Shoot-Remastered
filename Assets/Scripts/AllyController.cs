@@ -34,7 +34,7 @@ public class AllyController : AIController {
 		if (defaultWeapon == "None") {
 			return;
 		}
-		shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName(defaultWeapon));
+		shooting.SetWeapon (WeaponManager.instance.GetDataFromName(defaultWeapon));
 	}
 
 	protected override void UpdateTarget () {

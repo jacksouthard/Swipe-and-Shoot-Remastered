@@ -14,11 +14,6 @@ public class ShootingController : MonoBehaviour {
 	public float parentSpeed; //speed at which the body rotates towards target
 	public float speed; //speed at which the hands rotate towards target
 
-	[Header("Throwing")]
-	public GameObject weaponPickupPrefab;
-	public float throwHeight;
-	public float throwVelocity;
-
 	public bool targetInRange { get { return target != null; } }
 	public bool hasWeapon { get { return weapon != null; } }
 	public string curWeaponName { get { return (hasWeapon) ? weapon.name : "None"; } }
@@ -42,12 +37,12 @@ public class ShootingController : MonoBehaviour {
 		health = gameObject.GetComponentInParent<Health> ();
 	}
 
-	//updates current weapon and throws out old weapon
-	public void SetWeapon(WeaponManager.WeaponData newWeapon) {
-		if (hasWeapon) {
-			ThrowWeapon ();
+	//updates current weapon
+	public void SetWeapon(WeaponData newWeapon) {
+		if (weapon != null) {
+			Destroy (weapon.gameObject);
 		}
-			
+
 		GameObject weaponObj = Instantiate (newWeapon.prefab, transform.GetChild(0));
 		weaponObj.transform.localPosition = Vector3.zero;
 		weaponObj.transform.localRotation = Quaternion.identity;
@@ -68,16 +63,6 @@ public class ShootingController : MonoBehaviour {
 		if (health != null) {
 			health.UpdateRenderersNextFrame ();
 		}
-	}
-
-	void ThrowWeapon () {
-		Vector3 pos = transform.parent.TransformPoint(0f, throwHeight, 1f);
-		GameObject newPickup = Instantiate (weaponPickupPrefab, pos, Quaternion.identity);
-		WeaponManager.WeaponData newWeaponData = WeaponManager.instance.WeaponDataFromName (weapon.name);
-		newPickup.GetComponent<WeaponPickup> ().Init (newWeaponData);
-		newPickup.GetComponent<Rigidbody>().velocity = transform.parent.forward * throwVelocity;
-
-		Destroy (weapon.gameObject);
 	}
 
 	void LateUpdate() {
@@ -142,8 +127,8 @@ public class ShootingController : MonoBehaviour {
 		return Mathf.Clamp (((angle + 180f) % 360f) - 180f, -clampAngle, clampAngle);
 	}
 		
-	public WeaponManager.WeaponData GetWeaponData() {
-		return (hasWeapon) ? WeaponManager.instance.WeaponDataFromName (weapon.name) : null;
+	public WeaponData GetWeaponData() {
+		return (hasWeapon) ? WeaponManager.instance.GetDataFromName (weapon.name) : null;
 	}
 
 	public void Die() {

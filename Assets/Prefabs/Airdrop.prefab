@@ -854,5 +854,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea4863a76b36419ea1118f60ba2072e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPrefab: {fileID: 1576351328228362, guid: 190d4d7c0e3b44f12bb8ff2b63158d75,
+  pickupPrefab: {fileID: 1300268370610314, guid: 660d960f2c0db4ab98341d71d79b7708,
     type: 2}

@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 
 	[Header("Equipment")]
 	public EquipmentData[] equipment = new EquipmentData[3]; //there are 3 types of equipment
+	GameObject[] equipmentObjects = new GameObject[3];
 	public Transform equipmentParent;
 
 	[Header("Picking Up")]
@@ -38,10 +39,16 @@ public class PlayerController : MonoBehaviour {
 	public GameObject timerBar;
 	public Text nextPickupText;
 
+	[Header("Throwing")]
+	public GameObject pickupPrefab;
+	public float throwHeight;
+	public float throwVelocity;
+
 	List<PickupTimer> curPickingupTimers = new List<PickupTimer>();
 
 	public bool inVehicle { get { return currentVehicle != null; } }
 
+	[HideInInspector]
 	public Rideable currentVehicle;
 
 	Rigidbody rb;
@@ -65,7 +72,7 @@ public class PlayerController : MonoBehaviour {
 		//set starting weapon
 		string weaponToUse = (LevelProgressManager.lastWeaponName != "None") ? LevelProgressManager.lastWeaponName : defaultWeaponName;
 		if (weaponToUse != "None") {
-			shooting.SetWeapon (WeaponManager.instance.WeaponDataFromName (weaponToUse));
+			shooting.SetWeapon (WeaponManager.instance.GetDataFromName (weaponToUse));
 		}
 	}
 
@@ -134,7 +141,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	//takes enemy weapon if you don't have one
-	public bool TrySwapWeapons(WeaponManager.WeaponData weaponData) {
+	public bool TrySwapWeapons(WeaponData weaponData) {
 		if (shooting.hasWeapon) {
 			return false;
 		}
@@ -232,9 +239,12 @@ public class PlayerController : MonoBehaviour {
 
 	public void SwitchEquipment(EquipmentData data) {
 		int index = (int) data.type;
-		//take off equipment from here
 		equipment [index] = data;
-		Instantiate (data.prefab, transform.position, transform.rotation, transform);
+
+		GameObject newEquipment = (GameObject) Instantiate (data.prefab, transform.position, transform.rotation, transform);
+		equipmentObjects [index] = newEquipment;
+
+		health.UpdateRenderersNextFrame ();
 	}
 
 	//picks up object associated with this timer
@@ -245,9 +255,23 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if (timer.type == PickupTimer.Type.Weapon) {
-			WeaponPickup weaponPickup = timer.pickup.GetComponent<WeaponPickup> ();
-			shooting.SetWeapon (weaponPickup.weaponData);
+		if (timer.type == PickupTimer.Type.Drop) {
+			Pickup drop = timer.pickup.GetComponent<Pickup> ();
+			if (drop.data.GetAssetType () == "Weapon") {
+				if (shooting.hasWeapon) {
+					ThrowPickup (shooting.GetWeaponData().ToAssetData());
+				}
+				shooting.SetWeapon (drop.data as WeaponData);
+			} else if (drop.data.GetAssetType() == "Equipment") {
+				EquipmentData newEquipmentData = drop.data as EquipmentData;
+				int index = (int)newEquipmentData.type;
+
+				if (equipmentObjects[index] != null) {
+					ThrowPickup (equipment[index]);
+					Destroy (equipmentObjects [index]);
+				}
+				SwitchEquipment (newEquipmentData);
+			}
 			Destroy (timer.pickup);
 		} else if (timer.type == PickupTimer.Type.Objective) {
 			LevelProgressManager.instance.CompleteObjective ();
@@ -275,9 +299,16 @@ public class PlayerController : MonoBehaviour {
 		timerBar.transform.localScale = new Vector3 (1f - curPickingupTimers[0].percentage, 1f, 1f);
 	}
 
+	void ThrowPickup (Data data) {
+		Vector3 pos = transform.TransformPoint(0f, throwHeight, 1f);
+		GameObject newPickup = Instantiate (pickupPrefab, pos, Quaternion.identity);
+		newPickup.GetComponent<Pickup> ().Init (data);
+		newPickup.GetComponent<Rigidbody>().velocity = transform.forward * throwVelocity;
+	}
+
 	public class PickupTimer {
 		public enum Type {
-			Weapon,
+			Drop,
 			Objective
 		};
 
@@ -299,10 +330,10 @@ public class PlayerController : MonoBehaviour {
 
 		//setup timer based on object
 		void DetermineType() {
-			WeaponPickup weaponPickup = pickup.GetComponent<WeaponPickup> ();
+			Pickup weaponPickup = pickup.GetComponent<Pickup> ();
 			if (weaponPickup != null) {
-				name = weaponPickup.weaponData.name;
-				type = Type.Weapon;
+				name = weaponPickup.data.name;
+				type = Type.Drop;
 				return;
 			}
 

@@ -23,13 +23,13 @@ public class Airdrop : MonoBehaviour {
 	}
 
 	void SpawnPayload () {
-		WeaponManager.WeaponData data = WeaponManager.instance.GetWeaponDataFromLootTable ();
+		Data data = DataManager<Data>.GetAnyRandomData ();
 		GameObject pickup = Instantiate (pickupPrefab, transform.TransformPoint(Vector3.up * 0.2f), Quaternion.identity);
-		pickup.GetComponent<WeaponPickup> ().Init (data);
+		pickup.GetComponent<Pickup> ().Init (data);
 	}
 
 	void Despawn () {
-		if (Spawner.spawners["AirdropSpawner"] != null) {
+		if (Spawner.spawners.ContainsKey("AirdropSpawner")) {
 			Spawner.spawners["AirdropSpawner"].SpawnerObjectDespawn ();
 		}
 
