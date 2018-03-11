@@ -29,9 +29,11 @@ public class PlayerController : MonoBehaviour {
 	public string curWeaponName { get { return shooting.curWeaponName; } }
 
 	[Header("Equipment")]
-	public EquipmentData[] equipment = new EquipmentData[3]; //there are 3 types of equipment
+	public List<string> startingEquipment = new List<string> ();
+	EquipmentData[] equipment = new EquipmentData[3]; //there are 3 types of equipment
 	GameObject[] equipmentObjects = new GameObject[3];
 	public Transform equipmentParent;
+	Jetpack jetpack; //current jetpack
 
 	[Header("Picking Up")]
 	public float pickupTime;
@@ -74,6 +76,10 @@ public class PlayerController : MonoBehaviour {
 		if (weaponToUse != "None") {
 			shooting.SetWeapon (WeaponManager.instance.GetDataFromName (weaponToUse));
 		}
+
+		foreach (string equipmentName in startingEquipment) {
+			SwitchEquipment (EquipmentManager.instance.GetDataFromName (equipmentName));
+		}
 	}
 
 	//launches character in a direction
@@ -85,6 +91,10 @@ public class PlayerController : MonoBehaviour {
 		rb.AddForce (new Vector3(dir.x, dir.magnitude * verticalFactor, dir.y) * swipeForce);
 		state = MovementState.Jumping;
 		nextAutoReset = Time.time + autoResetTime; //so you can't get stuck in jumping state
+
+		if (jetpack != null) {
+			jetpack.Launch ();
+		}
 	}
 
 	void EnterVehicle(Rideable newVehicle) {
@@ -252,12 +262,12 @@ public class PlayerController : MonoBehaviour {
 			ThrowPickup (equipment[index]);
 			Destroy (equipmentObjects [index]);
 		}
-		ApplyEquipmentBuff (data);
 
 		equipment [index] = data;
 
 		GameObject newEquipment = (GameObject) Instantiate (data.prefab, transform.position, transform.rotation, transform);
 		equipmentObjects [index] = newEquipment;
+		ApplyEquipmentBuff (data);
 
 		health.UpdateRenderersNextFrame ();
 	}
@@ -270,6 +280,7 @@ public class PlayerController : MonoBehaviour {
 				break;
 			case "Jetpack":
 				verticalFactor -= 1.5f;
+				jetpack = null;
 				break;
 		}
 	}
@@ -281,6 +292,7 @@ public class PlayerController : MonoBehaviour {
 				break;
 			case "Jetpack":
 				verticalFactor += 1.5f;
+				jetpack = equipmentObjects [(int)data.type].GetComponent<Jetpack> ();
 				break;
 		}
 	}
