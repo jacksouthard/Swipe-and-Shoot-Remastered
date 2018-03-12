@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4682921874379974}
-  - component: {fileID: 114437392669905242}
+  - component: {fileID: 114315428430965394}
   m_Layer: 0
   m_Name: Jetpack
   m_TagString: Untagged
@@ -176,7 +176,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1321478684326388}
   m_Mesh: {fileID: 4300026, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
---- !u!114 &114437392669905242
+--- !u!114 &114315428430965394
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -184,10 +184,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1248845869312164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0586d7a438eb47fdbd912e03203fb54, type: 3}
+  m_Script: {fileID: 11500000, guid: b2099cd8bb1a84412bb401466dfc3dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchTime: 3
+  launchTime: 5
+  heightIncrease: 1.5
 --- !u!198 &198471723219799280
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -93,11 +93,15 @@ MonoBehaviour:
   - name: Body Armor
     prefab: {fileID: 1713186567975090, guid: 0b3eaa05031f546b6b46ba2d0fb2fea6, type: 2}
     mesh: {fileID: 4300038, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    slot: 1
     type: 1
+    go: {fileID: 0}
   - name: Jetpack
     prefab: {fileID: 1248845869312164, guid: b23e12a60c2d845c9bb063154f60fbad, type: 2}
     mesh: {fileID: 4300026, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
-    type: 0
+    slot: 0
+    type: 1
+    go: {fileID: 0}
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1

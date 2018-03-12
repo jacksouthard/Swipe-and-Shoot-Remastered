@@ -23,7 +23,8 @@ public class Health : MonoBehaviour {
 	[Header("Hit")]
 	public float hitWait;
 	public Color hitColor;
-	public System.Action onHit;
+	public float resistance;
+	public System.Action<float> onHit;
 
 	[Header("Death")]
 	public float dyingTimer;
@@ -140,11 +141,11 @@ public class Health : MonoBehaviour {
 
 	public void TakeDamage (float damage) {
 		if (state == State.Alive) {
-			health -= damage;
-
 			if (onHit != null) {
-				onHit.Invoke ();
+				onHit.Invoke (damage);
 			}
+
+			health -= (damage / Mathf.Max(1f, resistance));
 
 			if (health <= 0f) {
 				Die ();

@@ -13,13 +13,12 @@ public class EquipmentManager : DataManager<EquipmentData> {
 
 [System.Serializable]
 public class EquipmentData : Data {
-	public enum Type {
+	public enum Slot {
 		Back = 0,
 		Chest = 1,
 		Head = 2
 	}
-
-	public Type type;
+	public Slot slot;
 
 	public override string GetAssetType () {
 		return "Equipment";

@@ -30,10 +30,8 @@ public class PlayerController : MonoBehaviour {
 
 	[Header("Equipment")]
 	public List<string> startingEquipment = new List<string> ();
-	EquipmentData[] equipment = new EquipmentData[3]; //there are 3 types of equipment
-	GameObject[] equipmentObjects = new GameObject[3];
+	Equipment[] equipment = new Equipment[3]; //there are 3 types of equipment
 	public Transform equipmentParent;
-	Jetpack jetpack; //current jetpack
 
 	[Header("Picking Up")]
 	public float pickupTime;
@@ -68,6 +66,7 @@ public class PlayerController : MonoBehaviour {
 		timerDisplay.transform.parent = null; //timer moves independently from player
 
 		health.onDeath += Die;
+		health.onHit += Hit;
 	}
 
 	void Start() {
@@ -92,8 +91,10 @@ public class PlayerController : MonoBehaviour {
 		state = MovementState.Jumping;
 		nextAutoReset = Time.time + autoResetTime; //so you can't get stuck in jumping state
 
-		if (jetpack != null) {
-			jetpack.Launch ();
+		foreach (Equipment data in equipment) {
+			if (data != null) {
+				data.OnJump ();
+			}
 		}
 	}
 
@@ -144,10 +145,16 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void Hit() {
-		nextAutoReset = Time.time + autoResetTime;
-		rb.constraints = RigidbodyConstraints.None;
-		shooting.canRotateParent = false;
+	public void Hit(float damage) {
+//		nextAutoReset = Time.time + autoResetTime;
+//		rb.constraints = RigidbodyConstraints.None;
+//		shooting.canRotateParent = false;
+
+		foreach (Equipment data in equipment) {
+			if (data != null) {
+				data.OnHit (damage);
+			}
+		}
 	}
 
 	//takes enemy weapon if you don't have one
@@ -255,46 +262,23 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void SwitchEquipment(EquipmentData data) {
-		int index = (int)data.type;
+		int index = (int)data.slot;
 
-		if (equipmentObjects[index] != null) {
-			RemoveEquipmentBuff (equipment[index]);
-			ThrowPickup (equipment[index]);
-			Destroy (equipmentObjects [index]);
+		if (equipment[index] != null) {
+			equipment [index].Remove ();
+			ThrowPickup (equipment[index].data);
 		}
-
-		equipment [index] = data;
-
+			
 		GameObject newEquipment = (GameObject) Instantiate (data.prefab, transform.position, transform.rotation, transform);
-		equipmentObjects [index] = newEquipment;
-		ApplyEquipmentBuff (data);
+		equipment [index] = newEquipment.GetComponent<Equipment>();
+		equipment [index].Init (newEquipment, data);
 
 		health.UpdateRenderersNextFrame ();
 	}
 
-	void RemoveEquipmentBuff(EquipmentData data) {
-		switch (data.name) {
-			case "Body Armor":
-				health.maxHealth -= 20f;
-				health.health = Mathf.Min (health.health, health.maxHealth);
-				break;
-			case "Jetpack":
-				verticalFactor -= 1.5f;
-				jetpack = null;
-				break;
-		}
-	}
-
-	void ApplyEquipmentBuff(EquipmentData data) {
-		switch (data.name) {
-			case "Body Armor":
-				health.maxHealth += 20f;
-				break;
-			case "Jetpack":
-				verticalFactor += 1.5f;
-				jetpack = equipmentObjects [(int)data.type].GetComponent<Jetpack> ();
-				break;
-		}
+	public void RemoveEquipment(int index) {
+		equipment [index].Remove ();
+		health.UpdateRenderersNextFrame ();
 	}
 
 	//picks up object associated with this timer

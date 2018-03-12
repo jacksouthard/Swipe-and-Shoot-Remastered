@@ -118,7 +118,7 @@ public class EnemyController : AIController {
 		}
 	}
 
-	public void TriggerAlert() {
+	public void TriggerAlert(float damage) {
 		if (alerted) {
 			return;
 		}
