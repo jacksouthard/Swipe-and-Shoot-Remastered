@@ -74,10 +74,10 @@ public class GameManager : MonoBehaviour {
 
 	void SetupGameOverScreen() {
 		Button continueButton = gameOverScreen.transform.Find ("Window").Find("Buttons").Find("ContinueButton").GetComponent<Button>();
-		continueButton.interactable = LevelProgressManager.curCheckpointId > 0;
+		continueButton.interactable = LevelProgressManager.curObjectiveId > 0;
 
 		Text buttonText = continueButton.GetComponentInChildren<Text> ();
-		buttonText.color = new Color (buttonText.color.r, buttonText.color.g, buttonText.color.b, (LevelProgressManager.curCheckpointId > 0) ? 1f : 0.5f);
+		buttonText.color = new Color (buttonText.color.r, buttonText.color.g, buttonText.color.b, (LevelProgressManager.curObjectiveId > 0) ? 1f : 0.5f);
 	}
 
 	public void EndLevel() {

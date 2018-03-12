@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : AIController {
 	public string defaultWeapon = "Random";
+	public override string curWeaponName { get { return shooting.curWeaponName; } }
+
 	public bool alerted;
 	public float alertTime;
 	public float alertRange;
@@ -28,6 +30,10 @@ public class EnemyController : AIController {
 		backsUp = moves;
 		originalActiveRange = activeRange;
 		health.onHit = TriggerAlert;
+	}
+
+	protected override void UpdateWeapon(string weaponName) {
+		defaultWeapon = weaponName;
 	}
 
 	void Start() {
@@ -139,7 +145,7 @@ public class EnemyController : AIController {
 	public void Unalert() {
 		alerted = false;
 		activeRange = originalActiveRange;
-		if (currentVisualEffect.name == "AlertedEffect") {
+		if (currentVisualEffect != null && currentVisualEffect.name == "AlertedEffect") {
 			RemoveEffect ();
 		}
 	}

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class AIController : MonoBehaviour {
+	public float hash; //unique id for each AI object
+
 	public float activeRange;
 	public float pathUpdateRate;
 
@@ -18,9 +20,31 @@ public class AIController : MonoBehaviour {
 
 	protected Transform target;
 
+	public virtual string curWeaponName { get { return "None"; } }
+
 	void Awake() {
+		LoadFromCheckpoint ();
+	}
+		
+	void LoadFromCheckpoint() {
+		hash = (transform.position.x * 1000) + (transform.position.z); //hash is based on initial position
+
+		if (LevelProgressManager.curObjectiveId > 0) {
+			if (LevelProgressManager.startingAIData.ContainsKey(hash)) {
+				AIData data = LevelProgressManager.startingAIData [hash];
+				transform.position = data.position;
+				transform.rotation = Quaternion.Euler (0, data.angle, 0);
+				UpdateWeapon (data.weaponName);
+			} else if(LevelProgressManager.killedAIs.Contains(hash)) {
+				Destroy (gameObject);
+				return;
+			}
+		}
+
 		this.Init ();
 	}
+
+	protected virtual void UpdateWeapon(string newWeapon) {}
 
 	protected virtual void Init() {
 		navAgent = gameObject.GetComponent<NavMeshAgent> ();
@@ -111,6 +135,10 @@ public class AIController : MonoBehaviour {
 
 		if (navAgent != null) {
 			Destroy (navAgent);
+		}
+
+		if (LevelProgressManager.instance != null) {
+			LevelProgressManager.instance.EnemyDeath (hash);
 		}
 
 		Destroy(this);

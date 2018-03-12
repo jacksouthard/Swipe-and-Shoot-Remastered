@@ -320,7 +320,6 @@ public class PlayerController : MonoBehaviour {
 				Destroy (timer.pickup.GetComponent<Collider> ());
 			} else {
 				escort.Enable ();
-				timer.pickup.tag = "Player";
 			}
 		}
 	}

@@ -13,14 +13,31 @@ public class Objective {
 
 	public Type type;
 
-	public GameObject go; //object to set up
-	public GameObject newObjects; //optional objects to enable after completing this objective
+	public Transform spawnPoint; //where the player spawns after completing this objective
+	public GameObject objectiveObj; //object to set up
+	public GameObject objectsToDisable; //optional objects to disable after completing this objective
+	public GameObject objectsToEnable; //optional objects to enable after completing this objective
+}
+
+public class AIData {
+	public Vector3 position;
+	public float angle;
+	public string weaponName;
+
+	public AIData (AIController controller) {
+		position = controller.transform.position;
+		angle = controller.transform.rotation.eulerAngles.y;
+		weaponName = controller.curWeaponName;
+	}
 }
 
 public class LevelProgressManager : MonoBehaviour {
 	public static LevelProgressManager instance;
-	public static int curCheckpointId;
+	public static int curObjectiveId;
 	public static string lastWeaponName = "None";
+	public static Dictionary<float, AIData> startingAIData = new Dictionary<float, AIData> ();
+	public static List<float> killedAIs = new List<float> ();
+	List<float> killedAIsSinceLastCheckpoint = new List<float>();
 	
 	[Header("Objective")]
 	public GameObject objectiveScreenIndicator;
@@ -31,7 +48,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public GameObject winScreen;
 
 	[Header("Debug")]
-	public int startingCheckpoint = 0;
+	public int startingObjective = 0;
 
 	public bool allEnemiesKilled { get { return enemyParent.childCount == 0; } }
 	public bool isComplete;
@@ -42,35 +59,44 @@ public class LevelProgressManager : MonoBehaviour {
 		instance = this;
 		enemyParent = GameObject.Find ("Enemies").transform;
 
-		if (curCheckpointId == 0) {
-			curCheckpointId = startingCheckpoint;
+		if (curObjectiveId == 0) {
+			curObjectiveId = startingObjective;
 		}
 
 		winScreen.SetActive (false);
 		pc = GameObject.FindObjectOfType<PlayerController> ();
 
-		InitCheckpoints ();
 		PrepareObjectives ();
 		InitNextObjective ();
 		UpdateObjectiveUI ();
 	}
 
 	void Start() {
-		if (curCheckpointId > 0) {
+		if (curObjectiveId > 0) {
 			UpdatePlayer ();
 		}
 	}
 
-	void InitCheckpoints() {
-		for (int i = 0; i < transform.childCount; i++) {
-			transform.GetChild (i).GetComponent<Checkpoint> ().Init (i); //initialize each checkpoint (child objects of this transform)
-		}
-	}
-
 	void PrepareObjectives() {
-		foreach(Objective objective in objectives) {
-			if (objective.newObjects != null) {
-				objective.newObjects.SetActive (false);
+		for(int i = 0; i < objectives.Count; i++) {
+			if (i < curObjectiveId) {
+				if (objectives [i].objectsToDisable != null) {
+					objectives [i].objectsToDisable.SetActive (false);
+				}
+
+				if (objectives [i].objectsToEnable != null) {
+					objectives [i].objectsToEnable.SetActive (true);
+				}
+
+				//reactivates escort
+				EscortController escort = objectives [i].objectiveObj.GetComponent<EscortController> ();
+				if (escort != null) {
+					escort.Enable ();
+				}
+			} else {
+				if (objectives [i].objectsToEnable != null) {
+					objectives [i].objectsToEnable.SetActive (false);
+				}
 			}
 		}
 	}
@@ -81,12 +107,12 @@ public class LevelProgressManager : MonoBehaviour {
 			return;
 		}
 
-		switch (objectives[0].type) {
+		switch (objectives[curObjectiveId].type) {
 			case Objective.Type.Pickup:
-				objectives[0].go.tag = "Pickup";
+				objectives[curObjectiveId].objectiveObj.tag = "Pickup";
 				break;
 			case Objective.Type.Zone:
-				objectives[0].go.GetComponent<PlayerTrigger> ().enterActions.AddListener (CompleteObjective);
+				objectives[curObjectiveId].objectiveObj.GetComponent<PlayerTrigger> ().enterActions.AddListener (CompleteObjective);
 				break;
 			case Objective.Type.KillCount:
 				//TODO
@@ -101,36 +127,59 @@ public class LevelProgressManager : MonoBehaviour {
 	void UpdateObjectiveUI() {
 		objectiveWorldIndicator.transform.parent = null; //unparent
 
-		bool hasIndicators = objectives.Count > 0 && objectives [0].type != Objective.Type.KillCount;
+		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && objectives [curObjectiveId].type != Objective.Type.KillCount;
 
 		//show/hide indicators
 		objectiveScreenIndicator.SetActive (hasIndicators);
 		objectiveWorldIndicator.SetActive (hasIndicators);
 
 		if (hasIndicators) {
-			objectiveScreenIndicator.GetComponent<EdgeView> ().Init(objectives[0].go); //set target
-			objectiveWorldIndicator.transform.position = objectives[0].go.transform.position; //move to target
+			objectiveScreenIndicator.GetComponent<EdgeView> ().Init(objectives[curObjectiveId].objectiveObj); //set target
+			objectiveWorldIndicator.transform.position = objectives[curObjectiveId].objectiveObj.transform.position; //move to target
 		}
 	}
 
 	void UpdatePlayer() {
-		pc.transform.position = transform.GetChild (curCheckpointId).position; //move player to last checkpoint
+		pc.transform.position = objectives[curObjectiveId - 1].spawnPoint.position; //move player to last checkpoint
 
 		GameObject.FindObjectOfType<CameraController> ().ResetPosition (); //move camera
 	}
 
-	//assumes player is completing objectives in order for now
-	public void CompleteObjective() {
-		if(objectives[0].newObjects != null) {
-			objectives [0].newObjects.SetActive (true);
+	void SaveAI() {
+		startingAIData.Clear ();
+		Dictionary<float, AIData> newAIData = new Dictionary<float, AIData> ();
+		AIController[] ais = GameObject.FindObjectsOfType<AIController> ();
+		foreach(AIController ai in ais) {
+			startingAIData.Add (ai.hash, new AIData(ai));
 		}
 
-		objectives.RemoveAt (0);
+		killedAIs.AddRange (killedAIsSinceLastCheckpoint);
+		killedAIsSinceLastCheckpoint.Clear ();
+	}
 
-		if (objectives.Count == 0) {
+	public void EnemyDeath(float hash) {
+		killedAIsSinceLastCheckpoint.Add (hash);
+	}
+
+	//assumes player is completing objectives in order for now
+	public void CompleteObjective() {
+		if(objectives[curObjectiveId].objectsToEnable != null) {
+			objectives [curObjectiveId].objectsToEnable.SetActive (true);
+		}
+		if(objectives[curObjectiveId].objectsToDisable != null) {
+			objectives [curObjectiveId].objectsToDisable.SetActive (false);
+		}
+
+		curObjectiveId++;
+		lastWeaponName = pc.curWeaponName;
+
+		if (curObjectiveId == objectives.Count) {
 			CompleteLevel ();
 		} else {
+			SaveAI ();
 			InitNextObjective ();
+
+			NotificationManager.instance.ShowBanner ("CHECKPOINT REACHED");
 		}
 
 		UpdateObjectiveUI ();
@@ -148,14 +197,6 @@ public class LevelProgressManager : MonoBehaviour {
 		GameManager.instance.EndLevel ();
 	}
 
-	//called when a player enters a checkpoint
-	public void TriggerCheckpoint(int checkpointId) {
-		curCheckpointId = checkpointId;
-		lastWeaponName = pc.curWeaponName;
-
-		NotificationManager.instance.ShowBanner ("CHECKPOINT REACHED");
-	}
-
 	public void Restart() {
 		GameManager.instance.Restart ();
 	}
@@ -165,7 +206,9 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	public static void Reset() {
-		curCheckpointId = 0;
+		curObjectiveId = 0;
 		lastWeaponName = "None";
+		startingAIData.Clear ();
+		killedAIs.Clear ();
 	}
 }

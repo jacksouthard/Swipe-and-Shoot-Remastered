@@ -5,6 +5,8 @@ using UnityEngine;
 public class AllyController : AIController {
 	public string defaultWeapon = "Random";
 
+	public override string curWeaponName { get { return shooting.curWeaponName; } }
+
 	[Header("Control")]
 	public bool moves = true;
 
@@ -19,6 +21,10 @@ public class AllyController : AIController {
 
 		backsUp = moves;
 		GameManager.allEnemyTargets.Add (transform);
+	}
+
+	protected override void UpdateWeapon(string weaponName) {
+		defaultWeapon = weaponName;
 	}
 
 	void Start() {

@@ -10,10 +10,13 @@ public class EscortController : AIController {
 
 		base.Init ();
 
-		enabled = false;
+		if (tag != "Player") {
+			enabled = false;
+		}
 	}
 
 	public void Enable() {
+		tag = "Player";
 		enabled = true;
 		GameManager.allEnemyTargets.Add (transform);
 	}
