@@ -224,6 +224,10 @@ public class Health : MonoBehaviour {
 	//sets all MeshRenderers to a certain color
 	void ChangeToColor(Color color) {
 		foreach (var mr in mrs) {
+			if (mr == null) {
+				UpdateRenderers ();
+				return;
+			}
 			foreach (var mat in mr.materials) {
 				mat.color = color;
 			}
