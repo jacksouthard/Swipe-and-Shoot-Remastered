@@ -9,21 +9,25 @@ public class LineManager : MonoBehaviour {
 
 	public LineRenderer line;
 	PlayerController pc;
+	float mass;
 
 	void Start () {
 		line.useWorldSpace = true;
 		pc = GetComponentInParent<PlayerController> ();
+		mass = pc.GetComponent<Rigidbody> ().mass;
 	}
 
 	public void UpdateLineTrajectory (Vector2 direction)
 	{
+		float angle = Mathf.Atan2 (direction.x, direction.y) * Mathf.Rad2Deg;
+		float x = direction.magnitude * pc.swipeForce;
+		float y = x * pc.verticalFactor;
+		Vector3 velocity = (new Vector3(0, y, x) / mass) * Time.fixedDeltaTime;
+
 		int maxSegments = 30;
 		float resolution = 10f; // factor to increase number of segments
 
 		var positions = new List<Vector3> ();
-
-		Vector3 gravity = new Vector3 (0f, Physics.gravity.y / (resolution * resolution), 0f);
-		Vector3 velocity = (new Vector3(direction.x * distanceRatio, direction.magnitude * pc.verticalFactor * heightRatio, direction.y * distanceRatio)) / resolution;
 
 		Vector3 currentPos = transform.position;
 		Vector3 lastPos = currentPos;
@@ -38,8 +42,8 @@ public class LineManager : MonoBehaviour {
 
 			lastPos = currentPos;
 
-	    	currentPos += velocity;
-	    	velocity += gravity;
+			currentPos += Quaternion.Euler(0f, angle, 0f) * (velocity / resolution);
+			velocity += Physics.gravity / resolution;
 	    }
 
 	    BuildLine(positions);
