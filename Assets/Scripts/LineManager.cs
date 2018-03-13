@@ -3,10 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LineManager : MonoBehaviour {
-	[Header("Tweakers")]
-	public float heightRatio;
-	public float distanceRatio;
-
 	public LineRenderer line;
 	PlayerController pc;
 	float mass;
