@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4138976885120154}
   - component: {fileID: 114227078029244328}
   - component: {fileID: 114246819811646816}
+  - component: {fileID: 114095955571790950}
   - component: {fileID: 114994002116265576}
   m_Layer: 0
   m_Name: GameData
@@ -42,6 +43,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114095955571790950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021587275389494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c2e5429fb184e03b28190a104b4cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  datas:
+  - name: Soldier
+    prefab: {fileID: 1552984534006486, guid: c03ae9a50baab4126998bd015dcfd584, type: 2}
+  - name: Pilot
+    prefab: {fileID: 1398844481974702, guid: 3c38b30c37c3f4f0ca69097e7f46e98b, type: 2}
 --- !u!114 &114227078029244328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,14 +111,10 @@ MonoBehaviour:
     prefab: {fileID: 1713186567975090, guid: 0b3eaa05031f546b6b46ba2d0fb2fea6, type: 2}
     mesh: {fileID: 4300038, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
     slot: 1
-    type: 1
-    go: {fileID: 0}
   - name: Jetpack
     prefab: {fileID: 1248845869312164, guid: b23e12a60c2d845c9bb063154f60fbad, type: 2}
     mesh: {fileID: 4300026, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
     slot: 0
-    type: 1
-    go: {fileID: 0}
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1
