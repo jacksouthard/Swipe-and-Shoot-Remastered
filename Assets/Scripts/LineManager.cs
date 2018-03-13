@@ -81,7 +81,7 @@ public class LineManager : MonoBehaviour {
 //	}
 	 
 	void BuildLine(List<Vector3> positions) {
-	    line.SetVertexCount(positions.Count);
+		line.positionCount = positions.Count;
 	    for (var i = 0; i < positions.Count; ++i)
 	    {
 	        line.SetPosition(i, positions[i]);

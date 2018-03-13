@@ -147,7 +147,6 @@ public class LevelProgressManager : MonoBehaviour {
 
 	void SaveAI() {
 		startingAIData.Clear ();
-		Dictionary<float, AIData> newAIData = new Dictionary<float, AIData> ();
 		AIController[] ais = GameObject.FindObjectsOfType<AIController> ();
 		foreach(AIController ai in ais) {
 			startingAIData.Add (ai.hash, new AIData(ai));

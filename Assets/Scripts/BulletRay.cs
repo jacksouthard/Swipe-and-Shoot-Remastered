@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletRay : MonoBehaviour {
-	bool live = false;
-
 	LineRenderer lr;
 	Transform flash;
 
@@ -22,7 +20,5 @@ public class BulletRay : MonoBehaviour {
 		flash.transform.LookAt (end);
 
 		lr.SetPositions (positions);
-
-		live = true;
 	}
 }

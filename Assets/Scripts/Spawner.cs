@@ -79,7 +79,7 @@ public class Spawner : MonoBehaviour {
 			curIndex = newIndex;
 		}
 
-		GameObject enemy = Instantiate (prefab, spawnPoint, Quaternion.identity, transform);
+		Instantiate (prefab, spawnPoint, Quaternion.identity, transform);
 
 		count++;
 	}

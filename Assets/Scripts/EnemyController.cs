@@ -145,7 +145,7 @@ public class EnemyController : AIController {
 	public void Unalert() {
 		alerted = false;
 		activeRange = originalActiveRange;
-		if (currentVisualEffect != null && currentVisualEffect.name == "AlertedEffect") {
+		if (currentVisualEffect != null && currentVisualEffect.effectName == "AlertedEffect") {
 			RemoveEffect ();
 		}
 	}
