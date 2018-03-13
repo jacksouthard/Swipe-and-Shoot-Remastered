@@ -187,8 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2099cd8bb1a84412bb401466dfc3dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchTime: 5
+  launchTime: 0.75
   heightIncrease: 1.5
+  jumps: 10
 --- !u!198 &198471723219799280
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -199,7 +200,7 @@ ParticleSystem:
   lengthInSec: 0.3
   simulationSpeed: 1
   stopAction: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -3605,7 +3606,7 @@ ParticleSystem:
   lengthInSec: 0.3
   simulationSpeed: 1
   stopAction: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
