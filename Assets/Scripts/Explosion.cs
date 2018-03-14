@@ -14,6 +14,7 @@ public class Explosion : MonoBehaviour {
 		GameObject explosion = (GameObject) Instantiate (prefab, position, Quaternion.identity);
 		Explosion script = explosion.GetComponent<Explosion> ();
 		script.StartCoroutine (script.Initiate(range, force, damage));
+		GameObject.Destroy (explosion, 2f);
 	}
 
 	public IEnumerator Initiate(float range, float force, float damage) {
