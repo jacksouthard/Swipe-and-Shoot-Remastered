@@ -280,7 +280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1322730438458252
 GameObject:
   m_ObjectHideFlags: 1
@@ -395,7 +395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1445380272166410
 GameObject:
   m_ObjectHideFlags: 1
@@ -1239,7 +1239,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: resume game
+  m_Text: resume
 --- !u!114 &114230837813381140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1324,7 +1324,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: return to main menu
+  m_Text: main
 --- !u!114 &114241473571908200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1510,7 +1510,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RETURN TO MAIN
+  m_Text: MAIN
 --- !u!114 &114360802738111092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2418,7 +2418,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: restart level
+  m_Text: restart
 --- !u!114 &114900250725362602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2503,7 +2503,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RESTART LEVEL
+  m_Text: RETRY
 --- !u!114 &114937883552635012
 MonoBehaviour:
   m_ObjectHideFlags: 1

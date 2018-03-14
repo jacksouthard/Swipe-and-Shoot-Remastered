@@ -382,7 +382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RESTART LEVEL
+  m_Text: RESTART
 --- !u!114 &114479597362518040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -789,7 +789,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RETURN TO MAIN
+  m_Text: MAIN
 --- !u!222 &222162724701435638
 CanvasRenderer:
   m_ObjectHideFlags: 1

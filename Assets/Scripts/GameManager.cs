@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
-	public static bool firstTime = true; //reset this when we go to the main menu
+	public static bool firstTime = true;
 	public static List<Transform> allEnemyTargets = new List<Transform>();
 
 	[Header("Game Start")]
@@ -66,20 +66,11 @@ public class GameManager : MonoBehaviour {
 
 	public void GameOver() {
 		if (!isGameWon && !isGameOver) {
-			SetupGameOverScreen ();
 			gameOverScreen.SetActive (true);
 			isGameOver = true;
 
 			EndLevel ();
 		}
-	}
-
-	void SetupGameOverScreen() {
-		Button continueButton = gameOverScreen.transform.Find ("Window").Find("Buttons").Find("ContinueButton").GetComponent<Button>();
-		continueButton.interactable = LevelProgressManager.curObjectiveId > 0;
-
-		Text buttonText = continueButton.GetComponentInChildren<Text> ();
-		buttonText.color = new Color (buttonText.color.r, buttonText.color.g, buttonText.color.b, (LevelProgressManager.curObjectiveId > 0) ? 1f : 0.5f);
 	}
 
 	public void EndLevel() {
@@ -93,11 +84,13 @@ public class GameManager : MonoBehaviour {
 	public void Restart(bool fullReset = true) {
 		if (fullReset) {
 			LevelProgressManager.Reset ();
+			firstTime = true;
 		}
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 	}
 
 	public void ReturnToMain() {
+		firstTime = true;
 		SceneManager.LoadScene (0);
 	}
 }
