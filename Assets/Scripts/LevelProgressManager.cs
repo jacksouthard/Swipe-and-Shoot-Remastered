@@ -20,7 +20,7 @@ public class Objective {
 
 	public bool showsWorldIndicator;
 	public string bannerText;
-	public List<string> splashTexts = new List<string>();
+	public List<NotificationManager.SplashData> splashTexts = new List<NotificationManager.SplashData>();
 }
 
 public class AIData {
@@ -178,7 +178,7 @@ public class LevelProgressManager : MonoBehaviour {
 		}
 
 		//NOTE: splash text on the final objective does not work
-		foreach(string message in objectives[curObjectiveId].splashTexts) {
+		foreach(NotificationManager.SplashData message in objectives[curObjectiveId].splashTexts) {
 			NotificationManager.instance.ShowSplash (message);
 		}
 

@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour {
 	[System.Serializable]
 	public class LevelData {
 		public string name;
-		public List<string> startingMessages;
+		public List<NotificationManager.SplashData> startingMessages;
 		public string character;
 
 		public string GetCharacterName() {

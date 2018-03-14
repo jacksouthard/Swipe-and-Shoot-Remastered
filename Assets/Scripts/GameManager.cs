@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
 		if (firstTime) {
 			firstTime = false;
 
-			foreach (string message in levelData.startingMessages) {
+			foreach (NotificationManager.SplashData message in levelData.startingMessages) {
 				NotificationManager.instance.ShowSplash (message);
 			}
 		}

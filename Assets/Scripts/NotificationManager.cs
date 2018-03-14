@@ -12,6 +12,7 @@ public class NotificationManager : MonoBehaviour {
 
 	public GameObject splashParent;
 	Text splashText;
+	Image splashImage;
 	Animator splashAnim;
 
 	public GameObject helpParent;
@@ -19,7 +20,7 @@ public class NotificationManager : MonoBehaviour {
 	Animator helpAnim;
 
 	//for storage in the event of successive messages
-	List<string> splashes = new List<string> ();
+	List<SplashData> splashes = new List<SplashData> ();
 	List<string> banners = new List<string>();
 
 	const float bannerTime = 2f;
@@ -30,7 +31,10 @@ public class NotificationManager : MonoBehaviour {
 		bannerText = bannerParent.GetComponentInChildren<Text> ();
 		bannerAnim = bannerParent.GetComponent<Animator>();
 
-		splashText = splashParent.transform.Find("Panel").Find("SplashText").GetComponent<Text> (); //there is also text on the close button so we need to make sure it's the right one
+		Transform splashPanel = splashParent.transform.Find ("Panel");
+		splashText = splashPanel.Find("SplashText").GetComponent<Text> (); //there is also text on the close button so we need to make sure it's the right one
+		splashImage = splashPanel.Find("SplashImage").GetComponent<Image>() ;
+
 		splashAnim = splashParent.GetComponent<Animator>();
 
 		helpText = helpParent.GetComponentInChildren<Text> ();
@@ -69,8 +73,12 @@ public class NotificationManager : MonoBehaviour {
 	}
 
 	//notifications that fill the whole screen and pause the game
-	public void ShowSplash(string message) {
-		splashes.Add (message);
+	public void ShowSplash(string message, string spriteName) {
+		ShowSplash (new SplashData(message, spriteName));
+	}
+
+	public void ShowSplash(SplashData data) {
+		splashes.Add (data);
 
 		if (splashes.Count == 1) {
 			DisplaySplash ();
@@ -81,7 +89,13 @@ public class NotificationManager : MonoBehaviour {
 	//show splash text
 	void DisplaySplash() {
 		TimeManager.SetPaused (true);
-		splashText.text = splashes[0];
+		splashText.text = splashes[0].message;
+		if (string.IsNullOrEmpty (splashes [0].spriteName)) {
+			splashImage.enabled = false;
+		} else {
+			splashImage.sprite = SpriteManager.instance.GetDataFromName (splashes[0].spriteName);
+			splashImage.enabled = true;
+		}
 	}
 
 	public void HideSplash() {
@@ -112,5 +126,16 @@ public class NotificationManager : MonoBehaviour {
 
 	void SetAnim(Animator anim, bool state) {
 		anim.SetBool ("Active", state);
+	}
+
+	[System.Serializable]
+	public class SplashData {
+		public string message;
+		public string spriteName;
+
+		public SplashData (string _message, string _spriteName) {
+			message = _message;
+			spriteName = _spriteName;
+		}
 	}
 }

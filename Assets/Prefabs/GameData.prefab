@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114227078029244328}
   - component: {fileID: 114246819811646816}
   - component: {fileID: 114095955571790950}
+  - component: {fileID: 114926838792757542}
   - component: {fileID: 114994002116265576}
   m_Layer: 0
   m_Name: GameData
@@ -115,6 +116,18 @@ MonoBehaviour:
     prefab: {fileID: 1248845869312164, guid: b23e12a60c2d845c9bb063154f60fbad, type: 2}
     mesh: {fileID: 4300026, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
     slot: 0
+--- !u!114 &114926838792757542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021587275389494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfb10c2f39134d33871a5bbbc7a5134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  datas: []
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,11 +142,17 @@ MonoBehaviour:
   levelData:
   - name: Level 1
     startingMessages: []
+    character: 
   - name: Level 2
     startingMessages:
-    - Drive to the enemy base and free the pilot
+    - message: Drive to the enemy base and free the pilot
+      spriteName: 
+    character: 
   - name: Level 3
     startingMessages:
-    - Infiltrate the base and steal the chopper!
+    - message: Infiltrate the base and steal the chopper!
+      spriteName: 
+    character: Pilot
   - name: Endless
     startingMessages: []
+    character: 
