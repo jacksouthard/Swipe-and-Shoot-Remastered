@@ -9,8 +9,14 @@ public class Killzone : MonoBehaviour {
 			if (otherHealth.state == Health.State.Alive) {
 				otherHealth.Die ();
 
-				if (otherHealth.GetComponent<PlayerController>() != null) {
-					Destroy (other.GetComponentInParent<Rigidbody> ());
+				PlayerController pc = otherHealth.GetComponent<PlayerController> ();
+				if (pc != null) {
+					if (!pc.inVehicle) {
+						other.GetComponentInParent<Rigidbody> ().isKinematic = true;
+					} else {
+						pc.currentVehicle.GetComponent<Rigidbody> ().isKinematic = true;
+						GameManager.instance.GameOver ();
+					}
 				}
 			}
 		} else {
