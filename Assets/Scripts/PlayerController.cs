@@ -33,9 +33,6 @@ public class PlayerController : MonoBehaviour {
 	Equipment[] equipment = new Equipment[3]; //there are 3 types of equipment
 	public Transform equipmentParent;
 
-	[Header("Characters")]
-	public string startingCharacterName;
-
 	[Header("Picking Up")]
 	public float pickupTime;
 	public GameObject timerDisplay;
@@ -83,7 +80,7 @@ public class PlayerController : MonoBehaviour {
 			SwitchEquipment (EquipmentManager.instance.GetDataFromName (equipmentName));
 		}
 
-		Instantiate (CostumeManager.instance.GetDataFromName(startingCharacterName), transform.position, transform.rotation, transform);
+		Instantiate (CostumeManager.instance.GetDataFromName(GameManager.instance.levelData.GetCharacterName()), transform.position, transform.rotation, transform);
 	}
 
 	//launches character in a direction

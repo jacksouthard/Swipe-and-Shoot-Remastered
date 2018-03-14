@@ -11,6 +11,11 @@ public class LevelManager : MonoBehaviour {
 	public class LevelData {
 		public string name;
 		public List<string> startingMessages;
+		public string character;
+
+		public string GetCharacterName() {
+			return (string.IsNullOrEmpty (character)) ? "Soldier" : character;
+		}
 	}	
 
 	void Awake() {

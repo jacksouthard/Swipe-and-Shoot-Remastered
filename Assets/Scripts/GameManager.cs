@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
 	[Header("Game Start")]
 	public GameObject startScreen;
 	public Text levelTitle;
+	public Text characterText;
 
 	[Header("Game Over")]
 	public GameObject gameOverScreen;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour {
 	[Header("Pause")]
 	public GameObject pauseScreen;
 
-	LevelManager.LevelData levelData;
+	public LevelManager.LevelData levelData { get; private set; }
 
 	void Awake() {
 		instance = this;
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour {
 	void InitLevelData() {
 		levelData = LevelManager.instance.levelData [SceneManager.GetActiveScene().buildIndex - 1];
 		levelTitle.text = levelData.name;
+		characterText.text = "character: " + levelData.GetCharacterName();
 	}
 
 	public void StartGame() {

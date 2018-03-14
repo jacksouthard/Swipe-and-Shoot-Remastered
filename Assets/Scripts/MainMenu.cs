@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 	public Text levelTitleText;
+	public Text characterText;
 
 	int curLevelIndex = 0;
 
@@ -26,6 +27,7 @@ public class MainMenu : MonoBehaviour {
 	void LoadLevelData(int levelIndex) {
 		curLevelIndex = levelIndex;
 		levelTitleText.text = LevelManager.instance.levelData [levelIndex].name;
+		characterText.text = "Character: " + LevelManager.instance.levelData [levelIndex].GetCharacterName ();
 	}
 
 	public void StartLevel() {

@@ -12,10 +12,6 @@ public class CostumeManager : MonoBehaviour {
 	}
 
 	public GameObject GetDataFromName(string _name) {
-		if (string.IsNullOrEmpty (_name)) {
-			return datas [0].prefab;
-		}
-
 		foreach(CostumeData data in datas) {
 			if (data.name == _name) {
 				return data.prefab;
