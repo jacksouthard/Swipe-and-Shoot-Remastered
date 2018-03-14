@@ -22,6 +22,10 @@ public class Vehicle : Rideable {
 	[Header("Reversing")]
 	public float reverseEngageAngle = 90f;
 
+	[Header("Exit")]
+	public GameObject exitingVehicle;
+	public float spawnDelay;
+
 	[Space(20)]
 	[Header("Debug")]
 	public bool grounded = false;
@@ -72,6 +76,8 @@ public class Vehicle : Rideable {
 
 	public override void Dismount () {
 		if (dismountable) {
+			StartCoroutine (SpawnExitVehicle(mounter.transform));
+
 			base.Dismount ();
 			vectorArrow.gameObject.SetActive (false);
 
@@ -238,6 +244,16 @@ public class Vehicle : Rideable {
 		foreach (var wheel in steeringWheels) {
 			wheel.onGround = false;
 		}
+	}
+
+	IEnumerator SpawnExitVehicle(Transform rider) {
+		if (exitingVehicle == null) {
+			yield break;
+		}
+
+		yield return new WaitForSeconds (spawnDelay);
+
+		Instantiate (exitingVehicle, rider.position, Quaternion.Euler(0, rider.rotation.eulerAngles.y, 0));
 	}
 
 	public void Die() {

@@ -14,7 +14,8 @@ public class Rideable : MonoBehaviour {
 	public bool driver = false;
 	GameObject handsContainer;
 	Transform seat;
-	GameObject mounter;
+
+	protected GameObject mounter;
 
 	[HideInInspector]
 	public Rigidbody rb;
@@ -32,7 +33,7 @@ public class Rideable : MonoBehaviour {
 		handsContainer.SetActive (false);
 	}
 
-	public bool canBeMounted { get { return (Time.time >= nextEnterTime); } }
+	public bool canBeMounted { get { return (Time.time >= nextEnterTime) && !driver; } }
 
 	public virtual void Mount (GameObject _mounter) {
 		// universal
