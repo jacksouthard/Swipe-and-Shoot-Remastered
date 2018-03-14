@@ -17,6 +17,10 @@ public class Objective {
 	public GameObject objectiveObj; //object to set up
 	public GameObject objectsToDisable; //optional objects to disable after completing this objective
 	public GameObject objectsToEnable; //optional objects to enable after completing this objective
+
+	public bool showsWorldIndicator;
+	public string bannerText;
+	public List<string> splashTexts = new List<string>();
 }
 
 public class AIData {
@@ -131,7 +135,7 @@ public class LevelProgressManager : MonoBehaviour {
 
 		//show/hide indicators
 		objectiveScreenIndicator.SetActive (hasIndicators);
-		objectiveWorldIndicator.SetActive (hasIndicators);
+		objectiveWorldIndicator.SetActive (hasIndicators && objectives[curObjectiveId].showsWorldIndicator);
 
 		if (hasIndicators) {
 			objectiveScreenIndicator.GetComponent<EdgeView> ().Init(objectives[curObjectiveId].objectiveObj); //set target
@@ -169,6 +173,15 @@ public class LevelProgressManager : MonoBehaviour {
 			objectives [curObjectiveId].objectsToDisable.SetActive (false);
 		}
 
+		if (!string.IsNullOrEmpty(objectives [curObjectiveId].bannerText)) {
+			NotificationManager.instance.ShowBanner (objectives[curObjectiveId].bannerText);
+		}
+
+		//NOTE: splash text on the final objective does not work
+		foreach(string message in objectives[curObjectiveId].splashTexts) {
+			NotificationManager.instance.ShowSplash (message);
+		}
+
 		curObjectiveId++;
 		lastWeaponName = pc.curWeaponName;
 
@@ -177,8 +190,6 @@ public class LevelProgressManager : MonoBehaviour {
 		} else {
 			SaveAI ();
 			InitNextObjective ();
-
-			NotificationManager.instance.ShowBanner ("CHECKPOINT REACHED");
 		}
 
 		UpdateObjectiveUI ();

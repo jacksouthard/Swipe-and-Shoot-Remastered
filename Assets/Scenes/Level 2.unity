@@ -4299,6 +4299,7 @@ MonoBehaviour:
   regenWait: 1000
   hitWait: 0.05
   hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
+  resistance: 0
   dyingTimer: 1
   decayTimer: 2
   smokes: 0
@@ -13516,6 +13517,7 @@ MonoBehaviour:
   regenWait: 1000
   hitWait: 0.05
   hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
+  resistance: 0
   dyingTimer: 1
   decayTimer: 2
   smokes: 0
@@ -21388,6 +21390,31 @@ Prefab:
       propertyPath: objectives.Array.data[4].objectiveObj
       value: 
       objectReference: {fileID: 439120466}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[0].bannerText
+      value: CHECKPOINT REACHED
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[1].bannerText
+      value: CHECKPOINT REACHED
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[2].bannerText
+      value: CHECKPOINT REACHED
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].showsWorldIndicator
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[2].showsWorldIndicator
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
   m_IsPrefabParent: 0
@@ -32363,6 +32390,7 @@ MonoBehaviour:
   regenWait: 1000
   hitWait: 0.05
   hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
+  resistance: 0
   dyingTimer: 1
   decayTimer: 2
   smokes: 0
@@ -32885,6 +32913,7 @@ MonoBehaviour:
   regenWait: 1000
   hitWait: 0.05
   hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
+  resistance: 0
   dyingTimer: 1
   decayTimer: 2
   smokes: 0
@@ -34192,6 +34221,7 @@ MonoBehaviour:
   regenWait: 1000
   hitWait: 0.05
   hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
+  resistance: 0
   dyingTimer: 1
   decayTimer: 2
   smokes: 0
