@@ -23,24 +23,30 @@ public class Objective {
 	public List<NotificationManager.SplashData> splashTexts = new List<NotificationManager.SplashData>();
 }
 
-public class AIData {
+public class SavedAI {
 	public Vector3 position;
 	public float angle;
 	public string weaponName;
 
-	public AIData (AIController controller) {
+	public SavedAI (AIController controller) {
 		position = controller.transform.position;
 		angle = controller.transform.rotation.eulerAngles.y;
 		weaponName = controller.curWeaponName;
 	}
 }
 
+public class SavedVehicle {
+	public Vector3 position;
+	public Quaternion rotation;
+}
+
 public class LevelProgressManager : MonoBehaviour {
 	public static LevelProgressManager instance;
 	public static int curObjectiveId;
 	public static string lastWeaponName = "None";
-	public static Dictionary<float, AIData> startingAIData = new Dictionary<float, AIData> ();
+	public static Dictionary<float, SavedAI> startingAIData = new Dictionary<float, SavedAI> ();
 	public static List<float> killedAIs = new List<float> ();
+	public static Dictionary<float, SavedVehicle> startingVehicleData = new Dictionary<float, SavedVehicle>();
 	List<float> killedAIsSinceLastCheckpoint = new List<float>();
 	
 	[Header("Objective")]
@@ -149,15 +155,21 @@ public class LevelProgressManager : MonoBehaviour {
 		GameObject.FindObjectOfType<CameraController> ().ResetPosition (); //move camera
 	}
 
-	void SaveAI() {
+	void SaveGame() {
 		startingAIData.Clear ();
 		AIController[] ais = GameObject.FindObjectsOfType<AIController> ();
 		foreach(AIController ai in ais) {
-			startingAIData.Add (ai.hash, new AIData(ai));
+			startingAIData.Add (ai.hash, new SavedAI(ai));
 		}
 
 		killedAIs.AddRange (killedAIsSinceLastCheckpoint);
 		killedAIsSinceLastCheckpoint.Clear ();
+
+		startingVehicleData.Clear ();
+		Vehicle[] vehicles = GameObject.FindObjectsOfType<Vehicle> ();
+		foreach(Vehicle vehicle in vehicles) {
+			startingVehicleData.Add (vehicle.hash, vehicle.GetSavedData());
+		}
 	}
 
 	public void EnemyDeath(float hash) {
@@ -188,7 +200,7 @@ public class LevelProgressManager : MonoBehaviour {
 		if (curObjectiveId == objectives.Count) {
 			CompleteLevel ();
 		} else {
-			SaveAI ();
+			SaveGame ();
 			InitNextObjective ();
 		}
 
@@ -221,5 +233,10 @@ public class LevelProgressManager : MonoBehaviour {
 		lastWeaponName = "None";
 		startingAIData.Clear ();
 		killedAIs.Clear ();
+		startingVehicleData.Clear ();
+	}
+
+	public static float CalculateHash(Vector3 pos) {
+		return (pos.x * 1000) + (pos.z); //hash is based on initial position
 	}
 }

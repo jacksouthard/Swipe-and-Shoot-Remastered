@@ -27,11 +27,11 @@ public class AIController : MonoBehaviour {
 	}
 		
 	void LoadFromCheckpoint() {
-		hash = (transform.position.x * 1000) + (transform.position.z); //hash is based on initial position
+		hash = LevelProgressManager.CalculateHash (transform.position);
 
 		if (LevelProgressManager.curObjectiveId > 0) {
 			if (LevelProgressManager.startingAIData.ContainsKey(hash)) {
-				AIData data = LevelProgressManager.startingAIData [hash];
+				SavedAI data = LevelProgressManager.startingAIData [hash];
 				transform.position = data.position;
 				transform.rotation = Quaternion.Euler (0, data.angle, 0);
 				UpdateWeapon (data.weaponName);
