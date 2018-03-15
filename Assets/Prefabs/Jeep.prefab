@@ -1691,7 +1691,7 @@ MonoBehaviour:
   turnSpeed: 30000
   rotationSpeedLimiter: 1
   rotationSpeedLimitRatio: 1.5
-  maxSpeed: 80000
+  maxSpeed: 100000
   acceleration: 0.015
   decceleration: 0.03
   groundedDrag: 7
@@ -1699,6 +1699,8 @@ MonoBehaviour:
   airDrag: 0
   airAngDrag: 5
   reverseEngageAngle: 90
+  exitingVehicle: {fileID: 0}
+  spawnDelay: 0
   grounded: 0
   targetDirection: {x: 0, y: 0}
   targetSpeedPercent: 0
@@ -1733,6 +1735,7 @@ MonoBehaviour:
   regenWait: 30
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
+  resistance: 0
   dyingTimer: 0
   decayTimer: 2
   smokes: 1
