@@ -20,6 +20,8 @@ public class EnemyController : AIController {
 	float originalActiveRange;
 	EffectFollow currentVisualEffect;
 
+	AudioSource deathSound;
+
 	protected override void Init() {
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
 
@@ -38,6 +40,7 @@ public class EnemyController : AIController {
 
 	void Start() {
 		rb = GetComponent<Rigidbody> ();
+		deathSound = GetComponent<AudioSource> ();
 		nextPathUpdate = Time.time;
 
 		if (!moves) {
@@ -201,6 +204,9 @@ public class EnemyController : AIController {
 		if (Spawner.spawners.ContainsKey("EnemySpawner")) {
 			Spawner.spawners["EnemySpawner"].SpawnerObjectDespawn ();
 		}
+
+		deathSound.clip = AudioManager.instance.GetRandomEnemyDeathSound ();
+		deathSound.Play ();
 
 		base.Die ();
 	}

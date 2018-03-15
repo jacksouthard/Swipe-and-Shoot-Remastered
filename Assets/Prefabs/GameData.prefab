@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114246819811646816}
   - component: {fileID: 114095955571790950}
   - component: {fileID: 114926838792757542}
+  - component: {fileID: 114356074869754320}
   - component: {fileID: 114994002116265576}
   m_Layer: 0
   m_Name: GameData
@@ -116,6 +117,24 @@ MonoBehaviour:
     prefab: {fileID: 1248845869312164, guid: b23e12a60c2d845c9bb063154f60fbad, type: 2}
     mesh: {fileID: 4300026, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
     slot: 0
+--- !u!114 &114356074869754320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021587275389494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a581e973856fd48b29d2d5ce6d343008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDeathSounds:
+  - {fileID: 8300000, guid: 0e2edf782b26f41eb810098733d69b77, type: 3}
+  - {fileID: 8300000, guid: 0911ea01dcc11466ca09916f3db421bb, type: 3}
+  - {fileID: 8300000, guid: cbd48c4acc98643128d27e5842da823c, type: 3}
+  - {fileID: 8300000, guid: 5f1736d604809469b84462872439d3a2, type: 3}
+  - {fileID: 8300000, guid: 15ce2d376c6ab45968746e8d4faaad62, type: 3}
+  - {fileID: 8300000, guid: 46efcc3d151b94e519c21814bb1a9449, type: 3}
 --- !u!114 &114926838792757542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,23 +161,28 @@ MonoBehaviour:
   levelData:
   - name: Level 1
     startingMessages: []
+    mainMenuMessages: []
     character: 
   - name: Level 2
     startingMessages:
     - message: Drive to the enemy base and free the pilot
       spriteName: 
+    mainMenuMessages: []
     character: 
   - name: Level 3
     startingMessages:
     - message: Infiltrate the base and steal the chopper!
       spriteName: 
+    mainMenuMessages: []
     character: Pilot
   - name: Level 4
     startingMessages:
     - message: You need some wings soldier! We have intel this base has the plane
         we need... Steal it!
       spriteName: 
+    mainMenuMessages: []
     character: 
   - name: Endless
     startingMessages: []
+    mainMenuMessages: []
     character: 
