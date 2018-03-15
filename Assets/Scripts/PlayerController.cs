@@ -203,6 +203,8 @@ public class PlayerController : MonoBehaviour {
 		rb.velocity = Vector3.zero;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 		shooting.canRotateParent = true;
+
+		SwipeManager.instance.Pop ();
 	}
 
 	public void Die() {

@@ -4,8 +4,12 @@ using UnityEngine;
 
 //controls all swipe input and sends it to the player
 public class SwipeManager : MonoBehaviour {
+	public static SwipeManager instance;
+
 	public float maxSwipeDistance;
 	public float swipeCancelRange;
+
+	public bool autoSwiping;
 
 	[Header("UI")]
 	public RectTransform joystickVisual;
@@ -20,7 +24,11 @@ public class SwipeManager : MonoBehaviour {
 	bool isSelectingPlayer;
 	Vector2 startPos;
 
+	float timer;
+
 	void Awake() {
+		instance = this;
+
 		gameCam = GameObject.FindObjectOfType<Camera> ();
 		player = GameObject.FindObjectOfType<PlayerController> ();
 		swipeLine = player.GetComponentInChildren<LineRenderer> ();
@@ -40,13 +48,22 @@ public class SwipeManager : MonoBehaviour {
 		if (isTapping && Input.GetMouseButtonUp (0)) {
 			EndTap (Input.mousePosition);
 		}
+
+		if (timer > 0) {
+			timer -= Time.deltaTime;
+		}
 	}
 
 	void LateUpdate() {
 		if (isTapping) {
 			if (isSelectingPlayer) {
-				player.TryRotateInDir (CalculateDirection(Input.mousePosition).normalized);
+				Vector2 dir = CalculateDirection (Input.mousePosition);
+				player.TryRotateInDir (dir.normalized);
 				UpdateLine (Input.mousePosition);
+
+				if (autoSwiping && CanLaunch(dir)) {
+					player.Swipe (dir);
+				}
 			} else if (player.inVehicle) {
 				UpdateVehicle (Input.mousePosition);
 			}
@@ -103,6 +120,12 @@ public class SwipeManager : MonoBehaviour {
 		}
 	}
 
+	public void Pop() {
+		if(autoSwiping) {
+			timer = 0.1f; //wait a bit before you can swipe again
+		}
+	}
+
 	//update LineRenderer
 	void UpdateLine(Vector2 curPos) {
 		Vector2 dir = CalculateDirection (curPos);
@@ -134,11 +157,15 @@ public class SwipeManager : MonoBehaviour {
 
 		Vector2 dir = CalculateDirection (endPos);
 
-		if (isSelectingPlayer && player.state == PlayerController.MovementState.Grounded && dir.magnitude > swipeCancelRange) {
+		if (CanLaunch(dir)) {
 			player.Swipe (dir);
 		}
 
 		isSelectingPlayer = false;
+	}
+
+	bool CanLaunch (Vector2 dir) {
+		return isSelectingPlayer && player.state == PlayerController.MovementState.Grounded && dir.magnitude > swipeCancelRange && timer <= 0f;
 	}
 
 	Vector2 CalculateDirection(Vector2 curPos) {
