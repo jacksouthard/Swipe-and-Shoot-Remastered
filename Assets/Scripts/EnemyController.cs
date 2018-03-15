@@ -178,7 +178,7 @@ public class EnemyController : AIController {
 
 	public void EjectFromVehicle() {
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
-		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		rb.constraints = RigidbodyConstraints.None;
 		rb.velocity = currentVehicle.GetComponent<Rigidbody> ().velocity;
 			
 		currentVehicle = null;

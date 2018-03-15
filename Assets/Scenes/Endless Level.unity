@@ -579,7 +579,7 @@ GameObject:
   m_Name: Water_Extended
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &100769696
@@ -10061,6 +10061,10 @@ Prefab:
     - target: {fileID: 400000, guid: 6451d0b9ddbb5440cb0e1d2c5b2f47d5, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6451d0b9ddbb5440cb0e1d2c5b2f47d5, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: 6451d0b9ddbb5440cb0e1d2c5b2f47d5, type: 3}
