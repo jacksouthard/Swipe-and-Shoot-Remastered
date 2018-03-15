@@ -128,8 +128,7 @@ public class LevelProgressManager : MonoBehaviour {
 				//TODO
 				break;
 			case Objective.Type.Vehicle:
-				//TODO
-//				objectives[0].go.GetComponent<PlayerTrigger> ().enterActions.AddListener (CompleteObjective);
+				objectives [curObjectiveId].objectiveObj.GetComponent<Rideable> ().SetupObjective ();
 				break;
 		}
 	}

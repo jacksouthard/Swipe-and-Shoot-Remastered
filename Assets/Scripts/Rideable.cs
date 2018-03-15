@@ -17,6 +17,8 @@ public class Rideable : MonoBehaviour {
 
 	protected GameObject mounter;
 
+	bool isObjective = false;
+
 	[HideInInspector]
 	public Rigidbody rb;
 
@@ -55,6 +57,10 @@ public class Rideable : MonoBehaviour {
 			em.enabled = false;
 			mounter.GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = false;
 		}
+
+		if (isObjective) {
+			this.CompleteObjective ();
+		}
 	}
 
 	public virtual void Dismount () {
@@ -76,5 +82,14 @@ public class Rideable : MonoBehaviour {
 			em.enabled = true;
 			mounter.GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = true;
 		}
+	}
+
+	protected virtual void CompleteObjective() {
+		LevelProgressManager.instance.CompleteObjective ();
+	}
+
+	//sets up vehicle as objective
+	public void SetupObjective() {
+		isObjective = true;
 	}
 }
