@@ -14,7 +14,10 @@ public class MainMenu : MonoBehaviour {
 		TimeManager.SetPaused (false);
 		LevelProgressManager.Reset ();
 		Spawner.spawners.Clear ();
-		LoadLevelData (0);//later replace with last level
+	}
+
+	void Start() {
+		LoadLevelData (GameProgress.farthestLevel);
 	}
 
 	public void CycleLevel(int dir) {
@@ -26,8 +29,17 @@ public class MainMenu : MonoBehaviour {
 
 	void LoadLevelData(int levelIndex) {
 		curLevelIndex = levelIndex;
-		levelTitleText.text = LevelManager.instance.levelData [levelIndex].name;
-		characterText.text = "Character: " + LevelManager.instance.levelData [levelIndex].GetCharacterName ();
+		LevelManager.LevelData data = LevelManager.instance.levelData [levelIndex];
+		levelTitleText.text = data.name;
+		characterText.text = "Character: " + data.GetCharacterName ();
+
+		if (GameProgress.firstTime) {
+			foreach(NotificationManager.SplashData message in data.mainMenuMessages) {
+				NotificationManager.instance.ShowSplash (message);
+			}
+
+			GameProgress.firstTime = false;
+		}
 	}
 
 	public void StartLevel() {

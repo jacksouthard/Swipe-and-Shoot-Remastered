@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject pauseScreen;
 
 	public LevelManager.LevelData levelData { get; private set; }
+	public int curLevelId { get { return SceneManager.GetActiveScene().buildIndex - 1; } }
 
 	void Awake() {
 		instance = this;
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void InitLevelData() {
-		levelData = LevelManager.instance.levelData [SceneManager.GetActiveScene().buildIndex - 1];
+		levelData = LevelManager.instance.levelData [curLevelId];
 		levelTitle.text = levelData.name;
 		characterText.text = "character: " + levelData.GetCharacterName();
 	}

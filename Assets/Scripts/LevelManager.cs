@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour {
 	public class LevelData {
 		public string name;
 		public List<NotificationManager.SplashData> startingMessages;
+		public List<NotificationManager.SplashData> mainMenuMessages;
 		public string character;
 
 		public string GetCharacterName() {

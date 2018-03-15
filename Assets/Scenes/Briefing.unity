@@ -256,6 +256,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[0].mainMenuMessages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4138976885120154, guid: f44ae4d7524684aee81468242e81f628, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -287,6 +292,11 @@ Prefab:
     - target: {fileID: 4138976885120154, guid: f44ae4d7524684aee81468242e81f628, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[0].mainMenuMessages.Array.data[0].message
+      value: yapetacular
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f44ae4d7524684aee81468242e81f628, type: 2}
@@ -631,7 +641,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1 &1209409284
 GameObject:
