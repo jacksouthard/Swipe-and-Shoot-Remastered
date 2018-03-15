@@ -153,6 +153,12 @@ MonoBehaviour:
     - message: Infiltrate the base and steal the chopper!
       spriteName: 
     character: Pilot
+  - name: Level 4
+    startingMessages:
+    - message: You need some wings soldier! We have intel this base has the plane
+        we need... Steal it!
+      spriteName: 
+    character: 
   - name: Endless
     startingMessages: []
     character: 
