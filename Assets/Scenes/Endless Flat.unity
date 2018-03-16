@@ -1348,7 +1348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 0.03
   damage: 1
-  range: 7
+  range: 20
   speedMultiplier: 1
   accuracy: 2
   bulletRayPrefab: {fileID: 1303374916533454, guid: 387e19391ca184c4789e4926758050be,
@@ -1461,7 +1461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverDistance: 20
-  target: {fileID: 777349326}
+  targetUpdateRate: 0.5
+  target: {fileID: 0}
 --- !u!54 &1116516960
 Rigidbody:
   m_ObjectHideFlags: 0

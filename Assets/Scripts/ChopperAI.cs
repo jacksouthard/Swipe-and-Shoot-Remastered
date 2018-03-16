@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class ChopperAI : MonoBehaviour {
 	public float hoverDistance;
-	public Transform target;
+	public float targetUpdateRate;
 
+	Transform player;
+	public Transform target;
 	Helicopter heli;
 	Vector2 targetPos;
 	Vector2 pos2d;
+	ShootingController shooting;
 	bool active;
+	float nextTargetUpdateTime;
 
 	void Start () {
 		heli = GetComponent<Helicopter> ();
+		player = GameObject.FindObjectOfType<PlayerController> ().transform;
+		shooting = GetComponentInChildren<ShootingController> ();
 
 		AIStart ();
 	}
@@ -21,7 +27,6 @@ public class ChopperAI : MonoBehaviour {
 		if (!heli.flying) {
 			heli.EngageFlight ();
 		}
-		SetNextTargetPos ();
 		active = true;
 	}
 
@@ -35,12 +40,22 @@ public class ChopperAI : MonoBehaviour {
 			return;
 		}
 
+		if (Time.time > nextTargetUpdateTime) {
+			nextTargetUpdateTime = Time.time + targetUpdateRate;
+			UpdateTarget ();
+		}
+
 		pos2d = new Vector2 (transform.position.x, transform.position.z);
 		if ((pos2d - targetPos).magnitude < (hoverDistance / 4f)) {
 			SetNextTargetPos ();
 		}
 
 		heli.targetDirection = CalculateDirectionToTarget ();
+	}
+
+	void UpdateTarget() {
+		target = (shooting.target != null) ? shooting.target : player;
+		SetNextTargetPos ();
 	}
 
 	Vector2 CalculateDirectionToTarget () {
