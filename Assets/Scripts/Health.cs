@@ -212,7 +212,7 @@ public class Health : MonoBehaviour {
 		}
 
 		if (explodesOnDeath) {
-			Explosion.Create (transform.Find("Center").position, 5, explosionForce, explosionDamage);
+			Explosion.Create (transform.Find("Center").position, 10, explosionForce, explosionDamage);
 		}
 	}
 

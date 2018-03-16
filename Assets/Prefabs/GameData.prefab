@@ -96,7 +96,7 @@ MonoBehaviour:
   - name: RPG
     prefab: {fileID: 1872636546965686, guid: 5d9f50fda1aa5441798144693901e3fc, type: 2}
     mesh: {fileID: 4300046, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
-    tier: 3
+    tier: -1
 --- !u!114 &114246819811646816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,8 +180,7 @@ MonoBehaviour:
     image: {fileID: 0}
   - name: Level 4
     startingMessages:
-    - message: You need some wings soldier! We have intel this base has the plane
-        we need... Steal it!
+    - message: This is where the enemies keep their fighter jets. Destroy them!
       spriteName: 
     mainMenuMessages: []
     character: 
