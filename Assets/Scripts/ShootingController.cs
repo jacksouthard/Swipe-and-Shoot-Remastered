@@ -161,7 +161,11 @@ public class ShootingController : MonoBehaviour {
 		}
 
 		if (closestObj != null) {
-			closestObj = closestObj.Find ("Center");
+			Transform center = closestObj.Find ("Center");
+			if (center != null) {
+				print ("wtf");
+				closestObj = center;
+			}
 		}
 
 		return closestObj;
