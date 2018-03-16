@@ -45,7 +45,7 @@ public class Helicopter : Rideable {
 
 	Health health;
 
-	Transform vectorArrow;
+	public Transform vectorArrow;
 
 	// reversing
 	int reverseMutliplier = 1;
@@ -213,7 +213,7 @@ public class Helicopter : Rideable {
 	}
 
 	void ApplyFlyingForce () {
-		Vector3 force = Vector3.forward * maxSpeed * curFlySpeed;
+		Vector3 force = Vector3.forward * maxSpeed * curFlySpeed * curRotorSpeed;
 		rb.AddRelativeForce (force);
 	}
 

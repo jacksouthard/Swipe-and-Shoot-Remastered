@@ -28,6 +28,7 @@ public class ChopperAI : MonoBehaviour {
 			heli.EngageFlight ();
 		}
 		active = true;
+		heli.vectorArrow.gameObject.SetActive (false);
 	}
 
 	public void AIStop () {
