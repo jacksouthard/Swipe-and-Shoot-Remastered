@@ -15,6 +15,7 @@ public class NotificationManager : MonoBehaviour {
 	Image splashImage;
 	Animator splashAnim;
 	GameObject continueButton;
+	bool isSplashing;
 
 	public GameObject helpParent;
 	Text helpText;
@@ -90,7 +91,7 @@ public class NotificationManager : MonoBehaviour {
 	}
 
 	IEnumerator ShowSplashText(bool firstTime) {
-		continueButton.SetActive (false);
+		isSplashing = true;
 		splashText.text = "";
 		if (firstTime) {
 			yield return new WaitForSecondsRealtime (splashAnimTime);
@@ -98,15 +99,14 @@ public class NotificationManager : MonoBehaviour {
 
 		int curCharacterIndex = 0;
 		int messageLength = splashes [0].message.Length;
-		bool tapped = false;
 
-		while (!tapped && curCharacterIndex < messageLength) {
+		while (isSplashing && curCharacterIndex < messageLength) {
 			splashText.text += splashes [0].message[curCharacterIndex];
 			curCharacterIndex++;
 			yield return new WaitForSecondsRealtime (splashDelayBetweenCharacters);
 		}
 
-		continueButton.SetActive (true);
+		isSplashing = false;
 		splashText.text = splashes [0].message;
 	}
 
@@ -124,6 +124,11 @@ public class NotificationManager : MonoBehaviour {
 	}
 
 	public void HideSplash() {
+		if (isSplashing) {
+			isSplashing = false;
+			return;
+		}
+
 		splashes.RemoveAt (0);
 
 		if (splashes.Count == 0) {
