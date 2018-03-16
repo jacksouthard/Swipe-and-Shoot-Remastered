@@ -20,9 +20,6 @@ public class Vehicle : Rideable {
 	public float airDrag;
 	public float airAngDrag;
 
-	[Header("Reversing")]
-	public float reverseEngageAngle = 90f;
-
 	[Header("Exit")]
 	public GameObject exitingVehicle;
 	public float spawnDelay;
@@ -125,17 +122,12 @@ public class Vehicle : Rideable {
 			float vehicleAngle = transform.eulerAngles.y;
 			vehicleAngle = ((vehicleAngle + 90f) % 360f) - 180f;
 
+			Vector2 forward = new Vector2 (transform.forward.x, transform.forward.z);
+			int multiplier = Mathf.RoundToInt(Mathf.Sign (Vector2.Dot(forward, targetDirection)));
+			reverseMutliplier = multiplier;
+			targetSpeedPercent = multiplier;
+
 			float angleDiff = targetAngle - vehicleAngle;
-
-			if (Mathf.Abs (angleDiff) > reverseEngageAngle) {
-				// enter reverse mode
-				reverseMutliplier = -1;
-				targetSpeedPercent = -1;
-			} else {
-				reverseMutliplier = 1;
-				targetSpeedPercent = 1;
-			}
-
 			float ZeroTo90Angle = Mathf.Abs(90f - Mathf.Abs (angleDiff)) / 90f;
 			rotationSpeedLimiter = Mathf.Clamp (ZeroTo90Angle, 0.1f, 1f);
 		}
