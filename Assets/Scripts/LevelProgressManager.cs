@@ -140,15 +140,34 @@ public class LevelProgressManager : MonoBehaviour {
 	void UpdateObjectiveUI() {
 		objectiveWorldIndicator.transform.parent = null; //unparent
 
-		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && objectives [curObjectiveId].type != Objective.Type.Kills;
+		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count;
+
+		GameObject target = objectives [curObjectiveId].objectiveObj;
+		//choose objective arrow target
+		if (objectives [curObjectiveId].type == Objective.Type.Kills) {
+			Transform targetEnemy = null;
+			Transform targetParent = objectives [curObjectiveId].objectiveObj.transform;
+			foreach(Transform child in targetParent) {
+				if (child.name.Contains ("Target")) {
+					targetEnemy = child;
+					break;
+				}
+			}
+
+			if (targetEnemy != null) {
+				target = targetEnemy.gameObject;
+			} else {
+				hasIndicators = false;
+			}
+		}
 
 		//show/hide indicators
 		objectiveScreenIndicator.SetActive (hasIndicators);
 		objectiveWorldIndicator.SetActive (hasIndicators && objectives[curObjectiveId].showsWorldIndicator);
 
 		if (hasIndicators) {
-			objectiveScreenIndicator.GetComponent<EdgeView> ().Init(objectives[curObjectiveId].objectiveObj); //set target
-			objectiveWorldIndicator.transform.position = objectives[curObjectiveId].objectiveObj.transform.position; //move to target
+			objectiveScreenIndicator.GetComponent<EdgeView> ().Init(target); //set target
+			objectiveWorldIndicator.transform.position = target.transform.position; //move to target
 		}
 	}
 
