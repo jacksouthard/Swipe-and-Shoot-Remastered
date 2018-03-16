@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour {
 		public List<NotificationManager.SplashData> startingMessages;
 		public List<NotificationManager.SplashData> mainMenuMessages;
 		public string character;
+		public Sprite image;
 
 		public string GetCharacterName() {
 			return (string.IsNullOrEmpty (character)) ? "Soldier" : character;

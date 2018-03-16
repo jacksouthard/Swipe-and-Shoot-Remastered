@@ -163,18 +163,21 @@ MonoBehaviour:
     startingMessages: []
     mainMenuMessages: []
     character: 
+    image: {fileID: 21300000, guid: 57f3899e3f8ed495791e5d2c7e8d2123, type: 3}
   - name: Level 2
     startingMessages:
     - message: Drive to the enemy base and free the pilot
       spriteName: 
     mainMenuMessages: []
     character: 
+    image: {fileID: 0}
   - name: Level 3
     startingMessages:
     - message: Infiltrate the base and steal the chopper!
       spriteName: 
     mainMenuMessages: []
     character: Pilot
+    image: {fileID: 0}
   - name: Level 4
     startingMessages:
     - message: You need some wings soldier! We have intel this base has the plane
@@ -182,7 +185,9 @@ MonoBehaviour:
       spriteName: 
     mainMenuMessages: []
     character: 
+    image: {fileID: 0}
   - name: Endless
     startingMessages: []
     mainMenuMessages: []
     character: 
+    image: {fileID: 0}
