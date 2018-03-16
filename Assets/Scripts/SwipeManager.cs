@@ -141,6 +141,8 @@ public class SwipeManager : MonoBehaviour {
 	void UpdateVehicle(Vector2 curPos) {
 		if (player.currentVehicle is Vehicle) {
 			(player.currentVehicle as Vehicle).targetDirection = CalculateDirection (curPos);
+		} else if (player.currentVehicle is Helicopter) {
+			(player.currentVehicle as Helicopter).targetDirection = CalculateDirection (curPos);
 		}
 	}
 
@@ -152,6 +154,8 @@ public class SwipeManager : MonoBehaviour {
 		if (player.inVehicle) {
 			if (player.currentVehicle is Vehicle) {
 				(player.currentVehicle as Vehicle).targetDirection = Vector2.zero;
+			} else if (player.currentVehicle is Helicopter) {
+				(player.currentVehicle as Helicopter).targetDirection = Vector2.zero;
 			}
 		}
 

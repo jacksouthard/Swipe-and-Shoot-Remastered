@@ -190,3 +190,8 @@ MonoBehaviour:
     mainMenuMessages: []
     character: 
     image: {fileID: 0}
+  - name: Endless Flat
+    startingMessages: []
+    mainMenuMessages: []
+    character: 
+    image: {fileID: 0}

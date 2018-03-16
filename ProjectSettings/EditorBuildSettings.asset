@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Endless Level.unity
     guid: bc561a8235b5b4216907c62d1c7a9b48
+  - enabled: 1
+    path: Assets/Scenes/Endless Flat.unity
+    guid: ac2dbfb728b2d40d2b67297944787cbe
