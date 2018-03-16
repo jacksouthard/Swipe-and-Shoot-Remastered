@@ -14,6 +14,7 @@ public class NotificationManager : MonoBehaviour {
 	Text splashText;
 	Image splashImage;
 	Animator splashAnim;
+	GameObject continueButton;
 
 	public GameObject helpParent;
 	Text helpText;
@@ -26,6 +27,7 @@ public class NotificationManager : MonoBehaviour {
 	const float bannerTime = 2f;
 	const float bannerWait = 0.5f; //delay between successive banners
 	const float splashAnimTime = 0.5f; //delay before unpausing after the last splash screen
+	const float splashDelayBetweenCharacters = 0.05f; //delay between each character
 
 	void Awake() {
 		bannerText = bannerParent.GetComponentInChildren<Text> ();
@@ -33,7 +35,8 @@ public class NotificationManager : MonoBehaviour {
 
 		Transform splashPanel = splashParent.transform.Find ("Panel");
 		splashText = splashPanel.Find("SplashText").GetComponent<Text> (); //there is also text on the close button so we need to make sure it's the right one
-		splashImage = splashPanel.Find("SplashImage").GetComponent<Image>() ;
+		splashImage = splashPanel.Find("SplashImage").GetComponent<Image>();
+		continueButton = splashPanel.Find("CloseButton").gameObject;
 
 		splashAnim = splashParent.GetComponent<Animator>();
 
@@ -81,21 +84,43 @@ public class NotificationManager : MonoBehaviour {
 		splashes.Add (data);
 
 		if (splashes.Count == 1) {
-			DisplaySplash ();
+			DisplaySplash (true);
 			SetAnim (splashAnim, true); //only play animation the first time
 		}
 	}
 
+	IEnumerator ShowSplashText(bool firstTime) {
+		continueButton.SetActive (false);
+		splashText.text = "";
+		if (firstTime) {
+			yield return new WaitForSecondsRealtime (splashAnimTime);
+		}
+
+		int curCharacterIndex = 0;
+		int messageLength = splashes [0].message.Length;
+		bool tapped = false;
+
+		while (!tapped && curCharacterIndex < messageLength) {
+			splashText.text += splashes [0].message[curCharacterIndex];
+			curCharacterIndex++;
+			yield return new WaitForSecondsRealtime (splashDelayBetweenCharacters);
+		}
+
+		continueButton.SetActive (true);
+		splashText.text = splashes [0].message;
+	}
+
 	//show splash text
-	void DisplaySplash() {
+	void DisplaySplash(bool firstTime = false) {
 		TimeManager.SetPaused (true);
-		splashText.text = splashes[0].message;
 		if (string.IsNullOrEmpty (splashes [0].spriteName)) {
 			splashImage.enabled = false;
 		} else {
 			splashImage.sprite = SpriteManager.instance.GetDataFromName (splashes[0].spriteName);
 			splashImage.enabled = true;
 		}
+			
+		StartCoroutine (ShowSplashText(firstTime));
 	}
 
 	public void HideSplash() {
