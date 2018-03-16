@@ -8,7 +8,6 @@ public class Vehicle : Rideable {
 	[Header("Turning")]
 	public float turnSpeed;
 	public float rotationSpeedLimiter = 1f;
-	public float rotationSpeedLimitRatio;
 
 	[Header("Speed")]
 	public float maxSpeed;
@@ -123,10 +122,11 @@ public class Vehicle : Rideable {
 			vectorArrow.gameObject.SetActive (true);
 
 			// calculate weather to reverse or not
-			float vechicleAngle = transform.eulerAngles.y;
-			vechicleAngle = ((vechicleAngle + 90f) % 360f) - 180f;
+			float vehicleAngle = transform.eulerAngles.y;
+			vehicleAngle = ((vehicleAngle + 90f) % 360f) - 180f;
 
-			float angleDiff = targetAngle - vechicleAngle; 
+			float angleDiff = targetAngle - vehicleAngle;
+
 			if (Mathf.Abs (angleDiff) > reverseEngageAngle) {
 				// enter reverse mode
 				reverseMutliplier = -1;
@@ -135,6 +135,9 @@ public class Vehicle : Rideable {
 				reverseMutliplier = 1;
 				targetSpeedPercent = 1;
 			}
+
+			float ZeroTo90Angle = Mathf.Abs(90f - Mathf.Abs (angleDiff)) / 90f;
+			rotationSpeedLimiter = Mathf.Clamp (ZeroTo90Angle, 0.1f, 1f);
 		}
 	}
 
@@ -190,7 +193,7 @@ public class Vehicle : Rideable {
 			}
 		}
 		rb.AddRelativeTorque (Vector3.up * targetRotPercentage * turnSpeed * Mathf.Abs (curWheelSpeed) * wheelsRatio * reverseMutliplier);
-		rotationSpeedLimiter = Mathf.Clamp01(Mathf.Abs(rotationSpeedLimitRatio / rb.angularVelocity.y));
+//		rotationSpeedLimiter = Mathf.Clamp01(Mathf.Abs(rotationSpeedLimitRatio / rb.angularVelocity.y));
 	}
 
 	void ApplyDrivingWheelForce () {
