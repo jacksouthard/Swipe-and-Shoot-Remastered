@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour {
 
 	//rotates in direction of swipe unless an enemy is in range
 	public void TryRotateInDir(Vector2 dir) {
-		if (shooting.targetInRange) {
+		if (shooting.targetInRange || dir.magnitude == 0) {
 			return;
 		}
 

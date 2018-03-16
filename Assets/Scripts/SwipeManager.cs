@@ -130,7 +130,7 @@ public class SwipeManager : MonoBehaviour {
 	void UpdateLine(Vector2 curPos) {
 		Vector2 dir = CalculateDirection (curPos);
 
-		swipeLine.enabled = (dir.magnitude > swipeCancelRange);
+		swipeLine.enabled = (dir.magnitude > 0);
 
 		Color lineColor = (player.state == PlayerController.MovementState.Grounded) ? Color.white : new Color(1, 1, 1, 0.125f);
 		lm.line.material.color = lineColor;
@@ -169,7 +169,7 @@ public class SwipeManager : MonoBehaviour {
 	}
 
 	bool CanLaunch (Vector2 dir) {
-		return isSelectingPlayer && player.state == PlayerController.MovementState.Grounded && dir.magnitude > swipeCancelRange && timer <= 0f;
+		return isSelectingPlayer && player.state == PlayerController.MovementState.Grounded && dir.magnitude > 0 && timer <= 0f;
 	}
 
 	Vector2 CalculateDirection(Vector2 curPos) {
@@ -177,9 +177,10 @@ public class SwipeManager : MonoBehaviour {
 		dir = RotateVector (dir, -gameCam.transform.rotation.eulerAngles.y); //rotates the vector so that it aligns with the world angle
 		dir /= (Screen.height / 2); //scale based on screen size
 
-		if (dir.magnitude > maxSwipeDistance) {
-			dir = dir.normalized * maxSwipeDistance;
-		}
+		float magnitude = dir.magnitude * (maxSwipeDistance / swipeCancelRange) - maxSwipeDistance;
+		magnitude = Mathf.Clamp (magnitude, 0, maxSwipeDistance);
+
+		dir = dir.normalized * magnitude;
 
 		return dir;
 	}
