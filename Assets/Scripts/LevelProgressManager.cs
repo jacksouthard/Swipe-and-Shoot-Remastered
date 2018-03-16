@@ -136,7 +136,7 @@ public class LevelProgressManager : MonoBehaviour {
 	void UpdateObjectiveUI() {
 		objectiveWorldIndicator.transform.parent = null; //unparent
 
-		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && objectives [curObjectiveId].type != Objective.Type.KillCount;
+		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && objectives [curObjectiveId].type != Objective.Type.Kills;
 
 		//show/hide indicators
 		objectiveScreenIndicator.SetActive (hasIndicators);
