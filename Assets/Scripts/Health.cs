@@ -165,13 +165,14 @@ public class Health : MonoBehaviour {
 
 			health -= (damage / Mathf.Max(1f, resistance));
 
+			EndRegen ();
+
 			if (health <= 0f) {
 				Die ();
+				return;
 			} else {
 				StartCoroutine (HitAnimation ());
 			}
-
-			EndRegen ();
 
 			if (!smokes) {
 				return;
@@ -210,13 +211,13 @@ public class Health : MonoBehaviour {
 		if (onDeath != null) {
 			onDeath.Invoke ();
 		}
-
-		if (explodesOnDeath) {
-			Explosion.Create (transform.Find("Center").position, 10, explosionForce, explosionDamage);
-		}
 	}
 
 	void Decay () {
+		if (explodesOnDeath) {
+			Explosion.Create (transform.Find("Center").position, 10, explosionForce, explosionDamage);
+		}
+
 		state = State.Decaying;
 
 		// disable colliders
@@ -245,6 +246,11 @@ public class Health : MonoBehaviour {
 	 
 	//sets all MeshRenderers to a certain color
 	void ChangeToColor(Color color) {
+		if (mrs == null) {
+			UpdateRenderers ();
+			return;
+		}
+
 		foreach (var mr in mrs) {
 			if (mr == null) {
 				UpdateRenderers ();

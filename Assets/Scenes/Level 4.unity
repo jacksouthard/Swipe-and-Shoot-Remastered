@@ -1008,7 +1008,7 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
-  dyingTimer: 0
+  dyingTimer: 0.2
   decayTimer: 2
   explodesOnDeath: 1
   explosionDamage: 20
@@ -2758,7 +2758,7 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
-  dyingTimer: 0
+  dyingTimer: 0.2
   decayTimer: 2
   explodesOnDeath: 1
   explosionDamage: 20
@@ -4793,7 +4793,7 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
-  dyingTimer: 0
+  dyingTimer: 0.2
   decayTimer: 2
   explodesOnDeath: 1
   explosionDamage: 20
@@ -18763,7 +18763,7 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
-  dyingTimer: 0
+  dyingTimer: 0.2
   decayTimer: 2
   explodesOnDeath: 1
   explosionDamage: 20
@@ -21360,7 +21360,7 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
-  dyingTimer: 0
+  dyingTimer: 0.2
   decayTimer: 2
   explodesOnDeath: 1
   explosionDamage: 20
