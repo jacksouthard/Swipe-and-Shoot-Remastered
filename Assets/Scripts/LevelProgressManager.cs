@@ -7,7 +7,7 @@ public class Objective {
 	public enum Type {
 		Pickup,
 		Zone,
-		KillCount,
+		Kills,
 		Vehicle
 	}
 
@@ -124,8 +124,8 @@ public class LevelProgressManager : MonoBehaviour {
 			case Objective.Type.Zone:
 				objectives[curObjectiveId].objectiveObj.GetComponent<PlayerTrigger> ().enterActions.AddListener (CompleteObjective);
 				break;
-			case Objective.Type.KillCount:
-				//TODO
+			case Objective.Type.Kills:
+				StartCoroutine (CheckForEnemyDeaths ());
 				break;
 			case Objective.Type.Vehicle:
 				objectives [curObjectiveId].objectiveObj.GetComponent<Rideable> ().SetupObjective ();
@@ -173,6 +173,23 @@ public class LevelProgressManager : MonoBehaviour {
 
 	public void EnemyDeath(float hash) {
 		killedAIsSinceLastCheckpoint.Add (hash);
+	}
+
+	IEnumerator CheckForEnemyDeaths() {
+		List<Health> enemyHealths = new List<Health>(objectives [curObjectiveId].objectiveObj.GetComponentsInChildren<Health>());
+
+		while(enemyHealths.Count > 0) {
+			foreach(Health health in enemyHealths) {
+				if (health.state != Health.State.Alive) {
+					enemyHealths.Remove (health);
+					break; //break out of the loop
+				}
+			}
+
+			yield return new WaitForEndOfFrame ();
+		}
+
+		CompleteObjective ();
 	}
 
 	//assumes player is completing objectives in order for now
