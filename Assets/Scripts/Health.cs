@@ -40,6 +40,11 @@ public class Health : MonoBehaviour {
 	public float decayTimer;
 	public System.Action onDeath;
 
+	[Header("Explosion")]
+	public bool explodesOnDeath;
+	public float explosionDamage;
+	public float explosionForce;
+
 	[Header("Smoke")]
 	public bool smokes;
 	public Transform smokeCenter;
@@ -204,6 +209,10 @@ public class Health : MonoBehaviour {
 
 		if (onDeath != null) {
 			onDeath.Invoke ();
+		}
+
+		if (explodesOnDeath) {
+			Explosion.Create (transform.Find("Center").position, 5, explosionForce, explosionDamage);
 		}
 	}
 
