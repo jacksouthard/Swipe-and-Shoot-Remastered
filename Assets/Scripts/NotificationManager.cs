@@ -14,7 +14,6 @@ public class NotificationManager : MonoBehaviour {
 	Text splashText;
 	Image splashImage;
 	Animator splashAnim;
-	GameObject continueButton;
 	bool isSplashing;
 
 	public GameObject helpParent;
@@ -37,7 +36,6 @@ public class NotificationManager : MonoBehaviour {
 		Transform splashPanel = splashParent.transform.Find ("Panel");
 		splashText = splashPanel.Find("SplashText").GetComponent<Text> (); //there is also text on the close button so we need to make sure it's the right one
 		splashImage = splashPanel.Find("SplashImage").GetComponent<Image>();
-		continueButton = splashPanel.Find("CloseButton").gameObject;
 
 		splashAnim = splashParent.GetComponent<Animator>();
 
