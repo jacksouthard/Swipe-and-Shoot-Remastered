@@ -1688,6 +1688,7 @@ MonoBehaviour:
   isEnemyMountable: 0
   driver: 0
   rb: {fileID: 0}
+  hash: 0
   turnSpeed: 30000
   rotationSpeedLimiter: 1
   rotationSpeedLimitRatio: 1.5
@@ -1731,6 +1732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   maxHealth: 50
+  immunity: 0
   regenSpeed: 1
   regenWait: 30
   hitWait: 0.05
@@ -1738,6 +1740,9 @@ MonoBehaviour:
   resistance: 0
   dyingTimer: 0
   decayTimer: 2
+  explodesOnDeath: 1
+  explosionDamage: 15
+  explosionForce: 5000
   smokes: 1
   smokeCenter: {fileID: 4842594379769888}
   waitTimer: 0
