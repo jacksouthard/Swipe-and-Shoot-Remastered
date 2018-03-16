@@ -31,7 +31,7 @@ public class Explosion : MonoBehaviour {
 
 				Health health = col.gameObject.GetComponentInParent<Health> ();
 				if (health != null) {
-					health.TakeDamage (damage * distFactor);
+					health.TakeDamage (damage * distFactor, Health.DamageType.Explosions);
 				}
 
 				Vector3 dir = (rb.transform.position - transform.position).normalized;

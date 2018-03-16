@@ -30,9 +30,7 @@ public class LaserWeapon : Weapon {
 				// apply damage
 				GameObject hitGO = hit.collider.gameObject;
 				if (hitGO.GetComponentInParent<Health> () != null) {
-					hitGO.GetComponentInParent<Health> ().TakeDamage (damage);
-				} else if (hitGO.GetComponent<Health> () != null) {
-					hitGO.GetComponent<Health> ().TakeDamage (damage);
+					hitGO.GetComponentInParent<Health> ().TakeDamage (damage, Health.DamageType.Bullets);
 				}
 
 				// apply bullet force

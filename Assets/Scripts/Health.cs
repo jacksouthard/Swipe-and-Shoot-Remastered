@@ -13,8 +13,17 @@ public class Health : MonoBehaviour {
 	[HideInInspector]
 	public State state = State.Alive;
 
+	//make this a flag later?
+	public enum DamageType
+	{
+		None,
+		Bullets,
+		Explosions
+	};
+
 	[Header("Stats")]
 	public float maxHealth;
+	public DamageType immunity;
 
 	[Header("Regen")]
 	public float regenSpeed;
@@ -139,8 +148,12 @@ public class Health : MonoBehaviour {
 		}
 	}
 
-	public void TakeDamage (float damage) {
+	public void TakeDamage (float damage, DamageType type) {
 		if (state == State.Alive) {
+			if (type == immunity) {
+				return;
+			}
+
 			if (onHit != null) {
 				onHit.Invoke (damage);
 			}
