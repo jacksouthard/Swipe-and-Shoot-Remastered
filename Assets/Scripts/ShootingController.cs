@@ -34,6 +34,11 @@ public class ShootingController : MonoBehaviour {
 			player = pc.transform.Find("Center"); //target is the player's "center"
 		}
 
+		weapon = GetComponentInChildren<Weapon> (); //try to get whatever weapon we already have
+		if (weapon != null) {
+			weapon.SetTarget (targetTag);
+		}
+
 		health = gameObject.GetComponentInParent<Health> ();
 	}
 
@@ -163,7 +168,6 @@ public class ShootingController : MonoBehaviour {
 		if (closestObj != null) {
 			Transform center = closestObj.Find ("Center");
 			if (center != null) {
-				print ("wtf");
 				closestObj = center;
 			}
 		}
