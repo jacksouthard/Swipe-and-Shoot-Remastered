@@ -101,6 +101,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void EnterVehicle(Rideable newVehicle) {
+		health.ResetColor ();
+
 		currentVehicle = newVehicle;
 		rb.interpolation = RigidbodyInterpolation.None;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -293,21 +295,26 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if (timer.type == PickupTimer.Type.Drop) {
-			Pickup drop = timer.pickup.GetComponent<Pickup> ();
+		Pickup drop = timer.pickup.GetComponent<Pickup> ();
+		if (drop != null) {
 			if (drop.data.GetAssetType () == "Weapon") {
 				SwitchWeapon (drop.data as WeaponData);
-			} else if (drop.data.GetAssetType() == "Equipment") {
+			} else if (drop.data.GetAssetType () == "Equipment") {
 				SwitchEquipment (drop.data as EquipmentData);
 			}
 			Destroy (timer.pickup);
-		} else if (timer.type == PickupTimer.Type.Objective) {
+		}
+
+		if (timer.type == PickupTimer.Type.Objective) {
 			LevelProgressManager.instance.CompleteObjective ();
-			EscortController escort = timer.pickup.GetComponentInParent<EscortController> ();
-			if (escort == null) {
-				Destroy (timer.pickup.GetComponent<Collider> ());
-			} else {
-				escort.Enable ();
+
+			if (drop == null) {
+				EscortController escort = timer.pickup.GetComponentInParent<EscortController> ();
+				if (escort == null) {
+					Destroy (timer.pickup.GetComponent<Collider> ());
+				} else {
+					escort.Enable ();
+				}
 			}
 		}
 	}
@@ -357,16 +364,16 @@ public class PlayerController : MonoBehaviour {
 
 		//setup timer based on object
 		void DetermineType() {
-			Pickup weaponPickup = pickup.GetComponent<Pickup> ();
-			if (weaponPickup != null) {
-				name = weaponPickup.data.name;
-				type = Type.Drop;
+			Pickup newPickup = pickup.GetComponent<Pickup> ();
+			if (newPickup != null) {
+				name = newPickup.data.name;
+				type = (!newPickup.isObjective) ? Type.Drop : Type.Objective;
 				return;
 			}
 
 			//if we add costume pickups, check for it here
 			name = pickup.name;
-			type = Type.Objective;
+			type = Type.Objective; //we assume any non-drop pickups are objectives for now
 		}
 
 		public void ResetTimer() {

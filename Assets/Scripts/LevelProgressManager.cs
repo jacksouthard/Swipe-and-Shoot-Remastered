@@ -119,7 +119,11 @@ public class LevelProgressManager : MonoBehaviour {
 
 		switch (objectives[curObjectiveId].type) {
 			case Objective.Type.Pickup:
-				objectives[curObjectiveId].objectiveObj.tag = "Pickup";
+				objectives [curObjectiveId].objectiveObj.tag = "Pickup";
+				Pickup pickup = objectives [curObjectiveId].objectiveObj.GetComponent<Pickup> ();
+				if (pickup != null) {
+					pickup.isObjective = true;
+				}
 				break;
 			case Objective.Type.Zone:
 				objectives[curObjectiveId].objectiveObj.GetComponent<PlayerTrigger> ().enterActions.AddListener (CompleteObjective);
@@ -142,7 +146,6 @@ public class LevelProgressManager : MonoBehaviour {
 		objectiveScreenIndicator.SetActive (hasIndicators);
 		objectiveWorldIndicator.SetActive (hasIndicators && objectives[curObjectiveId].showsWorldIndicator);
 
-		print ("Obj: " + objectives [curObjectiveId].objectiveObj + " indicator: " + hasIndicators);
 		if (hasIndicators) {
 			objectiveScreenIndicator.GetComponent<EdgeView> ().Init(objectives[curObjectiveId].objectiveObj); //set target
 			objectiveWorldIndicator.transform.position = objectives[curObjectiveId].objectiveObj.transform.position; //move to target

@@ -6,6 +6,8 @@ public class Pickup : MonoBehaviour {
 	public string customType = "None";
 	public string assetType;
 
+	public bool isObjective = false;
+
 	// despawning
 	bool despawn;
 	float despawnTimer = 20f;
