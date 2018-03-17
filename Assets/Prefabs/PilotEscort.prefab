@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f5d89e1a770436d84172b8862d0021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hash: 0
   activeRange: 50
   pathUpdateRate: 0.5
   backsUp: 1
@@ -347,12 +348,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   maxHealth: 10
+  immunity: 0
   regenSpeed: 1
   regenWait: 3
   hitWait: 0.05
   hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
+  resistance: 0
   dyingTimer: 1
   decayTimer: 2
+  explodesOnDeath: 0
+  explosionDamage: 0
+  explosionForce: 0
   smokes: 0
   smokeCenter: {fileID: 0}
   waitTimer: 0
@@ -366,7 +372,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.25
-  m_Speed: 3
+  m_Speed: 4.5
   m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 50
