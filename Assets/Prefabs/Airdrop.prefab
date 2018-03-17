@@ -85,8 +85,8 @@ GameObject:
   - component: {fileID: 4085894624023618}
   - component: {fileID: 65572415518556268}
   - component: {fileID: 54282046304882470}
-  - component: {fileID: 95376066667993776}
   - component: {fileID: 114399625221142102}
+  - component: {fileID: 95732219283574002}
   m_Layer: 0
   m_Name: Airdrop
   m_TagString: Untagged
@@ -826,7 +826,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8, z: 0.8}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!95 &95376066667993776
+--- !u!95 &95732219283574002
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1

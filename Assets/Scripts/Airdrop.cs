@@ -23,7 +23,7 @@ public class Airdrop : MonoBehaviour {
 	}
 
 	void SpawnPayload () {
-		Data data = DataManager<Data>.GetAnyRandomData ();
+		Data data = EquipmentManager.instance.GetRandomData ().ToAssetData();
 		GameObject pickup = Instantiate (pickupPrefab, transform.TransformPoint(Vector3.up * 0.2f), Quaternion.identity);
 		pickup.GetComponent<Pickup> ().Init (data, true);
 	}
