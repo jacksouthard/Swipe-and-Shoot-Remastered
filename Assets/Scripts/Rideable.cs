@@ -68,6 +68,9 @@ public class Rideable : MonoBehaviour {
 		mounter.GetComponent<BoxCollider> ().enabled = true;
 		mounter.GetComponent<Rigidbody> ().isKinematic = false;
 		mounter.transform.parent = null;
+		if (mounter.transform.Find ("WeaponParent") != null) {
+			mounter.transform.Find ("WeaponParent").gameObject.SetActive (true);
+		}
 
 		handsContainer.SetActive (false);
 

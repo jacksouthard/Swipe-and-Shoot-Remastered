@@ -950,7 +950,7 @@ MonoBehaviour:
   tailRotor: {fileID: 4274654758665658}
   exitingVehicle: {fileID: 1729023859902792, guid: a318ea23bda0543d794ec856bf4cc5c0,
     type: 2}
-  spawnDelay: 1.5
+  spawnDelay: 1
   groundInZone: 0
   hasAI: 0
   ai: {fileID: 0}
@@ -978,7 +978,7 @@ MonoBehaviour:
   clampAngle: 360
   shouldUpdateTarget: 1
   parentSpeed: 0
-  speed: 1000
+  speed: 300
 --- !u!114 &114865315244580722
 MonoBehaviour:
   m_ObjectHideFlags: 1
