@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872716, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -288,6 +288,47 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[1].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 141717d910b0045efac98d9d86025b87,
+        type: 3}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[2].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 3676453243ea74b1693e71859b38e131,
+        type: 3}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[3].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 4a22f248e43994cba8a08bea319486e5,
+        type: 3}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[4].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 2fda49677f6464aadb80fef2c3fc2218,
+        type: 3}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[4].name
+      value: Endless 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[5].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 48beb546f17a440cc984882adcfd6dc3,
+        type: 3}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[6].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 2fda49677f6464aadb80fef2c3fc2218,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f44ae4d7524684aee81468242e81f628, type: 2}
   m_IsPrefabParent: 0
