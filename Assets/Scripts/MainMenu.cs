@@ -80,4 +80,9 @@ public class MainMenu : MonoBehaviour {
 	public void StartLevel() {
 		SceneManager.LoadScene (curLevelIndex + 1);
 	}
+
+	public void ResetGame() {
+		GameProgress.Reset ();
+		SceneManager.LoadScene (0);
+	}
 }

@@ -92,7 +92,7 @@ public class NotificationManager : MonoBehaviour {
 		isSplashing = true;
 		splashText.text = "";
 		if (firstTime) {
-			yield return new WaitForSecondsRealtime (splashAnimTime);
+			yield return new WaitForSecondsRealtime (splashAnimTime / 2);
 		}
 
 		int curCharacterIndex = 0;
