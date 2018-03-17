@@ -9,7 +9,7 @@ public class Parachute : Rideable {
 	}
 
 	void OnCollisionEnter (Collision coll) {
-		if (coll.gameObject.isStatic) {
+		if (coll.gameObject.GetComponentInParent<Rigidbody>() == null) {
 			if (driver) {
 				base.Dismount ();
 			}
