@@ -65,7 +65,8 @@ public class Rideable : MonoBehaviour {
 
 	public virtual void Dismount () {
 		// universal
-		mounter.GetComponent<BoxCollider> ().enabled = true;
+		Collider mounterCol = mounter.GetComponent<Collider> ();
+		mounterCol.enabled = true;
 		mounter.GetComponent<Rigidbody> ().isKinematic = false;
 		mounter.transform.parent = null;
 		if (mounter.transform.Find ("WeaponParent") != null) {
@@ -85,6 +86,23 @@ public class Rideable : MonoBehaviour {
 			em.enabled = true;
 			mounter.GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = true;
 		}
+
+		StartCoroutine(IgnoreDriverCollisions(mounterCol));
+	}
+
+	IEnumerator IgnoreDriverCollisions(Collider driverCol) {
+		Collider mainCollider = gameObject.GetComponentInChildren<BoxCollider> () as Collider;
+		if (mainCollider == null || driverCol == null) {
+			yield break;
+		}
+		Physics.IgnoreCollision (mainCollider, driverCol);
+
+		yield return new WaitForSeconds (0.5f);
+
+		if (mainCollider == null || driverCol == null) {
+			yield break;
+		}
+		Physics.IgnoreCollision (mainCollider, driverCol, false);
 	}
 
 	protected virtual void CompleteObjective() {
