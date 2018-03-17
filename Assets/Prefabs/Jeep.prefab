@@ -1691,7 +1691,6 @@ MonoBehaviour:
   hash: 0
   turnSpeed: 30000
   rotationSpeedLimiter: 1
-  rotationSpeedLimitRatio: 1.5
   maxSpeed: 100000
   acceleration: 0.015
   decceleration: 0.03
@@ -1699,7 +1698,6 @@ MonoBehaviour:
   groundedAngDrag: 5
   airDrag: 0
   airAngDrag: 5
-  reverseEngageAngle: 90
   exitingVehicle: {fileID: 0}
   spawnDelay: 0
   grounded: 0

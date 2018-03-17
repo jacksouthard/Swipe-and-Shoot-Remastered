@@ -127,3 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customType: None
   assetType: 
+  isObjective: 0

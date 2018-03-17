@@ -550,6 +550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   maxHealth: 7
+  immunity: 0
   regenSpeed: 0
   regenWait: 1000
   hitWait: 0.05
@@ -557,6 +558,9 @@ MonoBehaviour:
   resistance: 0
   dyingTimer: 1
   decayTimer: 2
+  explodesOnDeath: 0
+  explosionDamage: 0
+  explosionForce: 0
   smokes: 0
   smokeCenter: {fileID: 0}
   waitTimer: 0

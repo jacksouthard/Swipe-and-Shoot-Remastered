@@ -392,9 +392,6 @@ MonoBehaviour:
   shouldUpdateTarget: 1
   parentSpeed: 40
   speed: 160
-  weaponPickupPrefab: {fileID: 0}
-  throwHeight: 0
-  throwVelocity: 0
 --- !u!114 &114541107866414020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -406,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ff9ad84f2d74051bfbc6a84ff6178a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hash: 0
   activeRange: 30
   pathUpdateRate: 0.5
   backsUp: 1
@@ -424,12 +422,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   maxHealth: 12
+  immunity: 0
   regenSpeed: 10
   regenWait: 1
   hitWait: 0.05
   hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
+  resistance: 0
   dyingTimer: 1
   decayTimer: 2
+  explodesOnDeath: 0
+  explosionDamage: 0
+  explosionForce: 0
   smokes: 0
   smokeCenter: {fileID: 0}
   waitTimer: 0

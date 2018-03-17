@@ -1423,6 +1423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSwipeDistance: 0.25
   swipeCancelRange: 0.125
+  autoSwiping: 0
   joystickVisual: {fileID: 224420681075037514}
 --- !u!114 &114318939042861834
 MonoBehaviour:

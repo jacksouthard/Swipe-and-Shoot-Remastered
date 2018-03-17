@@ -447,7 +447,6 @@ MonoBehaviour:
   defaultWeaponName: None
   startingEquipment: []
   equipmentParent: {fileID: 4413794412513888}
-  startingCharacterName: 
   pickupTime: 2
   timerDisplay: {fileID: 1554879363731970}
   timerBar: {fileID: 1022813109609684}
@@ -482,6 +481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   maxHealth: 40
+  immunity: 0
   regenSpeed: 5
   regenWait: 1
   hitWait: 0.05
@@ -489,6 +489,9 @@ MonoBehaviour:
   resistance: 0
   dyingTimer: 0
   decayTimer: 0
+  explodesOnDeath: 0
+  explosionDamage: 0
+  explosionForce: 0
   smokes: 0
   smokeCenter: {fileID: 4413794412513888}
   waitTimer: 0
