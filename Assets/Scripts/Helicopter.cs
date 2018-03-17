@@ -50,9 +50,6 @@ public class Helicopter : Rideable {
 
 	public Transform vectorArrow;
 
-	// reversing
-	int reverseMutliplier = 1;
-
 	void Awake () {
 		base.Initiate ();
 	}
@@ -208,13 +205,12 @@ public class Helicopter : Rideable {
 	}
 
 	void CalculateTargetHeight () {
-		bool closeToGround = false;
 		float maxHeight = 0;
 
 		foreach (var point in checkPoints) {
 			RaycastHit hit;
 			Physics.Raycast (point.position, -Vector3.up, out hit);
-			if (hit.point != null) {
+			if (hit.collider != null) {
 				float height = hit.point.y;
 				if (height > maxHeight) {
 					maxHeight = height;
