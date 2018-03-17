@@ -13,10 +13,12 @@ public class Helicopter : Rideable {
 	public float acceleration;
 
 	[Header("Hovering")]
+	public Transform groundCheckPointsContainer;
 	public float hoverHeight;
 	public float targetHeight;
 	public float curHeight;
 	public float upDownSpeed;
+	List<Transform> checkPoints = new List<Transform>();
 
 	[Header("Tilting")]
 	public float maxTiltAngle;
@@ -33,6 +35,7 @@ public class Helicopter : Rideable {
 
 	[Space(20)]
 	[Header("Debug")]
+	public bool groundInZone = false;
 	public bool hasAI = false;
 	public ChopperAI ai;
 	public bool flying = false;
@@ -81,6 +84,11 @@ public class Helicopter : Rideable {
 
 		health.onDeath += Die;
 
+		// setup check points
+		for (int i = 0; i < groundCheckPointsContainer.childCount; i++) {
+			checkPoints.Add (groundCheckPointsContainer.GetChild (i));
+		}
+
 		vectorArrow = transform.Find ("TargetVector");
 		vectorArrow.gameObject.SetActive (false);
 	}
@@ -88,7 +96,9 @@ public class Helicopter : Rideable {
 	public override void Mount (GameObject _mounter) {
 		base.Mount (_mounter);
 		health.UpdateRenderersNextFrame ();
-		ai.AIStop ();
+		if (hasAI) {
+			ai.AIStop ();
+		}
 		if (!flying) {
 			EngageFlight ();
 		}
@@ -114,7 +124,6 @@ public class Helicopter : Rideable {
 	public void EngageFlight () {
 		rb.useGravity = false;
 		flying = true;
-		targetHeight = hoverHeight;
 		targetRotorPercent = 1;
 	}
 
@@ -178,13 +187,15 @@ public class Helicopter : Rideable {
 			ApplyRotation ();
 			ApplyFlyingForce ();
 			ApplyHover ();
+			transform.rotation = Quaternion.Euler (new Vector3 (0f, transform.rotation.eulerAngles.y, 0f));
 		}
 		RotateRotors ();
 
-		transform.rotation = Quaternion.Euler (new Vector3 (0f, transform.rotation.eulerAngles.y, 0f));
 	}
 
 	void ApplyHover () {
+		CalculateTargetHeight ();
+
 		if (Mathf.Abs(transform.position.y - targetHeight) < 0.1f) {
 			return;
 		}
@@ -194,6 +205,24 @@ public class Helicopter : Rideable {
 		}
 		float newY = heightIncriment + transform.position.y;
 		transform.position = new Vector3 (transform.position.x, newY, transform.position.z);
+	}
+
+	void CalculateTargetHeight () {
+		bool closeToGround = false;
+		float maxHeight = 0;
+
+		foreach (var point in checkPoints) {
+			RaycastHit hit;
+			Physics.Raycast (point.position, -Vector3.up, out hit);
+			if (hit.point != null) {
+				float height = hit.point.y;
+				if (height > maxHeight) {
+					maxHeight = height;
+				}
+			}
+		}
+			
+		targetHeight = maxHeight + hoverHeight;
 	}
 
 	void RotateRotors () {
