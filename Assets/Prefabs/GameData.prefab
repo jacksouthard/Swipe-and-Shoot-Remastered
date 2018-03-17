@@ -170,33 +170,28 @@ MonoBehaviour:
       spriteName: 
     mainMenuMessages: []
     character: 
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 141717d910b0045efac98d9d86025b87, type: 3}
   - name: Level 3
     startingMessages:
     - message: Infiltrate the base and steal the chopper!
       spriteName: 
     mainMenuMessages: []
     character: Pilot
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 3676453243ea74b1693e71859b38e131, type: 3}
   - name: Level 4
     startingMessages:
     - message: This is where the enemies keep their fighter jets. Destroy them!
       spriteName: 
     mainMenuMessages: []
     character: 
-    image: {fileID: 0}
-  - name: Endless
+    image: {fileID: 21300000, guid: 4a22f248e43994cba8a08bea319486e5, type: 3}
+  - name: Endless 1
     startingMessages: []
     mainMenuMessages: []
     character: 
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 2fda49677f6464aadb80fef2c3fc2218, type: 3}
   - name: Endless 2
     startingMessages: []
     mainMenuMessages: []
     character: 
-    image: {fileID: 0}
-  - name: Endless Flat
-    startingMessages: []
-    mainMenuMessages: []
-    character: 
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 48beb546f17a440cc984882adcfd6dc3, type: 3}
