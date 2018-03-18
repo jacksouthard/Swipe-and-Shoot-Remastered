@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 114479597362518040}
   - component: {fileID: 114702837519076546}
   m_Layer: 5
-  m_Name: RetryButton
+  m_Name: MainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 114684419031151730}
   - component: {fileID: 114876852962459506}
   m_Layer: 5
-  m_Name: MainButton
+  m_Name: RestartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RESTART
+  m_Text: CONTINUE
 --- !u!114 &114479597362518040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -596,7 +596,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114595244911099254}
-        m_MethodName: Restart
+        m_MethodName: ReturnToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -718,7 +718,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114595244911099254}
-        m_MethodName: ReturnToMain
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -789,7 +789,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: MAIN
+  m_Text: REPLAY
 --- !u!222 &222162724701435638
 CanvasRenderer:
   m_ObjectHideFlags: 1
