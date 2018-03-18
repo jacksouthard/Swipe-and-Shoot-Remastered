@@ -83,7 +83,7 @@ public class EnemyController : AIController {
 			base.Activate ();
 		}
 
-		shooting.enabled = true;
+		shooting.SetEnabled (true);
 		shooting.canRotateParent = (moves) ? (dist < navAgent.stoppingDistance) : true;
 
 		if (dist < shooting.range) {
@@ -98,7 +98,7 @@ public class EnemyController : AIController {
 			base.Deactivate ();
 		}
 
-		shooting.enabled = false;
+		shooting.SetEnabled (false);
 		shooting.canRotateParent = false;
 
 		if (currentVisualEffect != null) {

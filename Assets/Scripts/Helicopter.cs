@@ -47,6 +47,7 @@ public class Helicopter : Rideable {
 	public int targetRotorPercent = 0;
 
 	Health health;
+	ShootingController shooting;
 
 	public Transform vectorArrow;
 
@@ -76,6 +77,7 @@ public class Helicopter : Rideable {
 		}
 
 		health = GetComponent<Health> ();
+		shooting = GetComponentInChildren<ShootingController> ();
 
 		LoadFromCheckpoint ();
 
@@ -95,6 +97,8 @@ public class Helicopter : Rideable {
 		health.UpdateRenderersNextFrame ();
 		if (hasAI) {
 			ai.AIStop ();
+		} else {
+			shooting.SetEnabled (true);
 		}
 		if (!flying) {
 			EngageFlight ();
@@ -110,6 +114,7 @@ public class Helicopter : Rideable {
 
 			health.UpdateRenderersNextFrame ();
 			if (!hasAI) {
+				shooting.SetEnabled (false);
 				DisengageFlight ();
 			} else {
 				ai.AIStart ();

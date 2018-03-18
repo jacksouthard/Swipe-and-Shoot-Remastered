@@ -144,6 +144,13 @@ public class ShootingController : MonoBehaviour {
 		Destroy (this);
 	}
 
+	public void SetEnabled(bool isEnabled) {
+		enabled = isEnabled;
+		if (weapon != null) {
+			weapon.enabled = isEnabled;
+		}
+	}
+
 	//find nearest in range
 	Transform GetNearestTarget() {
 		Collider[] objectsInRange = Physics.OverlapSphere (transform.position, weapon.range);

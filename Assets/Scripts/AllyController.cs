@@ -57,7 +57,7 @@ public class AllyController : AIController {
 			base.Activate ();
 		}
 
-		shooting.enabled = true;
+		shooting.SetEnabled (true);
 		shooting.canRotateParent = (moves) ? (dist < navAgent.stoppingDistance) : true;
 	}
 
@@ -66,7 +66,7 @@ public class AllyController : AIController {
 			base.Deactivate ();
 		}
 
-		shooting.enabled = false;
+		shooting.SetEnabled (false);
 		shooting.canRotateParent = false;
 	}
 
