@@ -35,7 +35,7 @@ public class Rideable : MonoBehaviour {
 		handsContainer.SetActive (false);
 	}
 
-	public bool canBeMounted { get { return (Time.time >= nextEnterTime) && !driver; } }
+	public bool canBeMounted { get { return (Time.time >= nextEnterTime) && !driver && Vector3.Dot(Vector3.up, transform.up) > 0; } }
 
 	public virtual void Mount (GameObject _mounter) {
 		// universal
