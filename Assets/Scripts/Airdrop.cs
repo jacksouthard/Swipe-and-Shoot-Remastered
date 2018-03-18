@@ -6,6 +6,7 @@ public class Airdrop : MonoBehaviour {
 //	string payload;
 	Animator anim;
 	public GameObject pickupPrefab;
+	EdgeView edgeView;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,7 @@ public class Airdrop : MonoBehaviour {
 
 	void Deploy () {
 		anim.SetTrigger ("Open");
+		edgeView = EdgeView.Create(gameObject, true);
 	}
 
 	void SpawnPayload () {
@@ -32,6 +34,8 @@ public class Airdrop : MonoBehaviour {
 		if (Spawner.spawners.ContainsKey("AirdropSpawner")) {
 			Spawner.spawners["AirdropSpawner"].SpawnerObjectDespawn ();
 		}
+
+		edgeView.Destroy ();
 
 		Destroy (gameObject);
 	}

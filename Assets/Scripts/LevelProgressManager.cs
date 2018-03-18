@@ -50,9 +50,8 @@ public class LevelProgressManager : MonoBehaviour {
 	List<float> killedAIsSinceLastCheckpoint = new List<float>();
 	
 	[Header("Objective")]
-	public GameObject objectiveScreenIndicator;
-	public GameObject objectiveWorldIndicator;
 	public List<Objective> objectives = new List<Objective>();
+	EdgeView objectiveEdgeView;
 
 	[Header("UI")]
 	public GameObject winScreen;
@@ -75,6 +74,8 @@ public class LevelProgressManager : MonoBehaviour {
 
 		winScreen.SetActive (false);
 		pc = GameObject.FindObjectOfType<PlayerController> ();
+
+		objectiveEdgeView = EdgeView.Create ();
 
 		PrepareObjectives ();
 		InitNextObjective ();
@@ -140,36 +141,31 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	void UpdateObjectiveUI() {
-		objectiveWorldIndicator.transform.parent = null; //unparent
-
 		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count;
 
-		GameObject target = objectives [curObjectiveId].objectiveObj;
-		//choose objective arrow target
-		if (objectives [curObjectiveId].type == Objective.Type.Kills) {
-			Transform targetEnemy = null;
-			Transform targetParent = objectives [curObjectiveId].objectiveObj.transform;
-			foreach(Transform child in targetParent) {
-				if (child.name.Contains ("Target")) {
-					targetEnemy = child;
-					break;
+		if (hasIndicators) {
+			GameObject target = objectives [curObjectiveId].objectiveObj;
+			//choose objective arrow target
+			if (objectives [curObjectiveId].type == Objective.Type.Kills) {
+				Transform targetEnemy = null;
+				Transform targetParent = objectives [curObjectiveId].objectiveObj.transform;
+				foreach (Transform child in targetParent) {
+					if (child.name.Contains ("Target")) {
+						targetEnemy = child;
+						break;
+					}
+				}
+
+				if (targetEnemy != null) {
+					target = targetEnemy.gameObject;
+				} else {
+					hasIndicators = false;
 				}
 			}
-
-			if (targetEnemy != null) {
-				target = targetEnemy.gameObject;
-			} else {
-				hasIndicators = false;
-			}
-		}
-
-		//show/hide indicators
-		objectiveScreenIndicator.SetActive (hasIndicators);
-		objectiveWorldIndicator.SetActive (hasIndicators && objectives[curObjectiveId].showsWorldIndicator);
-
-		if (hasIndicators) {
-			objectiveScreenIndicator.GetComponent<EdgeView> ().Init(target); //set target
-			objectiveWorldIndicator.transform.position = target.transform.position; //move to target
+				
+			objectiveEdgeView.Init (target, objectives[curObjectiveId].showsWorldIndicator); //set target
+		} else {
+			objectiveEdgeView.Hide ();
 		}
 	}
 
@@ -249,8 +245,7 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	public void EnterCutsceneVehicle() {
-		objectiveScreenIndicator.SetActive (false);
-		objectiveWorldIndicator.SetActive (false);
+		objectiveEdgeView.Hide ();
 	}
 
 	//ends the level
@@ -258,7 +253,6 @@ public class LevelProgressManager : MonoBehaviour {
 		winScreen.SetActive (true);
 		isComplete = true;
 		int levelToUnlock = GameManager.instance.curLevelId + 1;
-		print (levelToUnlock);
 		while (levelToUnlock < (LevelManager.instance.levelData.Count - 1) && LevelManager.instance.levelData [levelToUnlock].name.Contains ("Endless")) {
 			levelToUnlock++;
 		}

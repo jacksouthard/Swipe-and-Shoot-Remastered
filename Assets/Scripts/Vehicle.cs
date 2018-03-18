@@ -93,6 +93,7 @@ public class Vehicle : Rideable {
 	public override void Dismount () {
 		if (dismountable) {
 			StartCoroutine (SpawnExitVehicle(mounter.transform));
+			health.ResetColor ();
 
 			base.Dismount ();
 			vectorArrow.gameObject.SetActive (false);

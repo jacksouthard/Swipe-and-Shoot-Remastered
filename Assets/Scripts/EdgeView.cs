@@ -21,20 +21,84 @@ public class EdgeView : MonoBehaviour {
 	float canvasWidth;
 	float canvasHeight;
 
+	bool isSetUp = false;
+	bool hasWorldIndicator;
+
 	Camera gameCam;
 	Vector3 offset; //offset from center
 	RectTransform canvas;
 	GameObject image;
+	GameObject worldIndicator;
 
-	void Awake() {
-		gameCam = GameObject.FindObjectOfType<Camera>();
-		canvas = transform.parent.GetComponent<RectTransform>();
-		image = transform.GetComponentInChildren<Image> ().gameObject;
+	static GameObject screenIndicatorPrefab;
+	static GameObject worldIndicatorPrefab;
+	static bool hasSetPrefabs = false;
+
+	public static EdgeView Create(GameObject _newTarget, bool _hasWorldIndicator) {
+		EdgeView edgeView = Create ();
+		edgeView.Init (_newTarget, _hasWorldIndicator);
+		return edgeView;
 	}
 
-	public void Init(GameObject newTarget) {
-		target = newTarget;
+	public static EdgeView Create() {
+		if (!hasSetPrefabs) {
+			LoadPrefab ();
+		}
+
+		GameObject edgeViewObj = Instantiate (screenIndicatorPrefab, GameManager.instance.transform.parent.GetComponentInChildren<Canvas>().transform); //always use the canvas in LevelAssets
+		EdgeView edgeView = edgeViewObj.GetComponent<EdgeView> ();
+
+		return edgeView;
+	}
+
+	static void LoadPrefab() {
+		screenIndicatorPrefab = Resources.Load ("EdgeView_Screen") as GameObject;
+		worldIndicatorPrefab = Resources.Load ("EdgeView_World") as GameObject;
+	}
+
+	public void Init(GameObject _newTarget, bool _hasWorldIndicator) {
+		target = _newTarget;
+		if (!isSetUp) {
+			gameCam = GameObject.FindObjectOfType<Camera>();
+			canvas = transform.parent.GetComponent<RectTransform>(); 
+			image = transform.GetComponentInChildren<Image> ().gameObject;
+			isSetUp = true;
+		}
 		offset = gameCam.transform.forward * Mathf.Sqrt (2) * (gameCam.transform.position.y - target.transform.position.y); //gets point in the center of the camera's view
+		hasWorldIndicator = _hasWorldIndicator;
+
+		SetUpWorldIndicator ();
+
+		enabled = true;
+	}
+
+	void SetUpWorldIndicator() {
+		if (hasWorldIndicator) {
+			if (worldIndicator == null) {
+				worldIndicator = (GameObject)Instantiate (worldIndicatorPrefab);
+			}
+
+			worldIndicator.SetActive (true);
+			worldIndicator.transform.position = target.transform.position;
+		} else {
+			if (worldIndicator != null) {
+				worldIndicator.SetActive (false);
+			}
+		}
+	}
+
+	public void Hide() {
+		image.SetActive (false);
+		worldIndicator.SetActive (false);
+		enabled = false;
+	}
+
+	public void Destroy() {
+		if (worldIndicator != null) {
+			Destroy (worldIndicator);
+		}
+
+		Destroy (gameObject);
 	}
 
 	void Start () {
@@ -98,7 +162,11 @@ public class EdgeView : MonoBehaviour {
 
 	void UpdateVisibility () {
 		Vector3 viewportPoint = gameCam.WorldToViewportPoint (target.transform.position);
-		image.SetActive (!(viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 && viewportPoint.z > 0));
+		bool targetIsOnScreen = viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 && viewportPoint.z > 0;
+		image.SetActive (!targetIsOnScreen);
+		if (worldIndicator != null) {
+			worldIndicator.SetActive (hasWorldIndicator && targetIsOnScreen);
+		}
 	}
 
 	//From https://gist.github.com/shiwano/0f236469cd2ce2f4f585
