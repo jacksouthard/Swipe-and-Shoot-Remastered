@@ -260,6 +260,15 @@ public class LevelProgressManager : MonoBehaviour {
 		GameManager.instance.EndLevel ();
 	}
 
+	public void Continue() {
+		int nextLevel = GameManager.instance.curLevelId + 1;
+		if (nextLevel < LevelManager.instance.levelData.Count && !LevelManager.instance.levelData [nextLevel].name.Contains ("Endless")) {
+			MainMenu.LoadLevel (nextLevel);
+		} else {
+			GameManager.instance.ReturnToMain (Mathf.Min(LevelManager.instance.levelData.Count - 1, nextLevel));
+		}
+	}
+
 	public void Restart() {
 		GameManager.instance.Restart ();
 	}

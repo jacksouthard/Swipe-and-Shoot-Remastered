@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
+	public static int startingLevel = -1;
+
 	public Text levelTitleText;
 	public Text characterText;
 
@@ -25,14 +27,12 @@ public class MainMenu : MonoBehaviour {
 
 	void Awake() {
 		TimeManager.SetPaused (false);
-		LevelProgressManager.Reset ();
-		Spawner.spawners.Clear ();
 
 		mainCanvas = levelTitleText.GetComponentInParent<Canvas> ().GetComponent<RectTransform>();
 	}
 
 	void Start() {
-		LoadLevelData (GameProgress.farthestLevel);
+		LoadLevelData ((startingLevel != -1) ? startingLevel : GameProgress.farthestLevel);
 	}
 
 	public void CycleLevel(int dir) {
@@ -74,27 +74,28 @@ public class MainMenu : MonoBehaviour {
 				backgrounds [i].sprite = LevelManager.instance.levelData [bgLevelIndex].image;
 			}
 		}
-
-		if (GameProgress.firstTime) {
-			foreach(NotificationManager.SplashData message in data.mainMenuMessages) {
-				NotificationManager.instance.ShowSplash (message);
-			}
-
-			GameProgress.firstTime = false;
-		}
 	}
 
 	public void StartLevel() {
-		SceneManager.LoadScene (curLevelIndex + 1);
+		LoadLevel (curLevelIndex);
 	}
 
 	public void ResetGame() {
 		GameProgress.Reset ();
+		startingLevel = 0;
 		SceneManager.LoadScene (0);
 	}
 
 	public void BetaUnlock() {
 		GameProgress.UnlockAll ();
+		startingLevel = GameProgress.farthestLevel;
 		SceneManager.LoadScene (0);
+	}
+
+	public static void LoadLevel(int levelIndex) {
+		LevelProgressManager.Reset ();
+		Spawner.spawners.Clear ();
+		GameManager.firstTime = true;
+		SceneManager.LoadScene (levelIndex + 1);
 	}
 }

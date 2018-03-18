@@ -90,8 +90,12 @@ public class GameManager : MonoBehaviour {
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 	}
 
-	public void ReturnToMain() {
-		firstTime = true;
+	public void ReturnToMain(int startingLevelId) {
+		MainMenu.startingLevel = startingLevelId;
 		SceneManager.LoadScene (0);
+	}
+
+	public void ReturnToMain() {
+		ReturnToMain (curLevelId);
 	}
 }
