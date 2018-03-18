@@ -147,10 +147,6 @@ public class SwipeManager : MonoBehaviour {
 	}
 
 	void EndTap(Vector2 endPos) {
-		joystickVisual.gameObject.SetActive (false);
-		swipeLine.enabled = false;
-		isTapping = false;
-
 		if (player.inVehicle) {
 			if (player.currentVehicle is Vehicle) {
 				(player.currentVehicle as Vehicle).targetDirection = Vector2.zero;
@@ -164,6 +160,14 @@ public class SwipeManager : MonoBehaviour {
 		if (CanLaunch(dir)) {
 			player.Swipe (dir);
 		}
+
+		EndSwipe ();
+	}
+
+	public void EndSwipe() {
+		joystickVisual.gameObject.SetActive (false);
+		swipeLine.enabled = false;
+		isTapping = false;
 
 		isSelectingPlayer = false;
 	}

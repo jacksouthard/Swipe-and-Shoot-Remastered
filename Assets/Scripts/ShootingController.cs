@@ -29,7 +29,7 @@ public class ShootingController : MonoBehaviour {
 
 	void Awake() {
 		isPlayer = gameObject.GetComponentInParent<PlayerController> () != null;
-		if (!isPlayer) {
+		if (!isPlayer && !GameManager.instance.isGameOver) {
 			pc = GameObject.FindObjectOfType<PlayerController> ();
 			player = pc.transform.Find("Center"); //target is the player's "center"
 		}

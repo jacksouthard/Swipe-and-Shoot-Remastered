@@ -113,6 +113,8 @@ public class PlayerController : MonoBehaviour {
 		shooting.canRotateParent = false;
 		shooting.gameObject.SetActive (false);
 
+		SwipeManager.instance.EndSwipe ();
+
 		curPickingupTimers.Clear ();
 	}
 
@@ -215,6 +217,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		rb.constraints = RigidbodyConstraints.None;
 		shooting.Die ();
+		SwipeManager.instance.EndSwipe ();
 		Destroy (this);
 
 		GameManager.instance.GameOver ();
