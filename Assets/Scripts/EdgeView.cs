@@ -89,7 +89,9 @@ public class EdgeView : MonoBehaviour {
 
 	public void Hide() {
 		image.SetActive (false);
-		worldIndicator.SetActive (false);
+		if (worldIndicator != null) {
+			worldIndicator.SetActive (false);
+		}
 		enabled = false;
 	}
 
