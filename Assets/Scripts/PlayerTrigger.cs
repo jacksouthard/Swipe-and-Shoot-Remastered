@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerTrigger : MonoBehaviour {
-	public UnityEvent enterActions;
-	public UnityEvent exitActions;
+	public UnityEvent enterActions = new UnityEvent();
+	public UnityEvent exitActions = new UnityEvent();
 	public bool oneTime;
 
 	Transform player;

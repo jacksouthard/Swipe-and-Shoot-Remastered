@@ -126,7 +126,9 @@ public class LevelProgressManager : MonoBehaviour {
 				}
 				break;
 			case Objective.Type.Zone:
-				objectives[curObjectiveId].objectiveObj.GetComponent<PlayerTrigger> ().enterActions.AddListener (CompleteObjective);
+				PlayerTrigger trigger = objectives [curObjectiveId].objectiveObj.AddComponent<PlayerTrigger> ();
+				trigger.enterActions.AddListener (CompleteObjective);
+				trigger.oneTime = true;
 				break;
 			case Objective.Type.Kills:
 				StartCoroutine (CheckForEnemyDeaths ());
