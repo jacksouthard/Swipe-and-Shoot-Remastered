@@ -257,7 +257,12 @@ public class LevelProgressManager : MonoBehaviour {
 	public void CompleteLevel() {
 		winScreen.SetActive (true);
 		isComplete = true;
-		GameProgress.farthestLevel = GameManager.instance.curLevelId + 1;
+		int levelToUnlock = GameManager.instance.curLevelId + 1;
+		print (levelToUnlock);
+		while (levelToUnlock < (LevelManager.instance.levelData.Count - 1) && LevelManager.instance.levelData [levelToUnlock].name.Contains ("Endless")) {
+			levelToUnlock++;
+		}
+		GameProgress.farthestLevel = levelToUnlock;
 		GameManager.instance.EndLevel ();
 	}
 

@@ -28,4 +28,9 @@ public class GameProgress {
 		PlayerPrefs.SetInt ("HasSeenStartingMessage", 0);
 		PlayerPrefs.SetInt ("FarthestLevel", 0);
 	}
+
+	public static void UnlockAll() {
+		PlayerPrefs.SetInt ("FarthestLevel", LevelManager.instance.levelData.Count - 1);
+		PlayerPrefs.SetInt ("HasSeenStartingMessage", 1);
+	}
 }

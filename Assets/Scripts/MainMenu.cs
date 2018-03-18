@@ -8,6 +8,10 @@ public class MainMenu : MonoBehaviour {
 	public Text levelTitleText;
 	public Text characterText;
 
+	[Header("Buttons")]
+	public GameObject leftButton;
+	public GameObject rightButton;
+
 	[Header("Transition")]
 	public AnimationCurve backgroundCurve;
 	public float transitionTime;
@@ -61,6 +65,9 @@ public class MainMenu : MonoBehaviour {
 		levelTitleText.text = data.name;
 		characterText.text = "Character: " + data.GetCharacterName ();
 
+		leftButton.SetActive (curLevelIndex > 0);
+		rightButton.SetActive (curLevelIndex < GameProgress.farthestLevel);
+
 		for (int i = 0; i < backgrounds.Count; i++) {
 			int bgLevelIndex = curLevelIndex + i - 1;
 			if (bgLevelIndex >= 0 && bgLevelIndex < LevelManager.instance.levelData.Count) {
@@ -83,6 +90,11 @@ public class MainMenu : MonoBehaviour {
 
 	public void ResetGame() {
 		GameProgress.Reset ();
+		SceneManager.LoadScene (0);
+	}
+
+	public void BetaUnlock() {
+		GameProgress.UnlockAll ();
 		SceneManager.LoadScene (0);
 	}
 }
