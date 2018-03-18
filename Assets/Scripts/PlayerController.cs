@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 	Rigidbody rb;
 	ShootingController shooting;
 	Health health;
+	Transform audioListener;
 
 	void Awake() {
 		rb = gameObject.GetComponent<Rigidbody> ();
@@ -62,6 +63,10 @@ public class PlayerController : MonoBehaviour {
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
 		rb.interpolation = RigidbodyInterpolation.Extrapolate;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+		audioListener = gameObject.GetComponentInChildren<AudioListener> ().transform;
+		audioListener.parent = null; //unparent audiolistener
+		audioListener.rotation = Quaternion.Euler(0, GameObject.FindObjectOfType<Camera>().transform.rotation.eulerAngles.y, 0); //rotation is based on camera rotation
 
 		timerDisplay.transform.parent = null; //timer moves independently from player
 
@@ -199,6 +204,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		DisplayPickupTimer ();
+		audioListener.position = transform.position;
 	}
 
 	//once player has slowed down enough, reset for next swipe

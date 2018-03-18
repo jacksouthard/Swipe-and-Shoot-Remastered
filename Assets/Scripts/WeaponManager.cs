@@ -5,6 +5,8 @@ using UnityEngine;
 public class WeaponManager : DataManager<WeaponData> {
 	public static WeaponManager instance;
 
+	int[] tierValues = {0, 45, 75, 95}; //hardcoded tier probabilities
+
 	void Awake() {
 		instance = this;
 		SetPointers ();
@@ -12,22 +14,15 @@ public class WeaponManager : DataManager<WeaponData> {
 
 	//uses loot table
 	public override WeaponData GetRandomData () {
-		int random = Random.Range (0, 100);
-		int randomTier;
+		return GetRandomDataWithMinTier (0);
+	}
 
-		// hardcoded tier propabilities
-		if (random < 45) {
-			// tier 0
-			randomTier = 0;
-		} else if (random < 75) {
-			// tier 1
-			randomTier = 1;
-		} else if (random < 95) {
-			// tier 2
-			randomTier = 2;
-		} else {
-			// tier 3
-			randomTier = 3;
+	public WeaponData GetRandomDataWithMinTier(int minTier) {
+		int random = Random.Range (tierValues[minTier], 100);
+		int randomTier = minTier;
+
+		while((randomTier + 1) < tierValues.Length && random >= tierValues[randomTier + 1]) {
+			randomTier++;
 		}
 
 		List<WeaponData> allDataOfTier = new List<WeaponData> ();

@@ -35,7 +35,9 @@ public class EnemyController : AIController {
 	}
 
 	protected override void UpdateWeapon(string weaponName) {
-		defaultWeapon = weaponName;
+		if (weaponName != "None") { //don't override with an empty weapon if we should have one
+			defaultWeapon = weaponName;
+		}
 	}
 
 	void Start() {
