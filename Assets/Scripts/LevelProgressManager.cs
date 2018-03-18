@@ -257,7 +257,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public void CompleteLevel() {
 		winScreen.SetActive (true);
 		isComplete = true;
-		GameProgress.farthestLevel = GameManager.instance.levelData.campaignId + 1;
+		GameProgress.farthestLevel = GameManager.instance.curLevelId + 1;
 		GameManager.instance.EndLevel ();
 	}
 
