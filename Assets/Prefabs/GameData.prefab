@@ -97,6 +97,10 @@ MonoBehaviour:
     prefab: {fileID: 1872636546965686, guid: 5d9f50fda1aa5441798144693901e3fc, type: 2}
     mesh: {fileID: 4300046, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
     tier: -1
+  - name: Shotgun
+    prefab: {fileID: 1497894853236206, guid: 40f93aae1de17485b9a12c7765326c17, type: 2}
+    mesh: {fileID: 4300048, guid: 3b7d2f637f83f4b25b312b4385283752, type: 3}
+    tier: 2
 --- !u!114 &114246819811646816
 MonoBehaviour:
   m_ObjectHideFlags: 1
