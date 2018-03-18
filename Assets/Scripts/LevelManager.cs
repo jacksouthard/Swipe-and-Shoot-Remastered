@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour {
 	public static LevelManager instance;
 
 	public List<LevelData> levelData;
+	[HideInInspector]
+	public List<int> campaignLevelIds = new List<int>();
 
 	[System.Serializable]
 	public class LevelData {
@@ -14,6 +16,9 @@ public class LevelManager : MonoBehaviour {
 		public List<NotificationManager.SplashData> mainMenuMessages;
 		public string character;
 		public Sprite image;
+		
+		[HideInInspector]
+		public int campaignId;
 
 		public string GetCharacterName() {
 			return (string.IsNullOrEmpty (character)) ? "Soldier" : character;
@@ -22,5 +27,18 @@ public class LevelManager : MonoBehaviour {
 
 	void Awake() {
 		instance = this;
+
+		InitializeCampaignIds ();
+	}
+
+	void InitializeCampaignIds() {
+		int id = 0;
+		for(int i = 0; i < levelData.Count; i++) {
+			if (!levelData[i].name.Contains ("Endless")) {
+				levelData[i].campaignId = id;
+				campaignLevelIds.Add (i);
+				id++;
+			}
+		}
 	}
 }

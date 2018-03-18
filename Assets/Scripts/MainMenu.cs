@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	void Start() {
-		LoadLevelData (GameProgress.farthestLevel);
+		LoadLevelData (LevelManager.instance.campaignLevelIds[GameProgress.farthestLevel]);
 	}
 
 	public void CycleLevel(int dir) {
