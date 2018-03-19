@@ -7,6 +7,7 @@ public class Airdrop : MonoBehaviour {
 	Animator anim;
 	public GameObject pickupPrefab;
 	EdgeView edgeView;
+	float despawnTime = 20f;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,8 @@ public class Airdrop : MonoBehaviour {
 	void Deploy () {
 		anim.SetTrigger ("Open");
 		edgeView = EdgeView.Create(gameObject, true);
+
+		StartCoroutine (Despawn());
 	}
 
 	void SpawnPayload () {
@@ -30,7 +33,9 @@ public class Airdrop : MonoBehaviour {
 		pickup.GetComponent<Pickup> ().Init (data, true);
 	}
 
-	void Despawn () {
+	IEnumerator Despawn () {
+		yield return new WaitForSeconds (despawnTime);
+
 		if (Spawner.spawners.ContainsKey("AirdropSpawner")) {
 			Spawner.spawners["AirdropSpawner"].SpawnerObjectDespawn ();
 		}

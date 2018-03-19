@@ -44,4 +44,9 @@ public class CameraController : MonoBehaviour {
 		float height = Mathf.Clamp (player.position.y, heightMinOffset, heightMaxOffset);
 		return new Vector3 (playerPos2D.x, height, playerPos2D.y);
 	}
+
+	public static bool PositionIsInView(Vector3 position) {
+		Vector3 viewportPoint = Camera.main.WorldToViewportPoint (position);
+		return viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 && viewportPoint.z > 0;
+	}
 }

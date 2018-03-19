@@ -41,7 +41,7 @@ public class Pickup : MonoBehaviour {
 	}
 
 	void Update () {
-		if (despawn) {
+		if (despawn && !CameraController.PositionIsInView(transform.position)) {
 			despawnTimer -= Time.deltaTime;
 			if (despawnTimer <= 0f) {
 				Destroy (gameObject);

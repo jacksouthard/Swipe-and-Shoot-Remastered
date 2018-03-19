@@ -163,8 +163,7 @@ public class EdgeView : MonoBehaviour {
 	}
 
 	void UpdateVisibility () {
-		Vector3 viewportPoint = gameCam.WorldToViewportPoint (target.transform.position);
-		bool targetIsOnScreen = viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 && viewportPoint.z > 0;
+		bool targetIsOnScreen = CameraController.PositionIsInView (target.transform.position);
 		image.SetActive (!targetIsOnScreen);
 		if (worldIndicator != null) {
 			worldIndicator.SetActive (hasWorldIndicator && targetIsOnScreen);
