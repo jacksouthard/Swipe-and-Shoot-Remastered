@@ -152,6 +152,11 @@ public class NotificationManager : MonoBehaviour {
 
 	//notifications that appear on the bottom of the screen under certain conditions
 	public void ShowHelp(string message) {
+		StartCoroutine (ShowHelpAtEndOfFrame(message));
+	}
+
+	IEnumerator ShowHelpAtEndOfFrame(string message) {
+		yield return new WaitForEndOfFrame ();
 		helpText.text = message;
 		SetAnim (helpAnim, true);
 	}

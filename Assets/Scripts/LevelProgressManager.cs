@@ -20,6 +20,7 @@ public class Objective {
 
 	public bool showsWorldIndicator;
 	public string bannerText;
+	public string helpText;
 	public List<NotificationManager.SplashData> splashTexts = new List<NotificationManager.SplashData>();
 }
 
@@ -141,6 +142,8 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	void UpdateObjectiveUI() {
+		NotificationManager.instance.HideHelp ();
+
 		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count;
 
 		if (hasIndicators) {
@@ -166,6 +169,10 @@ public class LevelProgressManager : MonoBehaviour {
 			objectiveEdgeView.Init (target, objectives[curObjectiveId].showsWorldIndicator); //set target
 		} else {
 			objectiveEdgeView.Hide ();
+		}
+
+		if (curObjectiveId < objectives.Count && !string.IsNullOrEmpty (objectives [curObjectiveId].helpText)) {
+			NotificationManager.instance.ShowHelp (objectives [curObjectiveId].helpText);
 		}
 	}
 
