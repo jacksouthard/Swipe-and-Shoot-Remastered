@@ -60,7 +60,7 @@ public class EnemyController : AIController {
 		priorityRange = shooting.range;
 
 		if(moves) {
-			navAgent.stoppingDistance = shooting.range - 4;
+			navAgent.stoppingDistance = Mathf.Max(shooting.range - 4, 3f); //enemies shouldn't get too close to you
 		}
 	}
 
