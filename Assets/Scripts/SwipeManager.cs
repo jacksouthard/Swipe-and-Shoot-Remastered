@@ -9,7 +9,6 @@ public class SwipeManager : MonoBehaviour {
 	public float maxSwipeDistance;
 	public float swipeCancelRange;
 
-	public bool autoSwiping;
 
 	[Header("UI")]
 	public RectTransform joystickVisual;
@@ -25,6 +24,7 @@ public class SwipeManager : MonoBehaviour {
 	Vector2 startPos;
 
 	float timer;
+	bool autoSwiping;
 
 	void Awake() {
 		instance = this;
@@ -36,6 +36,8 @@ public class SwipeManager : MonoBehaviour {
 
 		swipeLine.enabled = false;
 		joystickVisual.gameObject.SetActive (false);
+
+		autoSwiping = GameSettings.autoSwiping;
 	}
 
 	void Update() {

@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour {
 	[Header("Buttons")]
 	public GameObject leftButton;
 	public GameObject rightButton;
+	public Toggle autoSwipingToggle;
 
 	[Header("Transition")]
 	public AnimationCurve backgroundCurve;
@@ -29,6 +30,7 @@ public class MainMenu : MonoBehaviour {
 		TimeManager.SetPaused (false);
 
 		mainCanvas = levelTitleText.GetComponentInParent<Canvas> ().GetComponent<RectTransform>();
+		autoSwipingToggle.isOn = GameSettings.autoSwiping;
 	}
 
 	void Start() {
@@ -97,5 +99,9 @@ public class MainMenu : MonoBehaviour {
 		Spawner.spawners.Clear ();
 		GameManager.firstTime = true;
 		SceneManager.LoadScene (levelIndex + 1);
+	}
+
+	public void ToggleAutoSwiping(bool isOn) {
+		GameSettings.autoSwiping = isOn;
 	}
 }
