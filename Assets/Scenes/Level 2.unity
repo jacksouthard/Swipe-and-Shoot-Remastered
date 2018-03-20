@@ -17564,6 +17564,11 @@ Prefab:
       propertyPath: objectives.Array.data[0].startingSplashes.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].startingSplashes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4772021338654822, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -17821,6 +17826,17 @@ Prefab:
       propertyPath: objectives.Array.data[0].startingSplashes.Array.data[0].message
       value: Go free the pilot!
       objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].startingSplashes.Array.data[0].message
+      value: Thanks! I thought I would die in here.
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].startingSplashes.Array.data[0].character
+      value: 
+      objectReference: {fileID: 21300000, guid: 91c24995b863d4ddc8ce0c81e95457cb,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
   m_IsPrefabParent: 0
