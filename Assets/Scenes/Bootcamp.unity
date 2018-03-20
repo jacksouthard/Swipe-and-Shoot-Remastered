@@ -5822,32 +5822,32 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[0].splashTexts.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[1].splashTexts.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[2].splashTexts.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[3].splashTexts.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[4].splashTexts.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[5].splashTexts.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4772021338654822, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
       propertyPath: m_LocalPosition.x
@@ -6137,7 +6137,12 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[3].helpText
-      value: Stand next to a gun to pick it up
+      value: Stand next to the gun to pick it up
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[2].helpText
+      value: SWIPE INTO ENEMIES TO KILL THEM
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
@@ -9772,11 +9777,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
-        type: 2}
-      propertyPath: levelData.Array.data[0].startingMessages.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4138976885120154, guid: f44ae4d7524684aee81468242e81f628, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9808,16 +9808,6 @@ Prefab:
     - target: {fileID: 4138976885120154, guid: f44ae4d7524684aee81468242e81f628, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
-        type: 2}
-      propertyPath: levelData.Array.data[0].startingMessages.Array.data[2].message
-      value: To move, you can swipe anywhere on the screen to launch your character
-      objectReference: {fileID: 0}
-    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
-        type: 2}
-      propertyPath: levelData.Array.data[0].startingMessages.Array.data[1].message
-      value: To move, you can swipe anywhere on the screen to launch your character
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f44ae4d7524684aee81468242e81f628, type: 2}
