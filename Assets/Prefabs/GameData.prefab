@@ -155,10 +155,6 @@ MonoBehaviour:
     - message: Welcome to Swipe and Shoot, soldier!
       character: {fileID: 0}
       image: {fileID: 0}
-    - message: Here in bootcamp I will teach you how to fight and hold your own against
-        those pesky enemies
-      character: {fileID: 0}
-      image: {fileID: 0}
     - message: To move, you can swipe anywhere on the screen to launch your character
       character: {fileID: 0}
       image: {fileID: 0}
