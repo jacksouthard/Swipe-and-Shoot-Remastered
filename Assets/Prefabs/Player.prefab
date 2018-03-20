@@ -470,7 +470,7 @@ MonoBehaviour:
   stoppingSpeed: 1
   stoppingAngle: 30
   autoResetTime: 0.5
-  swipeForce: 120000
+  swipeForce: 30000
   verticalFactor: 0.5
   turnSpeed: 10
   defaultWeaponName: None
@@ -518,6 +518,8 @@ MonoBehaviour:
   resistance: 0
   dyingTimer: 0
   decayTimer: 0
+  canBeKilledBySwiping: 0
+  durability: 0
   explodesOnDeath: 0
   explosionDamage: 0
   explosionForce: 0

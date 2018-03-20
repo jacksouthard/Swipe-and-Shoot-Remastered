@@ -6,9 +6,8 @@ using UnityEngine;
 public class SwipeManager : MonoBehaviour {
 	public static SwipeManager instance;
 
-	public float maxSwipeDistance;
-	public float swipeCancelRange;
-
+	public float swipeCancelPercentage;
+	float screenScalingFactor;
 
 	[Header("UI")]
 	public RectTransform joystickVisual;
@@ -36,6 +35,8 @@ public class SwipeManager : MonoBehaviour {
 
 		swipeLine.enabled = false;
 		joystickVisual.gameObject.SetActive (false);
+
+		screenScalingFactor = (Mathf.Abs (joystickVisual.sizeDelta.y) - 30) / joystickVisual.GetComponentInParent<UnityEngine.UI.CanvasScaler>().referenceResolution.y;
 
 		autoSwiping = GameSettings.autoSwiping;
 	}
@@ -183,8 +184,8 @@ public class SwipeManager : MonoBehaviour {
 		dir = RotateVector (dir, -gameCam.transform.rotation.eulerAngles.y); //rotates the vector so that it aligns with the world angle
 		dir /= (Screen.height / 2); //scale based on screen size
 
-		float magnitude = dir.magnitude * (maxSwipeDistance / swipeCancelRange) - maxSwipeDistance;
-		magnitude = Mathf.Clamp (magnitude, 0, maxSwipeDistance);
+		float magnitude = dir.magnitude / swipeCancelPercentage - screenScalingFactor;
+		magnitude = Mathf.Clamp01 (magnitude / screenScalingFactor);
 
 		dir = dir.normalized * magnitude;
 
