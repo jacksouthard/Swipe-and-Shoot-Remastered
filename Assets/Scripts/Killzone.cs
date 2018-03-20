@@ -15,7 +15,7 @@ public class Killzone : MonoBehaviour {
 						other.GetComponentInParent<Rigidbody> ().isKinematic = true;
 					} else {
 						pc.currentVehicle.GetComponent<Rigidbody> ().isKinematic = true;
-						GameManager.instance.GameOver ();
+						GameManager.instance.GameOver ("you died");
 					}
 				}
 			}

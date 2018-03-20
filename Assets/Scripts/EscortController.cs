@@ -31,6 +31,6 @@ public class EscortController : AIController {
 
 		base.Die ();
 
-		GameManager.instance.GameOver ();
+		GameManager.instance.GameOver (gameObject.name + " died");
 	}
 }

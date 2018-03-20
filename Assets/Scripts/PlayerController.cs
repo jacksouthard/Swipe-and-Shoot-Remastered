@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour {
 		SwipeManager.instance.EndSwipe ();
 		Destroy (this);
 
-		GameManager.instance.GameOver ();
+		GameManager.instance.GameOver ("you died");
 	}
 
 	// picking up weapons

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject gameOverScreen;
 	public bool isGameOver;
 	bool isGameWon { get { return LevelProgressManager.instance != null && LevelProgressManager.instance.isComplete; } }
+	Text gameOverText;
 
 	[Header("Pause")]
 	public GameObject pauseScreen;
@@ -31,6 +32,8 @@ public class GameManager : MonoBehaviour {
 		startScreen.SetActive (true);
 		gameOverScreen.SetActive (false);
 		pauseScreen.SetActive (false);
+
+		gameOverText = gameOverScreen.transform.Find ("Window").Find ("Title").GetComponent<Text> ();
 
 		allEnemyTargets = new List<Transform> ();
 		allEnemyTargets.Add (GameObject.FindObjectOfType<PlayerController>().transform);
@@ -65,8 +68,9 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void GameOver() {
+	public void GameOver(string gameOverMessage = "game over") {
 		if (!isGameWon && !isGameOver) {
+			gameOverText.text = gameOverMessage;
 			gameOverScreen.SetActive (true);
 			isGameOver = true;
 

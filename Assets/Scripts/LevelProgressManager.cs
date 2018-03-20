@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Objective {
@@ -53,6 +54,7 @@ public class LevelProgressManager : MonoBehaviour {
 	[Header("Objective")]
 	public List<Objective> objectives = new List<Objective>();
 	EdgeView objectiveEdgeView;
+	public string winMessage;
 
 	[Header("UI")]
 	public GameObject winScreen;
@@ -64,6 +66,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public bool isComplete;
 	PlayerController pc;
 	Transform enemyParent;
+	Text winText;
 
 	void Awake() {
 		instance = this;
@@ -74,6 +77,7 @@ public class LevelProgressManager : MonoBehaviour {
 		}
 
 		winScreen.SetActive (false);
+		winText = winScreen.transform.Find ("Window").Find("Title").GetComponent<Text>();
 		pc = GameObject.FindObjectOfType<PlayerController> ();
 
 		objectiveEdgeView = EdgeView.Create ();
@@ -257,6 +261,10 @@ public class LevelProgressManager : MonoBehaviour {
 
 	//ends the level
 	public void CompleteLevel() {
+		if (!string.IsNullOrEmpty (winMessage)) {
+			winText.text = winMessage;
+		}
+
 		winScreen.SetActive (true);
 		isComplete = true;
 		int levelToUnlock = GameManager.instance.curLevelId + 1;
