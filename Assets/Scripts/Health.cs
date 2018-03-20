@@ -234,6 +234,15 @@ public class Health : MonoBehaviour {
 		if (onDeath != null) {
 			onDeath.Invoke ();
 		}
+
+		if (isPlayer) {
+			return;
+		}
+
+		Rigidbody rb = GetComponent<Rigidbody> ();
+		if (rb != null) {
+			rb.isKinematic = false;
+		}
 	}
 
 	void Decay () {

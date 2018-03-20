@@ -131,8 +131,6 @@ public class AIController : MonoBehaviour {
 	protected virtual void SwitchTargets () {}
 
 	public virtual void Die() {
-		gameObject.GetComponent<Rigidbody> ().isKinematic = false;
-
 		if (navAgent != null) {
 			Destroy (navAgent);
 		}
