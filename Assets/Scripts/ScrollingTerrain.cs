@@ -26,18 +26,7 @@ public class ScrollingTerrain : MonoBehaviour {
 		InterpretZone ();
 		Prewarm ();
 		timer = spawnFrequency;
-	}
-	
-	void Update () {
-		timer -= Time.deltaTime;
-		if (timer < 0f) {
-			SpawnObject (spawnX);
-			timer = spawnFrequency;
-		}
-	}
-
-	void LateUpdate () {
-		MoveObjects ();
+		StartCoroutine (Scroll());
 	}
 
 	void SpawnObject (float x) { // hack
@@ -61,7 +50,7 @@ public class ScrollingTerrain : MonoBehaviour {
 	void MoveObjects () {
 		List<GameObject> objectsToRemove = new List<GameObject> ();
 		foreach (var obj in scrollingObjects) {
-			Vector3 newPos = obj.transform.position + (Vector3.left * scrollSpeed * Time.deltaTime);
+			Vector3 newPos = obj.transform.position + (Vector3.left * scrollSpeed * Time.fixedDeltaTime);
 			if (newPos.x < despawnX) {
 				objectsToRemove.Add (obj);
 			} else {
@@ -88,5 +77,21 @@ public class ScrollingTerrain : MonoBehaviour {
 		spawnX = zone.size.x / 2f;
 		despawnX = -spawnX;
 		zSpread = zone.size.z / 2f;
+	}
+
+	IEnumerator Scroll() {
+		while (true) {
+			timer -= Time.fixedDeltaTime;
+			if (timer < 0f) {
+				SpawnObject (spawnX);
+				timer = spawnFrequency;
+			}
+
+			yield return new WaitForEndOfFrame ();
+
+			MoveObjects ();
+
+			yield return new WaitForSecondsRealtime (Time.fixedDeltaTime);
+		}
 	}
 }
