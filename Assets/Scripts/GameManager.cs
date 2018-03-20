@@ -38,7 +38,14 @@ public class GameManager : MonoBehaviour {
 		allEnemyTargets.Add (GameObject.FindObjectOfType<PlayerController>().transform);
 
 		InitLevelData ();
-		TimeManager.SetPaused (true);
+	}
+
+	void Start() {
+		if (levelData.type != LevelManager.LevelData.Type.Cutscene) {
+			TimeManager.SetPaused (true);
+		} else {
+			StartGame ();
+		}
 	}
 
 	void InitLevelData() {

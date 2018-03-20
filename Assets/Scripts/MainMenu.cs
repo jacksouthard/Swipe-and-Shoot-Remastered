@@ -42,7 +42,9 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public IEnumerator CycleAnim(int dir) {
-		int newLevelIndex = curLevelIndex + dir;
+		int newLevelIndex = GetLevelIdInDir (dir);
+		
+		
 		if (transitioning || newLevelIndex < 0 || newLevelIndex >= LevelManager.instance.levelData.Count) {
 			yield break;
 		}
@@ -71,11 +73,24 @@ public class MainMenu : MonoBehaviour {
 		rightButton.SetActive (curLevelIndex < GameProgress.farthestLevel);
 
 		for (int i = 0; i < backgrounds.Count; i++) {
-			int bgLevelIndex = curLevelIndex + i - 1;
+			int bgLevelIndex = GetLevelIdInDir (i - 1);
 			if (bgLevelIndex >= 0 && bgLevelIndex < LevelManager.instance.levelData.Count) {
 				backgrounds [i].sprite = LevelManager.instance.levelData [bgLevelIndex].image;
 			}
 		}
+	}
+
+	int GetLevelIdInDir(int dir) {
+		if (dir == 0) {
+			return curLevelIndex;
+		}
+
+		int newLevelIndex = curLevelIndex;
+		do {
+			newLevelIndex += dir;
+		} while(newLevelIndex < LevelManager.instance.levelData.Count && newLevelIndex > 0 && LevelManager.instance.levelData[newLevelIndex].type == LevelManager.LevelData.Type.Cutscene);
+
+		return newLevelIndex;
 	}
 
 	public void StartLevel() {

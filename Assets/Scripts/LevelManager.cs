@@ -9,7 +9,15 @@ public class LevelManager : MonoBehaviour {
 
 	[System.Serializable]
 	public class LevelData {
+		public enum Type
+		{
+			Campaign,
+			Endless,
+			Cutscene
+		}
+
 		public string name;
+		public Type type;
 		public string character;
 		public Sprite image;
 

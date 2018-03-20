@@ -276,23 +276,39 @@ public class LevelProgressManager : MonoBehaviour {
 		NotificationManager.instance.HideHelp ();
 		objectiveEdgeView.Hide ();
 
+		int levelToUnlock = GameManager.instance.curLevelId;
+		int curFurthestLevel = GameProgress.farthestLevel;
+
+		do {
+			levelToUnlock++;
+			if (levelToUnlock > curFurthestLevel && LevelManager.instance.levelData [levelToUnlock].type == LevelManager.LevelData.Type.Endless) {
+				NotificationManager.instance.ShowBanner ("New endless unlocked");
+			}
+		} while (levelToUnlock < (LevelManager.instance.levelData.Count - 1) && LevelManager.instance.levelData [levelToUnlock].type != LevelManager.LevelData.Type.Campaign);
+		GameProgress.farthestLevel = levelToUnlock;
+
+		if (GameManager.instance.levelData.type == LevelManager.LevelData.Type.Cutscene) {
+			Continue ();
+			return;
+		}
+
 		if (!string.IsNullOrEmpty (winMessage)) {
 			winText.text = winMessage;
 		}
-
 		winScreen.SetActive (true);
 		isComplete = true;
-		int levelToUnlock = GameManager.instance.curLevelId + 1;
-		while (levelToUnlock < (LevelManager.instance.levelData.Count - 1) && LevelManager.instance.levelData [levelToUnlock].name.Contains ("Endless")) {
-			levelToUnlock++;
-		}
-		GameProgress.farthestLevel = levelToUnlock;
+
 		GameManager.instance.EndLevel ();
 	}
 
 	public void Continue() {
-		int nextLevel = GameManager.instance.curLevelId + 1;
-		if (nextLevel < LevelManager.instance.levelData.Count && !LevelManager.instance.levelData [nextLevel].name.Contains ("Endless")) {
+		int nextLevel = GameManager.instance.curLevelId;
+
+		do {
+			nextLevel++;
+		} while(nextLevel < LevelManager.instance.levelData.Count && LevelManager.instance.levelData [nextLevel].type == LevelManager.LevelData.Type.Endless);
+
+		if (LevelManager.instance.levelData[nextLevel].type != LevelManager.LevelData.Type.Endless) {
 			MainMenu.LoadLevel (nextLevel);
 		} else {
 			GameManager.instance.ReturnToMain (Mathf.Min(LevelManager.instance.levelData.Count - 1, nextLevel));
