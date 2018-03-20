@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44824833, g: 0.49827528, b: 0.5755825, a: 1}
+  m_IndirectSpecularColor: {r: 0.44824862, g: 0.49827576, b: 0.5755829, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2100,6 +2100,21 @@ Prefab:
       propertyPath: objectives.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[0].splashTexts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[0].startingSplashes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[1].startingSplashes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4772021338654822, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2186,6 +2201,31 @@ Prefab:
         type: 2}
       propertyPath: objectives.Array.data[0].helpText
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[1].initialDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[0].splashTexts.Array.data[0].message
+      value: yape yape yape
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[0].completionBanner
+      value: CHECKPOINT REACHED
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[0].startingSplashes.Array.data[0].message
+      value: Our ace pilot has been captured. Find out where they are holding him!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[1].startingSplashes.Array.data[0].message
+      value: yape
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
@@ -9565,11 +9605,6 @@ Prefab:
     - target: {fileID: 4138976885120154, guid: f44ae4d7524684aee81468242e81f628, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
-        type: 2}
-      propertyPath: levelData.Array.data[1].startingMessages.Array.data[0].message
-      value: Our ace pilot has been captured. Find out where they are holding him!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f44ae4d7524684aee81468242e81f628, type: 2}

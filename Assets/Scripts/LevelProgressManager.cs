@@ -14,15 +14,19 @@ public class Objective {
 
 	public Type type;
 
+	public float initialDelay;
+	public List<NotificationManager.SplashData> startingSplashes = new List<NotificationManager.SplashData>();
+
+	[Space(15)]
 	public Transform spawnPoint; //where the player spawns after completing this objective
 	public GameObject objectiveObj; //object to set up
 	public GameObject objectsToDisable; //optional objects to disable after completing this objective
 	public GameObject objectsToEnable; //optional objects to enable after completing this objective
 
+	[Space(15)]
 	public bool showsWorldIndicator;
-	public string bannerText;
+	public string completionBanner;
 	public string helpText;
-	public List<NotificationManager.SplashData> splashTexts = new List<NotificationManager.SplashData>();
 }
 
 public class SavedAI {
@@ -49,6 +53,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public static Dictionary<float, SavedAI> startingAIData = new Dictionary<float, SavedAI> ();
 	public static List<float> killedAIs = new List<float> ();
 	public static Dictionary<float, SavedVehicle> startingVehicleData = new Dictionary<float, SavedVehicle>();
+	public static bool firstTime = true;
 	List<float> killedAIsSinceLastCheckpoint = new List<float>();
 	
 	[Header("Objective")]
@@ -81,16 +86,19 @@ public class LevelProgressManager : MonoBehaviour {
 		pc = GameObject.FindObjectOfType<PlayerController> ();
 
 		objectiveEdgeView = EdgeView.Create ();
+		objectiveEdgeView.Hide ();
 
 		PrepareObjectives ();
-		InitNextObjective ();
-		UpdateObjectiveUI ();
 	}
 
 	void Start() {
 		if (curObjectiveId > 0) {
 			UpdatePlayer ();
 		}
+	}
+
+	public void StartGame() {
+		StartCoroutine(InitNextObjective ());
 	}
 
 	void PrepareObjectives() {
@@ -117,10 +125,22 @@ public class LevelProgressManager : MonoBehaviour {
 		}
 	}
 
-	void InitNextObjective() {
+	IEnumerator InitNextObjective() {
+		objectiveEdgeView.Hide ();
+		NotificationManager.instance.HideHelp ();
+
+		yield return new WaitForSeconds (objectives[curObjectiveId].initialDelay);
+
 		if (objectives.Count == 0) {
 			Debug.LogError ("No objectives to set up");
-			return;
+			yield break;
+		}
+
+		if (firstTime) {
+			firstTime = false;
+			foreach (NotificationManager.SplashData message in objectives[curObjectiveId].startingSplashes) {
+				NotificationManager.instance.ShowSplash (message);
+			}
 		}
 
 		switch (objectives[curObjectiveId].type) {
@@ -143,11 +163,11 @@ public class LevelProgressManager : MonoBehaviour {
 				objectives [curObjectiveId].objectiveObj.GetComponent<Rideable> ().SetupObjective ();
 				break;
 		}
+
+		UpdateObjectiveUI ();
 	}
 
 	void UpdateObjectiveUI() {
-		NotificationManager.instance.HideHelp ();
-
 		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count;
 
 		if (hasIndicators) {
@@ -170,9 +190,7 @@ public class LevelProgressManager : MonoBehaviour {
 				}
 			}
 				
-			objectiveEdgeView.Init (target, objectives[curObjectiveId].showsWorldIndicator); //set target
-		} else {
-			objectiveEdgeView.Hide ();
+			objectiveEdgeView.SetTarget (target, objectives[curObjectiveId].showsWorldIndicator); //set target
 		}
 
 		if (curObjectiveId < objectives.Count && !string.IsNullOrEmpty (objectives [curObjectiveId].helpText)) {
@@ -233,13 +251,8 @@ public class LevelProgressManager : MonoBehaviour {
 			objectives [curObjectiveId].objectsToDisable.SetActive (false);
 		}
 
-		if (!string.IsNullOrEmpty(objectives [curObjectiveId].bannerText)) {
-			NotificationManager.instance.ShowBanner (objectives[curObjectiveId].bannerText);
-		}
-
-		//NOTE: splash text on the final objective does not work
-		foreach(NotificationManager.SplashData message in objectives[curObjectiveId].splashTexts) {
-			NotificationManager.instance.ShowSplash (message);
+		if (!string.IsNullOrEmpty(objectives [curObjectiveId].completionBanner)) {
+			NotificationManager.instance.ShowBanner (objectives[curObjectiveId].completionBanner);
 		}
 
 		curObjectiveId++;
@@ -248,11 +261,10 @@ public class LevelProgressManager : MonoBehaviour {
 		if (curObjectiveId == objectives.Count) {
 			CompleteLevel ();
 		} else {
+			firstTime = true;
 			SaveGame ();
-			InitNextObjective ();
+			StartCoroutine(InitNextObjective ());
 		}
-
-		UpdateObjectiveUI ();
 	}
 
 	public void EnterCutsceneVehicle() {
@@ -261,6 +273,9 @@ public class LevelProgressManager : MonoBehaviour {
 
 	//ends the level
 	public void CompleteLevel() {
+		NotificationManager.instance.HideHelp ();
+		objectiveEdgeView.Hide ();
+
 		if (!string.IsNullOrEmpty (winMessage)) {
 			winText.text = winMessage;
 		}
@@ -298,6 +313,7 @@ public class LevelProgressManager : MonoBehaviour {
 		startingAIData.Clear ();
 		killedAIs.Clear ();
 		startingVehicleData.Clear ();
+		firstTime = true;
 	}
 
 	public static float CalculateHash(Vector3 pos) {

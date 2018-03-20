@@ -21,7 +21,6 @@ public class EdgeView : MonoBehaviour {
 	float canvasWidth;
 	float canvasHeight;
 
-	bool isSetUp = false;
 	bool hasWorldIndicator;
 
 	Camera gameCam;
@@ -36,7 +35,7 @@ public class EdgeView : MonoBehaviour {
 
 	public static EdgeView Create(GameObject _newTarget, bool _hasWorldIndicator) {
 		EdgeView edgeView = Create ();
-		edgeView.Init (_newTarget, _hasWorldIndicator);
+		edgeView.SetTarget (_newTarget, _hasWorldIndicator);
 		return edgeView;
 	}
 
@@ -47,6 +46,7 @@ public class EdgeView : MonoBehaviour {
 
 		GameObject edgeViewObj = Instantiate (screenIndicatorPrefab, GameManager.instance.transform.parent.GetComponentInChildren<Canvas>().transform); //always use the canvas in LevelAssets
 		EdgeView edgeView = edgeViewObj.GetComponent<EdgeView> ();
+		edgeView.Init ();
 
 		return edgeView;
 	}
@@ -56,14 +56,15 @@ public class EdgeView : MonoBehaviour {
 		worldIndicatorPrefab = Resources.Load ("EdgeView_World") as GameObject;
 	}
 
-	public void Init(GameObject _newTarget, bool _hasWorldIndicator) {
+	public void Init() {
+		gameCam = GameObject.FindObjectOfType<Camera>();
+		canvas = transform.parent.GetComponent<RectTransform>(); 
+		image = transform.GetComponentInChildren<Image> ().gameObject;
+	}
+
+	public void SetTarget(GameObject _newTarget, bool _hasWorldIndicator) {
 		target = _newTarget;
-		if (!isSetUp) {
-			gameCam = GameObject.FindObjectOfType<Camera>();
-			canvas = transform.parent.GetComponent<RectTransform>(); 
-			image = transform.GetComponentInChildren<Image> ().gameObject;
-			isSetUp = true;
-		}
+
 		offset = gameCam.transform.forward * Mathf.Sqrt (2) * (gameCam.transform.position.y - target.transform.position.y); //gets point in the center of the camera's view
 		hasWorldIndicator = _hasWorldIndicator;
 

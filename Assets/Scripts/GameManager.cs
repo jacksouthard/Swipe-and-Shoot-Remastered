@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 	public static GameManager instance;
-	public static bool firstTime = true;
 	public static List<Transform> allEnemyTargets = new List<Transform>();
 
 	[Header("Game Start")]
@@ -52,12 +51,8 @@ public class GameManager : MonoBehaviour {
 		TimeManager.SetPaused (false);
 		startScreen.SetActive (false);
 
-		if (firstTime) {
-			firstTime = false;
-
-			foreach (NotificationManager.SplashData message in levelData.startingMessages) {
-				NotificationManager.instance.ShowSplash (message);
-			}
+		if (LevelProgressManager.instance != null) {
+			LevelProgressManager.instance.StartGame ();
 		}
 	}
 
@@ -89,7 +84,6 @@ public class GameManager : MonoBehaviour {
 	public void Restart(bool fullReset = true) {
 		if (fullReset) {
 			LevelProgressManager.Reset ();
-			firstTime = true;
 		}
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 	}

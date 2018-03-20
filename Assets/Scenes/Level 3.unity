@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44824845, g: 0.49827534, b: 0.5755825, a: 1}
+  m_IndirectSpecularColor: {r: 0.44824868, g: 0.49827576, b: 0.575583, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -427,6 +427,11 @@ Prefab:
       propertyPath: objectives.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[0].startingSplashes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4772021338654822, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -508,6 +513,16 @@ Prefab:
         type: 2}
       propertyPath: startingObjective
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[0].completionBanner
+      value: CHECKPOINT REACHED
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[0].startingSplashes.Array.data[0].message
+      value: Hijack the attack helicopter!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}

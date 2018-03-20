@@ -97,7 +97,6 @@ public class MainMenu : MonoBehaviour {
 	public static void LoadLevel(int levelIndex) {
 		LevelProgressManager.Reset ();
 		Spawner.spawners.Clear ();
-		GameManager.firstTime = true;
 		SceneManager.LoadScene (levelIndex + 1);
 	}
 
