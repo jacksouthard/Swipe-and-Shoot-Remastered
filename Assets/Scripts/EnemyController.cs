@@ -13,7 +13,6 @@ public class EnemyController : AIController {
 
 	[Header("Control")]
 	public bool moves = true;
-	public float durability; //max force before the enemy dies
 
 	ShootingController shooting;
 	float alertTimer;
@@ -32,6 +31,7 @@ public class EnemyController : AIController {
 		backsUp = moves;
 		originalActiveRange = activeRange;
 		health.onHit = TriggerAlert;
+		health.onSwipeDeath = TrySwapWeapons;
 	}
 
 	protected override void UpdateWeapon(string weaponName) {
@@ -103,23 +103,6 @@ public class EnemyController : AIController {
 
 		if (currentVisualEffect != null) {
 			RemoveEffect ();
-		}
-	}
-
-	void OnTriggerEnter(Collider other) {
-		Rigidbody otherRb = other.gameObject.GetComponentInParent<Rigidbody> ();
-		if (otherRb == null) {
-			return;
-		}
-
-		float appliedForce = otherRb.mass * (otherRb.velocity.magnitude / Time.deltaTime);
-
-		if (appliedForce >= durability) {
-			PlayerController pc = otherRb.GetComponent<PlayerController> ();
-			if (pc != null && pc.TrySwapWeapons (shooting.GetWeaponData ())) {
-				shooting.RemoveWeapon ();
-			}
-			health.Die ();
 		}
 	}
 
@@ -223,5 +206,11 @@ public class EnemyController : AIController {
 	void RemoveEffect() {
 		currentVisualEffect.End ();
 		currentVisualEffect = null;
+	}
+
+	void TrySwapWeapons() {
+		if (shooting.hasWeapon && GameObject.FindObjectOfType<PlayerController>().TrySwapWeapons (shooting.GetWeaponData ())) {
+			shooting.RemoveWeapon ();
+		}
 	}
 }

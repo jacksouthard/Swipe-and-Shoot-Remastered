@@ -40,6 +40,11 @@ public class Health : MonoBehaviour {
 	public float decayTimer;
 	public System.Action onDeath;
 
+	[Header("Swiping")]
+	public bool canBeKilledBySwiping;
+	public float durability; //max force before the enemy dies
+	public System.Action onSwipeDeath;
+
 	[Header("Explosion")]
 	public bool explodesOnDeath;
 	public float explosionDamage;
@@ -70,6 +75,24 @@ public class Health : MonoBehaviour {
 		UpdateRenderers ();
 
 		isPlayer = (GetComponent<PlayerController> () != null);
+
+		if (canBeKilledBySwiping) {
+			CreateSwipeHitBox ();
+		}
+	}
+
+	//for now we assume that the object already has a regular box collider
+	void CreateSwipeHitBox() {
+		GameObject empty = new GameObject ();
+		GameObject hitBoxObj = (GameObject) Instantiate(empty, transform.position, transform.rotation, transform);
+		Destroy (empty);
+
+		BoxCollider mainCol = GetComponentInChildren<BoxCollider> ();
+		BoxCollider boxCol = hitBoxObj.AddComponent<BoxCollider> ();
+		boxCol.size = mainCol.size + new Vector3 (0.5f, 0.25f, 0.5f); //make the collider slightly bigger than regular collider
+		boxCol.center = new Vector3(0f, boxCol.size.y / 2f, 0f);
+		boxCol.isTrigger = true;
+		hitBoxObj.layer = 2; //make it ignore raycast
 	}
 
 	//waits until next frame before updating MeshRenderers
@@ -283,6 +306,29 @@ public class Health : MonoBehaviour {
 			for (int j = 0; j < colorCount; j++) {
 				mrs [i].materials [j].color = originalColors [i] [j];
 			}
+		}
+	}
+
+	void OnTriggerEnter(Collider other) {
+		if (!canBeKilledBySwiping) {
+			return;
+		}
+
+		Rigidbody otherRb = other.gameObject.GetComponentInParent<Rigidbody> ();
+		if (otherRb == null) {
+			return;
+		}
+
+		float appliedForce = otherRb.mass * (otherRb.velocity.magnitude / Time.deltaTime);
+
+		if (appliedForce >= durability) {
+			PlayerController pc = otherRb.GetComponent<PlayerController> ();
+
+			if (pc != null) {
+				onSwipeDeath.Invoke ();
+			}
+
+			Die ();
 		}
 	}
 }
