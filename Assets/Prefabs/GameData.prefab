@@ -161,11 +161,18 @@ MonoBehaviour:
     character: 
     image: {fileID: 21300000, guid: 57f3899e3f8ed495791e5d2c7e8d2123, type: 3}
   - name: Level 1
-    startingMessages: []
+    startingMessages:
+    - message: Our best pilot has been captured. Find out where they are keeping our
+        ace pilot
+      character: {fileID: 0}
+      image: {fileID: 0}
     character: 
     image: {fileID: 21300000, guid: 57f3899e3f8ed495791e5d2c7e8d2123, type: 3}
   - name: Level 2
-    startingMessages: []
+    startingMessages:
+    - message: Go free the pilot!
+      character: {fileID: 0}
+      image: {fileID: 0}
     character: 
     image: {fileID: 21300000, guid: 141717d910b0045efac98d9d86025b87, type: 3}
   - name: Endless 1
@@ -173,7 +180,10 @@ MonoBehaviour:
     character: 
     image: {fileID: 21300000, guid: 2fda49677f6464aadb80fef2c3fc2218, type: 3}
   - name: Level 3
-    startingMessages: []
+    startingMessages:
+    - message: Hijack the attack helicopter!
+      character: {fileID: 0}
+      image: {fileID: 0}
     character: Pilot
     image: {fileID: 21300000, guid: 3676453243ea74b1693e71859b38e131, type: 3}
   - name: Level 4
