@@ -150,35 +150,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelData:
+  - name: Bootcamp
+    startingMessages:
+    - message: Welcome to Swipe and Shoot, soldier!
+      character: {fileID: 0}
+      image: {fileID: 0}
+    - message: Here in bootcamp I will teach you how to fight and hold your own against
+        those pesky enemies
+      character: {fileID: 0}
+      image: {fileID: 0}
+    - message: To move, you can swipe anywhere on the screen to launch your character
+      character: {fileID: 0}
+      image: {fileID: 0}
+    character: 
+    image: {fileID: 21300000, guid: 57f3899e3f8ed495791e5d2c7e8d2123, type: 3}
   - name: Level 1
     startingMessages: []
     character: 
     image: {fileID: 21300000, guid: 57f3899e3f8ed495791e5d2c7e8d2123, type: 3}
   - name: Level 2
-    startingMessages:
-    - message: Drive to the enemy base and free the pilot
-      character: {fileID: 0}
-      image: {fileID: 0}
+    startingMessages: []
     character: 
     image: {fileID: 21300000, guid: 141717d910b0045efac98d9d86025b87, type: 3}
-  - name: Level 3
-    startingMessages:
-    - message: Infiltrate the base and steal the chopper!
-      character: {fileID: 0}
-      image: {fileID: 0}
-    character: Pilot
-    image: {fileID: 21300000, guid: 3676453243ea74b1693e71859b38e131, type: 3}
-  - name: Level 4
-    startingMessages:
-    - message: This is where the enemies keep their fighter jets. Destroy them!
-      character: {fileID: 0}
-      image: {fileID: 0}
-    character: 
-    image: {fileID: 21300000, guid: 4a22f248e43994cba8a08bea319486e5, type: 3}
   - name: Endless 1
     startingMessages: []
     character: 
     image: {fileID: 21300000, guid: 2fda49677f6464aadb80fef2c3fc2218, type: 3}
+  - name: Level 3
+    startingMessages: []
+    character: Pilot
+    image: {fileID: 21300000, guid: 3676453243ea74b1693e71859b38e131, type: 3}
+  - name: Level 4
+    startingMessages: []
+    character: 
+    image: {fileID: 21300000, guid: 4a22f248e43994cba8a08bea319486e5, type: 3}
   - name: Endless 2
     startingMessages: []
     character: 

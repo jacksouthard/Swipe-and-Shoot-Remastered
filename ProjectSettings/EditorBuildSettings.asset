@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Briefing.unity
     guid: 70b6abcb5b20f46c59d1b1b07054e48d
   - enabled: 1
+    path: Assets/Scenes/Bootcamp.unity
+    guid: 5152c951238344309bc79d4826f68c6c
+  - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 8e33b00bf02e44f5584e6d35ad509ea6
   - enabled: 1
