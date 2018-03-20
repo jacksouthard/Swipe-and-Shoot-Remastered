@@ -324,7 +324,7 @@ public class Health : MonoBehaviour {
 		if (appliedForce >= durability) {
 			PlayerController pc = otherRb.GetComponent<PlayerController> ();
 
-			if (pc != null) {
+			if (pc != null && onSwipeDeath != null) {
 				onSwipeDeath.Invoke ();
 			}
 
