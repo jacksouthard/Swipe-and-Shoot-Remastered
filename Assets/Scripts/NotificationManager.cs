@@ -36,7 +36,7 @@ public class NotificationManager : MonoBehaviour {
 
 		Transform splashPanel = splashParent.transform.Find ("Panel");
 		splashText = splashPanel.Find("SplashText").GetComponent<Text> (); //there is also text on the close button so we need to make sure it's the right one
-		splashCharacter = splashPanel.Find("SplashImage_Corner").GetComponent<Image>();
+		splashCharacter = splashParent.transform.Find("Character").GetComponent<Image>();
 		splashImage = splashPanel.Find("SplashImage_Full").GetComponent<Image>();
 
 		splashAnim = splashParent.GetComponent<Animator>();
