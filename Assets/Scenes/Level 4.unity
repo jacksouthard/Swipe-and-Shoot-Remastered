@@ -43,7 +43,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 4126788ba01154fef9f7eafbfbbfb9e3,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -8040,8 +8041,10 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
+  hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
   explodesOnDeath: 1
@@ -10926,8 +10929,10 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
+  hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
   explodesOnDeath: 1
@@ -17496,8 +17501,10 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
+  hasKnockback: 0
   dyingTimer: 0
   decayTimer: 2
+  canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
   explodesOnDeath: 1
@@ -23015,8 +23022,10 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
+  hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
   explodesOnDeath: 1
@@ -23433,8 +23442,10 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
+  hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
   explodesOnDeath: 1
@@ -26325,8 +26336,10 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
+  hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
   explodesOnDeath: 1
