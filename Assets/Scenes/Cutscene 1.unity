@@ -827,8 +827,8 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[0].startingSplashes.Array.data[1].message
-      value: 'The enemies have set up a nuclear missile off our coast and are planning
-        to use it to end the war. '
+      value: The enemies have set up a nuclear missile off our coast and are planning
+        to use it.
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -848,8 +848,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[0].startingSplashes.Array.data[5].message
-      value: 'I can get us an attack helicopter, but I need you to blow up their fighter
-        jets. '
+      value: I can get us a chopper, but I don't know what we'll do about their jets.
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
