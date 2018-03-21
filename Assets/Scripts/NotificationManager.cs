@@ -16,6 +16,7 @@ public class NotificationManager : MonoBehaviour {
 	Image splashImage;
 	Animator splashAnim;
 	bool isSplashing;
+	int maxSplashTextWidth;
 
 	public GameObject helpParent;
 	Text helpText;
@@ -47,6 +48,8 @@ public class NotificationManager : MonoBehaviour {
 		bannerParent.SetActive (true);
 		splashParent.SetActive (true);
 		helpParent.SetActive (true);
+
+		maxSplashTextWidth = Mathf.FloorToInt(splashText.GetPixelAdjustedRect().width);
 
 		instance = this;
 	}
@@ -93,8 +96,33 @@ public class NotificationManager : MonoBehaviour {
 			yield return new WaitForSecondsRealtime (splashAnimTime / 2);
 		}
 
+		splashText.font.RequestCharactersInTexture (splashes[0].message, splashText.fontSize, splashText.fontStyle);
+
 		int curCharacterIndex = 0;
 		int messageLength = splashes [0].message.Length;
+
+		int lastSpaceIndex = 0;
+		int wordWidth = 0;
+		int lineWidth = 0;
+		CharacterInfo chInfo;
+
+		//insert new lines as necessary
+		for (int i = 0; i < splashes[0].message.Length; i++) {
+			char nextChar = splashes [0].message [i];
+			splashText.font.GetCharacterInfo (nextChar, out chInfo, splashText.fontSize, splashText.fontStyle);
+			wordWidth += chInfo.advance;
+			lineWidth += chInfo.advance;
+
+			if (nextChar == ' ') {
+				lastSpaceIndex = i;
+				wordWidth = 0;
+			}
+
+			if (lineWidth > maxSplashTextWidth) {
+				splashes [0].message = splashes[0].message.Substring(0, lastSpaceIndex) + '\n' + splashes[0].message.Substring(lastSpaceIndex + 1);
+				lineWidth = wordWidth;
+			}
+		}
 
 		while (isSplashing && curCharacterIndex < messageLength) {
 			splashText.text += splashes [0].message[curCharacterIndex];
