@@ -40,11 +40,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Start() {
-		if (levelData.type != LevelManager.LevelData.Type.Cutscene) {
-			TimeManager.SetPaused (true);
-		} else {
-			StartGame ();
-		}
+		StartGame ();
 	}
 
 	void InitLevelData() {
@@ -90,12 +86,12 @@ public class GameManager : MonoBehaviour {
 		if (fullReset) {
 			LevelProgressManager.Reset ();
 		}
-		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+		SceneFader.FadeToScene(SceneManager.GetActiveScene ().buildIndex, Color.black);
 	}
 
 	public void ReturnToMain(int startingLevelId) {
 		MainMenu.startingLevel = startingLevelId;
-		SceneManager.LoadScene (1);
+		SceneFader.FadeToScene (1, Color.black);
 	}
 
 	public void ReturnToMain() {

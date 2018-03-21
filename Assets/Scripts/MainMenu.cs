@@ -110,7 +110,7 @@ public class MainMenu : MonoBehaviour {
 	public static void LoadLevel(int levelIndex) {
 		LevelProgressManager.Reset ();
 		Spawner.spawners.Clear ();
-		SceneManager.LoadScene (levelIndex + 2); //take into account this scene and the title scene
+		SceneFader.FadeToScene (levelIndex + 2, Color.black);
 	}
 
 	public void ToggleAutoSwiping(bool isOn) {
