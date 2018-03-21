@@ -244,6 +244,10 @@ public class LevelProgressManager : MonoBehaviour {
 
 	//assumes player is completing objectives in order for now
 	public void CompleteObjective() {
+		if (GameManager.instance.isGameOver) {
+			return;
+		}
+
 		if(objectives[curObjectiveId].objectsToEnable != null) {
 			objectives [curObjectiveId].objectsToEnable.SetActive (true);
 		}
