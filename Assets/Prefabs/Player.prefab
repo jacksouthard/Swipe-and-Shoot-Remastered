@@ -516,8 +516,10 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
+  hasKnockback: 1
   dyingTimer: 0
   decayTimer: 0
+  canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
   explodesOnDeath: 0

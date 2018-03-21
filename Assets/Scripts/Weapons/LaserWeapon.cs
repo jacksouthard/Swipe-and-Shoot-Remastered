@@ -29,15 +29,18 @@ public class LaserWeapon : Weapon {
 
 				// apply damage
 				GameObject hitGO = hit.collider.gameObject;
-				if (hitGO.GetComponentInParent<Health> () != null) {
-					hitGO.GetComponentInParent<Health> ().TakeDamage (damage, Health.DamageType.Bullets);
+				Health otherHealth = hitGO.GetComponentInParent<Health> ();
+				if (otherHealth != null) {
+					otherHealth.TakeDamage (damage, Health.DamageType.Bullets);
 				}
 
 				// apply bullet force
 				if (hitGO.GetComponent<Rigidbody> () != null) {
 					// has rigid body
-					Vector3 force = direction.normalized * damage * 3000f; // default force multiplier
-					hitGO.GetComponent<Rigidbody> ().AddForceAtPosition (force, end);
+					if (otherHealth == null || otherHealth.hasKnockback) {
+						Vector3 force = direction.normalized * damage * 3000f; // default force multiplier
+						hitGO.GetComponent<Rigidbody> ().AddForceAtPosition (force, end);
+					}
 				}
 			}
 

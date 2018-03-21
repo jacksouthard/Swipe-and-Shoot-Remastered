@@ -359,9 +359,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &65068099233458466
 BoxCollider:
@@ -407,6 +407,7 @@ MonoBehaviour:
   activeRange: 30
   pathUpdateRate: 0.5
   backsUp: 1
+  fallWaitTime: 1
   defaultWeapon: Random
   moves: 1
 --- !u!114 &114754551650817594
@@ -428,8 +429,12 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5019608, g: 0, b: 0, a: 1}
   resistance: 0
+  hasKnockback: 0
   dyingTimer: 1
   decayTimer: 2
+  canFallOver: 1
+  canBeKilledBySwiping: 0
+  durability: 0
   explodesOnDeath: 0
   explosionDamage: 0
   explosionForce: 0

@@ -10,6 +10,11 @@ public class AIController : MonoBehaviour {
 	public float pathUpdateRate;
 
 	public bool backsUp = true;
+	[HideInInspector]
+	bool fallenOver;
+	bool gettingUp;
+
+	public float fallWaitTime;
 
 	protected bool prioritizesFirstTarget; //use this for when you want to prioritize the player
 	protected float priorityRange; //range within which the priority target takes priority
@@ -21,6 +26,8 @@ public class AIController : MonoBehaviour {
 	protected Transform target;
 
 	public virtual string curWeaponName { get { return "None"; } }
+
+	protected Rigidbody rb;
 
 	void Awake() {
 		LoadFromCheckpoint ();
@@ -48,8 +55,13 @@ public class AIController : MonoBehaviour {
 
 	protected virtual void Init() {
 		navAgent = gameObject.GetComponent<NavMeshAgent> ();
+
+		rb = gameObject.GetComponent<Rigidbody> ();
+		rb.constraints = RigidbodyConstraints.FreezeAll;
+
 		health = gameObject.GetComponent <Health> ();
 		health.onDeath += Die;
+		health.onKnockedOver += FallOver;
 
 		UpdateTarget ();
 
@@ -57,6 +69,10 @@ public class AIController : MonoBehaviour {
 	}
 
 	void LateUpdate() {
+		if (fallenOver) {
+			return;
+		}
+
 		if (Time.time > nextPathUpdate) {
 			UpdateTarget ();	
 		}
@@ -131,6 +147,8 @@ public class AIController : MonoBehaviour {
 	protected virtual void SwitchTargets () {}
 
 	public virtual void Die() {
+		rb.constraints = RigidbodyConstraints.None;
+
 		if (navAgent != null) {
 			Destroy (navAgent);
 		}
@@ -139,6 +157,35 @@ public class AIController : MonoBehaviour {
 			LevelProgressManager.instance.EnemyDeath (hash);
 		}
 
+		health.onKnockedOver -= FallOver;
 		Destroy(this);
+	}
+
+	void FallOver() {
+		rb.constraints = RigidbodyConstraints.None;
+		fallenOver = true;
+		gettingUp = false;
+		if (navAgent != null) {
+			navAgent.enabled = false;
+		}
+
+		StartCoroutine (GetUp());
+	}
+
+	IEnumerator GetUp() {
+		yield return new WaitForSeconds (fallWaitTime);
+
+		rb.velocity = Vector3.zero;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		gettingUp = true;
+		while (gettingUp && Quaternion.Angle(transform.rotation, Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f)) > 10f) {
+			transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f), Time.deltaTime * 20);
+			yield return new WaitForEndOfFrame ();
+		}
+		rb.constraints = RigidbodyConstraints.FreezeAll;
+			
+		transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y, 0f);
+		gettingUp = false;
+		fallenOver = false;
 	}
 }

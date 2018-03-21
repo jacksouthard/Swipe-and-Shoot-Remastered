@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44824833, g: 0.49827528, b: 0.5755825, a: 1}
+  m_IndirectSpecularColor: {r: 0.44824862, g: 0.49827576, b: 0.5755829, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5098,19 +5098,6 @@ Prefab:
       propertyPath: m_Name
       value: SwipeDummy
       objectReference: {fileID: 0}
-    - target: {fileID: 4528470294308214, guid: f5fb67a5e2426440bbb4c1add2221aa3, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4528470294308214, guid: f5fb67a5e2426440bbb4c1add2221aa3, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 54500494797373842, guid: f5fb67a5e2426440bbb4c1add2221aa3,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f5fb67a5e2426440bbb4c1add2221aa3, type: 2}
   m_IsPrefabParent: 0
@@ -7573,19 +7560,6 @@ Prefab:
       propertyPath: m_Name
       value: SwipeDummy
       objectReference: {fileID: 0}
-    - target: {fileID: 4528470294308214, guid: f5fb67a5e2426440bbb4c1add2221aa3, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4528470294308214, guid: f5fb67a5e2426440bbb4c1add2221aa3, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 54500494797373842, guid: f5fb67a5e2426440bbb4c1add2221aa3,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f5fb67a5e2426440bbb4c1add2221aa3, type: 2}
   m_IsPrefabParent: 0
@@ -9833,19 +9807,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4528470294308214, guid: f5fb67a5e2426440bbb4c1add2221aa3, type: 2}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 54500494797373842, guid: f5fb67a5e2426440bbb4c1add2221aa3,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4528470294308214, guid: f5fb67a5e2426440bbb4c1add2221aa3, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4528470294308214, guid: f5fb67a5e2426440bbb4c1add2221aa3, type: 2}
-      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

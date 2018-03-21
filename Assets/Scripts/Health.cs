@@ -33,6 +33,7 @@ public class Health : MonoBehaviour {
 	public float hitWait;
 	public Color hitColor;
 	public float resistance;
+	public bool hasKnockback;
 	public System.Action<float> onHit;
 
 	[Header("Death")]
@@ -41,8 +42,10 @@ public class Health : MonoBehaviour {
 	public System.Action onDeath;
 
 	[Header("Swiping")]
+	public bool canFallOver;
 	public bool canBeKilledBySwiping;
 	public float durability; //max force before the enemy dies
+	public System.Action onKnockedOver;
 	public System.Action onSwipeDeath;
 
 	[Header("Explosion")]
@@ -75,24 +78,6 @@ public class Health : MonoBehaviour {
 		UpdateRenderers ();
 
 		isPlayer = (GetComponent<PlayerController> () != null);
-
-		if (canBeKilledBySwiping) {
-			CreateSwipeHitBox ();
-		}
-	}
-
-	//for now we assume that the object already has a regular box collider
-	void CreateSwipeHitBox() {
-		GameObject empty = new GameObject ();
-		GameObject hitBoxObj = (GameObject) Instantiate(empty, transform.position, transform.rotation, transform);
-		Destroy (empty);
-
-		BoxCollider mainCol = GetComponentInChildren<BoxCollider> ();
-		BoxCollider boxCol = hitBoxObj.AddComponent<BoxCollider> ();
-		boxCol.size = mainCol.size + new Vector3 (0.5f, 0.25f, 0.5f); //make the collider slightly bigger than regular collider
-		boxCol.center = new Vector3(0f, boxCol.size.y / 2f, 0f);
-		boxCol.isTrigger = true;
-		hitBoxObj.layer = 2; //make it ignore raycast
 	}
 
 	//waits until next frame before updating MeshRenderers
@@ -192,9 +177,14 @@ public class Health : MonoBehaviour {
 
 			if (health <= 0f) {
 				Die ();
+				hasKnockback = true;
 				return;
 			} else {
 				StartCoroutine (HitAnimation ());
+
+				if (type == DamageType.Explosions && canFallOver && onKnockedOver != null) {
+					onKnockedOver.Invoke ();
+				}
 			}
 
 			if (!smokes) {
@@ -318,10 +308,10 @@ public class Health : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider other) {
-		if (!canBeKilledBySwiping) {
+	void OnCollisionEnter(Collision other) {
+		if (!canFallOver) {
 			return;
-		}
+		}	
 
 		Rigidbody otherRb = other.gameObject.GetComponentInParent<Rigidbody> ();
 		if (otherRb == null) {
@@ -330,7 +320,7 @@ public class Health : MonoBehaviour {
 
 		float appliedForce = otherRb.mass * (otherRb.velocity.magnitude / Time.deltaTime);
 
-		if (appliedForce >= durability) {
+		if (canBeKilledBySwiping && appliedForce >= durability) {
 			PlayerController pc = otherRb.GetComponent<PlayerController> ();
 
 			if (pc != null && onSwipeDeath != null) {
@@ -338,6 +328,10 @@ public class Health : MonoBehaviour {
 			}
 
 			Die ();
+		} else {
+			if (onKnockedOver != null) {
+				onKnockedOver.Invoke ();
+			}
 		}
 	}
 }

@@ -41,7 +41,6 @@ public class EnemyController : AIController {
 	}
 
 	void Start() {
-		rb = GetComponent<Rigidbody> ();
 		deathSound = GetComponent<AudioSource> ();
 		nextPathUpdate = Time.time;
 
@@ -140,7 +139,6 @@ public class EnemyController : AIController {
 
 	// vehicles
 	Rideable currentVehicle;
-	Rigidbody rb;
 	void OnCollisionEnter(Collision other) {
 		if (other.collider.tag == "Vehicle") {
 			Rideable newVehicle = other.gameObject.GetComponentInParent<Rideable> ();
