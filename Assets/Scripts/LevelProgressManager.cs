@@ -95,6 +95,8 @@ public class LevelProgressManager : MonoBehaviour {
 		if (curObjectiveId > 0) {
 			UpdatePlayer ();
 		}
+
+		GameObject.FindObjectOfType<CameraController> ().ResetPosition (); //move camera
 	}
 
 	public void StartGame() {
@@ -200,8 +202,6 @@ public class LevelProgressManager : MonoBehaviour {
 
 	void UpdatePlayer() {
 		pc.transform.position = objectives[curObjectiveId - 1].spawnPoint.position; //move player to last checkpoint
-
-		GameObject.FindObjectOfType<CameraController> ().ResetPosition (); //move camera
 	}
 
 	void SaveGame() {
@@ -306,7 +306,7 @@ public class LevelProgressManager : MonoBehaviour {
 
 		do {
 			nextLevel++;
-		} while(nextLevel < LevelManager.instance.levelData.Count && LevelManager.instance.levelData [nextLevel].type == LevelManager.LevelData.Type.Endless);
+		} while(nextLevel < (LevelManager.instance.levelData.Count - 1) && LevelManager.instance.levelData [nextLevel].type == LevelManager.LevelData.Type.Endless);
 
 		if (LevelManager.instance.levelData[nextLevel].type != LevelManager.LevelData.Type.Endless) {
 			MainMenu.LoadLevel (nextLevel);
