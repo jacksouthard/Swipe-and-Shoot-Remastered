@@ -60,6 +60,8 @@ MonoBehaviour:
     prefab: {fileID: 1552984534006486, guid: c03ae9a50baab4126998bd015dcfd584, type: 2}
   - name: Pilot
     prefab: {fileID: 1398844481974702, guid: 3c38b30c37c3f4f0ca69097e7f46e98b, type: 2}
+  - name: General
+    prefab: {fileID: 1091460730061230, guid: 588123117859b47d7830ec9b52debaa5, type: 2}
 --- !u!114 &114227078029244328
 MonoBehaviour:
   m_ObjectHideFlags: 1
