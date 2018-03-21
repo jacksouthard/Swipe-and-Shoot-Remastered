@@ -166,7 +166,7 @@ MonoBehaviour:
   decayTimer: 2
   canFallOver: 1
   canBeKilledBySwiping: 1
-  durability: 20000
+  durability: 100
   explodesOnDeath: 0
   explosionDamage: 0
   explosionForce: 0

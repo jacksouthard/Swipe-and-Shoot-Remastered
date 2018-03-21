@@ -14,6 +14,15 @@ public class GameProgress {
 		}
 	}
 
+	/*public static bool isFirstTime {
+		get {
+			return PlayerPrefs.GetInt ("IsFirstTime") == 0;
+		}
+		set {
+			PlayerPrefs.SetInt ("IsFirstTime", (value) ? 1 : 0);
+		}
+	}*/
+
 	public static void Reset() {
 		PlayerPrefs.SetInt ("FarthestLevel", 0);
 	}
