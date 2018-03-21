@@ -9844,6 +9844,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[5].image
+      value: 
+      objectReference: {fileID: 21300000, guid: 3676453243ea74b1693e71859b38e131,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f44ae4d7524684aee81468242e81f628, type: 2}
   m_IsPrefabParent: 0
