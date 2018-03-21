@@ -31,6 +31,7 @@ ModelImporter:
     100046: Rocket
     100048: RPG
     100050: Shotgun
+    100052: Dummy
     400000: Cube
     400002: Cube_001
     400004: Cube_002
@@ -57,6 +58,7 @@ ModelImporter:
     400046: Rocket
     400048: RPG
     400050: Shotgun
+    400052: Dummy
     2300000: Cube
     2300002: Cube_001
     2300004: Cube_002
@@ -82,6 +84,7 @@ ModelImporter:
     2300044: Rocket
     2300046: RPG
     2300048: Shotgun
+    2300050: Dummy
     3300000: Cube
     3300002: Cube_001
     3300004: Cube_002
@@ -107,6 +110,7 @@ ModelImporter:
     3300044: Rocket
     3300046: RPG
     3300048: Shotgun
+    3300050: Dummy
     4300000: Cube_008
     4300002: Cube_007
     4300004: Cube_003
@@ -132,6 +136,7 @@ ModelImporter:
     4300044: Rocket
     4300046: RPG
     4300048: Shotgun
+    4300050: Dummy
     7400000: Default Take
     9500000: //RootNode
   externalObjects:
@@ -160,6 +165,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: BodyArmor1
     second: {fileID: 2100000, guid: c80c16e5342a0499097808723a475438, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dummy
+    second: {fileID: 2100000, guid: 3bf916204d14c4b91992136550bd1044, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DummyPole
+    second: {fileID: 2100000, guid: 275c2786577a34462a1cdcee2f45ca27, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
