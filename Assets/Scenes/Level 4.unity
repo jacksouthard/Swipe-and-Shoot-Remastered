@@ -30055,6 +30055,11 @@ Prefab:
       propertyPath: objectives.Array.data[3].startingSplashes.Array.data[0].message
       value: Lets get out of here!
       objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: winMessage
+      value: Fighters Eliminated
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
   m_IsPrefabParent: 0

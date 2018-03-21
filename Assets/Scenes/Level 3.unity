@@ -541,6 +541,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 1ae5a4364eefb48a0b445cda67536e04,
         type: 3}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: winMessage
+      value: Chopper Stolen
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
   m_IsPrefabParent: 0

@@ -6233,6 +6233,11 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 002d4de706d434d7d8aff2b665cb220e,
         type: 3}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: winMessage
+      value: Training Complete
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
   m_IsPrefabParent: 0
