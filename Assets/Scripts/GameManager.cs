@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour {
 		if(enemySpawner != null) {
 			Destroy (enemySpawner); //no new enemies!
 		}
+
+		GameObject.FindObjectOfType<SwipeManager> ().EndSwipe ();
 	}
 
 	public void Restart(bool fullReset = true) {
