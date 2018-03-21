@@ -155,6 +155,11 @@ public class EnemyController : AIController {
 
 		currentVehicle.Mount (gameObject);
 
+		if (navAgent != null) {
+			navAgent.enabled = false;
+		}
+		inVehicle = true;
+
 		shooting.canRotateParent = false;
 		shooting.gameObject.SetActive (false);
 	}
@@ -168,6 +173,11 @@ public class EnemyController : AIController {
 
 		shooting.canRotateParent = true;
 		shooting.gameObject.SetActive (true);
+
+		if (navAgent != null) {
+			navAgent.enabled = true;
+		}
+		inVehicle = false;
 
 		health.ResetColor ();
 	}

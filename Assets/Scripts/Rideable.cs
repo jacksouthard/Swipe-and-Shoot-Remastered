@@ -55,7 +55,6 @@ public class Rideable : MonoBehaviour {
 		EnemyController em = mounter.GetComponentInParent<EnemyController>();
 		if (em != null) {
 			em.enabled = false;
-			mounter.GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = false;
 		}
 
 		if (isObjective) {
@@ -85,7 +84,6 @@ public class Rideable : MonoBehaviour {
 		if (em != null) {
 			em.EjectFromVehicle ();
 			em.enabled = true;
-			mounter.GetComponent<UnityEngine.AI.NavMeshAgent> ().enabled = true;
 		}
 
 		StartCoroutine(IgnoreDriverCollisions(mounterCol));

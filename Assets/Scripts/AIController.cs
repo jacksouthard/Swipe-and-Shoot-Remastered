@@ -10,7 +10,7 @@ public class AIController : MonoBehaviour {
 	public float pathUpdateRate;
 
 	public bool backsUp = true;
-	[HideInInspector]
+	public bool inVehicle;
 	bool fallenOver;
 	bool gettingUp;
 
@@ -162,6 +162,10 @@ public class AIController : MonoBehaviour {
 	}
 
 	void FallOver() {
+		if (inVehicle) {
+			return;
+		}
+
 		rb.constraints = RigidbodyConstraints.None;
 		fallenOver = true;
 		gettingUp = false;
@@ -169,10 +173,10 @@ public class AIController : MonoBehaviour {
 			navAgent.enabled = false;
 		}
 
-		StartCoroutine (GetUp());
+		StartCoroutine (GetUp(transform.position.y));
 	}
 
-	IEnumerator GetUp() {
+	IEnumerator GetUp(float originalHeight) {
 		yield return new WaitForSeconds (fallWaitTime);
 
 		rb.velocity = Vector3.zero;
@@ -183,6 +187,7 @@ public class AIController : MonoBehaviour {
 			yield return new WaitForEndOfFrame ();
 		}
 		rb.constraints = RigidbodyConstraints.FreezeAll;
+		transform.position = new Vector3 (transform.position.x, Mathf.Max(transform.position.y, originalHeight), transform.position.z);
 			
 		transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y, 0f);
 		gettingUp = false;
