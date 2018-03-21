@@ -9,7 +9,14 @@ public class Weapon : MonoBehaviour {
 	public float range;
 	public float speedMultiplier;
 
-	public float dps { get { return damage / fireRate; } }
+	public float dps {
+		get {
+			if (bulletSpawns.Count == 0) {
+				SetBulletSpawns ();
+			}
+			return (damage * bulletSpawns.Count) / fireRate;
+		}
+	}
 
 	string targetTag;
 
@@ -17,11 +24,17 @@ public class Weapon : MonoBehaviour {
 	float fireRateTimer = 0f;
 	protected List<Transform> bulletSpawns = new List<Transform> ();
 
-	void Start () {
+	void SetBulletSpawns() {
 		for (int i = 0; i < transform.childCount; i++) {
 			if (transform.GetChild (i).name.Contains("BulletSpawn")) {
 				bulletSpawns.Add (transform.GetChild (i));
 			}
+		}
+	}
+
+	void Start () {
+		if (bulletSpawns.Count == 0) {
+			SetBulletSpawns ();
 		}
 	}
 
