@@ -29,7 +29,7 @@ public class NotificationManager : MonoBehaviour {
 	const float bannerTime = 2f;
 	const float bannerWait = 0.5f; //delay between successive banners
 	const float splashAnimTime = 0.5f; //delay before unpausing after the last splash screen
-	const float splashDelayBetweenCharacters = 0.05f; //delay between each character
+	const float splashDelayBetweenCharacters = 0.035f; //delay between each character
 
 	void Awake() {
 		bannerText = bannerParent.GetComponentInChildren<Text> ();

@@ -2245,7 +2245,8 @@ Prefab:
         type: 2}
       propertyPath: objectives.Array.data[0].startingSplashes.Array.data[0].character
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 002d4de706d434d7d8aff2b665cb220e,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
   m_IsPrefabParent: 0
@@ -9688,6 +9689,11 @@ Prefab:
     - target: {fileID: 4138976885120154, guid: f44ae4d7524684aee81468242e81f628, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114994002116265576, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: levelData.Array.data[1].character
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f44ae4d7524684aee81468242e81f628, type: 2}
