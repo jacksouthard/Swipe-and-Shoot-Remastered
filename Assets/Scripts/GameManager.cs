@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject pauseScreen;
 
 	public LevelManager.LevelData levelData { get; private set; }
-	public int curLevelId { get { return SceneManager.GetActiveScene().buildIndex - 1; } }
+	public int curLevelId { get { return SceneManager.GetActiveScene().buildIndex - 2; } }
 
 	void Awake() {
 		instance = this;
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour {
 
 	public void ReturnToMain(int startingLevelId) {
 		MainMenu.startingLevel = startingLevelId;
-		SceneManager.LoadScene (0);
+		SceneManager.LoadScene (1);
 	}
 
 	public void ReturnToMain() {
