@@ -9,6 +9,8 @@ public class Weapon : MonoBehaviour {
 	public float range;
 	public float speedMultiplier;
 
+	public float dps { get { return damage / fireRate; } }
+
 	string targetTag;
 
 	bool canFire;

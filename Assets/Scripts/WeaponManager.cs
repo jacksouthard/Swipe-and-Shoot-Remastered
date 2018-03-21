@@ -47,7 +47,35 @@ public class WeaponManager : DataManager<WeaponData> {
 public class WeaponData : Data {
 	public int tier;
 
+	public Weapon weapon { get { return prefab.GetComponent<Weapon> (); } }
+
 	public override string GetAssetType () {
 		return "Weapon";
+	}
+
+	public WeaponComparisonData Compare(WeaponData other) {
+		WeaponComparisonData newData = new WeaponComparisonData ();
+		Weapon a = weapon;
+		Weapon b = other.weapon;
+
+		newData.dpsPercentageDiff = b.dps / a.dps;
+		newData.rangePercentageDiff = b.range / a.range;
+
+		return newData;
+	}
+}
+
+public class WeaponComparisonData {
+	public float dpsPercentageDiff;
+	public float rangePercentageDiff;
+
+	public static Color GetColorFromPercentage(float percentage) {
+		if (percentage > 1f) {
+			return new Color (0f, 0.75f, 0f);
+		} else if (percentage < 1f) {
+			return new Color (1f, 0.25f, 0.25f);
+		} else {
+			return Color.white;
+		}
 	}
 }

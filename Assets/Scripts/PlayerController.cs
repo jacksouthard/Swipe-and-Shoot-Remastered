@@ -37,7 +37,10 @@ public class PlayerController : MonoBehaviour {
 	public float pickupTime;
 	public GameObject timerDisplay;
 	public GameObject timerBar;
-	public Text nextPickupText;
+	GameObject weaponStatsParent;
+	Text pickupTitleText;
+	Text dpsText;
+	Text rangeText;
 
 	[Header("Throwing")]
 	public GameObject pickupPrefab;
@@ -75,6 +78,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Start() {
+		InitPickupDisplay ();
+
 		//set starting weapon
 		string weaponToUse = (LevelProgressManager.lastWeaponName != "None") ? LevelProgressManager.lastWeaponName : defaultWeaponName;
 		if (weaponToUse != "None") {
@@ -86,6 +91,15 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		Instantiate (CostumeManager.instance.GetDataFromName(GameManager.instance.levelData.GetCharacterName()), transform.position, transform.rotation, transform);
+	}
+
+	void InitPickupDisplay() {
+		Transform canvas = timerDisplay.GetComponentInChildren<Canvas> ().transform;
+		pickupTitleText = canvas.Find ("Name").GetComponent<Text> ();
+
+		weaponStatsParent = canvas.transform.Find ("WeaponStats").gameObject;
+		dpsText = weaponStatsParent.transform.Find ("DPS").GetComponent<Text>();
+		rangeText = weaponStatsParent.transform.Find ("Range").GetComponent<Text> ();
 	}
 
 	//launches character in a direction
@@ -338,7 +352,19 @@ public class PlayerController : MonoBehaviour {
 
 		timerDisplay.transform.position = transform.position;
 
-		nextPickupText.text = curPickingupTimers [0].name;
+		pickupTitleText.text = curPickingupTimers [0].name;
+		WeaponData newWeaponData = curPickingupTimers [0].pickup.GetComponent<Pickup> ().data as WeaponData;
+		if (shooting.hasWeapon && newWeaponData != null) {
+			WeaponComparisonData comparisonStats = shooting.GetWeaponData ().Compare (newWeaponData);
+			dpsText.text = Mathf.RoundToInt (comparisonStats.dpsPercentageDiff * 100) + "%";
+			dpsText.color = WeaponComparisonData.GetColorFromPercentage (comparisonStats.dpsPercentageDiff);
+			rangeText.text = Mathf.RoundToInt (comparisonStats.rangePercentageDiff * 100) + "%";
+			rangeText.color = WeaponComparisonData.GetColorFromPercentage (comparisonStats.rangePercentageDiff);
+			weaponStatsParent.SetActive (true);
+		} else {
+			weaponStatsParent.SetActive (false);
+		}
+
 		timerBar.transform.localScale = new Vector3 (1f - curPickingupTimers[0].percentage, 1f, 1f);
 	}
 
