@@ -100,19 +100,19 @@ public class MainMenu : MonoBehaviour {
 	public void ResetGame() {
 		GameProgress.Reset ();
 		startingLevel = 0;
-		SceneManager.LoadScene (0);
+		SceneManager.LoadScene (1);
 	}
 
 	public void BetaUnlock() {
 		GameProgress.UnlockAll ();
 		startingLevel = GameProgress.farthestLevel;
-		SceneManager.LoadScene (0);
+		SceneManager.LoadScene (1);
 	}
 
 	public static void LoadLevel(int levelIndex) {
 		LevelProgressManager.Reset ();
 		Spawner.spawners.Clear ();
-		SceneManager.LoadScene (levelIndex + 1);
+		SceneManager.LoadScene (levelIndex + 2); //take into account this scene and the title scene
 	}
 
 	public void ToggleAutoSwiping(bool isOn) {
