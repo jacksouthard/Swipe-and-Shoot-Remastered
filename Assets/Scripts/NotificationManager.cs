@@ -16,7 +16,6 @@ public class NotificationManager : MonoBehaviour {
 	Image splashImage;
 	Animator splashAnim;
 	bool isSplashing;
-	int maxSplashTextWidth;
 
 	public GameObject helpParent;
 	Text helpText;
@@ -48,8 +47,6 @@ public class NotificationManager : MonoBehaviour {
 		bannerParent.SetActive (true);
 		splashParent.SetActive (true);
 		helpParent.SetActive (true);
-
-		maxSplashTextWidth = Mathf.FloorToInt(splashText.GetPixelAdjustedRect().width);
 
 		instance = this;
 	}
@@ -96,6 +93,7 @@ public class NotificationManager : MonoBehaviour {
 			yield return new WaitForSecondsRealtime (splashAnimTime / 2);
 		}
 
+		int maxSplashTextWidth = Mathf.FloorToInt(splashText.GetPixelAdjustedRect().width);
 		splashText.font.RequestCharactersInTexture (splashes[0].message, splashText.fontSize, splashText.fontStyle);
 
 		int curCharacterIndex = 0;
