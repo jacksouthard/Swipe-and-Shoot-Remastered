@@ -59,6 +59,7 @@ public class Rideable : MonoBehaviour {
 		}
 
 		if (isObjective) {
+			isObjective = false;
 			this.CompleteObjective ();
 		}
 	}
