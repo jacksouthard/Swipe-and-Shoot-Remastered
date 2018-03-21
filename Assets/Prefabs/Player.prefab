@@ -467,10 +467,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  stoppingSpeed: 1
+  stoppingSpeed: 2
   stoppingAngle: 30
   autoResetTime: 0.5
-  swipeForce: 30000
+  swipeForce: 35000
   verticalFactor: 0.5
   turnSpeed: 10
   defaultWeaponName: None
