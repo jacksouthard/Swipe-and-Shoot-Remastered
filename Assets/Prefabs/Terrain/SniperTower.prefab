@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4570586743460080}
   - component: {fileID: 65309823967896886}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BottomCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
