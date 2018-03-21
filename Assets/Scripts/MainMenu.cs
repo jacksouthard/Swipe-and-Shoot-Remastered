@@ -8,7 +8,6 @@ public class MainMenu : MonoBehaviour {
 	public static int startingLevel = -1;
 
 	public Text levelTitleText;
-	public Text characterText;
 
 	[Header("Buttons")]
 	public GameObject leftButton;
@@ -67,7 +66,6 @@ public class MainMenu : MonoBehaviour {
 		curLevelIndex = levelIndex;
 		LevelManager.LevelData data = LevelManager.instance.levelData [levelIndex];
 		levelTitleText.text = data.name;
-		characterText.text = "Character: " + data.GetCharacterName ();
 
 		leftButton.SetActive (curLevelIndex > 0);
 		rightButton.SetActive (curLevelIndex < GameProgress.farthestLevel);

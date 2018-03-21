@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour {
 	[Header("Game Start")]
 	public GameObject startScreen;
 	public Text levelTitle;
-	public Text characterText;
 
 	[Header("Game Over")]
 	public GameObject gameOverScreen;
@@ -51,7 +50,6 @@ public class GameManager : MonoBehaviour {
 	void InitLevelData() {
 		levelData = LevelManager.instance.levelData [curLevelId];
 		levelTitle.text = levelData.name;
-		characterText.text = "character: " + levelData.GetCharacterName();
 	}
 
 	public void StartGame() {
