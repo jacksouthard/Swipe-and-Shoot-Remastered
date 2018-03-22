@@ -6,8 +6,28 @@ public class BulletRay : MonoBehaviour {
 	LineRenderer lr;
 	Transform flash;
 
-	public void Init (Vector3 start, Vector3 end, float time) {
-		Destroy (gameObject, time);
+	bool inited = false;
+
+	bool rayVisible = true;
+	float rayVisibleTime = 0.05f;
+	float audioTime;
+	float timer = 0f;
+
+	void Update () {
+		if (inited) {
+			if (rayVisible) {
+				timer += Time.deltaTime;
+				if (timer > rayVisibleTime) {
+					lr.enabled = false;
+					transform.Find ("Flash").gameObject.SetActive (false);
+				}
+			}
+		}
+	}
+
+	public void Init (Vector3 start, Vector3 end) {
+		audioTime = GetComponent<AudioSource> ().clip.length; 
+		Destroy (gameObject, audioTime);
 
 		lr = GetComponent<LineRenderer> ();
 		Vector3[] positions = new Vector3[2];
@@ -20,5 +40,7 @@ public class BulletRay : MonoBehaviour {
 		flash.transform.LookAt (end);
 
 		lr.SetPositions (positions);
+
+		inited = true;
 	}
 }

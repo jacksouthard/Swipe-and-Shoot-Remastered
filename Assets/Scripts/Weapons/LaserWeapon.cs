@@ -45,7 +45,7 @@ public class LaserWeapon : Weapon {
 			}
 
 			GameObject bulletRay = Instantiate (bulletRayPrefab, transform.position, Quaternion.identity, transform);
-			bulletRay.GetComponent<BulletRay> ().Init (start, end, 0.05f);
+			bulletRay.GetComponent<BulletRay> ().Init (start, end);
 		}
 	}
 }
