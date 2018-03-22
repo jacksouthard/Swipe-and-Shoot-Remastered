@@ -302,6 +302,8 @@ MonoBehaviour:
   damage: 10
   range: 12
   speedMultiplier: 0.2
+  audioClip: {fileID: 8300000, guid: 8c71312c4e26e4ab18b257fdefd3da47, type: 3}
+  audioPitch: 1
   projectile: {fileID: 1199342176633714, guid: 39b06e962069247978948b90578b12c5, type: 2}
   projectileSpeed: 10
   projectileLifeTime: 2

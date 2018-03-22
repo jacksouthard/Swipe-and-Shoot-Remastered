@@ -273,8 +273,8 @@ MonoBehaviour:
   damage: 0.8
   range: 7
   speedMultiplier: 0.8
+  audioClip: {fileID: 8300000, guid: 9bb0383c21e404a0385f61bf2dcbb4d2, type: 3}
+  audioPitch: 0.8
   accuracy: 5
   bulletRayPrefab: {fileID: 1303374916533454, guid: 387e19391ca184c4789e4926758050be,
     type: 2}
-  audioClip: {fileID: 8300000, guid: 9bb0383c21e404a0385f61bf2dcbb4d2, type: 3}
-  audioPitch: 1

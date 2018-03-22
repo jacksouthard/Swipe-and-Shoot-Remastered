@@ -297,12 +297,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd24194605b24a529a3f976ebea2675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.02
-  damage: 0.5
+  fireRate: 0.03
+  damage: 0.6
   range: 7
   speedMultiplier: 0.3
+  audioClip: {fileID: 8300000, guid: 9bb0383c21e404a0385f61bf2dcbb4d2, type: 3}
+  audioPitch: 1.1
   accuracy: 5
   bulletRayPrefab: {fileID: 1303374916533454, guid: 387e19391ca184c4789e4926758050be,
     type: 2}
-  audioClip: {fileID: 8300000, guid: 9bb0383c21e404a0385f61bf2dcbb4d2, type: 3}
-  audioPitch: 1
