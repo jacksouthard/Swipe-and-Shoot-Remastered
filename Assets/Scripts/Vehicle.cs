@@ -135,6 +135,15 @@ public class Vehicle : Rideable {
 	}
 
 	void Update () {
+		if (engine != null) {
+			float minPitch = (driver) ? 0.5f : 0f;
+			engine.pitch = Mathf.Lerp(engine.pitch, Mathf.Clamp(curWheelSpeed, minPitch, 1.5f), Time.deltaTime * 2); //arbitrary min/max values
+
+			if (!driver && engine.pitch <= 0.05f) {
+				engine.Stop ();
+			}
+		}
+
 		if (!driver) {
 			return;
 		}

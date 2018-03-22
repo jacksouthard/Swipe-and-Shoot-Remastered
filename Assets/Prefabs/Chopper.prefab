@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 54459164979934110}
   - component: {fileID: 114573642009926486}
   - component: {fileID: 114077014661711682}
+  - component: {fileID: 82662386077195976}
   m_Layer: 0
   m_Name: Chopper
   m_TagString: Vehicle
@@ -890,6 +891,86 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.25, y: 10.389094, z: 2.4233658}
   m_Center: {x: -0.00000003051066, y: 0.5004111, z: -0.7563533}
+--- !u!82 &82662386077195976
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1845829478854394}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9edc0be8f52c34145b97c0ef0f0a0b01, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114077014661711682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -909,8 +990,12 @@ MonoBehaviour:
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
+  hasKnockback: 0
   dyingTimer: 0
   decayTimer: 2
+  canFallOver: 0
+  canBeKilledBySwiping: 0
+  durability: 0
   explodesOnDeath: 1
   explosionDamage: 15
   explosionForce: 5000
@@ -977,6 +1062,7 @@ MonoBehaviour:
   targetTag: Enemy
   clampAngle: 360
   shouldUpdateTarget: 1
+  minRange: 0
   parentSpeed: 0
   speed: 300
 --- !u!114 &114865315244580722
@@ -994,6 +1080,8 @@ MonoBehaviour:
   damage: 1
   range: 20
   speedMultiplier: 1
+  audioClip: {fileID: 0}
+  audioPitch: 1
   accuracy: 2
   bulletRayPrefab: {fileID: 1303374916533454, guid: 387e19391ca184c4789e4926758050be,
     type: 2}

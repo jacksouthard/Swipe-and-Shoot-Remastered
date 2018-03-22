@@ -16,6 +16,7 @@ public class Rideable : MonoBehaviour {
 	Transform seat;
 
 	protected GameObject mounter;
+	protected AudioSource engine;
 
 	bool isObjective = false;
 
@@ -28,6 +29,7 @@ public class Rideable : MonoBehaviour {
 
 	public void Initiate () {
 		rb = GetComponent<Rigidbody> ();
+		engine = GetComponent<AudioSource> ();
 
 		// init mounting stuff
 		seat = transform.Find("Seat");
@@ -60,6 +62,11 @@ public class Rideable : MonoBehaviour {
 		if (isObjective) {
 			isObjective = false;
 			this.CompleteObjective ();
+		}
+
+		if (engine != null) {
+			engine.Play ();
+			engine.pitch = 0;
 		}
 	}
 

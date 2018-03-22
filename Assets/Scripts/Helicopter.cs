@@ -158,6 +158,14 @@ public class Helicopter : Rideable {
 	}
 
 	void Update () {
+		if (engine != null) {
+			engine.pitch = curRotorSpeed;
+
+			if (!driver && engine.pitch <= 0.1f) {
+				engine.Stop ();
+			}
+		}
+
 		if (!driver && !hasAI) {
 			return;
 		}
