@@ -314,7 +314,7 @@ public class Health : MonoBehaviour {
 		}	
 
 		Rigidbody otherRb = other.gameObject.GetComponentInParent<Rigidbody> ();
-		if (otherRb == null) {
+		if (otherRb == null || otherRb.constraints == RigidbodyConstraints.FreezeAll) { //don't fall if the other rigidbody has no physics
 			return;
 		}
 
