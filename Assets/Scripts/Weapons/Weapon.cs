@@ -9,6 +9,10 @@ public class Weapon : MonoBehaviour {
 	public float range;
 	public float speedMultiplier;
 
+	[Header("Audio")]
+	public AudioClip audioClip;
+	public float audioPitch = 1;
+
 	public float dps {
 		get {
 			if (bulletSpawns.Count == 0) {
