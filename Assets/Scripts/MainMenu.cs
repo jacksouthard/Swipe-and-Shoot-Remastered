@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 	public static int startingLevel = -1;
 
 	public Text levelTitleText;
+
+	public Animator menuAnim;
 
 	[Header("Buttons")]
 	public GameObject leftButton;
@@ -33,6 +34,10 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	void Start() {
+		LoadFromFarthestLevel ();
+	}
+
+	void LoadFromFarthestLevel() {
 		LoadLevelData ((startingLevel != -1) ? startingLevel : GameProgress.farthestLevel);
 	}
 
@@ -98,13 +103,15 @@ public class MainMenu : MonoBehaviour {
 	public void ResetGame() {
 		GameProgress.Reset ();
 		startingLevel = 0;
-		SceneManager.LoadScene (1);
+		LoadFromFarthestLevel ();
+		OpenSettingsMenu (false);
 	}
 
 	public void BetaUnlock() {
 		GameProgress.UnlockAll ();
 		startingLevel = GameProgress.farthestLevel;
-		SceneManager.LoadScene (1);
+		LoadFromFarthestLevel ();
+		OpenSettingsMenu (false);
 	}
 
 	public static void LoadLevel(int levelIndex) {
@@ -115,5 +122,9 @@ public class MainMenu : MonoBehaviour {
 
 	public void ToggleAutoSwiping(bool isOn) {
 		GameSettings.autoSwiping = isOn;
+	}
+
+	public void OpenSettingsMenu(bool open) {
+		menuAnim.SetBool ("SettingsOpen", open);
 	}
 }
