@@ -167,6 +167,7 @@ public class AIController : MonoBehaviour {
 		}
 
 		rb.constraints = RigidbodyConstraints.None;
+		rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 		fallenOver = true;
 		gettingUp = false;
 		if (navAgent != null) {
@@ -187,6 +188,7 @@ public class AIController : MonoBehaviour {
 			yield return new WaitForEndOfFrame ();
 		}
 		rb.constraints = RigidbodyConstraints.FreezeAll;
+		rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
 		transform.position = new Vector3 (transform.position.x, Mathf.Max(transform.position.y, originalHeight), transform.position.z);
 			
 		transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y, 0f);
