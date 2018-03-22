@@ -4177,7 +4177,7 @@ MonoBehaviour:
   spawnMode: 0
   prefab: {fileID: 1582026075492044, guid: 1ef19b14680ed42d1a3467fa45db251c, type: 2}
   maxObjects: 50
-  spawnRate: 0.1
+  spawnRate: 1.5
   minSpawnRange: 10
 --- !u!4 &833827796
 Transform:
@@ -7914,7 +7914,7 @@ Prefab:
     - target: {fileID: 114638930987555470, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
         type: 2}
       propertyPath: defaultWeaponName
-      value: KAR98
+      value: AK47
       objectReference: {fileID: 0}
     - target: {fileID: 114638930987555470, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
         type: 2}
