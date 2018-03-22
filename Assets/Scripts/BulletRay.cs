@@ -30,6 +30,7 @@ public class BulletRay : MonoBehaviour {
 	public void Init (Vector3 start, Vector3 end, AudioClip audioClip, float pitch) {
 		audio.clip = audioClip;
 		audio.pitch = pitch;
+		audio.Play ();
 
 		audioTime = audio.clip.length; 
 		Destroy (gameObject, audioTime);
