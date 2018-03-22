@@ -150,6 +150,9 @@ public class Vehicle : Rideable {
 		}
 
 		if (!driver) {
+			if (curWheelSpeed > 0) {
+				curWheelSpeed -= decceleration;
+			}
 			return;
 		}
 			
