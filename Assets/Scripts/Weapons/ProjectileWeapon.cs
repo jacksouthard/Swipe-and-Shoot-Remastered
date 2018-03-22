@@ -19,6 +19,9 @@ public class ProjectileWeapon : Weapon {
 			projectileRb.velocity = newProjectile.transform.forward * projectileSpeed; //shoot forward
 			projectileRb.velocity += transform.GetComponentInParent<Rigidbody> ().velocity; //take parent velocity into account
 
+			Projectile projectileScript = newProjectile.GetComponent<Projectile> ();
+			projectileScript.Init (audioClip, audioPitch);
+
 			Destroy (newProjectile, projectileLifeTime); //destroy after a certain amount of time
 		}
 	}
