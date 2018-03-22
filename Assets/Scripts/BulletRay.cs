@@ -32,7 +32,7 @@ public class BulletRay : MonoBehaviour {
 		audio.pitch = pitch;
 		audio.Play ();
 
-		audioTime = audio.clip.length; 
+		audioTime = audio.clip.length * pitch; 
 		Destroy (gameObject, audioTime);
 
 		lr = GetComponent<LineRenderer> ();

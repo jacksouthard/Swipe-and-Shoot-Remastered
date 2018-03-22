@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour {
 	public AudioClip audioClip;
 	public float audioPitch = 1;
 
+	AudioSource reloadSound;
+
 	public float dps {
 		get {
 			if (bulletSpawns.Count == 0) {
@@ -40,6 +42,8 @@ public class Weapon : MonoBehaviour {
 		if (bulletSpawns.Count == 0) {
 			SetBulletSpawns ();
 		}
+
+		reloadSound = GetComponent<AudioSource> ();
 	}
 
 	public void SetTarget(string target) {
@@ -90,5 +94,8 @@ public class Weapon : MonoBehaviour {
 	protected virtual void Shoot () {
 		fireRateTimer = fireRate;
 		canFire = false;
+		if (reloadSound != null) {
+			reloadSound.PlayDelayed(audioClip.length * audioPitch / 2); //wait for a bit
+		}
 	}
 }
