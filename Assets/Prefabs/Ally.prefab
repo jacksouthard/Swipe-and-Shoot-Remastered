@@ -390,6 +390,7 @@ MonoBehaviour:
   targetTag: Enemy
   clampAngle: 60
   shouldUpdateTarget: 1
+  minRange: 7
   parentSpeed: 40
   speed: 160
 --- !u!114 &114541107866414020
@@ -407,6 +408,7 @@ MonoBehaviour:
   activeRange: 30
   pathUpdateRate: 0.5
   backsUp: 1
+  inVehicle: 0
   fallWaitTime: 1
   defaultWeapon: Random
   moves: 1

@@ -9,6 +9,7 @@ public class ShootingController : MonoBehaviour {
 	public string targetTag;
 	public float clampAngle;
 	public bool shouldUpdateTarget = true;
+	public float minRange;
 
 	[Header("Speed")]
 	public float parentSpeed; //speed at which the body rotates towards target
@@ -17,7 +18,7 @@ public class ShootingController : MonoBehaviour {
 	public bool targetInRange { get { return target != null; } }
 	public bool hasWeapon { get { return weapon != null; } }
 	public string curWeaponName { get { return (hasWeapon) ? weapon.name : "None"; } }
-	public float range { get { return (hasWeapon) ? weapon.range : 0; } }
+	public float range { get { return (hasWeapon) ? Mathf.Max(weapon.range, minRange) : 0; } }
 
 	public Transform target { get; private set; }
 
@@ -153,7 +154,7 @@ public class ShootingController : MonoBehaviour {
 
 	//find nearest in range
 	Transform GetNearestTarget() {
-		Collider[] objectsInRange = Physics.OverlapSphere (transform.position, weapon.range);
+		Collider[] objectsInRange = Physics.OverlapSphere (transform.position, range);
 
 		float closestDistance = Mathf.Infinity;
 		Transform closestObj = null;
