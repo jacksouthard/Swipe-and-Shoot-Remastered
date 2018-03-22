@@ -24,6 +24,9 @@ public class Vehicle : Rideable {
 	public GameObject exitingVehicle;
 	public float spawnDelay;
 
+	[Header("Audio")]
+	public float averageEnginePitch;
+
 	[Space(20)]
 	[Header("Debug")]
 	public bool grounded = false;
@@ -136,10 +139,12 @@ public class Vehicle : Rideable {
 
 	void Update () {
 		if (engine != null) {
-			float minPitch = (driver) ? 0.5f : 0f;
-			engine.pitch = Mathf.Lerp(engine.pitch, Mathf.Clamp(curWheelSpeed, minPitch, 1.5f), Time.deltaTime * 2); //arbitrary min/max values
+			float minPitch = (driver) ? (averageEnginePitch - 0.5f) : 0f;
+			float maxPitch = averageEnginePitch + 0.5f;
+			float goalPitch = Mathf.Clamp01(Mathf.Abs(curWheelSpeed)) * (maxPitch - minPitch) + minPitch;
+			engine.pitch = Mathf.Lerp(engine.pitch, goalPitch, Time.deltaTime * 2); //arbitrary min/max values
 
-			if (!driver && engine.pitch <= 0.05f) {
+			if (!driver && engine.pitch <= 0.1f) {
 				engine.Stop ();
 			}
 		}
