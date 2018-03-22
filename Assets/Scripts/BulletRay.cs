@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletRay : MonoBehaviour {
-	public AudioSource audio;
+	public AudioSource soundEffect;
 
 	LineRenderer lr;
 	Transform flash;
@@ -28,11 +28,11 @@ public class BulletRay : MonoBehaviour {
 	}
 
 	public void Init (Vector3 start, Vector3 end, AudioClip audioClip, float pitch) {
-		audio.clip = audioClip;
-		audio.pitch = pitch;
-		audio.Play ();
+		soundEffect.clip = audioClip;
+		soundEffect.pitch = pitch;
+		soundEffect.Play ();
 
-		audioTime = audio.clip.length * pitch; 
+		audioTime = soundEffect.clip.length * pitch; 
 		Destroy (gameObject, audioTime);
 
 		lr = GetComponent<LineRenderer> ();

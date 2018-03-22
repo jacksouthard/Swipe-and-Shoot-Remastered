@@ -5,8 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SceneFader : MonoBehaviour {
+	public static float curFadeAmount { get { return (instance != null) ? instance.fader.color.a : 0; } }
+
 	static SceneFader instance;
-	Image fader;
+	public Image fader { get; private set; }
 
 	const float fadeSpeed = 10;
 

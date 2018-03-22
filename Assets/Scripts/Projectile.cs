@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
-	public AudioSource audio;
+	public AudioSource soundEffect;
 
 	public void Init(AudioClip audioClip, float pitch) {
-		audio.clip = audioClip;
-		audio.pitch = pitch;
-		audio.Play ();
+		soundEffect.clip = audioClip;
+		soundEffect.pitch = pitch;
+		soundEffect.Play ();
 	}
 
 	void OnCollisionEnter(Collision other) {

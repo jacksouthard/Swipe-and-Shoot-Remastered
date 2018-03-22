@@ -233,4 +233,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eed3678bf1f4589a3795c28e29ff3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 82003693107810196}
+  soundEffect: {fileID: 82003693107810196}

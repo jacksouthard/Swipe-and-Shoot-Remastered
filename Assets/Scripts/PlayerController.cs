@@ -353,8 +353,8 @@ public class PlayerController : MonoBehaviour {
 		timerDisplay.transform.position = transform.position;
 
 		pickupTitleText.text = curPickingupTimers [0].name;
-		WeaponData newWeaponData = curPickingupTimers [0].pickup.GetComponent<Pickup> ().data as WeaponData;
-		if (shooting.hasWeapon && newWeaponData != null) {
+		if (shooting.hasWeapon && curPickingupTimers[0].type == PickupTimer.Type.Drop && curPickingupTimers [0].pickup.GetComponent<Pickup> ().data is WeaponData) {
+			WeaponData newWeaponData = curPickingupTimers [0].pickup.GetComponent<Pickup> ().data as WeaponData;
 			WeaponComparisonData comparisonStats = shooting.GetWeaponData ().Compare (newWeaponData);
 			dpsText.text = Mathf.RoundToInt (comparisonStats.dpsPercentageDiff * 100) + "%";
 			dpsText.color = WeaponComparisonData.GetColorFromPercentage (comparisonStats.dpsPercentageDiff);
