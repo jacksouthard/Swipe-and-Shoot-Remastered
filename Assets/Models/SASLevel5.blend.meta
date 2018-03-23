@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: 3a70f2c43782d4aeb9a4094afd21d93e
+timeCreated: 1521833054
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: ControlCenterRoof
+    100002: Fortress
+    100004: FortressIsland
+    100006: MissleDoor
+    100008: MissleDoor_001
+    100010: //RootNode
+    100012: Fortress_001
+    100014: MisslePlatform
+    100016: WaterDonut
+    400000: ControlCenterRoof
+    400002: Fortress
+    400004: FortressIsland
+    400006: MissleDoor
+    400008: MissleDoor_001
+    400010: //RootNode
+    400012: Fortress_001
+    400014: MisslePlatform
+    400016: WaterDonut
+    2100000: FortressDoor
+    2100002: FortressWall
+    2100004: Grass
+    2100006: Beach
+    2100008: FortressDust
+    2100010: unnamed
+    2300000: ControlCenterRoof
+    2300002: Fortress
+    2300004: FortressIsland
+    2300006: MissleDoor
+    2300008: MissleDoor_001
+    2300010: Fortress_001
+    2300012: MisslePlatform
+    2300014: WaterDonut
+    3300000: ControlCenterRoof
+    3300002: Fortress
+    3300004: FortressIsland
+    3300006: MissleDoor
+    3300008: MissleDoor_001
+    3300010: Fortress_001
+    3300012: MisslePlatform
+    3300014: WaterDonut
+    4300000: MissleDoor_001
+    4300002: MissleDoor
+    4300004: ControlCenterRoof
+    4300006: FortressIsland
+    4300008: Fortress
+    4300010: Fortress_001
+    4300012: MisslePlatform
+    4300014: WaterDonut
+    7400000: Default Take
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

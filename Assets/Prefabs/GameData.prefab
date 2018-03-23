@@ -180,6 +180,10 @@ MonoBehaviour:
     type: 0
     character: 
     image: {fileID: 21300000, guid: 4a22f248e43994cba8a08bea319486e5, type: 3}
+  - name: Level 5
+    type: 0
+    character: 
+    image: {fileID: 21300000, guid: 48beb546f17a440cc984882adcfd6dc3, type: 3}
   - name: Endless 2
     type: 1
     character: 
