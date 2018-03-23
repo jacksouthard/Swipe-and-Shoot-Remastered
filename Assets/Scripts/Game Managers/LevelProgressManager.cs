@@ -99,7 +99,7 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	void Start() {
-		if (curObjectiveId > 0) {
+		if (curObjectiveId > startingObjective) {
 			UpdatePlayer ();
 		}
 
