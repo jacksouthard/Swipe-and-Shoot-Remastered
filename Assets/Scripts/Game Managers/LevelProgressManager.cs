@@ -20,7 +20,6 @@ public class Objective {
 	public bool hasCameraEvent; //automatically creates a camera event before this objective
 
 	[Space(15)]
-	public Transform spawnPoint; //where the player spawns after completing this objective
 	public GameObject objectiveObj; //object to set up
 	public GameObject objectsToDisable; //optional objects to disable after completing this objective
 	public GameObject objectsToEnable; //optional objects to enable after completing this objective
@@ -55,6 +54,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public static Dictionary<float, SavedAI> startingAIData = new Dictionary<float, SavedAI> ();
 	public static List<float> killedAIs = new List<float> ();
 	public static Dictionary<float, SavedVehicle> startingVehicleData = new Dictionary<float, SavedVehicle>();
+	public static Vector3 playerSpawnPoint;
 	public static bool firstTime = true;
 	List<float> killedAIsSinceLastCheckpoint = new List<float>();
 	
@@ -130,7 +130,6 @@ public class LevelProgressManager : MonoBehaviour {
 			if (objectives [i].hasCameraEvent) {
 				Objective newCameraObjective = new Objective ();
 				newCameraObjective.type = Objective.Type.Camera;
-				newCameraObjective.spawnPoint = objectives [Mathf.Min(i - 1, 0)].spawnPoint;
 				newCameraObjective.objectiveObj = objectives [i].objectiveObj;
 				newCameraObjective.showsWorldIndicator = objectives [i].showsWorldIndicator;
 				objectives.Insert(i, newCameraObjective);
@@ -216,10 +215,11 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	void UpdatePlayer() {
-		pc.transform.position = objectives[curObjectiveId - 1].spawnPoint.position; //move player to last checkpoint
+		pc.transform.position = playerSpawnPoint; //move player to last checkpoint
 	}
 
 	void SaveGame() {
+		playerSpawnPoint = pc.transform.position;
 		startingAIData.Clear ();
 		AIController[] ais = GameObject.FindObjectsOfType<AIController> ();
 		foreach(AIController ai in ais) {
@@ -361,6 +361,7 @@ public class LevelProgressManager : MonoBehaviour {
 		startingAIData.Clear ();
 		killedAIs.Clear ();
 		startingVehicleData.Clear ();
+		playerSpawnPoint = Vector3.zero;
 		firstTime = true;
 	}
 
