@@ -51,6 +51,8 @@ public class Helicopter : Rideable {
 
 	public Transform vectorArrow;
 
+	public override bool shouldBeShotAt { get { return true; } }
+
 	void Awake () {
 		base.Initiate ();
 	}

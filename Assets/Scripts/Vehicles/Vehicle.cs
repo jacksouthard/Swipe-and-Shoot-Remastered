@@ -35,6 +35,8 @@ public class Vehicle : Rideable {
 	public int targetRotPercentage = 0;
 	public float curWheelSpeed = 0f;
 
+	public override bool shouldBeShotAt { get { return true; } }
+
 	Health health;
 
 	Transform vectorArrow;

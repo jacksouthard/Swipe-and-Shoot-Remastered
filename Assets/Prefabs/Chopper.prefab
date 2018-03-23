@@ -983,10 +983,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  maxHealth: 500
-  immunity: 1
+  maxHealth: 100
+  immunity: 0
   regenSpeed: 10
-  regenWait: 5
+  regenWait: 30
   hitWait: 0.05
   hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
   resistance: 0
@@ -1000,7 +1000,7 @@ MonoBehaviour:
   explosionDamage: 15
   explosionForce: 5000
   smokes: 1
-  smokeCenter: {fileID: 0}
+  smokeCenter: {fileID: 4513271049199930}
   waitTimer: 0
   health: 0
 --- !u!114 &114573642009926486
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   maxSpeed: 80000
   acceleration: 0.015
   groundCheckPointsContainer: {fileID: 4992567798628238}
-  hoverHeight: 10
+  hoverHeight: 5
   targetHeight: 0
   curHeight: 0
   upDownSpeed: 0.05

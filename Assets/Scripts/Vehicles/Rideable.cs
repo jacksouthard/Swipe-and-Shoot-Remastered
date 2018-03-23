@@ -18,6 +18,8 @@ public class Rideable : MonoBehaviour {
 	protected GameObject mounter;
 	protected AudioSource engine;
 
+	public virtual bool shouldBeShotAt { get { return false; } }
+
 	bool isObjective = false;
 
 	[HideInInspector]
