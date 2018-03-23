@@ -7,7 +7,8 @@ public class ShootingController : MonoBehaviour {
 
 	[Header("Control")]
 	public string targetTag;
-	public float clampAngle;
+	public float verticalClampAngle;
+	public float horizontalClampAngle;
 	public bool shouldUpdateTarget = true;
 	public float minRange;
 
@@ -102,6 +103,13 @@ public class ShootingController : MonoBehaviour {
 		}
 	}
 
+	public void UpdateTargetTag(string newTag) {
+		targetTag = newTag;
+		if (weapon != null) {
+			weapon.SetTarget (targetTag);
+		}
+	}
+
 	//point towards a target
 	void RotateTowards(Transform target) {
 		Quaternion parentRotation = transform.parent.rotation;
@@ -113,7 +121,7 @@ public class ShootingController : MonoBehaviour {
 		}
 
 		transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(diff), Time.deltaTime * speed * weapon.speedMultiplier);
-		transform.localRotation = Quaternion.Euler(ClampedAngle(transform.localRotation.eulerAngles.x), ClampedAngle(transform.localRotation.eulerAngles.y), 0f);
+		transform.localRotation = Quaternion.Euler(ClampedAngle(transform.localRotation.eulerAngles.x, verticalClampAngle), ClampedAngle(transform.localRotation.eulerAngles.y, horizontalClampAngle), 0f);
 	}
 
 	//rotates parent in a direction (for when player looks in direction of swipe)
@@ -129,8 +137,8 @@ public class ShootingController : MonoBehaviour {
 		transform.localRotation = Quaternion.RotateTowards (transform.localRotation, Quaternion.identity, Time.deltaTime * parentSpeed);
 	}
 
-	float ClampedAngle(float angle) {
-		return Mathf.Clamp (((angle + 180f) % 360f) - 180f, -clampAngle, clampAngle);
+	float ClampedAngle(float angle, float clamp) {
+		return Mathf.Clamp (((angle + 180f) % 360f) - 180f, -clamp, clamp);
 	}
 		
 	public WeaponData GetWeaponData() {

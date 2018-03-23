@@ -471,6 +471,7 @@ MonoBehaviour:
   activeRange: 15
   pathUpdateRate: 1
   backsUp: 1
+  inVehicle: 0
   fallWaitTime: 1
   defaultWeapon: Random
   alerted: 0
@@ -491,8 +492,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canRotateParent: 0
   targetTag: Player
-  clampAngle: 60
+  verticalClampAngle: 60
+  horizontalClampAngle: 60
   shouldUpdateTarget: 1
+  minRange: 0
   parentSpeed: 40
   speed: 160
 --- !u!114 &114756937230397354

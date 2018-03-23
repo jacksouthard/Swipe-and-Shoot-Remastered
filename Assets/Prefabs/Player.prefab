@@ -678,8 +678,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canRotateParent: 0
   targetTag: Enemy
-  clampAngle: 90
+  verticalClampAngle: 60
+  horizontalClampAngle: 60
   shouldUpdateTarget: 1
+  minRange: 0
   parentSpeed: 200
   speed: 800
 --- !u!114 &114554513914816582
