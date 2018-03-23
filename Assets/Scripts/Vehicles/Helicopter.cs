@@ -33,6 +33,9 @@ public class Helicopter : Rideable {
 	public GameObject exitingVehicle;
 	public float spawnDelay;
 
+	[Header("AI")]
+	public bool AIOverridePlayer;
+
 	[Space(20)]
 	[Header("Debug")]
 	public bool groundInZone = false;
@@ -55,6 +58,8 @@ public class Helicopter : Rideable {
 
 	void Awake () {
 		base.Initiate ();
+		vectorArrow = transform.Find ("TargetVector");
+		vectorArrow.gameObject.SetActive (false);
 	}
 
 	void LoadFromCheckpoint() {
@@ -89,16 +94,15 @@ public class Helicopter : Rideable {
 		for (int i = 0; i < groundCheckPointsContainer.childCount; i++) {
 			checkPoints.Add (groundCheckPointsContainer.GetChild (i));
 		}
-
-		vectorArrow = transform.Find ("TargetVector");
-		vectorArrow.gameObject.SetActive (false);
 	}
 
 	public override void Mount (GameObject _mounter) {
 		base.Mount (_mounter);
 		health.UpdateRenderersNextFrame ();
 		if (hasAI) {
-			ai.AIStop ();
+			if (!AIOverridePlayer) {
+				ai.AIStop ();
+			}
 		} else {
 			shooting.SetEnabled (true);
 		}
@@ -153,7 +157,9 @@ public class Helicopter : Rideable {
 			// calculate arrow rotation
 			float localArrowAngle = targetAngle - transform.eulerAngles.y;
 			vectorArrow.localRotation = Quaternion.Euler (new Vector3 (0f, localArrowAngle, 0f));
-			vectorArrow.gameObject.SetActive (true);
+			if (driver && !AIOverridePlayer) {
+				vectorArrow.gameObject.SetActive (true);
+			}
 
 			targetSpeedPercent = 1;
 		}

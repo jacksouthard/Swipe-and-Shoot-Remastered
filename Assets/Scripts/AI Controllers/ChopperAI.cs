@@ -13,12 +13,20 @@ public class ChopperAI : MonoBehaviour {
 	Vector2 pos2d;
 	ShootingController shooting;
 	bool active;
+	bool objectiveTarget;
 	float nextTargetUpdateTime;
 
 	void Start () {
 		heli = GetComponent<Helicopter> ();
 		player = GameObject.FindObjectOfType<PlayerController> ().transform;
 		shooting = GetComponentInChildren<ShootingController> ();
+
+		if (target != null) {
+			objectiveTarget = true;
+			targetPos = new Vector2 (target.position.x, target.position.z);
+		} else {
+			objectiveTarget = false;
+		}
 
 		AIStart ();
 	}
@@ -41,13 +49,19 @@ public class ChopperAI : MonoBehaviour {
 			return;
 		}
 
-		if (Time.time > nextTargetUpdateTime) {
-			nextTargetUpdateTime = Time.time + targetUpdateRate;
-			UpdateTarget ();
+		if (!objectiveTarget) {
+			if (Time.time > nextTargetUpdateTime) {
+				nextTargetUpdateTime = Time.time + targetUpdateRate;
+				UpdateTarget ();
+			}
 		}
 
 		pos2d = new Vector2 (transform.position.x, transform.position.z);
 		if ((pos2d - targetPos).magnitude < (hoverDistance / 4f)) {
+			if (objectiveTarget) {
+				heli.Dismount ();
+				objectiveTarget = false;
+			}
 			SetNextTargetPos ();
 		}
 
