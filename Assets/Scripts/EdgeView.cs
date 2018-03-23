@@ -22,6 +22,7 @@ public class EdgeView : MonoBehaviour {
 	float canvasHeight;
 
 	bool hasWorldIndicator;
+	bool destroysOnDeath;
 
 	Camera gameCam;
 	Vector3 offset; //offset from center
@@ -33,20 +34,20 @@ public class EdgeView : MonoBehaviour {
 	static GameObject worldIndicatorPrefab;
 	static bool hasSetPrefabs = false;
 
-	public static EdgeView Create(GameObject _newTarget, bool _hasWorldIndicator) {
-		EdgeView edgeView = Create ();
+	public static EdgeView Create(GameObject _newTarget, bool _hasWorldIndicator, bool _destroysOnDeath = true) {
+		EdgeView edgeView = Create (_destroysOnDeath);
 		edgeView.SetTarget (_newTarget, _hasWorldIndicator);
 		return edgeView;
 	}
 
-	public static EdgeView Create() {
+	public static EdgeView Create(bool _destroysOnDeath = true) {
 		if (!hasSetPrefabs) {
 			LoadPrefab ();
 		}
 
 		GameObject edgeViewObj = Instantiate (screenIndicatorPrefab, GameManager.instance.transform.parent.GetComponentInChildren<Canvas>().transform); //always use the canvas in LevelAssets
 		EdgeView edgeView = edgeViewObj.GetComponent<EdgeView> ();
-		edgeView.Init ();
+		edgeView.Init (_destroysOnDeath);
 
 		return edgeView;
 	}
@@ -56,10 +57,11 @@ public class EdgeView : MonoBehaviour {
 		worldIndicatorPrefab = Resources.Load ("EdgeView_World") as GameObject;
 	}
 
-	public void Init() {
+	public void Init(bool _destroysOnDeath) {
 		gameCam = GameObject.FindObjectOfType<Camera>();
 		canvas = transform.parent.GetComponent<RectTransform>(); 
 		image = transform.GetComponentInChildren<Image> ().gameObject;
+		destroysOnDeath = _destroysOnDeath;
 	}
 
 	public void SetTarget(GameObject _newTarget, bool _hasWorldIndicator) {
@@ -69,6 +71,14 @@ public class EdgeView : MonoBehaviour {
 		hasWorldIndicator = _hasWorldIndicator;
 
 		SetUpWorldIndicator ();
+
+		//try to get the health component
+		if (destroysOnDeath) {
+			Health health = target.GetComponent<Health> ();
+			if (health != null) {
+				health.onDeath += Destroy;
+			}
+		}
 
 		enabled = true;
 	}
@@ -123,6 +133,11 @@ public class EdgeView : MonoBehaviour {
 	}
 	
 	void Update () {
+		if (target == null && destroysOnDeath) {
+			this.Destroy ();
+			return;
+		}
+
 		SetPositionAndRotation();
 		UpdateVisibility();
 	}

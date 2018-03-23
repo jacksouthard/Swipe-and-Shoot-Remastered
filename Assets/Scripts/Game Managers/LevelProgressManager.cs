@@ -92,7 +92,7 @@ public class LevelProgressManager : MonoBehaviour {
 		winText = winScreen.transform.Find ("Window").Find("Title").GetComponent<Text>();
 		pc = GameObject.FindObjectOfType<PlayerController> ();
 
-		objectiveEdgeView = EdgeView.Create ();
+		objectiveEdgeView = EdgeView.Create (false);
 		objectiveEdgeView.Hide ();
 
 		PrepareObjectives ();
@@ -197,29 +197,19 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	void UpdateObjectiveUI() {
-		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count;
+		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && objectives[curObjectiveId].type != Objective.Type.Kills;
 
 		if (hasIndicators) {
-			GameObject target = objectives [curObjectiveId].objectiveObj;
-			//choose objective arrow target
-			if (objectives [curObjectiveId].type == Objective.Type.Kills) {
-				Transform targetEnemy = null;
-				Transform targetParent = objectives [curObjectiveId].objectiveObj.transform;
-				foreach (Transform child in targetParent) {
-					if (child.name.Contains ("Target")) {
-						targetEnemy = child;
-						break;
-					}
-				}
+			objectiveEdgeView.SetTarget (objectives [curObjectiveId].objectiveObj, objectives[curObjectiveId].showsWorldIndicator); //set target
+		}
 
-				if (targetEnemy != null) {
-					target = targetEnemy.gameObject;
-				} else {
-					hasIndicators = false;
+		if (objectives [curObjectiveId].type == Objective.Type.Kills) {
+			Transform targetParent = objectives [curObjectiveId].objectiveObj.transform;
+			foreach (Transform child in targetParent) {
+				if (child.name.Contains ("Target")) {
+					EdgeView.Create(child.gameObject, true);
 				}
 			}
-				
-			objectiveEdgeView.SetTarget (target, objectives[curObjectiveId].showsWorldIndicator); //set target
 		}
 
 		if (curObjectiveId < objectives.Count && !string.IsNullOrEmpty (objectives [curObjectiveId].helpText)) {
