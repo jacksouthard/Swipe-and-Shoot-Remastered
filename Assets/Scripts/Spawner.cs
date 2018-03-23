@@ -21,15 +21,14 @@ public class Spawner : MonoBehaviour {
 	int count = 0;
 	float spawnTimer;
 
-	Transform player;
-	List<Vector3> spawnPoints = new List<Vector3>();
+	List<SpawnZone> spawnZones = new List<SpawnZone>();
 
 	void Awake () {
 		if (spawners.Count == 0) {
 			LoadSpawners ();
 		}
 
-		player = GameObject.FindObjectOfType<PlayerController> ().transform;
+		spawnZones = new List<SpawnZone> (transform.GetComponentsInChildren<SpawnZone>());
 	}
 
 	void LoadSpawners() {
@@ -40,17 +39,10 @@ public class Spawner : MonoBehaviour {
 	}
 
 	void Start () {
-		for (int i = 0; i < transform.childCount; i++) {
-			Transform child = transform.GetChild (i);
-			if (child.name.Contains ("SpawnPoint")) {
-				spawnPoints.Add (child.position);
-			}
-		}
-
 		spawnTimer = spawnRate;
 
 		if (spawnMode == SpawnMode.RoundRobin) {
-			curIndex = Random.Range (0, spawnPoints.Count - 1);
+			curIndex = Random.Range (0, spawnZones.Count - 1);
 		}
 	}
 	
@@ -70,35 +62,29 @@ public class Spawner : MonoBehaviour {
 	}
 
 	void SpawnObject () {
-		Vector3 spawnPoint;
-		if (spawnMode == SpawnMode.Random) {
-			spawnPoint = FindValidSpawnPoint ();
-		} else {
-			int newIndex = NextIndex (curIndex);
-			spawnPoint = spawnPoints [newIndex];
-			curIndex = newIndex;
-		}
-
-		Instantiate (prefab, spawnPoint, Quaternion.identity, transform);
-
-		count++;
-	}
-
-	Vector3 FindValidSpawnPoint() {
-		Vector3 spawnPoint;
+		SpawnZone chosenZone;
+		int attempts = 0;
 		do {
-			int index = Random.Range (0, spawnPoints.Count);
-			spawnPoint = spawnPoints [index];
-		} while (Vector3.Distance(spawnPoint, player.position) < minSpawnRange);
+			attempts++;
 
-		return spawnPoint;
-	}
+			if(attempts > 30) {
+				Debug.Log("Too many attempts on " + gameObject.name);
+				return;
+			}
 
-	int NextIndex (int _curIndex) {
-		if (_curIndex == spawnPoints.Count - 1) {
-			return 0;
-		} else {
-			return _curIndex + 1;
+			if (spawnMode == SpawnMode.Random) {
+				chosenZone = spawnZones[Random.Range(0, spawnZones.Count)];
+			} else {
+				int newIndex = (curIndex + 1) % spawnZones.Count;
+				chosenZone = spawnZones [newIndex];
+				curIndex = newIndex;
+			}
+		} while(!chosenZone.shouldSpawn);
+
+		Vector3 spawnPoint = chosenZone.FindRandomSpawnPoint ();
+		if (spawnPoint != Vector3.up) { //terminating condition in FindRandomSpawnPoint
+			Instantiate (prefab, spawnPoint, Quaternion.identity, transform);
+			count++;
 		}
 	}
 }
