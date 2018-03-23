@@ -75,13 +75,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void EndLevel() {
-		Destroy (gameObject.GetComponent<SwipeManager> ());
+		SwipeManager.instance.EndSwipe ();
+
+		Destroy (SwipeManager.instance);
 		Spawner enemySpawner = GameObject.FindObjectOfType<Spawner> ();
 		if(enemySpawner != null) {
 			Destroy (enemySpawner); //no new enemies!
 		}
-
-		GameObject.FindObjectOfType<SwipeManager> ().EndSwipe ();
 	}
 
 	public void Restart(bool fullReset = true) {

@@ -9,13 +9,15 @@ public class Objective {
 		Pickup,
 		Zone,
 		Kills,
-		Vehicle
+		Vehicle,
+		Camera
 	}
 
 	public Type type;
 
 	public float initialDelay;
 	public List<NotificationManager.SplashData> startingSplashes = new List<NotificationManager.SplashData>();
+	public bool hasCameraEvent; //automatically creates a camera event before this objective
 
 	[Space(15)]
 	public Transform spawnPoint; //where the player spawns after completing this objective
@@ -96,7 +98,7 @@ public class LevelProgressManager : MonoBehaviour {
 			UpdatePlayer ();
 		}
 
-		GameObject.FindObjectOfType<CameraController> ().ResetPosition (); //move camera
+		CameraController.instance.ResetPosition (); //move camera
 	}
 
 	public void StartGame() {
@@ -123,6 +125,16 @@ public class LevelProgressManager : MonoBehaviour {
 				if (objectives [i].objectsToEnable != null) {
 					objectives [i].objectsToEnable.SetActive (false);
 				}
+			}
+
+			if (objectives [i].hasCameraEvent) {
+				Objective newCameraObjective = new Objective ();
+				newCameraObjective.type = Objective.Type.Camera;
+				newCameraObjective.spawnPoint = objectives [Mathf.Min(i - 1, 0)].spawnPoint;
+				newCameraObjective.objectiveObj = objectives [i].objectiveObj;
+				newCameraObjective.showsWorldIndicator = objectives [i].showsWorldIndicator;
+				objectives.Insert(i, newCameraObjective);
+				i++;
 			}
 		}
 	}
@@ -163,6 +175,9 @@ public class LevelProgressManager : MonoBehaviour {
 				break;
 			case Objective.Type.Vehicle:
 				objectives [curObjectiveId].objectiveObj.GetComponent<Rideable> ().SetupObjective ();
+				break;
+			case Objective.Type.Camera:
+				StartCoroutine (MoveCamera ());
 				break;
 		}
 
@@ -238,6 +253,19 @@ public class LevelProgressManager : MonoBehaviour {
 
 			yield return new WaitForEndOfFrame ();
 		}
+
+		CompleteObjective ();
+	}
+
+	IEnumerator MoveCamera() {
+		TimeManager.SetPaused (true);
+
+		yield return StartCoroutine (CameraController.instance.ShowTarget(objectives[curObjectiveId].objectiveObj.transform));
+
+		yield return new WaitForSecondsRealtime (2f); //TODO: set this somewhere?
+
+		TimeManager.SetPaused (false);
+		CameraController.instance.Resume();
 
 		CompleteObjective ();
 	}
