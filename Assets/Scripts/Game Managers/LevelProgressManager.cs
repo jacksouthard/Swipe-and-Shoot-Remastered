@@ -10,7 +10,8 @@ public class Objective {
 		Zone,
 		Kills,
 		Vehicle,
-		Camera
+		Camera,
+		Defend
 	}
 
 	public Type type;
@@ -23,6 +24,7 @@ public class Objective {
 	public GameObject objectiveObj; //object to set up
 	public GameObject objectsToDisable; //optional objects to disable after completing this objective
 	public GameObject objectsToEnable; //optional objects to enable after completing this objective
+	public float time; //time for defend or camera objectives
 
 	[Space(15)]
 	public bool showsWorldIndicator;
@@ -74,6 +76,8 @@ public class LevelProgressManager : MonoBehaviour {
 	PlayerController pc;
 	Transform enemyParent;
 	Text winText;
+
+	public float timer = 0f; //for defend objectives
 
 	void Awake() {
 		instance = this;
@@ -132,6 +136,7 @@ public class LevelProgressManager : MonoBehaviour {
 				newCameraObjective.type = Objective.Type.Camera;
 				newCameraObjective.objectiveObj = objectives [i].objectiveObj;
 				newCameraObjective.showsWorldIndicator = objectives [i].showsWorldIndicator;
+				newCameraObjective.time = 1f; //default show time
 				objectives.Insert(i, newCameraObjective);
 				i++;
 			}
@@ -177,6 +182,9 @@ public class LevelProgressManager : MonoBehaviour {
 				break;
 			case Objective.Type.Camera:
 				StartCoroutine (MoveCamera ());
+				break;
+			case Objective.Type.Defend:
+				timer = objectives [curObjectiveId].time;
 				break;
 		}
 
@@ -262,12 +270,22 @@ public class LevelProgressManager : MonoBehaviour {
 
 		yield return StartCoroutine (CameraController.instance.ShowTarget(objectives[curObjectiveId].objectiveObj.transform));
 
-		yield return new WaitForSecondsRealtime (2f); //TODO: set this somewhere?
+		yield return new WaitForSecondsRealtime (objectives[curObjectiveId].time);
 
 		TimeManager.SetPaused (false);
 		CameraController.instance.Resume();
 
 		CompleteObjective ();
+	}
+
+	void Update() {
+		if (timer > 0f) {
+			timer -= Time.deltaTime;
+			if (timer <= 0f) {
+				timer = 0f;
+				CompleteObjective ();
+			}
+		}
 	}
 
 	//assumes player is completing objectives in order for now
