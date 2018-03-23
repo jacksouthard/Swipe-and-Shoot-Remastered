@@ -25,6 +25,7 @@ public class Objective {
 	public GameObject objectsToDisable; //optional objects to disable after completing this objective
 	public GameObject objectsToEnable; //optional objects to enable after completing this objective
 	public float time; //time for defend or camera objectives
+	public Animator animation;
 
 	[Space(15)]
 	public bool showsWorldIndicator;
@@ -136,7 +137,7 @@ public class LevelProgressManager : MonoBehaviour {
 				newCameraObjective.type = Objective.Type.Camera;
 				newCameraObjective.objectiveObj = objectives [i].objectiveObj;
 				newCameraObjective.showsWorldIndicator = objectives [i].showsWorldIndicator;
-				newCameraObjective.time = 1f; //default show time
+				newCameraObjective.time = objectives[i].time;
 				objectives.Insert(i, newCameraObjective);
 				i++;
 			}
@@ -186,6 +187,10 @@ public class LevelProgressManager : MonoBehaviour {
 			case Objective.Type.Defend:
 				timer = objectives [curObjectiveId].time;
 				break;
+		}
+
+		if (objectives[curObjectiveId].animation != null && objectives [curObjectiveId].type != Objective.Type.Camera) {
+			objectives [curObjectiveId].animation.SetTrigger ("Play");
 		}
 
 		UpdateObjectiveUI ();
@@ -269,6 +274,10 @@ public class LevelProgressManager : MonoBehaviour {
 		TimeManager.SetPaused (true);
 
 		yield return StartCoroutine (CameraController.instance.ShowTarget(objectives[curObjectiveId].objectiveObj.transform));
+
+		if (objectives [curObjectiveId].animation != null) {
+			objectives [curObjectiveId].animation.SetTrigger ("Play");
+		}
 
 		yield return new WaitForSecondsRealtime (objectives[curObjectiveId].time);
 
