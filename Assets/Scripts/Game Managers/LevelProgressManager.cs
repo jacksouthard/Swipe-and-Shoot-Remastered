@@ -302,7 +302,6 @@ public class LevelProgressManager : MonoBehaviour {
 			timer -= Time.deltaTime;
 			if (timer <= 0f) {
 				timer = 0f;
-				print ("hey");
 				CompleteObjective ();
 			}
 		}
