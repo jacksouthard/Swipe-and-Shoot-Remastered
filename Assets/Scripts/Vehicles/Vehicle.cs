@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Vehicle : Rideable {
-	public float hash;
-
 	[Header("Turning")]
 	public float turnSpeed;
 	public float rotationSpeedLimiter = 1f;
@@ -20,10 +18,6 @@ public class Vehicle : Rideable {
 	public float airDrag;
 	public float airAngDrag;
 
-	[Header("Exit")]
-	public GameObject exitingVehicle;
-	public float spawnDelay;
-
 	[Header("Audio")]
 	public float averageEnginePitch;
 
@@ -36,6 +30,7 @@ public class Vehicle : Rideable {
 	public float curWheelSpeed = 0f;
 
 	public override bool shouldBeShotAt { get { return true; } }
+	public override bool saves { get { return true; } }
 
 	Health health;
 
@@ -52,25 +47,8 @@ public class Vehicle : Rideable {
 		base.Initiate ();
 	}
 
-	void LoadFromCheckpoint() {
-		hash = LevelProgressManager.CalculateHash (transform.position);
-
-		if (LevelProgressManager.curObjectiveId > 0) {
-			if (LevelProgressManager.startingVehicleData.ContainsKey(hash)) {
-				SavedVehicle data = LevelProgressManager.startingVehicleData [hash];
-				transform.position = data.position;
-				transform.rotation = data.rotation;
-			} else {
-				Destroy (gameObject);
-				return;
-			}
-		}
-	}
-
 	void Start () {
 		health = GetComponent<Health> ();
-
-		LoadFromCheckpoint ();
 
 		health.onDeath += Die;
 
@@ -97,7 +75,6 @@ public class Vehicle : Rideable {
 
 	public override void Dismount () {
 		if (dismountable) {
-			StartCoroutine (SpawnExitVehicle(mounter.transform));
 			health.ResetColor ();
 
 			base.Dismount ();
@@ -279,24 +256,6 @@ public class Vehicle : Rideable {
 		foreach (var wheel in steeringWheels) {
 			wheel.onGround = false;
 		}
-	}
-
-	public SavedVehicle GetSavedData() {
-		SavedVehicle vehicle = new SavedVehicle ();
-		vehicle.position = transform.position;
-		vehicle.rotation = transform.rotation;
-		//save health?
-		return vehicle;
-	}
-
-	IEnumerator SpawnExitVehicle(Transform rider) {
-		if (exitingVehicle == null) {
-			yield break;
-		}
-
-		yield return new WaitForSeconds (spawnDelay);
-
-		Instantiate (exitingVehicle, rider.position, Quaternion.Euler(0, rider.rotation.eulerAngles.y, 0));
 	}
 
 	public void Die() {

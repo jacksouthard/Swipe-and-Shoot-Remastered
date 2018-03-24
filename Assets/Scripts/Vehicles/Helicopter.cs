@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Helicopter : Rideable {
-	public float hash;
-
 	[Header("Turning")]
 	public float turnSpeed;
 
@@ -29,10 +27,6 @@ public class Helicopter : Rideable {
 	public Transform topRotor;
 	public Transform tailRotor;
 
-	[Header("Exit")]
-	public GameObject exitingVehicle;
-	public float spawnDelay;
-
 	[Header("AI")]
 	public bool AIOverridePlayer;
 
@@ -55,26 +49,12 @@ public class Helicopter : Rideable {
 	public Transform vectorArrow;
 
 	public override bool shouldBeShotAt { get { return true; } }
+	public override bool saves { get { return true; } }
 
 	void Awake () {
 		base.Initiate ();
 		vectorArrow = transform.Find ("TargetVector");
 		vectorArrow.gameObject.SetActive (false);
-	}
-
-	void LoadFromCheckpoint() {
-		hash = LevelProgressManager.CalculateHash (transform.position);
-
-		if (LevelProgressManager.curObjectiveId > 0) {
-			if (LevelProgressManager.startingVehicleData.ContainsKey(hash)) {
-				SavedVehicle data = LevelProgressManager.startingVehicleData [hash];
-				transform.position = data.position;
-				transform.rotation = data.rotation;
-			} else {
-				Destroy (gameObject);
-				return;
-			}
-		}
 	}
 
 	void Start () {
@@ -85,8 +65,6 @@ public class Helicopter : Rideable {
 
 		health = GetComponent<Health> ();
 		shooting = GetComponentInChildren<ShootingController> ();
-
-		LoadFromCheckpoint ();
 
 		health.onDeath += Die;
 
@@ -113,8 +91,6 @@ public class Helicopter : Rideable {
 
 	public override void Dismount () {
 		if (dismountable) {
-			StartCoroutine (SpawnExitVehicle(mounter.transform));
-
 			base.Dismount ();
 			vectorArrow.gameObject.SetActive (false);
 
@@ -261,24 +237,6 @@ public class Helicopter : Rideable {
 	void ApplyFlyingForce () {
 		Vector3 force = Vector3.forward * maxSpeed * curFlySpeed * curRotorSpeed;
 		rb.AddRelativeForce (force);
-	}
-
-	public SavedVehicle GetSavedData() {
-		SavedVehicle vehicle = new SavedVehicle ();
-		vehicle.position = transform.position;
-		vehicle.rotation = transform.rotation;
-		//save health?
-		return vehicle;
-	}
-
-	IEnumerator SpawnExitVehicle(Transform rider) {
-		if (exitingVehicle == null) {
-			yield break;
-		}
-
-		yield return new WaitForSeconds (spawnDelay);
-
-		Instantiate (exitingVehicle, rider.position, Quaternion.Euler(0, rider.rotation.eulerAngles.y, 0));
 	}
 
 	public void Die() {

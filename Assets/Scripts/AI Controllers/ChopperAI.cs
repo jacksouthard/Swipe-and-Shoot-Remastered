@@ -21,7 +21,7 @@ public class ChopperAI : MonoBehaviour {
 		player = GameObject.FindObjectOfType<PlayerController> ().transform;
 		shooting = GetComponentInChildren<ShootingController> ();
 
-		if (target != null) {
+		if (target != null && !LevelProgressManager.hasMadeProgress) {
 			objectiveTarget = true;
 			targetPos = new Vector2 (target.position.x, target.position.z);
 		} else {

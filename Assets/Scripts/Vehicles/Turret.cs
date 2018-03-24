@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret : Rideable {
-	public bool onlyShootsVehicles;
+	public Transform lockedTarget;
+	public bool automatic;
 
 	ShootingController shooting;
 
@@ -12,22 +13,43 @@ public class Turret : Rideable {
 		shooting.SetEnabled (false);
 
 		GetComponent<Health> ().onDeath += Die;
+
+		if (automatic) {
+			SetupTarget ();
+		}
 	}
 
 	void Die() {
-		Dismount ();
+		if (mounter != null) {
+			Dismount ();
+		}
 		GetComponent<Rigidbody> ().isKinematic = false;
 		Destroy(GetComponent<Collider> ());
 	}
 
 	public override void Mount (GameObject _mounter) {
-		base.Mount (_mounter);
+		if (automatic) {
+			return;
+		}
 
-		if (mounter.GetComponent<EnemyController> ()) {
-			shooting.UpdateTargetTag ((!onlyShootsVehicles) ? "Player" : "Vehicle");
+		base.Mount (_mounter);
+		SetupTarget ();
+	}
+
+	void SetupTarget() {
+		if (lockedTarget != null) {
+			shooting.OverrideSwitchTargets (lockedTarget);
+			shooting.UpdateTargetTag (lockedTarget.tag);
+		} else if(mounter != null) {
+			if (mounter.GetComponent<EnemyController> ()) {
+				shooting.UpdateTargetTag ("Player");
+			} else {
+				shooting.UpdateTargetTag ("Enemy");
+			}
+		}
+
+		if (shooting.targetTag != "Enemy") {
 			tag = "Enemy";
-		} else {
-			shooting.UpdateTargetTag ("Enemy");
 		}
 		shooting.SetEnabled (true);
 	}

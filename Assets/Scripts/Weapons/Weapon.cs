@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour {
 	public float audioPitch = 1;
 
 	AudioSource reloadSound;
+	List<Transform> targetsToIgnore = new List<Transform>();
 
 	public float dps {
 		get {
@@ -49,6 +50,11 @@ public class Weapon : MonoBehaviour {
 	public void SetTarget(string target) {
 		targetTag = target;
 	}
+
+	public void UpdateIgnoreList() {
+		targetsToIgnore.Clear ();
+		targetsToIgnore = GetComponentInParent<ShootingController> ().targetsToIgnore;
+	}
 	
 	void Update () {
 		if (canFire) {
@@ -70,7 +76,7 @@ public class Weapon : MonoBehaviour {
 			RaycastHit hitInfo;
 			Physics.SphereCast (bulletSpawns [0].position, 0.5f, bulletSpawns[0].forward, out hitInfo, range, ~((1 << 2) | (1 << 11))); //ignore IgnoreRaycast and Projectile layers
 
-			if (hitInfo.collider == null) {
+			if (hitInfo.collider == null || targetsToIgnore.Contains(hitInfo.collider.transform)) {
 				return false;
 			}
 

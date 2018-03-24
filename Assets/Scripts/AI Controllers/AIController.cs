@@ -36,7 +36,7 @@ public class AIController : MonoBehaviour {
 	void LoadFromCheckpoint() {
 		hash = LevelProgressManager.CalculateHash (transform.position);
 
-		if (LevelProgressManager.curObjectiveId > 0) {
+		if (LevelProgressManager.hasMadeProgress) {
 			if (LevelProgressManager.startingAIData.ContainsKey(hash)) {
 				SavedAI data = LevelProgressManager.startingAIData [hash];
 				transform.position = data.position;

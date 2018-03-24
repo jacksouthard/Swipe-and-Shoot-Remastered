@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Rideable : MonoBehaviour {
+	[HideInInspector]
+	public float hash;
+
 	public bool dismountable;
 	public bool controllable;
 	public bool isEnemyMountable;
@@ -15,10 +18,15 @@ public class Rideable : MonoBehaviour {
 	GameObject handsContainer;
 	Transform seat;
 
+	[Header("Exit")]
+	public GameObject exitingVehicle;
+	public float spawnDelay;
+
 	protected GameObject mounter;
 	protected AudioSource engine;
 
 	public virtual bool shouldBeShotAt { get { return false; } }
+	public virtual bool saves { get { return false; } }
 
 	bool isObjective = false;
 
@@ -30,6 +38,10 @@ public class Rideable : MonoBehaviour {
 	}
 
 	public void Initiate () {
+		if (saves) {
+			LoadFromCheckpoint ();
+		}
+
 		rb = GetComponent<Rigidbody> ();
 		engine = GetComponent<AudioSource> ();
 
@@ -37,6 +49,21 @@ public class Rideable : MonoBehaviour {
 		seat = transform.Find("Seat");
 		handsContainer = transform.Find("Hands").gameObject;
 		handsContainer.SetActive (false);
+	}
+
+	void LoadFromCheckpoint() {
+		hash = LevelProgressManager.CalculateHash (transform.position);
+
+		if (LevelProgressManager.hasMadeProgress) {
+			if (LevelProgressManager.startingVehicleData.ContainsKey(hash)) {
+				SavedVehicle data = LevelProgressManager.startingVehicleData [hash];
+				transform.position = data.position;
+				transform.rotation = data.rotation;
+			} else {
+				Destroy (gameObject);
+				return;
+			}
+		}
 	}
 
 	public bool canBeMounted { get { return (Time.time >= nextEnterTime) && !driver && Vector3.Dot(Vector3.up, transform.up) > 0; } }
@@ -74,6 +101,8 @@ public class Rideable : MonoBehaviour {
 
 	public virtual void Dismount () {
 		// universal
+		StartCoroutine (SpawnExitVehicle(mounter.transform));
+
 		Collider mounterCol = mounter.GetComponent<Collider> ();
 		mounterCol.enabled = true;
 		mounter.GetComponent<Rigidbody> ().isKinematic = false;
@@ -96,6 +125,24 @@ public class Rideable : MonoBehaviour {
 		}
 
 		StartCoroutine(IgnoreDriverCollisions(mounterCol));
+	}
+
+	public SavedVehicle GetSavedData() {
+		SavedVehicle vehicle = new SavedVehicle ();
+		vehicle.position = transform.position;
+		vehicle.rotation = transform.rotation;
+		//save health?
+		return vehicle;
+	}
+
+	IEnumerator SpawnExitVehicle(Transform rider) {
+		if (exitingVehicle == null) {
+			yield break;
+		}
+
+		yield return new WaitForSeconds (spawnDelay);
+
+		Instantiate (exitingVehicle, rider.position, Quaternion.Euler(0, rider.rotation.eulerAngles.y, 0));
 	}
 
 	IEnumerator IgnoreDriverCollisions(Collider driverCol) {

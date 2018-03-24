@@ -63,6 +63,7 @@ public class LevelProgressManager : MonoBehaviour {
 	
 	[Header("Objective")]
 	public List<Objective> objectives = new List<Objective>();
+	Objective curObjective { get { return objectives [curObjectiveId]; } }
 	EdgeView objectiveEdgeView;
 	public string winMessage;
 
@@ -72,17 +73,23 @@ public class LevelProgressManager : MonoBehaviour {
 	[Header("Debug")]
 	public int startingObjective = 0;
 
-	public bool allEnemiesKilled { get { return enemyParent.childCount == 0; } }
+	public static bool hasMadeProgress {
+		get {
+			if (instance != null) {
+				return curObjectiveId > instance.startingObjective;
+			} else {
+				return false;
+			}
+		}
+	}
 	public bool isComplete;
 	PlayerController pc;
-	Transform enemyParent;
 	Text winText;
 
 	public float timer = 0f; //for defend objectives
 
 	void Awake() {
 		instance = this;
-		enemyParent = GameObject.Find ("Enemies").transform;
 
 		if (curObjectiveId == 0) {
 			curObjectiveId = startingObjective;
@@ -99,7 +106,7 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	void Start() {
-		if (curObjectiveId > startingObjective) {
+		if (hasMadeProgress) {
 			UpdatePlayer ();
 		}
 
@@ -119,6 +126,16 @@ public class LevelProgressManager : MonoBehaviour {
 
 				if (objectives [i].objectsToEnable != null) {
 					objectives [i].objectsToEnable.SetActive (true);
+				}
+
+				//skip animations we have passed
+				if (objectives [i].animation != null) {
+					objectives [i].animation.SetTrigger ("Skip");
+				}
+
+				//these enemies are dead so don't bring them back
+				if (objectives [i].type == Objective.Type.Kills) {
+					objectives [i].objectiveObj.SetActive (false);
 				}
 
 				//reactivates escort
@@ -148,8 +165,6 @@ public class LevelProgressManager : MonoBehaviour {
 		objectiveEdgeView.Hide ();
 		NotificationManager.instance.HideHelp ();
 
-		yield return new WaitForSeconds (objectives[curObjectiveId].initialDelay);
-
 		if (objectives.Count == 0) {
 			Debug.LogError ("No objectives to set up");
 			yield break;
@@ -157,21 +172,23 @@ public class LevelProgressManager : MonoBehaviour {
 
 		if (firstTime) {
 			firstTime = false;
-			foreach (NotificationManager.SplashData message in objectives[curObjectiveId].startingSplashes) {
+			yield return new WaitForSeconds (curObjective.initialDelay);
+
+			foreach (NotificationManager.SplashData message in curObjective.startingSplashes) {
 				NotificationManager.instance.ShowSplash (message);
 			}
 		}
 
-		switch (objectives[curObjectiveId].type) {
+		switch (curObjective.type) {
 			case Objective.Type.Pickup:
-				objectives [curObjectiveId].objectiveObj.tag = "Pickup";
-				Pickup pickup = objectives [curObjectiveId].objectiveObj.GetComponent<Pickup> ();
+				curObjective.objectiveObj.tag = "Pickup";
+				Pickup pickup = curObjective.objectiveObj.GetComponent<Pickup> ();
 				if (pickup != null) {
 					pickup.isObjective = true;
 				}
 				break;
 			case Objective.Type.Zone:
-				PlayerTrigger trigger = objectives [curObjectiveId].objectiveObj.AddComponent<PlayerTrigger> ();
+				PlayerTrigger trigger = curObjective.objectiveObj.AddComponent<PlayerTrigger> ();
 				trigger.enterActions.AddListener (CompleteObjective);
 				trigger.oneTime = true;
 				break;
@@ -179,32 +196,32 @@ public class LevelProgressManager : MonoBehaviour {
 				StartCoroutine (CheckForEnemyDeaths ());
 				break;
 			case Objective.Type.Vehicle:
-				objectives [curObjectiveId].objectiveObj.GetComponent<Rideable> ().SetupObjective ();
+				curObjective.objectiveObj.GetComponent<Rideable> ().SetupObjective ();
 				break;
 			case Objective.Type.Camera:
 				StartCoroutine (MoveCamera ());
 				break;
 			case Objective.Type.Defend:
-				timer = objectives [curObjectiveId].time;
+				timer = curObjective.time;
 				break;
 		}
 
-		if (objectives[curObjectiveId].animation != null && objectives [curObjectiveId].type != Objective.Type.Camera) {
-			objectives [curObjectiveId].animation.SetTrigger ("Play");
+		if (curObjective.animation != null && curObjective.type != Objective.Type.Camera) {
+			curObjective.animation.SetTrigger ("Play");
 		}
 
 		UpdateObjectiveUI ();
 	}
 
 	void UpdateObjectiveUI() {
-		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && objectives[curObjectiveId].type != Objective.Type.Kills;
+		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && curObjective.type != Objective.Type.Kills;
 
 		if (hasIndicators) {
-			objectiveEdgeView.SetTarget (objectives [curObjectiveId].objectiveObj, objectives[curObjectiveId].showsWorldIndicator); //set target
+			objectiveEdgeView.SetTarget (curObjective.objectiveObj, curObjective.showsWorldIndicator); //set target
 		}
 
-		if (objectives [curObjectiveId].type == Objective.Type.Kills) {
-			Transform targetParent = objectives [curObjectiveId].objectiveObj.transform;
+		if (curObjective.type == Objective.Type.Kills) {
+			Transform targetParent = curObjective.objectiveObj.transform;
 			foreach (Transform child in targetParent) {
 				if (child.name.Contains ("Target")) {
 					EdgeView.Create(child.gameObject, true);
@@ -212,8 +229,8 @@ public class LevelProgressManager : MonoBehaviour {
 			}
 		}
 
-		if (curObjectiveId < objectives.Count && !string.IsNullOrEmpty (objectives [curObjectiveId].helpText)) {
-			NotificationManager.instance.ShowHelp (objectives [curObjectiveId].helpText);
+		if (curObjectiveId < objectives.Count && !string.IsNullOrEmpty (curObjective.helpText)) {
+			NotificationManager.instance.ShowHelp (curObjective.helpText);
 		}
 	}
 
@@ -233,10 +250,13 @@ public class LevelProgressManager : MonoBehaviour {
 		killedAIsSinceLastCheckpoint.Clear ();
 
 		startingVehicleData.Clear ();
-		Vehicle[] vehicles = GameObject.FindObjectsOfType<Vehicle> ();
-		foreach(Vehicle vehicle in vehicles) {
-			startingVehicleData.Add (vehicle.hash, vehicle.GetSavedData());
+		Rideable[] vehicles = GameObject.FindObjectsOfType<Rideable> ();
+		foreach(Rideable vehicle in vehicles) {
+			if (vehicle.saves) {
+				startingVehicleData.Add (vehicle.hash, vehicle.GetSavedData ());
+			}
 		}
+
 	}
 
 	public void EnemyDeath(float hash) {
@@ -244,7 +264,7 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	IEnumerator CheckForEnemyDeaths() {
-		List<Health> enemyHealths = new List<Health>(objectives [curObjectiveId].objectiveObj.GetComponentsInChildren<Health>());
+		List<Health> enemyHealths = new List<Health>(curObjective.objectiveObj.GetComponentsInChildren<Health>());
 
 		while(enemyHealths.Count > 0) {
 			foreach(Health health in enemyHealths) {
@@ -263,13 +283,13 @@ public class LevelProgressManager : MonoBehaviour {
 	IEnumerator MoveCamera() {
 		TimeManager.SetPaused (true);
 
-		yield return StartCoroutine (CameraController.instance.ShowTarget(objectives[curObjectiveId].objectiveObj.transform));
+		yield return StartCoroutine (CameraController.instance.ShowTarget(curObjective.objectiveObj.transform));
 
-		if (objectives [curObjectiveId].animation != null) {
-			objectives [curObjectiveId].animation.SetTrigger ("Play");
+		if (curObjective.animation != null) {
+			curObjective.animation.SetTrigger ("Play");
 		}
 
-		yield return new WaitForSecondsRealtime (objectives[curObjectiveId].time);
+		yield return new WaitForSecondsRealtime (curObjective.time);
 
 		TimeManager.SetPaused (false);
 		CameraController.instance.Resume();
@@ -282,6 +302,7 @@ public class LevelProgressManager : MonoBehaviour {
 			timer -= Time.deltaTime;
 			if (timer <= 0f) {
 				timer = 0f;
+				print ("hey");
 				CompleteObjective ();
 			}
 		}
@@ -293,15 +314,15 @@ public class LevelProgressManager : MonoBehaviour {
 			return;
 		}
 
-		if(objectives[curObjectiveId].objectsToEnable != null) {
-			objectives [curObjectiveId].objectsToEnable.SetActive (true);
+		if(curObjective.objectsToEnable != null) {
+			curObjective.objectsToEnable.SetActive (true);
 		}
-		if(objectives[curObjectiveId].objectsToDisable != null) {
-			objectives [curObjectiveId].objectsToDisable.SetActive (false);
+		if(curObjective.objectsToDisable != null) {
+			curObjective.objectsToDisable.SetActive (false);
 		}
 
-		if (!string.IsNullOrEmpty(objectives [curObjectiveId].completionBanner)) {
-			NotificationManager.instance.ShowBanner (objectives[curObjectiveId].completionBanner);
+		if (!string.IsNullOrEmpty(curObjective.completionBanner)) {
+			NotificationManager.instance.ShowBanner (curObjective.completionBanner);
 		}
 
 		curObjectiveId++;

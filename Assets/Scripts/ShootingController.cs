@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShootingController : MonoBehaviour {
 	public bool canRotateParent;
+	public List<Transform> targetsToIgnore = new List<Transform> ();
 
 	[Header("Control")]
 	public string targetTag;
@@ -39,6 +40,7 @@ public class ShootingController : MonoBehaviour {
 		weapon = GetComponentInChildren<Weapon> (); //try to get whatever weapon we already have
 		if (weapon != null) {
 			weapon.SetTarget (targetTag);
+			weapon.UpdateIgnoreList ();
 		}
 
 		health = gameObject.GetComponentInParent<Health> ();
@@ -57,6 +59,7 @@ public class ShootingController : MonoBehaviour {
 
 		weapon = weaponObj.GetComponent<Weapon>();
 		weapon.SetTarget(targetTag);
+		weapon.UpdateIgnoreList ();
 
 		if (health != null) {
 			health.UpdateRenderersNextFrame ();
@@ -169,7 +172,7 @@ public class ShootingController : MonoBehaviour {
 
 		foreach (Collider obj in objectsInRange) {
 			if (obj.tag == targetTag) {
-				if (targetTag == "Enemy" && obj.GetComponentInParent<Health>().state != Health.State.Alive) {
+				if ((targetTag == "Enemy" && obj.GetComponentInParent<Health>().state != Health.State.Alive) || targetsToIgnore.Contains(obj.transform)) {
 					continue;
 				}
 
