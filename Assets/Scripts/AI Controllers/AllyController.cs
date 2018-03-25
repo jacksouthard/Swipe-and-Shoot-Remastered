@@ -11,11 +11,11 @@ public class AllyController : AIController {
 	public bool moves = true;
 
 	ShootingController shooting;
-	Transform player;
+	PlayerController pc;
 
 	protected override void Init() {
 		shooting = gameObject.GetComponentInChildren<ShootingController> ();
-		player = GameObject.FindObjectOfType<PlayerController> ().transform;
+		pc = GameObject.FindObjectOfType<PlayerController> ();
 
 		base.Init ();
 
@@ -44,12 +44,30 @@ public class AllyController : AIController {
 	}
 
 	protected override void UpdateTarget () {
+		if (pc == null) {
+			return;
+		}
+
 		base.UpdateTarget ();
 
-		SetTargets ((shooting.target != null) ? shooting.target : player);
+		SetTargets ((shooting.target != null) ? shooting.target : pc.transform);
 		if (moves) {
-			navAgent.stoppingDistance = (shooting.target != null) ? Mathf.Max(shooting.range - 4, 3) : 3; //default stopping distance is 3
+			if (shooting.target != null) {
+				navAgent.stoppingDistance = Mathf.Max (shooting.range - 4, 3);
+			} else if (pc.inVehicle && IsValidVehicle (pc.currentVehicle.gameObject)) {
+				navAgent.stoppingDistance = 0f;
+			} else {
+				navAgent.stoppingDistance = 3f;
+			}
 		}
+	}
+
+	protected override bool IsValidVehicle(GameObject vehicle) {
+		if (!base.IsValidVehicle(vehicle)) {
+			return false;
+		}
+
+		return vehicle.GetComponentInParent<Rideable> ().driver; //only try to get in if the player is already in
 	}
 
 	protected override void Activate () {
@@ -75,5 +93,16 @@ public class AllyController : AIController {
 		GameManager.allEnemyTargets.Remove (transform);
 
 		base.Die ();
+	}
+
+	protected override void EnterVehicle (Rideable newVehicle) {
+		base.EnterVehicle (newVehicle);
+	}
+
+	public override void EjectFromVehicle (Rigidbody rb) {
+		base.EjectFromVehicle (rb);
+
+		shooting.canRotateParent = true;
+		shooting.gameObject.SetActive (true);
 	}
 }

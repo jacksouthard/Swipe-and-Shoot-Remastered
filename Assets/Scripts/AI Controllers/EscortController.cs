@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EscortController : AIController {
-	Transform player;
+	PlayerController pc;
 
 	protected override void Init () {
-		player = GameObject.FindObjectOfType<PlayerController>().transform;
+		pc = GameObject.FindObjectOfType<PlayerController> ();
 
 		base.Init ();
 
@@ -21,9 +21,26 @@ public class EscortController : AIController {
 		GameManager.allEnemyTargets.Add (transform);
 	}
 
+	protected override bool IsValidVehicle(GameObject vehicle) {
+		if (!base.IsValidVehicle(vehicle)) {
+			return false;
+		}
+
+		return vehicle.GetComponentInParent<Rideable> ().driver; //only try to get in if the player is already in
+	}
+
 	protected override void UpdateTarget () {
+		if (pc == null) {
+			return;
+		}
+
 		base.UpdateTarget ();
-		SetTargets (player);
+		SetTargets (pc.transform);
+		if (pc.inVehicle && IsValidVehicle (pc.currentVehicle.gameObject)) {
+			navAgent.stoppingDistance = 0f;
+		} else {
+			navAgent.stoppingDistance = 3f;
+		}
 	}
 
 	public override void Die() {

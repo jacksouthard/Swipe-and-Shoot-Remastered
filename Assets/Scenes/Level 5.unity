@@ -2595,6 +2595,11 @@ Prefab:
       propertyPath: lockedTarget
       value: 
       objectReference: {fileID: 1426489118}
+    - target: {fileID: 114492753346921334, guid: 0f13945fd8ac64712a366e1c13cb03c8,
+        type: 2}
+      propertyPath: isEnemyMountable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f13945fd8ac64712a366e1c13cb03c8, type: 2}
   m_IsPrefabParent: 0
@@ -12663,6 +12668,11 @@ Prefab:
       propertyPath: lockedTarget
       value: 
       objectReference: {fileID: 1426489118}
+    - target: {fileID: 114492753346921334, guid: 0f13945fd8ac64712a366e1c13cb03c8,
+        type: 2}
+      propertyPath: isEnemyMountable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f13945fd8ac64712a366e1c13cb03c8, type: 2}
   m_IsPrefabParent: 0
@@ -16027,6 +16037,11 @@ Prefab:
       propertyPath: lockedTarget
       value: 
       objectReference: {fileID: 1426489118}
+    - target: {fileID: 114492753346921334, guid: 0f13945fd8ac64712a366e1c13cb03c8,
+        type: 2}
+      propertyPath: isEnemyMountable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f13945fd8ac64712a366e1c13cb03c8, type: 2}
   m_IsPrefabParent: 0

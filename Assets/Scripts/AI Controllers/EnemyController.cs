@@ -59,8 +59,17 @@ public class EnemyController : AIController {
 		priorityRange = shooting.range;
 
 		if(moves) {
-			navAgent.stoppingDistance = Mathf.Max(shooting.range - 4, 3f); //enemies shouldn't get too close to you
+			navAgent.stoppingDistance = Mathf.Max(shooting.range - 4, 3f);
 		}
+	}
+
+	protected override bool IsValidVehicle(GameObject vehicle) {
+		if (vehicle == null) {
+			return false;
+		}
+
+		Rideable otherRideable = vehicle.GetComponentInParent<Rideable> ();
+		return otherRideable != null && otherRideable.canBeMounted && otherRideable.isEnemyMountable && (!otherRideable.driver || otherRideable.tag == "Enemy");
 	}
 
 	void Update() {
@@ -75,6 +84,9 @@ public class EnemyController : AIController {
 	protected override void UpdateTarget () {
 		base.UpdateTarget ();
 		SetTargets (GameManager.allEnemyTargets);
+		if (moves) {
+			navAgent.stoppingDistance = (!IsValidVehicle(target.gameObject)) ? Mathf.Max(shooting.range - 4, 3f) : 0f;
+		}
 	}
 
 	protected override void Activate () {
@@ -137,51 +149,6 @@ public class EnemyController : AIController {
 		}
 	}
 
-	// vehicles
-	Rideable currentVehicle;
-	void OnCollisionEnter(Collision other) {
-		if (other.collider.tag == "Vehicle") {
-			Rideable newVehicle = other.gameObject.GetComponentInParent<Rideable> ();
-			if(newVehicle != null && newVehicle.canBeMounted && newVehicle.isEnemyMountable) {
-				EnterVehicle (newVehicle); //enter vehicle when you hit something tagged with vehicle
-			}
-		}
-	}
-
-	void EnterVehicle(Rideable newVehicle) {
-		currentVehicle = newVehicle;
-		rb.interpolation = RigidbodyInterpolation.None;
-		rb.constraints = RigidbodyConstraints.FreezeRotation;
-
-		currentVehicle.Mount (gameObject);
-
-		if (navAgent != null) {
-			navAgent.enabled = false;
-		}
-		inVehicle = true;
-
-		shooting.canRotateParent = false;
-		shooting.gameObject.SetActive (false);
-	}
-
-	public void EjectFromVehicle() {
-		rb.interpolation = RigidbodyInterpolation.Extrapolate;
-		rb.constraints = RigidbodyConstraints.None;
-		rb.velocity = currentVehicle.GetComponent<Rigidbody> ().velocity;
-			
-		currentVehicle = null;
-
-		shooting.canRotateParent = true;
-		shooting.gameObject.SetActive (true);
-
-		if (navAgent != null) {
-			navAgent.enabled = true;
-		}
-		inVehicle = false;
-
-		health.ResetColor ();
-	}
-
 	protected override void SwitchTargets () {
 		shooting.OverrideSwitchTargets (target);
 	}
@@ -220,5 +187,16 @@ public class EnemyController : AIController {
 		if (shooting.hasWeapon && GameObject.FindObjectOfType<PlayerController>().TrySwapWeapons (shooting.GetWeaponData ())) {
 			shooting.RemoveWeapon ();
 		}
+	}
+
+	protected override void EnterVehicle (Rideable newVehicle) {
+		base.EnterVehicle (newVehicle);
+	}
+
+	public override void EjectFromVehicle (Rigidbody rb) {
+		base.EjectFromVehicle (rb);
+
+		shooting.canRotateParent = true;
+		shooting.gameObject.SetActive (true);
 	}
 }

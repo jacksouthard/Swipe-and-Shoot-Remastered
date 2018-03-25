@@ -94,9 +94,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1287912652366688
+--- !u!1 &1285294659826414
 GameObject:
   m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4954625154985572}
+  m_Layer: 0
+  m_Name: BackSeat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1287912652366688
+GameObject:
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -271,6 +286,7 @@ GameObject:
   - component: {fileID: 54869579448232278}
   - component: {fileID: 114978877593691960}
   - component: {fileID: 82288541190576018}
+  - component: {fileID: 208511217812584664}
   m_Layer: 0
   m_Name: ATV
   m_TagString: Vehicle
@@ -375,7 +391,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4920397931556818}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4261897015098796
 Transform:
@@ -410,13 +426,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287912652366688}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4911486469206606}
   - {fileID: 4931298150539296}
-  m_Father: {fileID: 4920397931556818}
-  m_RootOrder: 3
+  m_Father: {fileID: 4488758502068506}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4335956075313500
 Transform:
@@ -481,7 +497,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4920397931556818}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &4488758502068506
 Transform:
@@ -492,7 +508,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4298592212776792}
   m_Father: {fileID: 4920397931556818}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -521,7 +538,7 @@ Transform:
   m_Children:
   - {fileID: 4393912757203960}
   m_Father: {fileID: 4920397931556818}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4660985982169284
 Transform:
@@ -637,10 +654,10 @@ Transform:
   - {fileID: 4917746190641804}
   - {fileID: 4875187265843104}
   - {fileID: 4488758502068506}
-  - {fileID: 4298592212776792}
   - {fileID: 4641983546273792}
   - {fileID: 4135801446123124}
   - {fileID: 4484611047439112}
+  - {fileID: 4954625154985572}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -657,6 +674,19 @@ Transform:
   m_Father: {fileID: 4298592212776792}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -21.61, z: 0}
+--- !u!4 &4954625154985572
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285294659826414}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.871, z: -0.638}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4920397931556818}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23239478377621440
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -1340,12 +1370,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4678f3dbd7cd4ccbb5dd0bfc4186212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hash: 0
   dismountable: 1
   controllable: 1
   isEnemyMountable: 0
-  driver: 0
+  seats:
+  - {fileID: 4488758502068506}
+  - {fileID: 4954625154985572}
+  exitingVehicle: {fileID: 0}
+  spawnDelay: 0
   rb: {fileID: 0}
-  hash: 0
   turnSpeed: 12000
   rotationSpeedLimiter: 1
   maxSpeed: 40000
@@ -1355,8 +1389,6 @@ MonoBehaviour:
   groundedAngDrag: 5
   airDrag: 0
   airAngDrag: 5
-  exitingVehicle: {fileID: 0}
-  spawnDelay: 0
   averageEnginePitch: 1.5
   grounded: 0
   targetDirection: {x: 0, y: 0}
@@ -1431,6 +1463,21 @@ MonoBehaviour:
   smokeCenter: {fileID: 4484611047439112}
   waitTimer: 0
   health: 0
+--- !u!208 &208511217812584664
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1755002622876324}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!212 &212693284423328780
 SpriteRenderer:
   m_ObjectHideFlags: 1

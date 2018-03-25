@@ -13,10 +13,11 @@ public class CutsceneVehicle : Rideable {
 
 	public override void Mount (GameObject _mounter) {
 		base.Mount (_mounter);
-		anim.enabled = true;
 	}
 
 	protected override void CompleteObjective () {
+		anim.enabled = true;
+		dismountable = false;
 		LevelProgressManager.instance.EnterCutsceneVehicle ();
 	}
 

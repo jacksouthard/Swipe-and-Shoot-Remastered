@@ -30,7 +30,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1439478508795106
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -158,7 +158,6 @@ Transform:
   - {fileID: 4176554185291682}
   - {fileID: 4273232637926622}
   - {fileID: 4664431718452214}
-  - {fileID: 4031883245852070}
   - {fileID: 4400843421695406}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -169,13 +168,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1439478508795106}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36089206, z: -0.030000009}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.3100002, z: -0.9291079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4005525624840646}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 4664431718452214}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!4 &4176554185291682
 Transform:
   m_ObjectHideFlags: 1
@@ -226,7 +225,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4005525624840646}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4420981649458860
 Transform:
@@ -250,7 +249,8 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.29, z: 1.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4031883245852070}
   m_Father: {fileID: 4005525624840646}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -545,8 +545,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f36437b106d44f0b12e87d1914a31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hash: 0
   dismountable: 0
   controllable: 0
   isEnemyMountable: 0
-  driver: 0
+  seats:
+  - {fileID: 4664431718452214}
+  exitingVehicle: {fileID: 0}
+  spawnDelay: 0
   rb: {fileID: 0}

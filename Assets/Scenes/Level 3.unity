@@ -4835,6 +4835,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1678392736121820, guid: 5db244586b5344acba1e380898249daf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5db244586b5344acba1e380898249daf, type: 2}
   m_IsPrefabParent: 0
@@ -5877,10 +5881,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef00250558cd49d994338b60384f3c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hash: 0
   dismountable: 0
   controllable: 0
   isEnemyMountable: 0
-  driver: 0
+  seats:
+  - {fileID: 1534491024}
+  exitingVehicle: {fileID: 0}
+  spawnDelay: 0
   rb: {fileID: 0}
 --- !u!95 &719787854
 Animator:
@@ -14272,6 +14280,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 75
       objectReference: {fileID: 0}
+    - target: {fileID: 1678392736121820, guid: 5db244586b5344acba1e380898249daf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5db244586b5344acba1e380898249daf, type: 2}
   m_IsPrefabParent: 0
@@ -15328,6 +15340,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4881778141735102, guid: 44bc23ce733744ceaa339ccf49f9bde7,
     type: 2}
   m_PrefabInternal: {fileID: 1522668815}
+--- !u!4 &1534491024 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4664431718452214, guid: cc0d6b9e683604138a29cdcf7cfc3e65,
+    type: 2}
+  m_PrefabInternal: {fileID: 719787851}
 --- !u!1 &1544914628
 GameObject:
   m_ObjectHideFlags: 0

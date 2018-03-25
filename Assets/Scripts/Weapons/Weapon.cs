@@ -83,7 +83,7 @@ public class Weapon : MonoBehaviour {
 			if (hitInfo.collider.tag != targetTag) {
 				if (targetTag == "Player") {
 					Rideable hitVehicle = hitInfo.collider.GetComponentInParent<Rideable> ();
-					if (hitVehicle == null || !hitVehicle.shouldBeShotAt || !hitVehicle.driver) {
+					if (hitVehicle == null || hitVehicle.tag == "Enemy" || !hitVehicle.shouldBeShotAt || !hitVehicle.driver) {
 						return false;
 					}
 				} else {

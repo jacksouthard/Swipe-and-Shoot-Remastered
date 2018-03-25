@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Vehicle : Rideable {
 	[Header("Turning")]
@@ -32,9 +33,8 @@ public class Vehicle : Rideable {
 	public override bool shouldBeShotAt { get { return true; } }
 	public override bool saves { get { return true; } }
 
-	Health health;
-
 	Transform vectorArrow;
+	NavMeshObstacle obstacle;
 
 	// reversing
 	int reverseMutliplier = 1;
@@ -48,10 +48,6 @@ public class Vehicle : Rideable {
 	}
 
 	void Start () {
-		health = GetComponent<Health> ();
-
-		health.onDeath += Die;
-
 		UpdateDrag ();
 
 		vectorArrow = transform.Find ("TargetVector");
@@ -66,21 +62,21 @@ public class Vehicle : Rideable {
 				steeringWheels.Add (wheel);
 			}
 		}
+
+		obstacle = GetComponent<NavMeshObstacle> ();
 	}
 		
 	public override void Mount (GameObject _mounter) {
 		base.Mount (_mounter);
-		health.UpdateRenderersNextFrame ();
+		obstacle.enabled = false;
 	}
 
 	public override void Dismount () {
 		if (dismountable) {
-			health.ResetColor ();
+			obstacle.enabled = true;
 
 			base.Dismount ();
 			vectorArrow.gameObject.SetActive (false);
-
-			health.UpdateRenderersNextFrame ();
 		}
 	}
 
@@ -258,18 +254,8 @@ public class Vehicle : Rideable {
 		}
 	}
 
-	public void Die() {
-		// test for player in vechicle
-		if (driver) {
-			if (GetComponentInChildren<PlayerController> () != null) {
-				GetComponentInChildren<PlayerController> ().ExitVehicle ();
-			} else if (GetComponentInChildren<EnemyController> () != null) {
-				GetComponentInChildren<EnemyController> ().EjectFromVehicle ();
-			}
-		}
-
+	protected override void Die() {
 		gameObject.GetComponent<Rigidbody> ().drag = 0;
-
-		Destroy(this);
+		base.Die ();
 	}
 }

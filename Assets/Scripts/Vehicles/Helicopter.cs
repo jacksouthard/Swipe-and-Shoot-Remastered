@@ -43,7 +43,6 @@ public class Helicopter : Rideable {
 	public float curRotorSpeed = 0f;
 	public int targetRotorPercent = 0;
 
-	Health health;
 	ShootingController shooting;
 
 	public Transform vectorArrow;
@@ -63,10 +62,7 @@ public class Helicopter : Rideable {
 			ai = GetComponent<ChopperAI> ();
 		}
 
-		health = GetComponent<Health> ();
 		shooting = GetComponentInChildren<ShootingController> ();
-
-		health.onDeath += Die;
 
 		// setup check points
 		for (int i = 0; i < groundCheckPointsContainer.childCount; i++) {
@@ -76,7 +72,6 @@ public class Helicopter : Rideable {
 
 	public override void Mount (GameObject _mounter) {
 		base.Mount (_mounter);
-		health.UpdateRenderersNextFrame ();
 		if (hasAI) {
 			if (!AIOverridePlayer) {
 				ai.AIStop ();
@@ -94,7 +89,6 @@ public class Helicopter : Rideable {
 			base.Dismount ();
 			vectorArrow.gameObject.SetActive (false);
 
-			health.UpdateRenderersNextFrame ();
 			if (!hasAI) {
 				shooting.SetEnabled (false);
 				DisengageFlight ();
@@ -237,18 +231,5 @@ public class Helicopter : Rideable {
 	void ApplyFlyingForce () {
 		Vector3 force = Vector3.forward * maxSpeed * curFlySpeed * curRotorSpeed;
 		rb.AddRelativeForce (force);
-	}
-
-	public void Die() {
-		// test for player in vechicle
-		if (driver) {
-			if (GetComponentInChildren<PlayerController> () != null) {
-				GetComponentInChildren<PlayerController> ().ExitVehicle ();
-			} else if (GetComponentInChildren<EnemyController> () != null) {
-				GetComponentInChildren<EnemyController> ().EjectFromVehicle ();
-			}
-		}
-
-		Destroy(this);
 	}
 }

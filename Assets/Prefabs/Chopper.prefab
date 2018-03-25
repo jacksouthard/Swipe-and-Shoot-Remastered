@@ -201,7 +201,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1558606564812726
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -441,7 +441,7 @@ Transform:
   - {fileID: 4137628249463298}
   - {fileID: 4274654758665658}
   m_Father: {fileID: 4550162200006794}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4271297661666426
 Transform:
@@ -467,7 +467,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4550162200006794}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4274654758665658
 Transform:
@@ -489,11 +489,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1558606564812726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36089206, z: -0.030000065}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4550162200006794}
-  m_RootOrder: 2
+  m_Father: {fileID: 4781532332965836}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4438163852316302
 Transform:
@@ -547,7 +547,6 @@ Transform:
   m_Children:
   - {fileID: 4510026982083528}
   - {fileID: 4513271049199930}
-  - {fileID: 4383300242899012}
   - {fileID: 4274469902458288}
   - {fileID: 4781532332965836}
   - {fileID: 4261929478300940}
@@ -658,9 +657,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 1.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4383300242899012}
   m_Father: {fileID: 4550162200006794}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4798892909428900
 Transform:
@@ -691,7 +691,7 @@ Transform:
   - {fileID: 4203285173005180}
   - {fileID: 4097094872293158}
   m_Father: {fileID: 4550162200006794}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23198217208508326
 MeshRenderer:
@@ -1014,12 +1014,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1057b199cb624469b9c537a1fc73a44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hash: 0
   dismountable: 1
   controllable: 1
   isEnemyMountable: 0
-  driver: 0
+  seats:
+  - {fileID: 4781532332965836}
+  exitingVehicle: {fileID: 1729023859902792, guid: a318ea23bda0543d794ec856bf4cc5c0,
+    type: 2}
+  spawnDelay: 1
   rb: {fileID: 0}
-  hash: 0
   turnSpeed: 30000
   maxSpeed: 80000
   acceleration: 0.015
@@ -1033,9 +1037,7 @@ MonoBehaviour:
   maxSpinSpeed: 30
   topRotor: {fileID: 4756207352521566}
   tailRotor: {fileID: 4274654758665658}
-  exitingVehicle: {fileID: 1729023859902792, guid: a318ea23bda0543d794ec856bf4cc5c0,
-    type: 2}
-  spawnDelay: 1
+  AIOverridePlayer: 0
   groundInZone: 0
   hasAI: 0
   ai: {fileID: 0}
@@ -1059,6 +1061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canRotateParent: 0
+  targetsToIgnore: []
   targetTag: Enemy
   verticalClampAngle: 360
   horizontalClampAngle: 360

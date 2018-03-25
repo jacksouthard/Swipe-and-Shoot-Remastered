@@ -81,9 +81,17 @@ public class AIController : MonoBehaviour {
 			return;
 		}
 
+		if (navAgent == null) {
+			return;
+		}
+			
 		if (backsUp && Vector3.Distance (transform.position, target.position) < navAgent.stoppingDistance - 0.5f) { //give a little room for error
 			transform.position += (transform.position - target.position).normalized * navAgent.speed * Time.deltaTime / 2; //back up slower than they move normally
 		}
+	}
+
+	protected virtual bool IsValidVehicle(GameObject vehicle) {
+		return vehicle != null && vehicle.tag == "Vehicle" && vehicle.GetComponentInParent<Rideable>().canBeMounted;
 	}
 
 	protected virtual void UpdateTarget () {
@@ -194,5 +202,33 @@ public class AIController : MonoBehaviour {
 		transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y, 0f);
 		gettingUp = false;
 		fallenOver = false;
+	}
+
+	//vehicle stuff
+	void OnCollisionEnter(Collision other) {
+		if (IsValidVehicle (other.collider.gameObject)) {
+			Rideable newVehicle = other.collider.gameObject.GetComponentInParent<Rideable> ();
+			newVehicle.Mount (gameObject);
+			EnterVehicle (newVehicle);
+		}
+	}
+
+	protected virtual void EnterVehicle(Rideable newVehicle) {
+		inVehicle = true;
+
+		if (navAgent != null) {
+			navAgent.enabled = false;
+		}
+	}
+
+	public virtual void EjectFromVehicle(Rigidbody vehicleRb) {
+		rb.velocity = vehicleRb.velocity;
+
+		if (navAgent != null) {
+			navAgent.enabled = true;
+		}
+		inVehicle = false;
+
+		health.ResetColor ();
 	}
 }

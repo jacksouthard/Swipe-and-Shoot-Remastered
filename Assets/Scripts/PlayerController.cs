@@ -129,9 +129,6 @@ public class PlayerController : MonoBehaviour {
 		currentVehicle.Mount (gameObject);
 		state = MovementState.Grounded;
 
-		shooting.canRotateParent = false;
-		shooting.gameObject.SetActive (false);
-
 		SwipeManager.instance.EndSwipe ();
 
 		curPickingupTimers.Clear ();

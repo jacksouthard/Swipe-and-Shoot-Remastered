@@ -9,29 +9,32 @@ public class Rideable : MonoBehaviour {
 	public bool dismountable;
 	public bool controllable;
 	public bool isEnemyMountable;
+	protected virtual bool isEnemyTargetable { get { return false; } }
+
+	public bool driver { get { return riders[0] != null; } }
+	public List<Transform> seats;
+
+	public int remainingSeats { get; private set; }
 
 	float reentryWait = 1.0f;
 	float nextEnterTime;
-
-	[HideInInspector]
-	public bool driver = false;
-	GameObject handsContainer;
-	Transform seat;
 
 	[Header("Exit")]
 	public GameObject exitingVehicle;
 	public float spawnDelay;
 
-	protected GameObject mounter;
+	protected GameObject[] riders;
 	protected AudioSource engine;
 
 	public virtual bool shouldBeShotAt { get { return false; } }
 	public virtual bool saves { get { return false; } }
 
+	public int ridersRequiredForObjective = 1; //if this is an objective, how many riders do you need for it to count
 	bool isObjective = false;
 
 	[HideInInspector]
 	public Rigidbody rb;
+	Health health;
 
 	void Awake () {
 		Initiate ();
@@ -46,9 +49,20 @@ public class Rideable : MonoBehaviour {
 		engine = GetComponent<AudioSource> ();
 
 		// init mounting stuff
-		seat = transform.Find("Seat");
-		handsContainer = transform.Find("Hands").gameObject;
-		handsContainer.SetActive (false);
+		for (int i = 0; i < seats.Count; i++) {
+			EnableHands (i, false);
+		}
+		riders = new GameObject[seats.Count];
+		remainingSeats = seats.Count;
+
+		if (isEnemyTargetable) {
+			GameManager.allEnemyTargets.Add (transform);
+		}
+
+		health = GetComponent<Health> ();
+		if (health != null) {
+			health.onDeath += Die;
+		}
 	}
 
 	void LoadFromCheckpoint() {
@@ -66,65 +80,127 @@ public class Rideable : MonoBehaviour {
 		}
 	}
 
-	public bool canBeMounted { get { return (Time.time >= nextEnterTime) && !driver && Vector3.Dot(Vector3.up, transform.up) > 0; } }
+	public bool canBeMounted { get { return (Time.time >= nextEnterTime) && Vector3.Dot(Vector3.up, transform.up) > 0 && remainingSeats > 0; } }
 
 	public virtual void Mount (GameObject _mounter) {
-		// universal
-		mounter = _mounter;
-		mounter.GetComponent<BoxCollider> ().enabled = false;
-		mounter.GetComponent<Rigidbody> ().isKinematic = true;
-		mounter.transform.parent = seat;
-		mounter.transform.localPosition = Vector3.zero;
-		mounter.transform.localRotation = Quaternion.identity;
-
-		handsContainer.SetActive (true);
-
-		driver = true;
-		rb.interpolation = RigidbodyInterpolation.Extrapolate;
-
-		// if enemy
-		EnemyController em = mounter.GetComponentInParent<EnemyController>();
-		if (em != null) {
-			em.enabled = false;
+		int index = 0;
+		while(index < riders.Length && riders[index] != null) {
+			index++;
 		}
 
-		if (isObjective) {
+		if (index == riders.Length) {
+			return;
+		}
+
+		remainingSeats--;
+
+		if (isEnemyTargetable && remainingSeats == 0) {
+			GameManager.allEnemyTargets.Remove (transform);
+		}
+
+		// universal
+		GameObject newMounter = _mounter;
+		newMounter.GetComponent<BoxCollider> ().enabled = false;
+		newMounter.GetComponent<Rigidbody> ().isKinematic = true;
+
+		newMounter.transform.parent = seats[index];
+		newMounter.transform.localPosition = Vector3.zero;
+		newMounter.transform.localRotation = Quaternion.identity;
+		riders[index] = newMounter;
+
+		EnableHands (index, true);
+
+		bool riderIsPlayer = newMounter.GetComponentInParent<PlayerController> () != null;
+		if (riderIsPlayer) {
+			rb.interpolation = RigidbodyInterpolation.Extrapolate;
+		}
+
+		AIController ai = newMounter.GetComponentInParent<AIController>();
+		if (ai != null) {
+			ai.enabled = false;
+		}
+
+		if (isObjective && ridersRequiredForObjective == (seats.Count - remainingSeats)) {
 			isObjective = false;
 			this.CompleteObjective ();
 		}
 
-		if (engine != null) {
+		if (engine != null && index == 0) {
 			engine.Play ();
 			engine.pitch = 0;
+		}
+
+		if (health != null) {
+			health.UpdateRenderersNextFrame ();
+		}
+
+		ShootingController shooting = newMounter.GetComponentInChildren<ShootingController> ();
+		if (shooting != null) {
+			shooting.canRotateParent = false;
+			if(seats[index].Find("Hands") != null) {
+				shooting.gameObject.SetActive (false); //only disable the weapon if the hands will appear somewhere else
+			}
 		}
 	}
 
 	public virtual void Dismount () {
 		// universal
-		StartCoroutine (SpawnExitVehicle(mounter.transform));
-
-		Collider mounterCol = mounter.GetComponent<Collider> ();
-		mounterCol.enabled = true;
-		mounter.GetComponent<Rigidbody> ().isKinematic = false;
-		mounter.transform.parent = null;
-		if (mounter.transform.Find ("WeaponParent") != null) {
-			mounter.transform.Find ("WeaponParent").gameObject.SetActive (true);
+		if (health != null) {
+			health.ResetColor ();
 		}
 
-		handsContainer.SetActive (false);
+		for (int i = 0; i < seats.Count; i++) {
+			GameObject exitingRider = riders [i];
+			if (exitingRider == null) {
+				continue;
+			}
 
-		driver = false;
-		nextEnterTime = Time.time + reentryWait;
-		rb.interpolation = RigidbodyInterpolation.None;
+			riders [i] = null;
+			StartCoroutine (SpawnExitVehicle (exitingRider.transform));
 
-		// if enemy
-		EnemyController em = mounter.GetComponentInParent<EnemyController>();
-		if (em != null) {
-			em.EjectFromVehicle ();
-			em.enabled = true;
+			Collider mounterCol = exitingRider.GetComponent<Collider> ();
+			mounterCol.enabled = true;
+			exitingRider.GetComponent<Rigidbody> ().isKinematic = false;
+			exitingRider.transform.parent = null;
+			if (exitingRider.transform.Find ("WeaponParent") != null) {
+				exitingRider.transform.Find ("WeaponParent").gameObject.SetActive (true);
+			}
+
+			EnableHands (i, false);
+
+			nextEnterTime = Time.time + reentryWait;
+
+			bool riderIsPlayer = exitingRider.GetComponentInParent<PlayerController> () != null;
+			if (riderIsPlayer) {
+				rb.interpolation = RigidbodyInterpolation.None;
+			}
+
+			// if enemy
+			AIController ai = exitingRider.GetComponentInParent<AIController>();
+			if (ai != null) {
+				ai.EjectFromVehicle (rb);
+				ai.enabled = true;
+			}
+
+			StartCoroutine (IgnoreDriverCollisions (mounterCol));
 		}
 
-		StartCoroutine(IgnoreDriverCollisions(mounterCol));
+		if (isEnemyTargetable && !GameManager.allEnemyTargets.Contains (transform)) {
+			GameManager.allEnemyTargets.Add (transform);
+		}
+
+		remainingSeats = seats.Count;
+
+		if (health != null) {
+			health.UpdateRenderersNextFrame ();
+		}
+	}
+
+	public void EnableHands(int index, bool enable) {
+		Transform hands = seats[index].Find("Hands");
+		if(hands != null) {
+			hands.gameObject.SetActive (enable);
+		}
 	}
 
 	public SavedVehicle GetSavedData() {
@@ -167,5 +243,18 @@ public class Rideable : MonoBehaviour {
 	//sets up vehicle as objective
 	public void SetupObjective() {
 		isObjective = true;
+	}
+
+	protected virtual void Die() {
+		//test for driver in vehicle
+		if (driver) {
+			Dismount ();
+		}
+
+		if (isEnemyTargetable && GameManager.allEnemyTargets.Contains(transform)) {
+			GameManager.allEnemyTargets.Remove (transform);
+		}
+
+		Destroy (this);
 	}
 }
