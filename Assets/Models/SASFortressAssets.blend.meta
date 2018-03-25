@@ -8,9 +8,15 @@ ModelImporter:
     100000: Cube
     100002: Cylinder
     100004: //RootNode
+    100006: MantisBarrel
+    100008: MantisBase
+    100010: MantisTurret
     400000: Cube
     400002: Cylinder
     400004: //RootNode
+    400006: MantisBarrel
+    400008: MantisBase
+    400010: MantisTurret
     2100000: Consolelever
     2100002: ConsoleDial
     2100004: ButtonRed
@@ -24,12 +30,25 @@ ModelImporter:
     2100020: MissleStripe
     2100022: MissleMetal
     2100024: MissleTop
+    2100026: MantisMain
+    2100028: MantisVent
+    2100030: MantisDoor
+    2100032: Barrel
     2300000: Cube
     2300002: Cylinder
+    2300004: MantisBarrel
+    2300006: MantisBase
+    2300008: MantisTurret
     3300000: Cube
     3300002: Cylinder
+    3300004: MantisBarrel
+    3300006: MantisBase
+    3300008: MantisTurret
     4300000: Cube
     4300002: Cylinder
+    4300004: MantisBase
+    4300006: MantisBarrel
+    4300008: MantisTurret
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
