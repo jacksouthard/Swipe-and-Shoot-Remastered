@@ -85,6 +85,9 @@ public class Rideable : MonoBehaviour {
 	public virtual void Mount (GameObject _mounter) {
 		int index = 0;
 		while(index < riders.Length && riders[index] != null) {
+			if (riders [index] == _mounter) {
+				return;
+			}
 			index++;
 		}
 

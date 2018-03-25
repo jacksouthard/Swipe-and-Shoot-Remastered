@@ -11,10 +11,6 @@ public class CutsceneVehicle : Rideable {
 		base.Initiate ();
 	}
 
-	public override void Mount (GameObject _mounter) {
-		base.Mount (_mounter);
-	}
-
 	protected override void CompleteObjective () {
 		anim.enabled = true;
 		dismountable = false;
