@@ -3210,6 +3210,11 @@ Prefab:
       propertyPath: m_Name
       value: MantisTurret (Target)
       objectReference: {fileID: 0}
+    - target: {fileID: 54021376506245476, guid: 1f769aff6769b439d96b3973e3f0788c,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 122
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f769aff6769b439d96b3973e3f0788c, type: 2}
   m_IsPrefabParent: 0
@@ -9405,6 +9410,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 54021376506245476, guid: 1f769aff6769b439d96b3973e3f0788c,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 122
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f769aff6769b439d96b3973e3f0788c, type: 2}
   m_IsPrefabParent: 0
@@ -10750,6 +10760,11 @@ Prefab:
     - target: {fileID: 4056534096920052, guid: 1f769aff6769b439d96b3973e3f0788c, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54021376506245476, guid: 1f769aff6769b439d96b3973e3f0788c,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1f769aff6769b439d96b3973e3f0788c, type: 2}
