@@ -12120,7 +12120,8 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114345569886853610, guid: cc0d6b9e683604138a29cdcf7cfc3e65, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: cc0d6b9e683604138a29cdcf7cfc3e65, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &734427427 stripped
@@ -12150,6 +12151,27 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &734427430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 734427428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef00250558cd49d994338b60384f3c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hash: 0
+  dismountable: 0
+  controllable: 0
+  isEnemyMountable: 0
+  seats:
+  - {fileID: 937295345}
+  exitingVehicle: {fileID: 0}
+  spawnDelay: 0
+  ridersRequiredForObjective: 1
+  rb: {fileID: 0}
 --- !u!1 &739595545
 GameObject:
   m_ObjectHideFlags: 0
@@ -12652,7 +12674,6 @@ GameObject:
   m_Component:
   - component: {fileID: 777916544}
   - component: {fileID: 777916547}
-  - component: {fileID: 777916546}
   m_Layer: 0
   m_Name: HeliextractionZone
   m_TagString: Untagged
@@ -12673,18 +12694,6 @@ Transform:
   m_Father: {fileID: 1270769870}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!135 &777916546
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 777916543}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &777916547
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15765,6 +15774,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4242699180448400, guid: e5c684e5ae16942eab4b2b5ba58b91a7,
     type: 2}
   m_PrefabInternal: {fileID: 934099318}
+--- !u!4 &937295345 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4664431718452214, guid: cc0d6b9e683604138a29cdcf7cfc3e65,
+    type: 2}
+  m_PrefabInternal: {fileID: 734427426}
 --- !u!1 &938607434
 GameObject:
   m_ObjectHideFlags: 0
@@ -29972,7 +29986,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[3].type
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -29983,7 +29997,7 @@ Prefab:
         type: 2}
       propertyPath: objectives.Array.data[3].objectiveObj
       value: 
-      objectReference: {fileID: 777916543}
+      objectReference: {fileID: 734427428}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[3].objectsToDisable

@@ -119,19 +119,23 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void EnterVehicle(Rideable newVehicle) {
+	public void PrepareForVehicle(Rideable newVehicle) {
 		health.ResetColor ();
 
-		currentVehicle = newVehicle;
 		rb.interpolation = RigidbodyInterpolation.None;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
+		currentVehicle = newVehicle;
 
-		currentVehicle.Mount (gameObject);
 		state = MovementState.Grounded;
 
 		SwipeManager.instance.EndSwipe ();
 
 		curPickingupTimers.Clear ();
+	}
+
+	void EnterVehicle(Rideable newVehicle) {
+		PrepareForVehicle (newVehicle);
+		currentVehicle.Mount (gameObject);
 	}
 
 	public void ExitVehicle() {

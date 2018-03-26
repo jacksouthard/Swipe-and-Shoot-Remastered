@@ -5889,6 +5889,7 @@ MonoBehaviour:
   - {fileID: 1534491024}
   exitingVehicle: {fileID: 0}
   spawnDelay: 0
+  ridersRequiredForObjective: 1
   rb: {fileID: 0}
 --- !u!95 &719787854
 Animator:

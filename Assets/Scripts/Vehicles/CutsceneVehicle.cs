@@ -7,12 +7,11 @@ public class CutsceneVehicle : Rideable {
 
 	void Awake() {
 		anim = GetComponent<Animator> ();
-		anim.enabled = false;
 		base.Initiate ();
 	}
 
 	protected override void CompleteObjective () {
-		anim.enabled = true;
+		anim.SetTrigger ("Play");
 		dismountable = false;
 		LevelProgressManager.instance.EnterCutsceneVehicle ();
 	}

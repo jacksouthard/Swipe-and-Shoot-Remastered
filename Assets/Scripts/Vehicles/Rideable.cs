@@ -36,6 +36,9 @@ public class Rideable : MonoBehaviour {
 	public Rigidbody rb;
 	Health health;
 
+	RopeMounter ropeMounter;
+	bool hasRopeOut = false;
+
 	void Awake () {
 		Initiate ();
 	}
@@ -63,6 +66,8 @@ public class Rideable : MonoBehaviour {
 		if (health != null) {
 			health.onDeath += Die;
 		}
+
+		ropeMounter = GetComponentInChildren<RopeMounter> ();
 	}
 
 	void LoadFromCheckpoint() {
@@ -81,6 +86,13 @@ public class Rideable : MonoBehaviour {
 	}
 
 	public bool canBeMounted { get { return (Time.time >= nextEnterTime) && Vector3.Dot(Vector3.up, transform.up) > 0 && remainingSeats > 0; } }
+
+	protected void LowerRope() {
+		if (ropeMounter != null) {
+			StartCoroutine (ropeMounter.Lower());
+			hasRopeOut = true;
+		}
+	}
 
 	public virtual void Mount (GameObject _mounter) {
 		int index = 0;
@@ -123,7 +135,7 @@ public class Rideable : MonoBehaviour {
 			ai.enabled = false;
 		}
 
-		if (isObjective && ridersRequiredForObjective == (seats.Count - remainingSeats)) {
+		if (isObjective && ridersRequiredForObjective == (seats.Count - remainingSeats) && !hasRopeOut) {
 			isObjective = false;
 			this.CompleteObjective ();
 		}
@@ -143,6 +155,14 @@ public class Rideable : MonoBehaviour {
 			if(seats[index].Find("Hands") != null) {
 				shooting.gameObject.SetActive (false); //only disable the weapon if the hands will appear somewhere else
 			}
+		}
+	}
+
+	public void FinishRope() {
+		hasRopeOut = false;
+		if (isObjective && ridersRequiredForObjective == (seats.Count - remainingSeats)) {
+			isObjective = false;
+			this.CompleteObjective ();
 		}
 	}
 
