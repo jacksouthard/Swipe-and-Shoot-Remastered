@@ -7,7 +7,7 @@ public class RopeMounter : MonoBehaviour {
 
 	LineRenderer lrend;
 	Transform seat;
-	Collider col;
+	BoxCollider col;
 	Rideable rideable;
 	bool wasControllable;
 	bool wasDismountable;
@@ -18,7 +18,7 @@ public class RopeMounter : MonoBehaviour {
 
 		seat = transform.Find ("Seat");
 
-		col = GetComponent<Collider> ();
+		col = GetComponent<BoxCollider> ();
 		col.enabled = false;
 
 		rideable = GetComponentInParent<Rideable> ();
@@ -27,19 +27,29 @@ public class RopeMounter : MonoBehaviour {
 	}
 
 	public IEnumerator Lower() {
-		Vector3 endPos = transform.position + new Vector3 (0f, -6f, 0f); //arbitrary end position
+		RaycastHit hitInfo;
+		float ropeLength;
+		Physics.Raycast (transform.position, Vector3.down, out hitInfo, 50f, 1 << 10); //figure out where the ground is
+		if (hitInfo.collider == null) {
+			ropeLength = 6f; //default rope length
+		} else {
+			ropeLength = transform.position.y - hitInfo.point.y - 1f; //leave the rope slightly above the ground
+		}
+
 		lrend.enabled = true;
 
 		float p = 0f;
 		while(p <= 1f) {
 			p += Time.deltaTime / pullTime;
-			seat.transform.position = Vector3.Lerp (transform.position, endPos, p);
+			seat.transform.position = Vector3.Lerp (transform.position, transform.position + (Vector3.down * ropeLength), p);
 			lrend.SetPosition (1, seat.transform.localPosition);
 			yield return null;
 		}
 
-		seat.transform.position = endPos;
+		seat.transform.position = transform.position + (Vector3.down * ropeLength);
 		lrend.SetPosition (1, seat.transform.localPosition);
+		col.size = new Vector3 (lrend.startWidth, ropeLength, lrend.startWidth);
+		col.center = new Vector3 (0f, -ropeLength / 2, 0f);
 		col.enabled = true;
 	}
 
@@ -58,19 +68,18 @@ public class RopeMounter : MonoBehaviour {
 		rideable.controllable = false;
 		rideable.dismountable = false;
 
-		Vector3 startPos = seat.transform.position;
-		Vector3 endPos = transform.position;
+		Vector3 relativeStartPos = seat.transform.localPosition;
 		col.enabled = false;
 
 		float p = 0f;
 		while(p <= 1f) {
 			p += Time.deltaTime / pullTime;
-			seat.transform.position = Vector3.Lerp (startPos, endPos, p);
+			seat.transform.position = Vector3.Lerp (transform.position + relativeStartPos, transform.position, p);
 			lrend.SetPosition (1, seat.transform.localPosition);
 			yield return null;
 		}
 
-		seat.transform.position = endPos;
+		seat.transform.position = transform.position;
 		lrend.enabled = false;
 		rideable.controllable = wasControllable;
 		rideable.dismountable = wasDismountable;
