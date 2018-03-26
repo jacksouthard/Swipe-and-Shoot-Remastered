@@ -17598,8 +17598,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hash: 0
-  dismountable: 1
-  controllable: 1
+  dismountable: 0
+  controllable: 0
   isEnemyMountable: 0
   seats:
   - {fileID: 138964575}
