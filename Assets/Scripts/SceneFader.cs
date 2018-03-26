@@ -10,9 +10,12 @@ public class SceneFader : MonoBehaviour {
 	static SceneFader instance;
 	public Image fader { get; private set; }
 
+	Color fullColor;
+	Color zeroColor;
+
 	const float fadeSpeed = 10;
 
-	public static void FadeToScene(int buildIndex, Color color) {
+	static void SetUpInstance() {
 		if (instance == null) {
 			GameObject prefab = Resources.Load("SceneFader") as GameObject;
 			GameObject sceneFaderObj = (GameObject)Instantiate (prefab);
@@ -20,18 +23,62 @@ public class SceneFader : MonoBehaviour {
 			instance.Init ();
 			DontDestroyOnLoad (instance);
 		}
+	}
 
-		instance.StartCoroutine (instance.Fade(buildIndex, color));
+	public static void FadeToScene(int buildIndex, Color color) {
+		SetUpInstance ();
+
+		instance.SetColor (color);
+		instance.StartCoroutine (instance.SwitchScenes(buildIndex));
+	}
+
+	public static void FadeToCamera(Camera camera, Color color) {
+		SetUpInstance ();
+
+		instance.SetColor (color);
+		instance.StartCoroutine (instance.SwitchCameras(camera));
+	}
+
+	public static void FadeToColor(Color color) {
+		SetUpInstance ();
+
+		instance.SetColor (color);
+		instance.StartCoroutine (instance.FadeInAndOut());
 	}
 
 	public void Init() {
 		fader = gameObject.GetComponentInChildren<Image> ();
 	}
 
-	public IEnumerator Fade(int buildIndex, Color color) {
-		Color fullColor = new Color(color.r, color.g, color.b, 1f);
-		Color zeroColor = new Color(color.r, color.g, color.b, 0f);
+	public void SetColor(Color color) {
+		fullColor = new Color(color.r, color.g, color.b, 1f);
+		zeroColor = new Color(color.r, color.g, color.b, 0f);
+	}
 
+	public IEnumerator SwitchScenes(int buildIndex) {
+		yield return StartCoroutine (FadeIn());
+
+		AsyncOperation loadingLevel = SceneManager.LoadSceneAsync (buildIndex);
+		yield return new WaitUntil (() => loadingLevel.isDone);
+
+		yield return StartCoroutine (FadeOut());
+	}
+
+	public IEnumerator SwitchCameras(Camera camera) {
+		yield return StartCoroutine (FadeIn());
+
+		GameObject.FindObjectOfType<Camera> ().gameObject.SetActive (false);
+		camera.gameObject.SetActive (true);
+
+		yield return StartCoroutine (FadeOut());
+	}
+
+	public IEnumerator FadeInAndOut() {
+		yield return StartCoroutine (FadeIn());
+		yield return StartCoroutine (FadeOut());
+	}
+		
+	IEnumerator FadeIn() {
 		fader.raycastTarget = true;
 		fader.color = zeroColor;
 		while(fader.color.a < 0.95f) {
@@ -39,11 +86,9 @@ public class SceneFader : MonoBehaviour {
 			yield return new WaitForSecondsRealtime (Time.fixedUnscaledDeltaTime);
 		}
 		fader.color = fullColor;
+	}
 
-		AsyncOperation loadingLevel = SceneManager.LoadSceneAsync (buildIndex);
-
-		yield return new WaitUntil (() => loadingLevel.isDone);
-
+	IEnumerator FadeOut() {
 		while(fader.color.a > 0.05f) {
 			fader.color = Color.Lerp (fader.color, zeroColor, Time.fixedUnscaledDeltaTime * fadeSpeed);
 			yield return new WaitForSecondsRealtime (Time.fixedUnscaledDeltaTime);
