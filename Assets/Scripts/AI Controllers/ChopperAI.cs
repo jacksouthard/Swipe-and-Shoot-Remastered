@@ -65,6 +65,7 @@ public class ChopperAI : MonoBehaviour {
 
 	void CompleteExtraction () {
 		awaitingPlayer = false;
+		heli.aiSpeedMultiplier = 1f;
 		SwitchToNextObjective ();
 	}
 
@@ -109,12 +110,14 @@ public class ChopperAI : MonoBehaviour {
 			heli.targetDirection = CalculateDirectionToTarget ();
 
 			// calculate speed multiplier for exraction missions
-			if (quedTargets [0].type == TargetData.TargetType.extract) {
-				if (dstFromTarget > distToSlowDown) {
-					dstFromTarget = distToSlowDown;
+			if (quedTargets.Count != 0) {
+				if (quedTargets [0].type == TargetData.TargetType.extract) {
+					if (dstFromTarget > distToSlowDown) {
+						dstFromTarget = distToSlowDown;
+					}
+					float newSpeed = dstFromTarget / distToSlowDown;
+					heli.aiSpeedMultiplier = newSpeed;
 				}
-				float newSpeed = dstFromTarget / distToSlowDown;
-				heli.aiSpeedMultiplier = newSpeed;
 			}
 		} else {
 			heli.targetDirection = Vector2.zero;
@@ -122,7 +125,7 @@ public class ChopperAI : MonoBehaviour {
 	}
 
 	void UpdateTarget() {
-		if ((pos2d - new Vector2 (player.position.x, player.position.z)).magnitude > leashLength) {
+		if (heli.driver && (pos2d - new Vector2 (player.position.x, player.position.z)).magnitude > leashLength) {
 			target = player;
 		} else {
 			target = (shooting.target != null) ? shooting.target : player;
