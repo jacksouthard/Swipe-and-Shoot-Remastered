@@ -335,6 +335,7 @@ MonoBehaviour:
   activeRange: 50
   pathUpdateRate: 0.5
   backsUp: 1
+  inVehicle: 0
   fallWaitTime: 1
 --- !u!114 &114039047697400354
 MonoBehaviour:
@@ -358,6 +359,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 1
   decayTimer: 2
+  endsGame: 1
   canFallOver: 1
   canBeKilledBySwiping: 0
   durability: 0

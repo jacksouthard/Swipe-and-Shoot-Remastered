@@ -28,6 +28,10 @@ public class Objective {
 	public Animator animation;
 
 	[Space(15)]
+	public Health crucialHealth; //health to track at the top of the screen
+	public Sprite icon; //icon for the health thing to track
+
+	[Space(15)]
 	public bool showsWorldIndicator;
 	public string completionBanner;
 	public string helpText;
@@ -69,6 +73,9 @@ public class LevelProgressManager : MonoBehaviour {
 
 	[Header("UI")]
 	public GameObject winScreen;
+	public Animator barAnim;
+	public Transform topBar;
+	public Image barIcon;
 
 	[Header("Debug")]
 	public int startingObjective = 0;
@@ -238,6 +245,16 @@ public class LevelProgressManager : MonoBehaviour {
 		if (curObjectiveId < objectives.Count && !string.IsNullOrEmpty (curObjective.helpText)) {
 			NotificationManager.instance.ShowHelp (curObjective.helpText);
 		}
+			
+		barAnim.SetBool ("Open", curObjective.crucialHealth != null);
+		if (curObjective.crucialHealth != null) {
+			if (curObjective.icon != null) {
+				barIcon.gameObject.SetActive (true);
+				barIcon.sprite = curObjective.icon;
+			} else {
+				barIcon.gameObject.SetActive (false);
+			}
+		}
 	}
 
 	void UpdatePlayer() {
@@ -320,6 +337,12 @@ public class LevelProgressManager : MonoBehaviour {
 				timer = 0f;
 				CompleteObjective ();
 			}
+		}
+	}
+
+	void LateUpdate() {
+		if (curObjective.crucialHealth != null) {
+			topBar.localScale = new Vector3 (curObjective.crucialHealth.healthPercentage, 1f, 1f);
 		}
 	}
 

@@ -39,6 +39,7 @@ public class Health : MonoBehaviour {
 	[Header("Death")]
 	public float dyingTimer;
 	public float decayTimer;
+	public bool endsGame;
 	public System.Action onDeath;
 
 	[Header("Swiping")]
@@ -63,6 +64,8 @@ public class Health : MonoBehaviour {
 	[Header("Debug")]
 	public float waitTimer;
 	public float health;
+
+	public float healthPercentage { get { return health / maxHealth; } }
 
 	bool isPlayer;
 	bool shouldUpdateRenderers;
@@ -223,6 +226,11 @@ public class Health : MonoBehaviour {
 
 		if (onDeath != null) {
 			onDeath.Invoke ();
+		}
+
+		if (endsGame) {
+			string objectName = (isPlayer) ? "you" : gameObject.name;
+			GameManager.instance.GameOver (objectName + " died");
 		}
 
 		if (isPlayer) {

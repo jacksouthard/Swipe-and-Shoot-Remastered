@@ -677,6 +677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canRotateParent: 0
+  targetsToIgnore: []
   targetTag: Enemy
   verticalClampAngle: 60
   horizontalClampAngle: 60
@@ -807,6 +808,7 @@ MonoBehaviour:
   hasKnockback: 1
   dyingTimer: 0
   decayTimer: 0
+  endsGame: 1
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0

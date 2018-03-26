@@ -47,7 +47,5 @@ public class EscortController : AIController {
 		GameManager.allEnemyTargets.Remove (transform);
 
 		base.Die ();
-
-		GameManager.instance.GameOver (gameObject.name + " died");
 	}
 }
