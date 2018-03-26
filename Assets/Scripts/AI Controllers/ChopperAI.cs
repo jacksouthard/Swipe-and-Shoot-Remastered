@@ -6,6 +6,7 @@ public class ChopperAI : MonoBehaviour {
 	public float hoverDistance;
 	public float targetUpdateRate;
 	public float leashLength;
+	public float distToSlowDown;
 
 	Transform player;
 	public Transform target;
@@ -14,7 +15,9 @@ public class ChopperAI : MonoBehaviour {
 	Vector2 pos2d;
 	ShootingController shooting;
 	bool active;
-	bool objectiveTarget;
+	bool objectiveTarget = false;
+	public bool awaitingPlayer = false;
+	public List<TargetData> quedTargets = new List<TargetData> ();
 	float nextTargetUpdateTime;
 
 	void Start () {
@@ -22,14 +25,47 @@ public class ChopperAI : MonoBehaviour {
 		player = GameObject.FindObjectOfType<PlayerController> ().transform;
 		shooting = GetComponentInChildren<ShootingController> ();
 
-		if (target != null && !LevelProgressManager.hasMadeProgress) {
+		if (quedTargets.Count != 0) {
 			objectiveTarget = true;
+			target = quedTargets [0].target;
 			targetPos = new Vector2 (target.position.x, target.position.z);
-		} else {
-			objectiveTarget = false;
 		}
 
 		AIStart ();
+	}
+
+	public void AddTarget (Transform target, TargetData.TargetType type) {
+		objectiveTarget = true;
+		quedTargets.Add (new TargetData (target, type));
+	}
+
+	void CompleteFlyingToTarget () {
+		if (quedTargets [0].type == TargetData.TargetType.deploy) {
+			heli.Dismount ();
+		} else if (quedTargets [0].type == TargetData.TargetType.extract) {
+			print ("Reached Extraction Zone");
+			heli.LowerRope ();
+			awaitingPlayer = true;
+			return;
+		}
+
+		SwitchToNextObjective ();
+	}
+
+	void SwitchToNextObjective () {
+		quedTargets.RemoveAt (0);
+
+		if (quedTargets.Count == 0) {
+			objectiveTarget = false;
+		} else {
+			target = quedTargets [0].target;
+			targetPos = new Vector2 (target.position.x, target.position.z);
+		}
+	}
+
+	void CompleteExtraction () {
+		awaitingPlayer = false;
+		SwitchToNextObjective ();
 	}
 
 	public void AIStart () {
@@ -58,15 +94,31 @@ public class ChopperAI : MonoBehaviour {
 		}
 
 		pos2d = new Vector2 (transform.position.x, transform.position.z);
-		if ((pos2d - targetPos).magnitude < (hoverDistance / 4f)) {
-			if (objectiveTarget) {
-				heli.Dismount ();
-				objectiveTarget = false;
-			}
-			SetNextTargetPos ();
-		}
 
-		heli.targetDirection = CalculateDirectionToTarget ();
+		if (!awaitingPlayer) {		
+			float dstFromTarget = (targetPos - pos2d).magnitude;
+				
+			// calculate target direction	
+			if (dstFromTarget < 2f) {
+				if (objectiveTarget) {
+					CompleteFlyingToTarget ();
+				}
+				SetNextTargetPos ();
+			}
+
+			heli.targetDirection = CalculateDirectionToTarget ();
+
+			// calculate speed multiplier for exraction missions
+			if (quedTargets [0].type == TargetData.TargetType.extract) {
+				if (dstFromTarget > distToSlowDown) {
+					dstFromTarget = distToSlowDown;
+				}
+				float newSpeed = dstFromTarget / distToSlowDown;
+				heli.aiSpeedMultiplier = newSpeed;
+			}
+		} else {
+			heli.targetDirection = Vector2.zero;
+		}
 	}
 
 	void UpdateTarget() {
@@ -89,5 +141,27 @@ public class ChopperAI : MonoBehaviour {
 		Vector2 distanceVector = Random.insideUnitCircle.normalized * hoverDistance;
 		targetPos = distanceVector + anchorPos2d;
 //		print ("New Pos: " + targetPos);
+	}
+
+	public void PlayerMounted () {
+		if (awaitingPlayer) {
+			CompleteExtraction ();
+		}
+	}
+}
+
+[System.Serializable]
+public class TargetData {
+	public Transform target;
+	public enum TargetType {
+		fly,
+		deploy,
+		extract
+	}
+	public TargetType type;
+
+	public TargetData (Transform _target, TargetData.TargetType _type) {
+		target = _target;
+		type = _type;
 	}
 }

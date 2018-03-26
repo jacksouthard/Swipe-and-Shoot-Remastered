@@ -36,6 +36,7 @@ public class Helicopter : Rideable {
 	public bool groundInZone = false;
 	public bool hasAI = false;
 	public ChopperAI ai;
+	public float aiSpeedMultiplier = 1f;
 	public bool flying = false;
 	public Vector2 targetDirection = Vector2.zero;
 	public int targetSpeedPercent = 0;
@@ -74,6 +75,7 @@ public class Helicopter : Rideable {
 	public override void Mount (GameObject _mounter) {
 		base.Mount (_mounter);
 		if (hasAI) {
+			ai.PlayerMounted ();
 			if (!AIOverridePlayer) {
 				ai.AIStop ();
 			}
@@ -233,7 +235,7 @@ public class Helicopter : Rideable {
 	}
 
 	void ApplyFlyingForce () {
-		Vector3 force = Vector3.forward * maxSpeed * curFlySpeed * curRotorSpeed;
+		Vector3 force = Vector3.forward * maxSpeed * curFlySpeed * curRotorSpeed * aiSpeedMultiplier;
 		rb.AddRelativeForce (force);
 	}
 }

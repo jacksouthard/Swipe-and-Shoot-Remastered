@@ -4532,6 +4532,8 @@ GameObject:
   m_Component:
   - component: {fileID: 368110200}
   - component: {fileID: 368110201}
+  - component: {fileID: 368110202}
+  - component: {fileID: 368110203}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -4589,7 +4591,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: -6, z: 0}
+  - {x: 0, y: -10, z: 0}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 0.2
@@ -4641,6 +4643,30 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 0
   m_Loop: 0
+--- !u!114 &368110202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 368110199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14da611c1c15f455093555a74d9e6db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullTime: 1.5
+--- !u!65 &368110203
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 368110199}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: -10, z: 0.2}
+  m_Center: {x: 0, y: -5, z: 0}
 --- !u!1001 &376811861
 Prefab:
   m_ObjectHideFlags: 0
@@ -9880,6 +9906,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4978778302677568, guid: 5d9a4be112f534cb2accd1d10dd4dcf7,
     type: 2}
   m_PrefabInternal: {fileID: 1177259121}
+--- !u!1 &763575168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 763575169}
+  m_Layer: 0
+  m_Name: ChopperExtractionZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &763575169
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763575168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -49.31, y: 6, z: 10.19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &767000646 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4610083496979866, guid: 04b4938f8660c4f799cd8b83649da604,
@@ -10428,7 +10482,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 794176855}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.53, y: 6, z: -2.355662}
+  m_LocalPosition: {x: -53.3, y: 6, z: -2.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -17387,9 +17441,9 @@ GameObject:
   - component: {fileID: 1426489118}
   - component: {fileID: 1418013018}
   - component: {fileID: 1418013017}
+  - component: {fileID: 1418013014}
   - component: {fileID: 1418013016}
   - component: {fileID: 1418013015}
-  - component: {fileID: 1418013014}
   m_Layer: 0
   m_Name: Chopper
   m_TagString: Vehicle
@@ -17408,10 +17462,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea133bd4388a4752bc44ace5e9010c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverDistance: 10
+  hoverDistance: 0
   targetUpdateRate: 2
   leashLength: 40
-  target: {fileID: 794176856}
+  distToSlowDown: 10
+  target: {fileID: 0}
+  awaitingPlayer: 0
+  quedTargets:
+  - target: {fileID: 794176856}
+    type: 1
+  - target: {fileID: 763575169}
+    type: 2
 --- !u!82 &1418013015
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17549,8 +17610,8 @@ MonoBehaviour:
   spawnDelay: 1
   ridersRequiredForObjective: 1
   rb: {fileID: 0}
-  turnSpeed: 30000
-  maxSpeed: 80000
+  turnSpeed: 40000
+  maxSpeed: 60000
   acceleration: 0.015
   groundCheckPointsContainer: {fileID: 812845670}
   hoverHeight: 7
@@ -17567,6 +17628,7 @@ MonoBehaviour:
   groundInZone: 0
   hasAI: 0
   ai: {fileID: 0}
+  aiSpeedMultiplier: 1
   flying: 0
   targetDirection: {x: 0, y: 1}
   targetSpeedPercent: 0

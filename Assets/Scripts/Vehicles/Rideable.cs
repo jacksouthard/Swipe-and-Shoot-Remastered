@@ -87,7 +87,7 @@ public class Rideable : MonoBehaviour {
 
 	public bool canBeMounted { get { return (Time.time >= nextEnterTime) && Vector3.Dot(Vector3.up, transform.up) > 0 && remainingSeats > 0; } }
 
-	protected void LowerRope() {
+	public void LowerRope() {
 		if (ropeMounter != null) {
 			StartCoroutine (ropeMounter.Lower());
 			hasRopeOut = true;
