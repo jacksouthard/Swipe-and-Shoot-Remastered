@@ -13,6 +13,7 @@ public class Helicopter : Rideable {
 	[Header("Hovering")]
 	public Transform groundCheckPointsContainer;
 	public float hoverHeight;
+	public float minHoverHeight;
 	public float targetHeight;
 	public float curHeight;
 	public float upDownSpeed;
@@ -210,6 +211,9 @@ public class Helicopter : Rideable {
 		}
 			
 		targetHeight = maxHeight + hoverHeight;
+		if (targetHeight < minHoverHeight) {
+			targetHeight = minHoverHeight;
+		}
 	}
 
 	void RotateRotors () {

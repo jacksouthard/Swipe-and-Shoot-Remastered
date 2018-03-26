@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChopperAI : MonoBehaviour {
 	public float hoverDistance;
 	public float targetUpdateRate;
+	public float leashLength;
 
 	Transform player;
 	public Transform target;
@@ -69,7 +70,11 @@ public class ChopperAI : MonoBehaviour {
 	}
 
 	void UpdateTarget() {
-		target = (shooting.target != null) ? shooting.target : player;
+		if ((pos2d - new Vector2 (player.position.x, player.position.z)).magnitude > leashLength) {
+			target = player;
+		} else {
+			target = (shooting.target != null) ? shooting.target : player;
+		}
 		SetNextTargetPos ();
 	}
 
