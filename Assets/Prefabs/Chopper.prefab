@@ -574,8 +574,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1845829478854394}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 88.07, y: 1, z: 31.676273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4510026982083528}
@@ -1079,6 +1079,7 @@ MonoBehaviour:
   exitingVehicle: {fileID: 1729023859902792, guid: a318ea23bda0543d794ec856bf4cc5c0,
     type: 2}
   spawnDelay: 1
+  saves: 1
   ridersRequiredForObjective: 1
   rb: {fileID: 0}
   turnSpeed: 30000
@@ -1086,6 +1087,7 @@ MonoBehaviour:
   acceleration: 0.015
   groundCheckPointsContainer: {fileID: 4992567798628238}
   hoverHeight: 5
+  minHoverHeight: 0
   targetHeight: 0
   curHeight: 0
   upDownSpeed: 0.05
@@ -1098,6 +1100,7 @@ MonoBehaviour:
   groundInZone: 0
   hasAI: 0
   ai: {fileID: 0}
+  aiSpeedMultiplier: 1
   flying: 0
   targetDirection: {x: 0, y: 0}
   targetSpeedPercent: 0

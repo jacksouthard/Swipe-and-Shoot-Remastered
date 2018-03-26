@@ -27,7 +27,7 @@ public class Rideable : MonoBehaviour {
 	protected AudioSource engine;
 
 	public virtual bool shouldBeShotAt { get { return false; } }
-	public virtual bool saves { get { return false; } }
+	public bool saves;
 
 	public int ridersRequiredForObjective = 1; //if this is an objective, how many riders do you need for it to count
 	bool isObjective = false;

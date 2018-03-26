@@ -1379,6 +1379,8 @@ MonoBehaviour:
   - {fileID: 4954625154985572}
   exitingVehicle: {fileID: 0}
   spawnDelay: 0
+  saves: 1
+  ridersRequiredForObjective: 1
   rb: {fileID: 0}
   turnSpeed: 12000
   rotationSpeedLimiter: 1

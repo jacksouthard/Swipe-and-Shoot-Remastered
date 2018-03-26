@@ -74,7 +74,11 @@ public class CameraController : MonoBehaviour {
 	}
 
 	public static bool PositionIsInView(Vector3 position) {
+		return PositionIsInView (position, 0f);
+	}
+
+	public static bool PositionIsInView(Vector3 position, float margin) {
 		Vector3 viewportPoint = instance.cam.WorldToViewportPoint (position);
-		return viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 && viewportPoint.z > 0;
+		return viewportPoint.x > margin && viewportPoint.x < (1f - margin) && viewportPoint.y > margin && viewportPoint.y < (1f - margin) && viewportPoint.z > 0;
 	}
 }

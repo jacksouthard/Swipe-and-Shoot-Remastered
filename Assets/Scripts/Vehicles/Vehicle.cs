@@ -31,7 +31,6 @@ public class Vehicle : Rideable {
 	public float curWheelSpeed = 0f;
 
 	public override bool shouldBeShotAt { get { return true; } }
-	public override bool saves { get { return true; } }
 
 	Transform vectorArrow;
 	NavMeshObstacle obstacle;
