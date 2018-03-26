@@ -149,6 +149,12 @@ public class LevelProgressManager : MonoBehaviour {
 				}
 			}
 
+			if (objectives [i].type == Objective.Type.Camera) {
+				if (objectives [i].objectiveObj.GetComponent<Camera> () != null) {
+					objectives [i].objectiveObj.SetActive (false);
+				}
+			}
+
 			if (objectives [i].hasCameraEvent) {
 				Objective newCameraObjective = new Objective ();
 				newCameraObjective.type = Objective.Type.Camera;
@@ -199,7 +205,7 @@ public class LevelProgressManager : MonoBehaviour {
 				curObjective.objectiveObj.GetComponent<Rideable> ().SetupObjective ();
 				break;
 			case Objective.Type.Camera:
-				StartCoroutine (MoveCamera ());
+				StartCoroutine (CameraEvent ());
 				break;
 			case Objective.Type.Defend:
 				timer = curObjective.time;
@@ -280,10 +286,16 @@ public class LevelProgressManager : MonoBehaviour {
 		CompleteObjective ();
 	}
 
-	IEnumerator MoveCamera() {
+	IEnumerator CameraEvent() {
 		TimeManager.SetPaused (true);
+		Camera newCamera = curObjective.objectiveObj.GetComponent<Camera> ();
+		bool movesCamera = newCamera == null;
 
-		yield return StartCoroutine (CameraController.instance.ShowTarget(curObjective.objectiveObj.transform));
+		if (movesCamera) {
+			yield return StartCoroutine (CameraController.instance.ShowTarget (curObjective.objectiveObj.transform));
+		} else {
+			yield return StartCoroutine (SceneFader.FadeToCameraAndWait(newCamera, Color.black));
+		}
 
 		if (curObjective.animation != null) {
 			curObjective.animation.SetTrigger ("Play");
@@ -292,7 +304,11 @@ public class LevelProgressManager : MonoBehaviour {
 		yield return new WaitForSecondsRealtime (curObjective.time);
 
 		TimeManager.SetPaused (false);
-		CameraController.instance.Resume();
+		if (movesCamera) {
+			CameraController.instance.Resume();
+		} else {
+			yield return StartCoroutine (SceneFader.FadeToCameraAndWait(CameraController.instance.GetComponent<Camera>(), Color.black));
+		}
 
 		CompleteObjective ();
 	}

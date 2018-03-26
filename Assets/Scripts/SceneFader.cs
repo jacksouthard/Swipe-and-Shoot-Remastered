@@ -39,6 +39,14 @@ public class SceneFader : MonoBehaviour {
 		instance.StartCoroutine (instance.SwitchCameras(camera));
 	}
 
+	public static IEnumerator FadeToCameraAndWait(Camera camera, Color color) {
+		SetUpInstance ();
+
+		instance.SetColor (color);
+
+		yield return instance.StartCoroutine (instance.SwitchCameras(camera));
+	}
+
 	public static void FadeToColor(Color color) {
 		SetUpInstance ();
 

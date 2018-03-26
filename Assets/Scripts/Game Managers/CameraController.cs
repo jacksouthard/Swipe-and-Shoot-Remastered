@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour {
 	[Header("Speed")]
 	public float speed;
 
+	public Camera cam { get; private set; }
 	Transform player;
 	Vector3 offset;
 	bool isActive = true;
@@ -23,6 +24,7 @@ public class CameraController : MonoBehaviour {
 
 		player = GameObject.FindObjectOfType<PlayerController> ().transform;
 		offset = transform.position;
+		cam = GetComponent<Camera> ();
 	}
 
 	public void ResetPosition() {
@@ -72,7 +74,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	public static bool PositionIsInView(Vector3 position) {
-		Vector3 viewportPoint = Camera.main.WorldToViewportPoint (position);
+		Vector3 viewportPoint = instance.cam.WorldToViewportPoint (position);
 		return viewportPoint.x > 0 && viewportPoint.x < 1 && viewportPoint.y > 0 && viewportPoint.y < 1 && viewportPoint.z > 0;
 	}
 }
