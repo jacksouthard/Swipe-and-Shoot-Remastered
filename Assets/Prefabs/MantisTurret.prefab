@@ -180,8 +180,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1603228906696876}
-  m_LocalRotation: {x: 0, y: 0.2588191, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: -30.97, y: 7.68, z: -53.46}
+  m_LocalRotation: {x: -0, y: 0.2588191, z: -0, w: 0.9659258}
+  m_LocalPosition: {x: -30.97, y: 1.6799998, z: -53.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4675075051490972}
@@ -452,7 +452,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!65 &65353859141919570
 BoxCollider:
@@ -485,6 +485,7 @@ MonoBehaviour:
   - {fileID: 4972906196936282}
   exitingVehicle: {fileID: 0}
   spawnDelay: 0
+  saves: 0
   ridersRequiredForObjective: 1
   rb: {fileID: 0}
   lockedTarget: {fileID: 0}
@@ -500,13 +501,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd24194605b24a529a3f976ebea2675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.3
-  damage: 3
-  range: 50
+  fireRate: 0.2
+  damage: 2
+  range: 150
   speedMultiplier: 1
   audioClip: {fileID: 8300000, guid: 9bb0383c21e404a0385f61bf2dcbb4d2, type: 3}
   audioPitch: 0.7
-  accuracy: 10
+  accuracy: 3
   bulletRayPrefab: {fileID: 1303374916533454, guid: 387e19391ca184c4789e4926758050be,
     type: 2}
 --- !u!114 &114519548527508462
@@ -531,6 +532,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 0
   decayTimer: 2
+  endsGame: 0
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 20000
@@ -559,8 +561,8 @@ MonoBehaviour:
   horizontalClampAngle: 0
   shouldUpdateTarget: 0
   minRange: 5
-  parentSpeed: 40
-  speed: 40
+  parentSpeed: 400
+  speed: 400
 --- !u!208 &208012673567834782
 NavMeshObstacle:
   m_ObjectHideFlags: 1
