@@ -74,7 +74,7 @@ public class Weapon : MonoBehaviour {
 	bool shouldFire {
 		get {
 			RaycastHit hitInfo;
-			Physics.SphereCast (bulletSpawns [0].position, 0.5f, bulletSpawns[0].forward, out hitInfo, range, ~((1 << 2) | (1 << 11))); //ignore IgnoreRaycast and Projectile layers
+			Physics.Raycast (bulletSpawns [0].position, bulletSpawns[0].forward, out hitInfo, range, ~((1 << 2) | (1 << 11))); //ignore IgnoreRaycast and Projectile layers
 
 			if (hitInfo.collider == null || targetsToIgnore.Contains(hitInfo.collider.transform)) {
 				return false;
