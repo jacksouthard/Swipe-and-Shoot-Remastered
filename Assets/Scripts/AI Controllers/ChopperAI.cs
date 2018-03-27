@@ -124,7 +124,7 @@ public class ChopperAI : MonoBehaviour {
 	}
 
 	void UpdateTarget() {
-		if (heli.driver && (pos2d - new Vector2 (player.position.x, player.position.z)).magnitude > leashLength) {
+		if (!heli.driver && (pos2d - new Vector2 (player.position.x, player.position.z)).magnitude > leashLength) {
 			target = player;
 		} else {
 			target = (shooting.target != null) ? shooting.target : player;
