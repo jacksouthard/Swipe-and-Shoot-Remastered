@@ -17462,7 +17462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ea133bd4388a4752bc44ace5e9010c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverDistance: 0
+  hoverDistance: 20
   targetUpdateRate: 2
   leashLength: 40
   distToSlowDown: 20
@@ -17575,6 +17575,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 0
   decayTimer: 2
+  endsGame: 0
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
@@ -17606,6 +17607,7 @@ MonoBehaviour:
   exitingVehicle: {fileID: 1729023859902792, guid: a318ea23bda0543d794ec856bf4cc5c0,
     type: 2}
   spawnDelay: 1
+  saves: 0
   ridersRequiredForObjective: 1
   rb: {fileID: 0}
   turnSpeed: 40000

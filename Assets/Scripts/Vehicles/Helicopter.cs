@@ -87,17 +87,14 @@ public class Helicopter : Rideable {
 	}
 
 	public override void Dismount () {
-		if (dismountable) {
-			base.Dismount ();
-			vectorArrow.gameObject.SetActive (false);
+		base.Dismount ();
+		vectorArrow.gameObject.SetActive (false);
 
-			if (!hasAI) {
-				shooting.SetEnabled (false);
-				DisengageFlight ();
-			} else {
-				ai.AIStart ();
-			}
-
+		if (!hasAI) {
+			shooting.SetEnabled (false);
+			DisengageFlight ();
+		} else {
+			ai.AIStart ();
 		}
 	}
 

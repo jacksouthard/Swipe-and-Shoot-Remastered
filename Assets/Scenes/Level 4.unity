@@ -8312,6 +8312,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  endsGame: 0
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
@@ -11235,6 +11236,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  endsGame: 0
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
@@ -15419,6 +15421,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 0
   decayTimer: 2
+  endsGame: 0
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
@@ -15472,14 +15475,15 @@ MonoBehaviour:
   exitingVehicle: {fileID: 1729023859902792, guid: a318ea23bda0543d794ec856bf4cc5c0,
     type: 2}
   spawnDelay: 1
+  saves: 0
   ridersRequiredForObjective: 1
   rb: {fileID: 0}
   turnSpeed: 40000
   maxSpeed: 60000
   acceleration: 0.015
   groundCheckPointsContainer: {fileID: 2041741331}
-  hoverHeight: 7
-  minHoverHeight: 13
+  hoverHeight: 5
+  minHoverHeight: 5
   targetHeight: 0
   curHeight: 0
   upDownSpeed: 0.05
@@ -17982,6 +17986,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 0
   decayTimer: 2
+  endsGame: 0
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
@@ -23640,6 +23645,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  endsGame: 0
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
@@ -24139,6 +24145,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  endsGame: 0
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
@@ -27153,6 +27160,7 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 0.2
   decayTimer: 2
+  endsGame: 0
   canFallOver: 0
   canBeKilledBySwiping: 0
   durability: 0
@@ -30873,7 +30881,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[3].startingSplashes.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}

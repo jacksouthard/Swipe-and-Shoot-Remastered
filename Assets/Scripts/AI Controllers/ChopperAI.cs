@@ -100,7 +100,7 @@ public class ChopperAI : MonoBehaviour {
 			float dstFromTarget = (targetPos - pos2d).magnitude;
 				
 			// calculate target direction	
-			if (dstFromTarget < 2f) {
+			if (dstFromTarget < 2.5f) {
 				if (objectiveTarget) {
 					CompleteFlyingToTarget ();
 				}
