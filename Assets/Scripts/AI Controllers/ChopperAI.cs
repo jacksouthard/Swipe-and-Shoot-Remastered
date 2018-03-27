@@ -43,7 +43,6 @@ public class ChopperAI : MonoBehaviour {
 		if (quedTargets [0].type == TargetData.TargetType.deploy) {
 			heli.Dismount ();
 		} else if (quedTargets [0].type == TargetData.TargetType.extract) {
-			print ("Reached Extraction Zone");
 			heli.LowerRope ();
 			awaitingPlayer = true;
 			return;
