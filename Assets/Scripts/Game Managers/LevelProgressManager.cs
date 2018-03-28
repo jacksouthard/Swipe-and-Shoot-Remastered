@@ -22,6 +22,7 @@ public class Objective {
 
 	[Space(15)]
 	public GameObject objectiveObj; //object to set up
+	public GameObject overrideTarget; //optional object that indicators will point to
 	public GameObject objectsToDisable; //optional objects to disable after completing this objective
 	public GameObject objectsToEnable; //optional objects to enable after completing this objective
 	public float time; //time for defend or camera objectives
@@ -269,7 +270,8 @@ public class LevelProgressManager : MonoBehaviour {
 		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && curObjective.type != Objective.Type.Kills;
 
 		if (hasIndicators) {
-			objectiveEdgeView.SetTarget (curObjective.objectiveObj, curObjective.showsWorldIndicator); //set target
+			GameObject targetObj = (curObjective.overrideTarget == null) ? curObjective.objectiveObj : curObjective.overrideTarget;
+			objectiveEdgeView.SetTarget (targetObj, curObjective.showsWorldIndicator); //set target
 		}
 
 		if (curObjective.type == Objective.Type.Kills) {
