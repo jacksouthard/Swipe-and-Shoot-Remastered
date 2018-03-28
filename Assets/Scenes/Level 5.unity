@@ -28223,8 +28223,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2031033414}
   - component: {fileID: 2031033413}
-  - component: {fileID: 2031033416}
   - component: {fileID: 2031033415}
+  - component: {fileID: 2031033416}
   m_Layer: 0
   m_Name: LaunchStation
   m_TagString: Untagged
@@ -28353,7 +28353,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2031033412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4abbc791c6c2e462ca7f926e899862e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 53bd2d5a07fb74308b4b7e7f031563cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2032410665 stripped
