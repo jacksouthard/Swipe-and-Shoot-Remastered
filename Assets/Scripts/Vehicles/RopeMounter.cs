@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RopeMounter : MonoBehaviour {
-	public float pullTime;
+	public float speed;
 
 	LineRenderer lrend;
 	Transform seat;
@@ -27,24 +27,22 @@ public class RopeMounter : MonoBehaviour {
 	}
 
 	public IEnumerator Lower() {
-		RaycastHit hitInfo;
-		float ropeLength;
-		Physics.Raycast (transform.position, Vector3.down, out hitInfo, 50f, 1 << 10); //figure out where the ground is
-		if (hitInfo.collider == null) {
-			ropeLength = 6f; //default rope length
-		} else {
-			ropeLength = transform.position.y - hitInfo.point.y - 1f; //leave the rope slightly above the ground
-		}
-
+		Rigidbody parentRb = GetComponentInParent<Rigidbody> ();
 		lrend.enabled = true;
 
-		float p = 0f;
-		while(p <= 1f) {
-			p += Time.deltaTime / pullTime;
-			seat.transform.position = Vector3.Lerp (transform.position, transform.position + (Vector3.down * ropeLength), p);
+		float groundHeight = 0f;
+		do {
+			RaycastHit hitInfo;
+			Physics.Raycast (transform.position, Vector3.down, out hitInfo, 50f, 1 << 10); //figure out where the ground is
+
+			groundHeight = (hitInfo.collider != null) ? hitInfo.point.y + 1f : 0f; //leave the rope slightly above the ground
+
+			seat.position += Vector3.down * speed * Time.deltaTime;
 			lrend.SetPosition (1, seat.transform.localPosition);
 			yield return null;
-		}
+		} while(parentRb.velocity.magnitude > 0.5f || seat.transform.position.y > groundHeight);
+
+		float ropeLength = transform.position.y - seat.position.y;
 
 		seat.transform.position = transform.position + (Vector3.down * ropeLength);
 		lrend.SetPosition (1, seat.transform.localPosition);
@@ -71,10 +69,8 @@ public class RopeMounter : MonoBehaviour {
 		Vector3 relativeStartPos = seat.transform.localPosition;
 		col.enabled = false;
 
-		float p = 0f;
-		while(p <= 1f) {
-			p += Time.deltaTime / pullTime;
-			seat.transform.position = Vector3.Lerp (transform.position + relativeStartPos, transform.position, p);
+		while(seat.position.y < transform.position.y) {
+			seat.position += Vector3.up * speed * Time.deltaTime;
 			lrend.SetPosition (1, seat.transform.localPosition);
 			yield return null;
 		}
