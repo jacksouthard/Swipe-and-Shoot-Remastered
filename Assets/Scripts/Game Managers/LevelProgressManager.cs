@@ -378,7 +378,7 @@ public class LevelProgressManager : MonoBehaviour {
 
 	void LateUpdate() {
 		if (curObjectiveId < objectives.Count && curObjective.crucialHealth != null) {
-			topBar.localScale = new Vector3 (curObjective.crucialHealth.healthPercentage, 1f, 1f);
+			topBar.localScale = new Vector3 (Mathf.Max(curObjective.crucialHealth.healthPercentage, 0f), 1f, 1f);
 		}
 	}
 
