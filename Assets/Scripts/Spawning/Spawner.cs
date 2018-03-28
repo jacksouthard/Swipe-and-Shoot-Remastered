@@ -83,7 +83,11 @@ public class Spawner : MonoBehaviour {
 
 		Vector3 spawnPoint = chosenZone.FindRandomSpawnPoint ();
 		if (spawnPoint != Vector3.up) { //terminating condition in FindRandomSpawnPoint
-			Instantiate (prefab, spawnPoint, Quaternion.identity, transform);
+			GameObject newObject = (GameObject) Instantiate (prefab, spawnPoint, Quaternion.identity, transform);
+			SpecialSpawn specialSpawn = newObject.GetComponent<SpecialSpawn> ();
+			if (specialSpawn != null) {
+				specialSpawn.Init ();
+			}
 			count++;
 		}
 	}
