@@ -27,6 +27,8 @@ public class Objective {
 	public GameObject objectsToEnable; //optional objects to enable after completing this objective
 	public float time; //time for defend or camera objectives
 	public Animator animation;
+	public Color fadeInColor = Color.black;
+	public Color fadeOutColor = Color.black;
 	public bool doesNotSave;
 
 	[Space(15)]
@@ -355,7 +357,7 @@ public class LevelProgressManager : MonoBehaviour {
 		if (movesCamera) {
 			yield return StartCoroutine (CameraController.instance.ShowTarget (curObjective.objectiveObj.transform));
 		} else {
-			yield return StartCoroutine (SceneFader.FadeToCameraAndWait(newCamera, Color.black));
+			yield return StartCoroutine (SceneFader.FadeToCameraAndWait(newCamera, curObjective.fadeInColor));
 		}
 
 		if (curObjective.animation != null) {
@@ -368,7 +370,7 @@ public class LevelProgressManager : MonoBehaviour {
 		if (movesCamera) {
 			CameraController.instance.Resume();
 		} else {
-			yield return StartCoroutine (SceneFader.FadeToCameraAndWait(CameraController.instance.GetComponent<Camera>(), Color.black));
+			yield return StartCoroutine (SceneFader.FadeToCameraAndWait(CameraController.instance.GetComponent<Camera>(), curObjective.fadeOutColor));
 		}
 
 		CompleteObjective ();
