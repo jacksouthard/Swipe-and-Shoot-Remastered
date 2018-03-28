@@ -39,6 +39,16 @@ public class ChopperAI : MonoBehaviour {
 		quedTargets.Add (new TargetData (target, type));
 	}
 
+	public void AddTargetThroughEvent (Transform target) {
+		TargetData.TargetType type = TargetData.TargetType.fly;
+		if (target.name.Contains ("Extract")) {
+			type = TargetData.TargetType.extract;
+		} else if (target.name.Contains ("Deploy")) {
+			type = TargetData.TargetType.deploy;
+		}
+		quedTargets.Add (new TargetData (target, type));
+	}
+		
 	void CompleteFlyingToTarget () {
 		if (quedTargets [0].type == TargetData.TargetType.deploy) {
 			heli.Dismount ();
