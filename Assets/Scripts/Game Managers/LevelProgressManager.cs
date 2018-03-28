@@ -26,6 +26,7 @@ public class Objective {
 	public GameObject objectsToEnable; //optional objects to enable after completing this objective
 	public float time; //time for defend or camera objectives
 	public Animator animation;
+	public bool doesNotSave;
 
 	[Space(15)]
 	public Health crucialHealth; //health to track at the top of the screen
@@ -59,7 +60,7 @@ public class SavedVehicle {
 
 public class LevelProgressManager : MonoBehaviour {
 	public static LevelProgressManager instance;
-	public static int curObjectiveId;
+	public static int savedObjectiveId;
 	public static string lastWeaponName = "None";
 	public static Dictionary<float, SavedAI> startingAIData = new Dictionary<float, SavedAI> ();
 	public static List<float> killedAIs = new List<float> ();
@@ -68,6 +69,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public static bool firstTime = true;
 	static float timeRemaining = 0f;
 	List<float> killedAIsSinceLastCheckpoint = new List<float>();
+	int curObjectiveId;
 	
 	[Header("Objective")]
 	public List<Objective> objectives = new List<Objective>();
@@ -90,7 +92,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public static bool hasMadeProgress {
 		get {
 			if (instance != null) {
-				return curObjectiveId > instance.startingObjective;
+				return savedObjectiveId > instance.startingObjective;
 			} else {
 				return false;
 			}
@@ -105,9 +107,11 @@ public class LevelProgressManager : MonoBehaviour {
 	void Awake() {
 		instance = this;
 
-		if (curObjectiveId == 0) {
-			curObjectiveId = startingObjective;
+		if (savedObjectiveId == 0) {
+			savedObjectiveId = startingObjective;
 		}
+
+		curObjectiveId = savedObjectiveId;
 
 		winScreen.SetActive (false);
 		winText = winScreen.transform.Find ("Window").Find("Title").GetComponent<Text>();
@@ -131,7 +135,7 @@ public class LevelProgressManager : MonoBehaviour {
 				firstTimerIndex++;
 			}
 
-			if (firstTimerIndex > curObjectiveId) {
+			if (firstTimerIndex > savedObjectiveId) {
 				gameTimer.Init (objectives[firstTimerIndex].time); //set it to what it will start as
 			}
 		}
@@ -151,7 +155,7 @@ public class LevelProgressManager : MonoBehaviour {
 
 	void PrepareObjectives() {
 		for(int i = 0; i < objectives.Count; i++) {
-			if (i < curObjectiveId) {
+			if (i < savedObjectiveId) {
 				if (objectives [i].objectsToDisable != null) {
 					objectives [i].objectsToDisable.SetActive (false);
 				}
@@ -406,7 +410,10 @@ public class LevelProgressManager : MonoBehaviour {
 			CompleteLevel ();
 		} else {
 			firstTime = true;
-			SaveGame ();
+			if (!objectives [curObjectiveId - 1].doesNotSave) { //if we don't save from the previous objective
+				savedObjectiveId = curObjectiveId;
+				SaveGame ();
+			}
 			StartCoroutine(InitNextObjective ());
 		}
 	}
@@ -468,7 +475,7 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	public static void Reset() {
-		curObjectiveId = 0;
+		savedObjectiveId = 0;
 		lastWeaponName = "None";
 		startingAIData.Clear ();
 		killedAIs.Clear ();
