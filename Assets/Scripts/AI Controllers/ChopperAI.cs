@@ -25,18 +25,24 @@ public class ChopperAI : MonoBehaviour {
 		player = GameObject.FindObjectOfType<PlayerController> ().transform;
 		shooting = GetComponentInChildren<ShootingController> ();
 
+		UpdateTargetsQue ();
+
+		AIStart ();
+	}
+
+	void UpdateTargetsQue () {
 		if (quedTargets.Count != 0) {
 			objectiveTarget = true;
 			target = quedTargets [0].target;
 			targetPos = new Vector2 (target.position.x, target.position.z);
 		}
-
-		AIStart ();
 	}
 
 	public void AddTarget (Transform target, TargetData.TargetType type) {
 		objectiveTarget = true;
 		quedTargets.Add (new TargetData (target, type));
+
+		UpdateTargetsQue ();
 	}
 
 	public void AddTargetThroughEvent (Transform target) {
@@ -47,6 +53,8 @@ public class ChopperAI : MonoBehaviour {
 			type = TargetData.TargetType.deploy;
 		}
 		quedTargets.Add (new TargetData (target, type));
+
+		UpdateTargetsQue ();
 	}
 		
 	void CompleteFlyingToTarget () {
