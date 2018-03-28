@@ -25,6 +25,7 @@ public class Objective {
 	public GameObject objectsToDisable; //optional objects to disable after completing this objective
 	public GameObject objectsToEnable; //optional objects to enable after completing this objective
 	public float time; //time for defend or camera objectives
+	public bool pausesForAnimation; //whether or not the game pauses for animation
 	public Animator animation;
 	public bool doesNotSave;
 
@@ -197,6 +198,7 @@ public class LevelProgressManager : MonoBehaviour {
 				newCameraObjective.objectiveObj = objectives [i].objectiveObj;
 				newCameraObjective.showsWorldIndicator = objectives [i].showsWorldIndicator;
 				newCameraObjective.time = objectives[i].time;
+				newCameraObjective.pausesForAnimation = true;
 				objectives [i].time = 0;
 				objectives.Insert(i, newCameraObjective);
 				i++;
@@ -344,7 +346,9 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	IEnumerator CameraEvent() {
-		TimeManager.SetPaused (true);
+		if (curObjective.pausesForAnimation) {
+			TimeManager.SetPaused (true);
+		}
 		Camera newCamera = curObjective.objectiveObj.GetComponent<Camera> ();
 		bool movesCamera = newCamera == null;
 
@@ -360,7 +364,9 @@ public class LevelProgressManager : MonoBehaviour {
 
 		yield return new WaitForSecondsRealtime (curObjective.time);
 
-		TimeManager.SetPaused (false);
+		if (curObjective.pausesForAnimation) {
+			TimeManager.SetPaused (false);
+		}
 		if (movesCamera) {
 			CameraController.instance.Resume();
 		} else {
