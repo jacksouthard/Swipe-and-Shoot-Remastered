@@ -17,7 +17,7 @@ public class EnemyController : AIController {
 	ShootingController shooting;
 	float alertTimer;
 	float originalActiveRange;
-	EffectFollow currentVisualEffect;
+	//EffectFollow currentVisualEffect;
 
 	AudioSource deathSound;
 
@@ -97,11 +97,11 @@ public class EnemyController : AIController {
 		shooting.SetEnabled (true);
 		shooting.canRotateParent = (moves) ? (dist < navAgent.stoppingDistance) : true;
 
-		if (dist < shooting.range) {
-			SwitchEffects ("SightedEffect");
-		} else {
-			SwitchEffects ("AlertedEffect");
-		}
+//		if (dist < shooting.range) {
+//			SwitchEffects ("SightedEffect");
+//		} else {
+//			SwitchEffects ("AlertedEffect");
+//		}
 	}
 
 	protected override void Deactivate () {
@@ -112,9 +112,9 @@ public class EnemyController : AIController {
 		shooting.SetEnabled (false);
 		shooting.canRotateParent = false;
 
-		if (currentVisualEffect != null) {
-			RemoveEffect ();
-		}
+//		if (currentVisualEffect != null) {
+//			RemoveEffect ();
+//		}
 	}
 
 	public void TriggerAlert(float damage) {
@@ -144,9 +144,9 @@ public class EnemyController : AIController {
 	public void Unalert() {
 		alerted = false;
 		activeRange = originalActiveRange;
-		if (currentVisualEffect != null && currentVisualEffect.effectName == "AlertedEffect") {
-			RemoveEffect ();
-		}
+//		if (currentVisualEffect != null && currentVisualEffect.effectName == "AlertedEffect") {
+//			RemoveEffect ();
+//		}
 	}
 
 	protected override void SwitchTargets () {
@@ -156,9 +156,9 @@ public class EnemyController : AIController {
 	public override void Die() {
 		shooting.Die ();
 
-		if (currentVisualEffect != null) {
-			RemoveEffect ();
-		}
+//		if (currentVisualEffect != null) {
+//			RemoveEffect ();
+//		}
 		// notify spawner of death
 
 		if (Spawner.spawners.ContainsKey("EnemySpawner")) {
@@ -171,17 +171,17 @@ public class EnemyController : AIController {
 		base.Die ();
 	}
 
-	void SwitchEffects(string effectName) {
-		if (currentVisualEffect != null) {
-			currentVisualEffect.End ();
-		}
-		currentVisualEffect = EffectFollow.Create (effectName, transform);
-	}
-
-	void RemoveEffect() {
-		currentVisualEffect.End ();
-		currentVisualEffect = null;
-	}
+//	void SwitchEffects(string effectName) {
+//		if (currentVisualEffect != null) {
+//			currentVisualEffect.End ();
+//		}
+//		currentVisualEffect = EffectFollow.Create (effectName, transform);
+//	}
+//
+//	void RemoveEffect() {
+//		currentVisualEffect.End ();
+//		currentVisualEffect = null;
+//	}
 
 	void TrySwapWeapons() {
 		if (shooting.hasWeapon && GameObject.FindObjectOfType<PlayerController>().TrySwapWeapons (shooting.GetWeaponData ())) {
