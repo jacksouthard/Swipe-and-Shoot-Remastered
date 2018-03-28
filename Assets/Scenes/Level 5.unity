@@ -11166,6 +11166,16 @@ Prefab:
       propertyPath: curRotorSpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114573642009926486, guid: c66a686207b684c37aa8ba40b540eb12,
+        type: 2}
+      propertyPath: dismountable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114573642009926486, guid: c66a686207b684c37aa8ba40b540eb12,
+        type: 2}
+      propertyPath: controllable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c66a686207b684c37aa8ba40b540eb12, type: 2}
   m_IsPrefabParent: 0

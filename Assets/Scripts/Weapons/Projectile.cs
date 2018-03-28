@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		Explosion.Create (transform.position, 5, 100000, 20);
+		Explosion.Create (transform.position, 4, 50000, 10);
 		Destroy (gameObject);
 	}
 }
