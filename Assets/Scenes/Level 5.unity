@@ -4671,7 +4671,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -4819,7 +4819,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: startingObjective
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5000,7 +5000,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[6].time
-      value: 60
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5081,7 +5081,7 @@ Prefab:
         type: 2}
       propertyPath: objectives.Array.data[7].objectiveObj
       value: 
-      objectReference: {fileID: 2056530703}
+      objectReference: {fileID: 1418013013}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[7].time
@@ -5095,13 +5095,23 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[7].showsWorldIndicator
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[7].helpText
-      value: 
+      value: GET TO THE CHOPPER
       objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[8].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[8].objectiveObj
+      value: 
+      objectReference: {fileID: 2056530703}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
   m_IsPrefabParent: 0
@@ -26008,15 +26018,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -115.46
+      value: -8.6
       objectReference: {fileID: 0}
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 19.39
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.42
+      value: -5.08
       objectReference: {fileID: 0}
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_LocalRotation.x
