@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class GameTimer : MonoBehaviour {
-	public float time;
 	public Text[] displayTexts;
 
-	float timeLeft = 0f;
+	public UnityEvent onTimerEnd;
 
-	void Awake() {
-		if (timeLeft == 0) {
-			Init ();
-		}
-	}
+	public float timeLeft { get; private set; }
 
-	public void Init() {
-		timeLeft = time;
+	public void Init(float startingTime) {
+		timeLeft = startingTime;
 		UpdateTexts ();
 	}
 
@@ -27,7 +23,8 @@ public class GameTimer : MonoBehaviour {
 			if (timeLeft <= 0f) {
 				timeLeft = 0;
 				UpdateTexts ();
-				GameManager.instance.GameOver ("Time's up");
+				onTimerEnd.Invoke ();
+			//	GameManager.instance.GameOver ("Time's up");
 			}
 		}
 	}

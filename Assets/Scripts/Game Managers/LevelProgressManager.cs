@@ -32,6 +32,9 @@ public class Objective {
 	public Sprite icon; //icon for the health thing to track
 
 	[Space(15)]
+	public bool timerActiveState;
+
+	[Space(15)]
 	public bool showsWorldIndicator;
 	public string completionBanner;
 	public string helpText;
@@ -63,6 +66,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public static Dictionary<float, SavedVehicle> startingVehicleData = new Dictionary<float, SavedVehicle>();
 	public static Vector3 playerSpawnPoint;
 	public static bool firstTime = true;
+	static float timeRemaining = 0f;
 	List<float> killedAIsSinceLastCheckpoint = new List<float>();
 	
 	[Header("Objective")]
@@ -70,6 +74,9 @@ public class LevelProgressManager : MonoBehaviour {
 	Objective curObjective { get { return objectives [curObjectiveId]; } }
 	EdgeView objectiveEdgeView;
 	public string winMessage;
+
+	[Header("Timer")]
+	public GameTimer gameTimer;
 
 	[Header("UI")]
 	public GameObject winScreen;
@@ -110,6 +117,24 @@ public class LevelProgressManager : MonoBehaviour {
 		objectiveEdgeView.Hide ();
 
 		PrepareObjectives ();
+
+		if (gameTimer != null) {
+			gameTimer.enabled = curObjective.timerActiveState;
+
+			if (timeRemaining > 0) {
+				gameTimer.Init (timeRemaining);
+				return;
+			}
+
+			int firstTimerIndex = 0; //find the first event with a timer
+			while (!objectives [firstTimerIndex].timerActiveState) {
+				firstTimerIndex++;
+			}
+
+			if (firstTimerIndex > curObjectiveId) {
+				gameTimer.Init (objectives[firstTimerIndex].time); //set it to what it will start as
+			}
+		}
 	}
 
 	void Start() {
@@ -168,6 +193,7 @@ public class LevelProgressManager : MonoBehaviour {
 				newCameraObjective.objectiveObj = objectives [i].objectiveObj;
 				newCameraObjective.showsWorldIndicator = objectives [i].showsWorldIndicator;
 				newCameraObjective.time = objectives[i].time;
+				objectives [i].time = 0;
 				objectives.Insert(i, newCameraObjective);
 				i++;
 			}
@@ -221,6 +247,13 @@ public class LevelProgressManager : MonoBehaviour {
 
 		if (curObjective.animation != null && curObjective.type != Objective.Type.Camera) {
 			curObjective.animation.SetTrigger ("Play");
+		}
+
+		if (gameTimer != null) {
+			gameTimer.enabled = curObjective.timerActiveState;
+			if (curObjective.timerActiveState && curObjective.time > 0) {
+				gameTimer.Init (curObjective.time);
+			}
 		}
 
 		UpdateObjectiveUI ();
@@ -280,6 +313,9 @@ public class LevelProgressManager : MonoBehaviour {
 			}
 		}
 
+		if (gameTimer != null) {
+			timeRemaining = gameTimer.timeLeft;
+		}
 	}
 
 	public void EnemyDeath(float hash) {
@@ -341,7 +377,7 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		if (curObjective.crucialHealth != null) {
+		if (curObjectiveId < objectives.Count && curObjective.crucialHealth != null) {
 			topBar.localScale = new Vector3 (curObjective.crucialHealth.healthPercentage, 1f, 1f);
 		}
 	}
@@ -439,6 +475,7 @@ public class LevelProgressManager : MonoBehaviour {
 		startingVehicleData.Clear ();
 		playerSpawnPoint = Vector3.zero;
 		firstTime = true;
+		timeRemaining = 0f;
 	}
 
 	public static float CalculateHash(Vector3 pos) {
