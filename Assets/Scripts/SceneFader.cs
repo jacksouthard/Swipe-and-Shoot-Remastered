@@ -89,17 +89,26 @@ public class SceneFader : MonoBehaviour {
 	IEnumerator FadeIn() {
 		fader.raycastTarget = true;
 		fader.color = zeroColor;
-		while(fader.color.a < 0.95f) {
-			fader.color = Color.Lerp (fader.color, fullColor, Time.fixedUnscaledDeltaTime * fadeSpeed);
-			yield return new WaitForSecondsRealtime (Time.fixedUnscaledDeltaTime);
+		float p = 0f;
+		float t = Time.fixedUnscaledDeltaTime;
+
+		while(p < 1f) {
+			fader.color = Color.Lerp (zeroColor, fullColor, p);
+			p += t * fadeSpeed;
+			yield return new WaitForSecondsRealtime (t);
 		}
 		fader.color = fullColor;
 	}
 
 	IEnumerator FadeOut() {
-		while(fader.color.a > 0.05f) {
-			fader.color = Color.Lerp (fader.color, zeroColor, Time.fixedUnscaledDeltaTime * fadeSpeed);
-			yield return new WaitForSecondsRealtime (Time.fixedUnscaledDeltaTime);
+		fader.color = fullColor;
+		float p = 0f;
+		float t = Time.fixedUnscaledDeltaTime;
+
+		while(p < 1f) {
+			fader.color = Color.Lerp (fullColor, zeroColor, p);
+			p += t * fadeSpeed;
+			yield return new WaitForSecondsRealtime (t);
 		}
 		fader.color = zeroColor;
 		fader.raycastTarget = false;
