@@ -176,6 +176,12 @@ public class ShootingController : MonoBehaviour {
 					continue;
 				}
 
+				RaycastHit hitInfo;
+				Physics.Linecast (transform.position, obj.transform.position, out hitInfo);
+				if (hitInfo.collider != obj) {
+					continue;
+				}
+
 				float distance = Vector3.Distance (transform.position, obj.transform.position);
 				if (distance < closestDistance) {
 					closestObj = obj.transform;
