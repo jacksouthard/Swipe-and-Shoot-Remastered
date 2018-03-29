@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour {
 	public bool isGameOver;
 	bool isGameWon { get { return LevelProgressManager.instance != null && LevelProgressManager.instance.isComplete; } }
 	Text gameOverText;
+	Animator gameOverAnim; //optional animation to play before game over
+	Camera gameOverCam; //optional camera to switch to after game over
 
 	[Header("Pause")]
 	public GameObject pauseScreen;
@@ -64,14 +66,45 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void SetGameOverAnimation(Animator anim) {
+		gameOverAnim = anim;
+	}
+
+	public void SetGameOverCamera(Camera cam) {
+		gameOverCam = cam;
+	}
+
 	public void GameOver(string gameOverMessage = "game over") {
 		if (!isGameWon && !isGameOver) {
 			gameOverText.text = gameOverMessage;
-			gameOverScreen.SetActive (true);
 			isGameOver = true;
 
-			EndLevel ();
+			if (gameOverAnim == null) {
+				SetUpGameOver ();
+			} else {
+				StartCoroutine (GameOverAnimationSequence());
+			}
 		}
+	}
+
+	IEnumerator GameOverAnimationSequence() {
+		TimeManager.SetPaused (true);
+		print ("yape");
+		gameOverAnim.GetComponent<AnimationTrigger> ().actions += SetUpGameOver;
+
+		if (gameOverCam != null) {
+			yield return StartCoroutine (SceneFader.FadeToCameraAndWait (gameOverCam, Color.black));
+		}
+
+		print ("yape");
+		gameOverAnim.SetTrigger ("GameOver");
+		yield break;
+	}
+
+	void SetUpGameOver() {
+		gameOverScreen.SetActive (true);
+
+		EndLevel ();
 	}
 
 	public void EndLevel() {

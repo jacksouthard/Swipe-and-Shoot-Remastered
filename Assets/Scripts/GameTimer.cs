@@ -4,10 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+[System.Serializable]
+public class GameTimerEvent {
+	public List<int> objectiveIdsToActivateOn;
+	public UnityEvent onTimerEnd;
+	public bool isActivatedOncePassed; //check this if the event is saved after passing it
+}
+
 public class GameTimer : MonoBehaviour {
 	public Text[] displayTexts;
 
-	public UnityEvent onTimerEnd;
+	public List<GameTimerEvent> timerEvents = new List<GameTimerEvent>();
 
 	public float timeLeft { get; private set; }
 
@@ -23,7 +30,11 @@ public class GameTimer : MonoBehaviour {
 			if (timeLeft <= 0f) {
 				timeLeft = 0;
 				UpdateTexts ();
-				onTimerEnd.Invoke ();
+				foreach(GameTimerEvent timeEvent in timerEvents) {
+					if (timeEvent.objectiveIdsToActivateOn.Contains (LevelProgressManager.instance.curObjectiveId)) {
+						timeEvent.onTimerEnd.Invoke ();
+					}
+				}
 			//	GameManager.instance.GameOver ("Time's up");
 			}
 		}

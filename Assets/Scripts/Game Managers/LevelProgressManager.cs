@@ -72,7 +72,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public static bool firstTime = true;
 	static float timeRemaining = 0f;
 	List<float> killedAIsSinceLastCheckpoint = new List<float>();
-	int curObjectiveId;
+	public int curObjectiveId { get; private set; }
 	
 	[Header("Objective")]
 	public List<Objective> objectives = new List<Objective>();
@@ -141,7 +141,11 @@ public class LevelProgressManager : MonoBehaviour {
 			if (firstTimerIndex > savedObjectiveId) {
 				gameTimer.Init (objectives [firstTimerIndex].time); //set it to what it will start as
 			} else {
-				gameTimer.onTimerEnd.Invoke (); //we finished the timer so invoke whatever methods we were supposed to invoke
+				foreach(GameTimerEvent timerEvent in gameTimer.timerEvents) {
+					if (timerEvent.isActivatedOncePassed && savedObjectiveId > timerEvent.objectiveIdsToActivateOn[0]) {
+						timerEvent.onTimerEnd.Invoke (); //we finished the timer so invoke whatever methods we were supposed to invoke
+					}
+				}
 			}
 		}
 	}
