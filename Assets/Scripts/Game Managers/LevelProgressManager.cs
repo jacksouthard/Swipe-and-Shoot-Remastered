@@ -371,10 +371,12 @@ public class LevelProgressManager : MonoBehaviour {
 		yield return new WaitForSecondsRealtime (curObjective.time);
 
 		TimeManager.SetPaused (false);
-		if (movesCamera) {
-			CameraController.instance.Resume();
-		} else {
-			yield return StartCoroutine (SceneFader.FadeToCameraAndWait(CameraController.instance.GetComponent<Camera>(), curObjective.fadeOutColor));
+		if (curObjectiveId < objectives.Count - 1) {
+			if (movesCamera) {
+				CameraController.instance.Resume ();
+			} else {
+				yield return StartCoroutine (SceneFader.FadeToCameraAndWait (CameraController.instance.GetComponent<Camera> (), curObjective.fadeOutColor));
+			}
 		}
 
 		CompleteObjective ();
