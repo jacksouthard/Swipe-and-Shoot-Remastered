@@ -125,8 +125,8 @@ public class GameManager : MonoBehaviour {
 		SceneFader.FadeToScene(SceneManager.GetActiveScene ().buildIndex, Color.black);
 	}
 
-	public void ReturnToMain(int startingLevelId) {
-		if (!hasSeenConfirmation) {
+	public void ReturnToMain(int startingLevelId, bool skipsConfirmation) {
+		if (!skipsConfirmation && !hasSeenConfirmation) {
 			Transform mainMenuButtonParent = gameOverScreen.transform.Find ("Window").Find ("OldButtons").Find("MainButton");
 			mainMenuButtonParent.GetComponent<Image> ().color = Color.red;
 			Text buttonText = mainMenuButtonParent.GetComponentInChildren<Text> ();
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour {
 		SceneFader.FadeToScene (1, Color.black);
 	}
 
-	public void ReturnToMain() {
-		ReturnToMain (curLevelId);
+	public void ReturnToMain(bool skipsConfirmation) {
+		ReturnToMain (curLevelId, skipsConfirmation);
 	}
 }

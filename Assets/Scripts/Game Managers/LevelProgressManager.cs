@@ -472,7 +472,7 @@ public class LevelProgressManager : MonoBehaviour {
 		if (nextLevel < LevelManager.instance.levelData.Count - 1 && LevelManager.instance.levelData[nextLevel].type != LevelManager.LevelData.Type.Endless) {
 			MainMenu.LoadLevel (nextLevel);
 		} else {
-			GameManager.instance.ReturnToMain (Mathf.Min(LevelManager.instance.levelData.Count - 1, nextLevel));
+			GameManager.instance.ReturnToMain (Mathf.Min(LevelManager.instance.levelData.Count - 1, nextLevel), true);
 		}
 	}
 
@@ -481,7 +481,7 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	public void ReturnToMain() {
-		GameManager.instance.ReturnToMain ();
+		GameManager.instance.ReturnToMain (true);
 	}
 
 	public static void Reset() {
