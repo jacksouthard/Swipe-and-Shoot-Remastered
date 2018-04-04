@@ -38,7 +38,7 @@ public class LaserWeapon : Weapon {
 				if (hitGO.GetComponent<Rigidbody> () != null) {
 					// has rigid body
 					if (otherHealth == null || otherHealth.hasKnockback) {
-						Vector3 force = direction.normalized * damage * 3000f; // default force multiplier
+						Vector3 force = direction.normalized * damage * 2000f; // default force multiplier (originally 3000)
 						hitGO.GetComponent<Rigidbody> ().AddForceAtPosition (force, end);
 					}
 				}

@@ -176,24 +176,23 @@ public class ShootingController : MonoBehaviour {
 					continue;
 				}
 
+				Transform target = obj.transform;
+				Transform center = target.Find ("Center");
+				if (center != null) {
+					target = center;
+				}
+
 				RaycastHit hitInfo;
-				Physics.Linecast (transform.position, obj.transform.position, out hitInfo);
+				Physics.Linecast (transform.position, target.position, out hitInfo);
 				if (hitInfo.collider != obj) {
 					continue;
 				}
 
-				float distance = Vector3.Distance (transform.position, obj.transform.position);
+				float distance = Vector3.Distance (transform.position, target.position);
 				if (distance < closestDistance) {
-					closestObj = obj.transform;
+					closestObj = target;
 					closestDistance = distance;
 				}
-			}
-		}
-
-		if (closestObj != null) {
-			Transform center = closestObj.Find ("Center");
-			if (center != null) {
-				closestObj = center;
 			}
 		}
 

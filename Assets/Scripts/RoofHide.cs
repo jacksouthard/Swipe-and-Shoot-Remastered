@@ -28,10 +28,6 @@ public class RoofHide : MonoBehaviour {
 	}
 
 	void LateUpdate() {
-		if (targetColor == originalColor && CameraController.PositionIsInView (transform.position, 0.3f)) {
-			targetColor = fadedColor;
-		}
-
 		foreach (var material in roofRenderer.materials) {
 			material.color = Color.Lerp (roofRenderer.material.color, targetColor, Time.deltaTime * fadeSpeed);
 		}
