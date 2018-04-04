@@ -1570,6 +1570,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1332124809240992, guid: bb9d0c7a799904f2885978fc5aff2f6a,
     type: 2}
   m_PrefabInternal: {fileID: 68894279}
+--- !u!114 &68894282 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114039047697400354, guid: bb9d0c7a799904f2885978fc5aff2f6a,
+    type: 2}
+  m_PrefabInternal: {fileID: 68894279}
+  m_Script: {fileID: 11500000, guid: 016c887d302bd4fb28e07a889197c8d7, type: 3}
 --- !u!1001 &69338830
 Prefab:
   m_ObjectHideFlags: 0
@@ -4990,34 +4996,6 @@ Prefab:
     - target: {fileID: 4724234367936434, guid: d257a3fd0cacd494ba9df5e343ac9d55, type: 2}
       propertyPath: m_RootOrder
       value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724234367936434, guid: d257a3fd0cacd494ba9df5e343ac9d55, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724234367936434, guid: d257a3fd0cacd494ba9df5e343ac9d55, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4724234367936434, guid: d257a3fd0cacd494ba9df5e343ac9d55, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1696511509931876, guid: d257a3fd0cacd494ba9df5e343ac9d55, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1525556849867328, guid: d257a3fd0cacd494ba9df5e343ac9d55, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1415256755662080, guid: d257a3fd0cacd494ba9df5e343ac9d55, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1150143137074980, guid: d257a3fd0cacd494ba9df5e343ac9d55, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d257a3fd0cacd494ba9df5e343ac9d55, type: 2}
@@ -17821,6 +17799,34 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 002d4de706d434d7d8aff2b665cb220e,
         type: 3}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].crucialHealth
+      value: 
+      objectReference: {fileID: 68894282}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].icon
+      value: 
+      objectReference: {fileID: 21300000, guid: ff3398b8447544bfca8112190ea1afe5,
+        type: 3}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[4].crucialHealth
+      value: 
+      objectReference: {fileID: 68894282}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[4].icon
+      value: 
+      objectReference: {fileID: 21300000, guid: ff3398b8447544bfca8112190ea1afe5,
+        type: 3}
+    - target: {fileID: 114401651278335846, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ff3398b8447544bfca8112190ea1afe5,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
   m_IsPrefabParent: 0
@@ -21091,8 +21097,9 @@ Transform:
   - {fileID: 1175240758}
   - {fileID: 538705573}
   - {fileID: 1945674434}
+  - {fileID: 1846710571}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1013606890
 Prefab:
@@ -33085,10 +33092,6 @@ Prefab:
       propertyPath: defaultWeaponName
       value: AK47
       objectReference: {fileID: 0}
-    - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
   m_IsPrefabParent: 0
@@ -38877,8 +38880,8 @@ Transform:
   - {fileID: 1704440856}
   - {fileID: 1417726239}
   - {fileID: 1939682567}
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 1008502859}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1846710572
 MonoBehaviour:
@@ -38900,6 +38903,7 @@ MonoBehaviour:
   - {fileID: 1939682567}
   exitingVehicle: {fileID: 0}
   spawnDelay: 0
+  saves: 0
   ridersRequiredForObjective: 2
   rb: {fileID: 0}
 --- !u!95 &1846710573

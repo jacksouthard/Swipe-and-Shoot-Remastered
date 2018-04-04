@@ -5889,6 +5889,7 @@ MonoBehaviour:
   - {fileID: 1534491024}
   exitingVehicle: {fileID: 0}
   spawnDelay: 0
+  saves: 0
   ridersRequiredForObjective: 1
   rb: {fileID: 0}
 --- !u!95 &719787854
@@ -17829,12 +17830,13 @@ GameObject:
   - component: {fileID: 1817520286}
   - component: {fileID: 1817520288}
   - component: {fileID: 1817520287}
+  - component: {fileID: 1817520289}
   m_Layer: 0
   m_Name: HeliPad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1817520286
 Transform:
@@ -17893,6 +17895,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1817520285}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1817520289
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1817520285}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000001, z: 1}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!1001 &1838982852
 Prefab:
   m_ObjectHideFlags: 0
