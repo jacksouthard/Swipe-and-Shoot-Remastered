@@ -35,7 +35,7 @@ public class RopeMounter : MonoBehaviour {
 			RaycastHit hitInfo;
 			Physics.Raycast (transform.position, Vector3.down, out hitInfo, 50f, 1 << 10); //figure out where the ground is
 
-			groundHeight = (hitInfo.collider != null) ? hitInfo.point.y + 1f : 0f; //leave the rope slightly above the ground
+			groundHeight = (hitInfo.collider != null) ? hitInfo.point.y : 0f;
 
 			seat.position += Vector3.down * speed * Time.deltaTime;
 			lrend.SetPosition (1, seat.transform.localPosition);
