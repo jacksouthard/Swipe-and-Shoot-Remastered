@@ -4515,6 +4515,16 @@ Prefab:
       propertyPath: objectives.Array.data[4].startingSplashes.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[5].startingSplashes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[7].startingSplashes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4772021338654822, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5014,7 +5024,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[4].startingSplashes.Array.data[1].message
-      value: Not yet soldier! Get to that control center and retarget the missile!
+      value: Not yet soldier! Go up to that control center and retarget the missile!
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5077,6 +5087,33 @@ Prefab:
         type: 2}
       propertyPath: objectives.Array.data[8].doesNotSave
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[5].initialDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[5].startingSplashes.Array.data[0].character
+      value: 
+      objectReference: {fileID: 21300000, guid: 91c24995b863d4ddc8ce0c81e95457cb,
+        type: 3}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[5].startingSplashes.Array.data[0].message
+      value: Good job! Now get down to the launch pad to restart the launch!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[7].startingSplashes.Array.data[0].character
+      value: 
+      objectReference: {fileID: 21300000, guid: 91c24995b863d4ddc8ce0c81e95457cb,
+        type: 3}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[7].startingSplashes.Array.data[0].message
+      value: Lets get out of here!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
@@ -11050,7 +11087,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4550162200006794, guid: c66a686207b684c37aa8ba40b540eb12, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -113.25
+      value: -133.92
       objectReference: {fileID: 0}
     - target: {fileID: 4550162200006794, guid: c66a686207b684c37aa8ba40b540eb12, type: 2}
       propertyPath: m_LocalPosition.y
@@ -11124,6 +11161,11 @@ Prefab:
         type: 2}
       propertyPath: minHoverHeight
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114573642009926486, guid: c66a686207b684c37aa8ba40b540eb12,
+        type: 2}
+      propertyPath: curFlySpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c66a686207b684c37aa8ba40b540eb12, type: 2}
@@ -13601,7 +13643,7 @@ MonoBehaviour:
     onTimerEnd:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 1418013014}
           m_MethodName: AddTargetThroughEvent
           m_Mode: 2
           m_Arguments:
@@ -13612,7 +13654,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 1418013014}
           m_MethodName: AddTargetThroughEvent
           m_Mode: 2
           m_Arguments:
@@ -15853,6 +15895,7 @@ Transform:
   - {fileID: 1048006005}
   - {fileID: 642271331}
   - {fileID: 301703670}
+  - {fileID: 1804371683}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -25938,6 +25981,90 @@ Transform:
   m_PrefabParentObject: {fileID: 4946324974941488, guid: a0e9adc57c3b341fd9dc903826409b2c,
     type: 2}
   m_PrefabInternal: {fileID: 1591399384}
+--- !u!1 &1804371682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1804371683}
+  - component: {fileID: 1804371686}
+  - component: {fileID: 1804371685}
+  - component: {fileID: 1804371684}
+  m_Layer: 2
+  m_Name: StaircaseBlock (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!4 &1804371683
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1804371682}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 27.65, y: 10.13, z: -9.47}
+  m_LocalScale: {x: 0.2, y: 5, z: 4}
+  m_Children: []
+  m_Father: {fileID: 1287280512}
+  m_RootOrder: 211
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!23 &1804371684
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1804371682}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &1804371685
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1804371682}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1804371686
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1804371682}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1807309333
 Prefab:
   m_ObjectHideFlags: 0
@@ -26040,7 +26167,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -111.83
+      value: -132.5
       objectReference: {fileID: 0}
     - target: {fileID: 4776769612598714, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
       propertyPath: m_LocalPosition.y
