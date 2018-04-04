@@ -10,6 +10,7 @@ public class ScrollingTerrain : MonoBehaviour {
 	[Header("Options")]
 	public bool useRandomZ;
 	public bool useRandomRot;
+	public Transform childContainer;
 
 	float timer;
 	List<GameObject> scrollingObjects = new List<GameObject>();
@@ -22,6 +23,10 @@ public class ScrollingTerrain : MonoBehaviour {
 	float zSpread;
 
 	void Start () {
+		if (childContainer == null) {
+			childContainer = this.transform;
+		}
+
 		zone = GetComponent<BoxCollider> ();
 		InterpretZone ();
 		Prewarm ();
@@ -43,7 +48,7 @@ public class ScrollingTerrain : MonoBehaviour {
 		} else {
 			newRot = Quaternion.identity;
 		}
-		GameObject newObject = (GameObject)Instantiate (prefab, transform.TransformPoint(spawnPos), newRot, transform);
+		GameObject newObject = (GameObject)Instantiate (prefab, transform.TransformPoint(spawnPos), newRot, childContainer);
 		scrollingObjects.Add (newObject);
 	}
 
