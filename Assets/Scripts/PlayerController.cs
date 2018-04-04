@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour {
 	public float throwHeight;
 	public float throwVelocity;
 
+	Image damageOverlay;
+
 	List<PickupTimer> curPickingupTimers = new List<PickupTimer>();
 
 	public bool inVehicle { get { return currentVehicle != null; } }
@@ -78,6 +80,8 @@ public class PlayerController : MonoBehaviour {
 
 		health.onDeath += Die;
 		health.onHit += Hit;
+
+		damageOverlay = GameObject.Find("DamageOverlay").GetComponent<Image>();
 	}
 
 	void Start() {
@@ -225,6 +229,8 @@ public class PlayerController : MonoBehaviour {
 		if (audioListener != null) {
 			audioListener.position = transform.position;
 		}
+
+		damageOverlay.color = new Color (damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, Mathf.Pow(1 - health.healthPercentage, 2) * 0.5f);
 	}
 
 	//once player has slowed down enough, reset for next swipe
