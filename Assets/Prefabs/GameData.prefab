@@ -184,6 +184,10 @@ MonoBehaviour:
     type: 0
     character: 
     image: {fileID: 21300000, guid: 7da75fbb9ee1841a9af00da321eee31b, type: 3}
+  - name: Cutscene 2
+    type: 2
+    character: 
+    image: {fileID: 21300000, guid: 48beb546f17a440cc984882adcfd6dc3, type: 3}
   - name: Endless 2
     type: 1
     character: 
