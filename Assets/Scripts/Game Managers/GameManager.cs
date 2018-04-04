@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 	public bool isGameOver;
 	bool isGameWon { get { return LevelProgressManager.instance != null && LevelProgressManager.instance.isComplete; } }
 	Text gameOverText;
+	bool hasSeenConfirmation; //for confirmation
 	Animator gameOverAnim; //optional animation to play before game over
 	Camera gameOverCam; //optional camera to switch to after game over
 
@@ -125,6 +126,16 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void ReturnToMain(int startingLevelId) {
+		if (!hasSeenConfirmation) {
+			Transform mainMenuButtonParent = gameOverScreen.transform.Find ("Window").Find ("OldButtons").Find("MainButton");
+			mainMenuButtonParent.GetComponent<Image> ().color = Color.red;
+			Text buttonText = mainMenuButtonParent.GetComponentInChildren<Text> ();
+			buttonText.text = "Sure?";
+			buttonText.color = Color.white;
+			hasSeenConfirmation = true;
+			return;
+		}
+
 		MainMenu.startingLevel = startingLevelId;
 		SceneFader.FadeToScene (1, Color.black);
 	}
