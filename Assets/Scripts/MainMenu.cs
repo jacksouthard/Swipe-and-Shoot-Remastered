@@ -57,7 +57,7 @@ public class MainMenu : MonoBehaviour {
 		float p = 0;
 		while(p < 1f) {
 			p += (Time.deltaTime / transitionTime);
-			backgroundParent.anchoredPosition = new Vector2 (mainCanvas.rect.width * backgroundCurve.Evaluate(p) * -dir, 0);
+			backgroundParent.anchoredPosition = new Vector2 ((mainCanvas.rect.width + 25f) * backgroundCurve.Evaluate(p) * -dir, 0); //25 is the size of the bars
 			yield return new WaitForEndOfFrame ();
 		}
 
