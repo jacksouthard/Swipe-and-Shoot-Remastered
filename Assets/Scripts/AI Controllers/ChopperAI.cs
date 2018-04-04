@@ -31,6 +31,10 @@ public class ChopperAI : MonoBehaviour {
 	}
 
 	void UpdateTargetsQue () {
+		while(LevelProgressManager.hasMadeProgress && quedTargets.Count > 0 && quedTargets[0].type == TargetData.TargetType.deploy) {
+			quedTargets.RemoveAt (0);
+		}
+
 		if (quedTargets.Count != 0) {
 			objectiveTarget = true;
 			target = quedTargets [0].target;

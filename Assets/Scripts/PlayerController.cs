@@ -230,7 +230,11 @@ public class PlayerController : MonoBehaviour {
 			audioListener.position = transform.position;
 		}
 
-		damageOverlay.color = new Color (damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, Mathf.Pow(1 - health.healthPercentage, 2) * 0.5f);
+		if (!GameManager.instance.isGameOver) {
+			damageOverlay.color = new Color (damageOverlay.color.r, damageOverlay.color.g, damageOverlay.color.b, Mathf.Pow (1 - health.healthPercentage, 2) * 0.5f);
+		} else {
+			damageOverlay.color = Color.clear;
+		}
 	}
 
 	//once player has slowed down enough, reset for next swipe

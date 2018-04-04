@@ -11167,6 +11167,11 @@ Prefab:
       propertyPath: curFlySpeed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114077014661711682, guid: c66a686207b684c37aa8ba40b540eb12,
+        type: 2}
+      propertyPath: endsGame
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c66a686207b684c37aa8ba40b540eb12, type: 2}
   m_IsPrefabParent: 0
@@ -28508,7 +28513,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2056530703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: -212}
+  m_LocalPosition: {x: 0, y: 6, z: -250}
   m_LocalScale: {x: 100, y: 20, z: 3}
   m_Children: []
   m_Father: {fileID: 0}

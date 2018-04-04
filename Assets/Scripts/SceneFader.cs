@@ -104,10 +104,11 @@ public class SceneFader : MonoBehaviour {
 		fader.color = fullColor;
 		float p = 0f;
 		float t = Time.fixedUnscaledDeltaTime;
+		float speedFactor = (fullColor != Color.white) ? 1f : 0.03f;  //if it's white, fade out slower
 
 		while(p < 1f) {
 			fader.color = Color.Lerp (fullColor, zeroColor, p);
-			p += t * fadeSpeed;
+			p += t * fadeSpeed * speedFactor;
 			yield return new WaitForSecondsRealtime (t);
 		}
 		fader.color = zeroColor;

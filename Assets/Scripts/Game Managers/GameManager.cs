@@ -90,14 +90,12 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator GameOverAnimationSequence() {
 		TimeManager.SetPaused (true);
-		print ("yape");
 		gameOverAnim.GetComponent<AnimationTrigger> ().actions += SetUpGameOver;
 
 		if (gameOverCam != null) {
 			yield return StartCoroutine (SceneFader.FadeToCameraAndWait (gameOverCam, Color.black));
 		}
 
-		print ("yape");
 		gameOverAnim.SetTrigger ("GameOver");
 		yield break;
 	}
