@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44824862, g: 0.49827576, b: 0.5755829, a: 1}
+  m_IndirectSpecularColor: {r: 0.44824833, g: 0.49827528, b: 0.5755825, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 578275c14e89147008a27ff76395959d,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -159,6 +160,7 @@ MonoBehaviour:
   scrollSpeed: 25
   useRandomZ: 0
   useRandomRot: 0
+  childContainer: {fileID: 0}
 --- !u!4 &48020675
 Transform:
   m_ObjectHideFlags: 0
@@ -1085,6 +1087,7 @@ MonoBehaviour:
   scrollSpeed: 25
   useRandomZ: 1
   useRandomRot: 1
+  childContainer: {fileID: 0}
 --- !u!65 &1149832249
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1506,6 +1509,7 @@ MonoBehaviour:
   scrollSpeed: 25
   useRandomZ: 1
   useRandomRot: 1
+  childContainer: {fileID: 0}
 --- !u!4 &2119026077
 Transform:
   m_ObjectHideFlags: 0
