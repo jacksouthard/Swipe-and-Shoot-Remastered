@@ -469,7 +469,7 @@ public class LevelProgressManager : MonoBehaviour {
 			nextLevel++;
 		} while(nextLevel < (LevelManager.instance.levelData.Count - 1) && LevelManager.instance.levelData [nextLevel].type == LevelManager.LevelData.Type.Endless);
 
-		if (LevelManager.instance.levelData[nextLevel].type != LevelManager.LevelData.Type.Endless) {
+		if (nextLevel < LevelManager.instance.levelData.Count - 1 && LevelManager.instance.levelData[nextLevel].type != LevelManager.LevelData.Type.Endless) {
 			MainMenu.LoadLevel (nextLevel);
 		} else {
 			GameManager.instance.ReturnToMain (Mathf.Min(LevelManager.instance.levelData.Count - 1, nextLevel));
