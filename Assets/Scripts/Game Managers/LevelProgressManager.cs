@@ -39,6 +39,7 @@ public class Objective {
 	public bool timerActiveState;
 
 	[Space(15)]
+	public bool showsScreenIndicator = true;
 	public bool showsWorldIndicator;
 	public string completionBanner;
 	public string helpText;
@@ -273,7 +274,7 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	void UpdateObjectiveUI() {
-		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && curObjective.type != Objective.Type.Kills;
+		bool hasIndicators = objectives.Count > 0 && curObjectiveId < objectives.Count && curObjective.type != Objective.Type.Kills && curObjective.showsScreenIndicator;
 
 		if (hasIndicators) {
 			GameObject targetObj = (curObjective.overrideTarget == null) ? curObjective.objectiveObj : curObjective.overrideTarget;
