@@ -201,7 +201,7 @@ public class Rideable : MonoBehaviour {
 			// if enemy
 			AIController ai = exitingRider.GetComponentInParent<AIController>();
 			if (ai != null) {
-				ai.EjectFromVehicle (rb);
+				ai.EjectFromVehicle (rb, health.state != Health.State.Alive);
 				ai.enabled = true;
 			}
 

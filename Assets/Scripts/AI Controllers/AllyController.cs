@@ -99,8 +99,8 @@ public class AllyController : AIController {
 		base.EnterVehicle (newVehicle);
 	}
 
-	public override void EjectFromVehicle (Rigidbody rb) {
-		base.EjectFromVehicle (rb);
+	public override void EjectFromVehicle (Rigidbody rb, bool forceFallOver = false) {
+		base.EjectFromVehicle (rb, forceFallOver);
 
 		shooting.canRotateParent = true;
 		shooting.gameObject.SetActive (true);

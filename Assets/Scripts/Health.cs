@@ -131,6 +131,19 @@ public class Health : MonoBehaviour {
 				}
 			} else {
 				health += regenSpeed * Time.deltaTime;
+
+				if (smokeEffect != null) {
+					if (healthPercentage > 0.5f) {
+						smokeEffect.End();
+					}
+				}
+
+				if (fireEffect != null) {
+					if (healthPercentage > 0.25f) {
+						fireEffect.End();
+					}
+				}
+
 				if (health > maxHealth) {
 					EndRegen();
 					health = maxHealth;
@@ -195,13 +208,13 @@ public class Health : MonoBehaviour {
 			}
 
 			if (smokeEffect == null) {
-				if ((health / maxHealth) <= 0.5f) {
+				if (healthPercentage <= 0.5f) {
 					smokeEffect = EffectFollow.Create ("SmokeEffect", smokeCenter);
 				}
 			}
 
 			if (fireEffect == null) {
-				if ((health / maxHealth) <= 0.25f) {
+				if (healthPercentage <= 0.25f) {
 					fireEffect = EffectFollow.Create ("FireEffect", smokeCenter);
 				}
 			}

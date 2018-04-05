@@ -188,6 +188,10 @@ public class AIController : MonoBehaviour {
 	IEnumerator GetUp(float originalHeight) {
 		yield return new WaitForSeconds (fallWaitTime);
 
+		if (navAgent != null) {
+			yield return new WaitUntil (() => (navAgent.isOnNavMesh || rb.velocity.magnitude < 0.5f));
+		}
+
 		rb.velocity = Vector3.zero;
 		rb.constraints = RigidbodyConstraints.FreezeRotation;
 		gettingUp = true;
@@ -221,13 +225,15 @@ public class AIController : MonoBehaviour {
 		}
 	}
 
-	public virtual void EjectFromVehicle(Rigidbody vehicleRb) {
+	public virtual void EjectFromVehicle(Rigidbody vehicleRb, bool forceFallOver = false) {
 		rb.velocity = vehicleRb.velocity;
+		inVehicle = false;
 
-		if (navAgent != null) {
+		if (forceFallOver || navAgent == null || (!navAgent.isOnNavMesh && vehicleRb.velocity.magnitude > 0.5f)) {
+			FallOver ();
+		} else {
 			navAgent.enabled = true;
 		}
-		inVehicle = false;
 
 		health.ResetColor ();
 	}
