@@ -14997,6 +14997,8 @@ MonoBehaviour:
     type: 2
   - target: {fileID: 1869577460}
     type: 0
+  - target: {fileID: 1693083089}
+    type: 0
 --- !u!4 &899699468 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4550162200006794, guid: c66a686207b684c37aa8ba40b540eb12,
@@ -20227,6 +20229,7 @@ Transform:
   - {fileID: 899699468}
   - {fileID: 1869577460}
   - {fileID: 777916544}
+  - {fileID: 1693083089}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26913,6 +26916,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4298474352881994, guid: 1ef19b14680ed42d1a3467fa45db251c,
     type: 2}
   m_PrefabInternal: {fileID: 1690047742}
+--- !u!1 &1693083088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1693083089}
+  m_Layer: 0
+  m_Name: HeliFinalFlyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1693083089
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1693083088}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 113.1, y: 7.073715, z: -123.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1270769870}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1694113499
 Prefab:
   m_ObjectHideFlags: 0

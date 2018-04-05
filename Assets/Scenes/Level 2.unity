@@ -1373,7 +1373,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4997555800933038, guid: bb9d0c7a799904f2885978fc5aff2f6a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 163.632
+      value: 163.82
       objectReference: {fileID: 0}
     - target: {fileID: 4997555800933038, guid: bb9d0c7a799904f2885978fc5aff2f6a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1381,7 +1381,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4997555800933038, guid: bb9d0c7a799904f2885978fc5aff2f6a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 24.306
+      value: 24.89
       objectReference: {fileID: 0}
     - target: {fileID: 4997555800933038, guid: bb9d0c7a799904f2885978fc5aff2f6a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -9807,6 +9807,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 82288541190576018, guid: 3ec1756db85114a8c9053292e6d520aa,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
   m_IsPrefabParent: 0
@@ -17075,7 +17080,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[0].startingSplashes.Array.data[0].message
-      value: Go free the pilot!
+      value: The data points here! Go free the pilot!
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
