@@ -14,6 +14,7 @@ ModelImporter:
     100012: Fortress_001
     100014: MisslePlatform
     100016: WaterDonut
+    100018: ControllRoomGlass
     400000: ControlCenterRoof
     400002: Fortress
     400004: FortressIsland
@@ -23,6 +24,7 @@ ModelImporter:
     400012: Fortress_001
     400014: MisslePlatform
     400016: WaterDonut
+    400018: ControllRoomGlass
     2100000: FortressDoor
     2100002: FortressWall
     2100004: Grass
@@ -37,6 +39,7 @@ ModelImporter:
     2300010: Fortress_001
     2300012: MisslePlatform
     2300014: WaterDonut
+    2300016: ControllRoomGlass
     3300000: ControlCenterRoof
     3300002: Fortress
     3300004: FortressIsland
@@ -45,6 +48,7 @@ ModelImporter:
     3300010: Fortress_001
     3300012: MisslePlatform
     3300014: WaterDonut
+    3300016: ControllRoomGlass
     4300000: MissleDoor_001
     4300002: MissleDoor
     4300004: ControlCenterRoof
@@ -53,6 +57,7 @@ ModelImporter:
     4300010: Fortress_001
     4300012: MisslePlatform
     4300014: WaterDonut
+    4300016: ControllRoomGlass
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
