@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1225471198317634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 0.37, z: -1.22}
+  m_LocalPosition: {x: 0.6, y: 0.62, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4689697128786592}
@@ -83,15 +83,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1488500999376776}
-  m_LocalRotation: {x: -0.6217825, y: 0.28304458, z: 0.25755072, w: 0.68333006}
-  m_LocalPosition: {x: -10.41, y: 0.63, z: 31.439999}
+  m_LocalRotation: {x: -0.67287886, y: 0.21733397, z: 0.21733397, w: 0.67287886}
+  m_LocalPosition: {x: 72.27, y: -5.42, z: -23.51}
   m_LocalScale: {x: 0.3000001, y: 1, z: 2}
   m_Children:
   - {fileID: 4587788571780922}
   - {fileID: 4911877418837310}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -84.6, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 35.8, z: 0}
 --- !u!4 &4911877418837310
 Transform:
   m_ObjectHideFlags: 1
@@ -180,7 +180,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 10
-  MaxDistance: 50
+  MaxDistance: 35
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -300,7 +300,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2028195601
+  randomSeed: -1667124168
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -452,7 +452,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -860,7 +860,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 30
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -3661,14 +3661,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 620428874
+  randomSeed: -1919592348
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.9
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -3709,7 +3709,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -4
+      scalar: -5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
