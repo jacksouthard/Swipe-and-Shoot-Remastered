@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour {
 	public static AudioManager instance;
 
 	public List<DeathSound> enemyDeathSounds;
-	int[] tierValues = {0, 70, 99}; //hardcoded tier probabilities
+	int[] tierValues = {0, 80, 98}; //hardcoded tier probabilities
 
 	void Awake() {
 		instance = this;
