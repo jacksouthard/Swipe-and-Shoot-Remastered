@@ -412,7 +412,9 @@ public class LevelProgressManager : MonoBehaviour {
 			return;
 		}
 
-		barAnim.SetBool ("Open", false);
+		if (curObjectiveId == objectives.Count - 1 || objectives [curObjectiveId + 1].crucialHealth == null) {
+			barAnim.SetBool ("Open", false);
+		}
 
 		if(curObjective.objectsToEnable != null) {
 			curObjective.objectsToEnable.SetActive (true);
@@ -441,6 +443,8 @@ public class LevelProgressManager : MonoBehaviour {
 	}
 
 	public void EnterCutsceneVehicle() {
+		barAnim.SetBool ("Open", false);
+		NotificationManager.instance.HideHelp ();
 		objectiveEdgeView.Hide ();
 	}
 
