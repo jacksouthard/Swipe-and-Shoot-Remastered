@@ -4767,7 +4767,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f4a184eaba01f43f5ba921fda1dbac36, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5921235ab91b648049d8daf572862c11, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -5536,8 +5536,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[4].startingSplashes.Array.data[1].message
-      value: Not yet, soldier! There's a control center where we might be able to
-        retarget the missile!
+      value: Not yet, soldier! Stop the launch in the control center!
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5615,7 +5614,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[5].startingSplashes.Array.data[0].message
-      value: NOw get down to the launch site and restart the timer!
+      value: Now get down to the launch site and restart the timer!
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -28000,32 +27999,32 @@ GameObject:
   - component: {fileID: 1804371685}
   - component: {fileID: 1804371684}
   m_Layer: 2
-  m_Name: StaircaseBlock (3)
+  m_Name: TrassCornerBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1804371683
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1804371682}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 27.65, y: 10.13, z: -9.47}
-  m_LocalScale: {x: 0.2, y: 5, z: 4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.27, y: 10.13, z: -7.59}
+  m_LocalScale: {x: 3, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 1287280512}
   m_RootOrder: 211
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1804371684
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1804371682}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -28703,6 +28702,11 @@ Prefab:
     - target: {fileID: 4138976885120154, guid: f44ae4d7524684aee81468242e81f628, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114356074869754320, guid: f44ae4d7524684aee81468242e81f628,
+        type: 2}
+      propertyPath: enemyDeathSounds.Array.data[10].tier
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f44ae4d7524684aee81468242e81f628, type: 2}

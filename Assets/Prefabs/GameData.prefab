@@ -155,7 +155,7 @@ MonoBehaviour:
   - sound: {fileID: 8300000, guid: 09f9f072132314b61b09e8afe121cbfe, type: 3}
     tier: 0
   - sound: {fileID: 8300000, guid: ace952ac8d8c5491586726bf070a8ebf, type: 3}
-    tier: 1
+    tier: 2
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1
