@@ -150,8 +150,6 @@ MonoBehaviour:
     tier: 0
   - sound: {fileID: 8300000, guid: 473d773db985441deab928dc06f1ba06, type: 3}
     tier: 0
-  - sound: {fileID: 8300000, guid: 1791b6f362580401d858ca0023c57544, type: 3}
-    tier: 2
   - sound: {fileID: 8300000, guid: 2f4c31be841ad4661829611c4c2d3ad3, type: 3}
     tier: 0
   - sound: {fileID: 8300000, guid: 09f9f072132314b61b09e8afe121cbfe, type: 3}
