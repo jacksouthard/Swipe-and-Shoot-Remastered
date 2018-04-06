@@ -46,7 +46,7 @@ public class RopeMounter : MonoBehaviour {
 
 		seat.transform.position = transform.position + (Vector3.down * ropeLength);
 		lrend.SetPosition (1, seat.transform.localPosition);
-		col.size = new Vector3 (lrend.startWidth, ropeLength, lrend.startWidth);
+		col.size = new Vector3 (1f, ropeLength, 1f);
 		col.center = new Vector3 (0f, -ropeLength / 2, 0f);
 		col.enabled = true;
 	}
