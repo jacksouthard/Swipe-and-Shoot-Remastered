@@ -5308,7 +5308,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[5].helpText
-      value: REACH THE LAUNCH CONSOLE
+      value: RESTART THE TIMER
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5536,8 +5536,8 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[4].startingSplashes.Array.data[1].message
-      value: Not yet, soldier! We might be able to retarget the missile if you can
-        get to the control center!
+      value: Not yet, soldier! There's a control center where we might be able to
+        retarget the missile!
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5615,7 +5615,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[5].startingSplashes.Array.data[0].message
-      value: Good job! Now get down to the launch pad to restart the timer!
+      value: NOw get down to the launch site and restart the timer!
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
