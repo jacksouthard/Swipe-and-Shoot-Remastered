@@ -21,6 +21,8 @@ public class NotificationManager : MonoBehaviour {
 	Text helpText;
 	Animator helpAnim;
 
+	public Animator characterAnim;
+
 	//for storage in the event of successive messages
 	List<SplashData> splashes = new List<SplashData> ();
 	List<string> banners = new List<string>();
@@ -29,6 +31,7 @@ public class NotificationManager : MonoBehaviour {
 	const float bannerWait = 0.5f; //delay between successive banners
 	const float splashAnimTime = 0.5f; //delay before unpausing after the last splash screen
 	const float splashDelayBetweenCharacters = 0.035f; //delay between each character
+	const float splashCharacterDelay = 0.16f; //delay for 
 
 	void Awake() {
 		bannerText = bannerParent.GetComponentInChildren<Text> ();
@@ -36,8 +39,9 @@ public class NotificationManager : MonoBehaviour {
 
 		Transform splashPanel = splashParent.transform.Find ("Panel");
 		splashText = splashPanel.Find("SplashText").GetComponent<Text> (); //there is also text on the close button so we need to make sure it's the right one
-		splashCharacter = splashParent.transform.Find("Character").GetComponent<Image>();
 		splashImage = splashPanel.Find("SplashImage_Full").GetComponent<Image>();
+
+		splashCharacter = characterAnim.GetComponent<Image>();
 
 		splashAnim = splashParent.GetComponent<Animator>();
 
@@ -89,9 +93,8 @@ public class NotificationManager : MonoBehaviour {
 	IEnumerator ShowSplashText(bool firstTime) {
 		isSplashing = true;
 		splashText.text = "";
-		if (firstTime) {
-			yield return new WaitForSecondsRealtime (splashAnimTime / 2);
-		}
+
+		yield return StartCoroutine (SwapCharacter());
 
 		int maxSplashTextWidth = Mathf.FloorToInt(splashText.GetPixelAdjustedRect().width);
 		splashText.font.RequestCharactersInTexture (splashes[0].message, splashText.fontSize, splashText.fontStyle);
@@ -135,14 +138,6 @@ public class NotificationManager : MonoBehaviour {
 	//show splash text
 	void DisplaySplash(bool firstTime = false) {
 		TimeManager.SetPaused (true);
-		if (splashes [0].character == null) {
-			splashCharacter.enabled = false;
-		} else {
-			splashCharacter.sprite = splashes[0].character;
-			splashCharacter.preserveAspect = true;
-			splashCharacter.enabled = true;
-		}
-			
 		if (splashes[0].image == null) {
 			splashText.enabled = true;
 			StartCoroutine (ShowSplashText (firstTime));
@@ -152,6 +147,25 @@ public class NotificationManager : MonoBehaviour {
 			splashImage.preserveAspect = true;
 			splashImage.enabled = true;
 			splashText.enabled = false;
+		}
+	}
+
+	IEnumerator SwapCharacter() {
+		if (splashes.Count == 0 || splashes [0].character != splashCharacter.sprite) {
+			characterAnim.SetBool ("Open", false);
+			yield return new WaitForSecondsRealtime (splashCharacterDelay);
+		}
+
+		if (splashes.Count == 0 || splashes [0].character == null) {
+			splashCharacter.sprite = null;
+			splashCharacter.enabled = false;
+		} else {
+			splashCharacter.sprite = splashes[0].character;
+			splashCharacter.preserveAspect = true;
+			splashCharacter.enabled = true;
+
+			characterAnim.SetBool ("Open", true);
+			yield return new WaitForSecondsRealtime (splashCharacterDelay);
 		}
 	}
 
@@ -165,6 +179,7 @@ public class NotificationManager : MonoBehaviour {
 
 		if (splashes.Count == 0) {
 			SetAnim (splashAnim, false);
+			StartCoroutine (SwapCharacter());
 			StartCoroutine (UnpauseDelayed());
 		} else {
 			DisplaySplash(); //keep going until all splashes have been cleared
