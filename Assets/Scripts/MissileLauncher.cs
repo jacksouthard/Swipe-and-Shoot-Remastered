@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MissileLauncher : MonoBehaviour {
-	public void FadeOut() {
-		SceneFader.FadeToColor (Color.white);
+	public AudioSource explosionSound;
+
+	public void PlayExplosion() {
+		explosionSound.Play ();
 	}
 }
