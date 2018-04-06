@@ -19,11 +19,13 @@ public class SwipeManager : MonoBehaviour {
 	LineManager lm;
 
 	bool isTapping;
-	bool isSelectingPlayer;
 	Vector2 startPos;
 
 	float timer;
 	bool autoSwiping;
+	float swipeTime;
+
+	const float fastFlickLimit = 0.2f;
 
 	void Awake() {
 		instance = this;
@@ -59,7 +61,7 @@ public class SwipeManager : MonoBehaviour {
 
 	void LateUpdate() {
 		if (isTapping) {
-			if (isSelectingPlayer) {
+			if (!player.inVehicle) {
 				Vector2 dir = CalculateDirection (Input.mousePosition);
 				player.TryRotateInDir (dir.normalized);
 				UpdateLine (Input.mousePosition);
@@ -67,14 +69,15 @@ public class SwipeManager : MonoBehaviour {
 				if (autoSwiping && CanLaunch(dir)) {
 					player.Swipe (dir);
 				}
-			} else if (player.inVehicle) {
+			} else {
+				swipeTime += Time.deltaTime;
 				UpdateVehicle (Input.mousePosition);
 			}
 		}
 	}
 
 	void StartTap(Vector2 curPos) {
-		//check whether or not we are selecting the player
+		/*//check whether or not we are selecting the player
 		if (!player.inVehicle) {
 			// not in vehicle
 			isSelectingPlayer = true;
@@ -95,31 +98,21 @@ public class SwipeManager : MonoBehaviour {
 					}
 				}
 			}
-		}
+		}*/
 
-		bool startTap = false;
-		if (player.inVehicle) {
+		if (!player.inVehicle || (player.currentVehicle.controllable || player.currentVehicle.dismountable)) {
 			// in vehicle
-			if (player.currentVehicle.controllable && !isSelectingPlayer) {
-				startTap = true;
-			}
-			if (isSelectingPlayer) {
-				startTap = true;
-			}
-		} else {
-			startTap = true;
-		}
-
-		if (startTap) {
 			isTapping = true;
 			startPos = curPos; //save initial tap position
 
 			joystickVisual.gameObject.SetActive (true);
 			joystickVisual.position = startPos;
 
-			if (isSelectingPlayer) {
+			if (!player.inVehicle) {
 				swipeLine.enabled = true;
 			}
+
+			swipeTime = 0f;
 		}
 	}
 
@@ -171,12 +164,10 @@ public class SwipeManager : MonoBehaviour {
 		joystickVisual.gameObject.SetActive (false);
 		swipeLine.enabled = false;
 		isTapping = false;
-
-		isSelectingPlayer = false;
 	}
 
 	bool CanLaunch (Vector2 dir) {
-		return isSelectingPlayer && player.state == PlayerController.MovementState.Grounded && dir.magnitude > 0 && timer <= 0f;
+		return player.state == PlayerController.MovementState.Grounded && dir.magnitude > 0 && timer <= 0f && (!player.inVehicle || swipeTime < fastFlickLimit);
 	}
 
 	Vector2 CalculateDirection(Vector2 curPos) {
