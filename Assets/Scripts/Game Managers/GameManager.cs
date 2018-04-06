@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 	[Header("Game Over")]
 	public GameObject gameOverScreen;
 	public bool isGameOver;
+	public List<GameObject> objectsToDisableOnAnimation = new List<GameObject>();
 	bool isGameWon { get { return LevelProgressManager.instance != null && LevelProgressManager.instance.isComplete; } }
 	Text gameOverText;
 	bool hasSeenConfirmation; //for confirmation
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour {
 	public void GameOver(string gameOverMessage = "game over") {
 		if (!isGameWon && !isGameOver) {
 			gameOverText.text = gameOverMessage;
+
 			isGameOver = true;
 
 			if (gameOverAnim == null) {
@@ -91,6 +93,14 @@ public class GameManager : MonoBehaviour {
 	IEnumerator GameOverAnimationSequence() {
 		TimeManager.SetPaused (true);
 		gameOverAnim.GetComponent<AnimationTrigger> ().actions += SetUpGameOver;
+
+		if (LevelProgressManager.instance != null) {
+			LevelProgressManager.instance.HideAllUI ();
+		}
+
+		foreach(GameObject go in objectsToDisableOnAnimation) {
+			go.SetActive (false);
+		}
 
 		if (gameOverCam != null) {
 			yield return StartCoroutine (SceneFader.FadeToCameraAndWait (gameOverCam, Color.black));

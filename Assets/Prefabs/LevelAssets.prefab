@@ -1830,6 +1830,7 @@ MonoBehaviour:
   levelTitle: {fileID: 114937883552635012}
   gameOverScreen: {fileID: 1435890179236890}
   isGameOver: 0
+  objectsToDisableOnAnimation: []
   pauseScreen: {fileID: 1085863146457966}
 --- !u!114 &114626219502256920
 MonoBehaviour:
@@ -2217,7 +2218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

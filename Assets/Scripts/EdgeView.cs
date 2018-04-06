@@ -58,7 +58,7 @@ public class EdgeView : MonoBehaviour {
 	}
 
 	public void Init(bool _destroysOnDeath) {
-		gameCam = GameObject.FindObjectOfType<Camera>();
+		gameCam = GameObject.FindObjectOfType<CameraController>().GetComponent<Camera>();
 		canvas = transform.parent.GetComponent<RectTransform>(); 
 		image = transform.GetComponentInChildren<Image> ().gameObject;
 		destroysOnDeath = _destroysOnDeath;

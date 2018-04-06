@@ -348,7 +348,7 @@ public class PlayerController : MonoBehaviour {
 			if (drop == null) {
 				EscortController escort = timer.pickup.GetComponentInParent<EscortController> ();
 				if (escort == null) {
-					Destroy (timer.pickup.GetComponent<Collider> ());
+					timer.pickup.tag = "Untagged";
 				} else {
 					escort.Enable ();
 				}

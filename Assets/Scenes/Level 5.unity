@@ -3944,6 +3944,11 @@ Transform:
   m_Father: {fileID: 1651652840}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 33.48, z: 0}
+--- !u!1 &336256502 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1180116322659138, guid: dab0b4a5d0e5347a59e73123a6d8237a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1656046675}
 --- !u!1001 &338288264
 Prefab:
   m_ObjectHideFlags: 0
@@ -5209,7 +5214,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[2].initialDelay
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5422,7 +5427,8 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[4].startingSplashes.Array.data[1].message
-      value: Not yet soldier! Go up to that control center and retarget the missile!
+      value: Not yet, soldier! We might be able to retarget the missile if you can
+        get to the control center!
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5500,7 +5506,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[5].startingSplashes.Array.data[0].message
-      value: Good job! Now get down to the launch pad to restart the launch!
+      value: Good job! Now get down to the launch pad to restart the timer!
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -10816,6 +10822,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4988711218438140, guid: d2c4fa90f2ee04ac8878fa3304842d2c,
     type: 2}
   m_PrefabInternal: {fileID: 331067244}
+--- !u!1 &723266933 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1025847532324876, guid: e32477048be2b4e30bf8cb30e045bfbf,
+    type: 2}
+  m_PrefabInternal: {fileID: 1816079518}
 --- !u!1001 &723365310
 Prefab:
   m_ObjectHideFlags: 0
@@ -25740,6 +25751,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114579453342435634, guid: dab0b4a5d0e5347a59e73123a6d8237a,
+        type: 2}
+      propertyPath: objectsToDisableOnAnimation.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4011621529032860, guid: dab0b4a5d0e5347a59e73123a6d8237a, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -25801,6 +25817,21 @@ Prefab:
       propertyPath: heightMinOffset
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114579453342435634, guid: dab0b4a5d0e5347a59e73123a6d8237a,
+        type: 2}
+      propertyPath: objectsToDisableOnAnimation.Array.data[0]
+      value: 
+      objectReference: {fileID: 1418013013}
+    - target: {fileID: 114579453342435634, guid: dab0b4a5d0e5347a59e73123a6d8237a,
+        type: 2}
+      propertyPath: objectsToDisableOnAnimation.Array.data[1]
+      value: 
+      objectReference: {fileID: 336256502}
+    - target: {fileID: 114579453342435634, guid: dab0b4a5d0e5347a59e73123a6d8237a,
+        type: 2}
+      propertyPath: objectsToDisableOnAnimation.Array.data[2]
+      value: 
+      objectReference: {fileID: 723266933}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dab0b4a5d0e5347a59e73123a6d8237a, type: 2}
   m_IsPrefabParent: 0
@@ -26617,7 +26648,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967263
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -30018,7 +30049,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 17c2de2ad71624dc6a09054e56b70d01, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -30133,7 +30164,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 81b896af962d04bdf98cf75864897d3f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
   Mute: 0

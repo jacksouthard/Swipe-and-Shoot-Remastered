@@ -305,6 +305,13 @@ public class LevelProgressManager : MonoBehaviour {
 		}
 	}
 
+	public void HideAllUI() {
+		NotificationManager.instance.HideHelp ();
+		if (objectiveEdgeView != null) {
+			objectiveEdgeView.Hide ();
+		}
+	}
+
 	void UpdatePlayer() {
 		pc.transform.position = playerSpawnPoint; //move player to last checkpoint
 	}
@@ -404,6 +411,8 @@ public class LevelProgressManager : MonoBehaviour {
 		if (GameManager.instance.isGameOver) {
 			return;
 		}
+
+		barAnim.SetBool ("Open", false);
 
 		if(curObjective.objectsToEnable != null) {
 			curObjective.objectsToEnable.SetActive (true);
