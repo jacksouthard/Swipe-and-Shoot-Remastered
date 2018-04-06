@@ -168,6 +168,10 @@ public class EnemyController : AIController {
 		deathSound.clip = AudioManager.instance.GetRandomEnemyDeathSound ();
 		deathSound.Play ();
 
+		if (EndlessProgressManager.instance != null) {
+			EndlessProgressManager.instance.RecordEnemyDeath ();
+		}
+
 		base.Die ();
 	}
 
