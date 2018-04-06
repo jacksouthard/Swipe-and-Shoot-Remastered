@@ -134,12 +134,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDeathSounds:
-  - {fileID: 8300000, guid: 0e2edf782b26f41eb810098733d69b77, type: 3}
-  - {fileID: 8300000, guid: 0911ea01dcc11466ca09916f3db421bb, type: 3}
-  - {fileID: 8300000, guid: cbd48c4acc98643128d27e5842da823c, type: 3}
-  - {fileID: 8300000, guid: 5f1736d604809469b84462872439d3a2, type: 3}
-  - {fileID: 8300000, guid: 15ce2d376c6ab45968746e8d4faaad62, type: 3}
-  - {fileID: 8300000, guid: 46efcc3d151b94e519c21814bb1a9449, type: 3}
+  - sound: {fileID: 8300000, guid: 0e2edf782b26f41eb810098733d69b77, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 0911ea01dcc11466ca09916f3db421bb, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: cbd48c4acc98643128d27e5842da823c, type: 3}
+    tier: 1
+  - sound: {fileID: 8300000, guid: 5f1736d604809469b84462872439d3a2, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 15ce2d376c6ab45968746e8d4faaad62, type: 3}
+    tier: 2
+  - sound: {fileID: 8300000, guid: 46efcc3d151b94e519c21814bb1a9449, type: 3}
+    tier: 0
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1
