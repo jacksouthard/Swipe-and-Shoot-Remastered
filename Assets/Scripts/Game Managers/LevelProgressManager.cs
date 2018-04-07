@@ -87,6 +87,7 @@ public class LevelProgressManager : MonoBehaviour {
 	[Header("UI")]
 	public GameObject winScreen;
 	public Animator barAnim;
+	public Animator timerAnim;
 	public Transform topBar;
 	public Image barIcon;
 
@@ -222,6 +223,9 @@ public class LevelProgressManager : MonoBehaviour {
 			Debug.LogError ("No objectives to set up");
 			yield break;
 		}
+
+		//some UI updates before the initial delay
+		timerAnim.SetBool ("Open", curObjective.timerActiveState);
 
 		if (firstTime) {
 			firstTime = false;

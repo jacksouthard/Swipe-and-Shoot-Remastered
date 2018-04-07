@@ -28,6 +28,7 @@ public class Turret : Rideable {
 	protected override void Die() {
 		GetComponent<Rigidbody> ().isKinematic = false;
 		Destroy(GetComponent<Collider> ());
+		shooting.Die ();
 
 		base.Die ();
 	}

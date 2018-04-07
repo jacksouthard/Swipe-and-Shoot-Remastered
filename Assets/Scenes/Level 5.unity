@@ -4934,7 +4934,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[4].startingSplashes.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -4945,6 +4945,11 @@ Prefab:
         type: 2}
       propertyPath: objectives.Array.data[7].startingSplashes.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].startingSplashes.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4772021338654822, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
       propertyPath: m_LocalPosition.x
@@ -4976,7 +4981,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4772021338654822, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5172,7 +5177,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[4].initialDelay
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5288,7 +5293,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[3].completionBanner
-      value: CHECKPOINT REACHED
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5445,7 +5450,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[4].startingSplashes.Array.data[1].message
-      value: Not yet, soldier! Stop the launch in the control center!
+      value: 'Not yet, soldier! '
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -5601,9 +5606,52 @@ Prefab:
       propertyPath: objectives.Array.data[8].objectsToDisable
       value: 
       objectReference: {fileID: 380515085}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].startingSplashes.Array.data[0].message
+      value: Oh no! The timer has already started!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].initialDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].startingSplashes.Array.data[1].message
+      value: It's not over yet! Stop the launch from the control center!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].startingSplashes.Array.data[0].character
+      value: 
+      objectReference: {fileID: 21300000, guid: 1930dd88672da48dbbbaecb7539bc073,
+        type: 3}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].startingSplashes.Array.data[1].character
+      value: 
+      objectReference: {fileID: 21300000, guid: 91c24995b863d4ddc8ce0c81e95457cb,
+        type: 3}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[4].doesNotSave
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: objectives.Array.data[3].doesNotSave
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &390051912 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114806853205619924, guid: 6fc48da9e88b347e694fe886a9691487,
+    type: 2}
+  m_PrefabInternal: {fileID: 390051911}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &391639895
 Prefab:
   m_ObjectHideFlags: 0
@@ -14570,6 +14618,7 @@ MonoBehaviour:
   displayTexts:
   - {fileID: 1061034022}
   - {fileID: 639117911}
+  - {fileID: 390051912}
   timerEvents:
   - objectiveIdsToActivateOn: 0300000004000000
     onTimerEnd:
@@ -16956,9 +17005,9 @@ Transform:
   - {fileID: 963838410}
   - {fileID: 997727937}
   - {fileID: 301703670}
+  - {fileID: 1804371683}
   - {fileID: 519513826}
   - {fileID: 466718535}
-  - {fileID: 1804371683}
   - {fileID: 735031652}
   - {fileID: 889837382}
   - {fileID: 1950241557}
@@ -25698,7 +25747,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4011621529032860, guid: dab0b4a5d0e5347a59e73123a6d8237a, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114848508575375894, guid: dab0b4a5d0e5347a59e73123a6d8237a,
         type: 2}
@@ -27799,7 +27848,7 @@ Transform:
   m_LocalScale: {x: 3, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 1287280512}
-  m_RootOrder: 189
+  m_RootOrder: 187
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1804371684
 MeshRenderer:
