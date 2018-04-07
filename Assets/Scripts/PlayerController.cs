@@ -297,8 +297,8 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void SwitchWeapon(WeaponData data) {
-		if (shooting.hasWeapon) {
+	void SwitchWeapon(WeaponData data, bool destoryLast) {
+		if (shooting.hasWeapon && !destoryLast) {
 			ThrowPickup (shooting.GetWeaponData().ToAssetData());
 		}
 		shooting.SetWeapon (data as WeaponData);
@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour {
 		Pickup drop = timer.pickup.GetComponent<Pickup> ();
 		if (drop != null) {
 			if (drop.data.GetAssetType () == "Weapon") {
-				SwitchWeapon (drop.data as WeaponData);
+				SwitchWeapon (drop.data as WeaponData, drop.destoryLastPickup);
 			} else if (drop.data.GetAssetType () == "Equipment") {
 				SwitchEquipment (drop.data as EquipmentData);
 			}

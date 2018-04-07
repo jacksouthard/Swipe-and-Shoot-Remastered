@@ -646,6 +646,11 @@ Prefab:
       propertyPath: assetType
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 114640794005351164, guid: 660d960f2c0db4ab98341d71d79b7708,
+        type: 2}
+      propertyPath: destoryLastPickup
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 660d960f2c0db4ab98341d71d79b7708, type: 2}
   m_IsPrefabParent: 0

@@ -7,6 +7,7 @@ public class Pickup : MonoBehaviour {
 	public string assetType;
 
 	public bool isObjective = false;
+	public bool destoryLastPickup;
 
 	// despawning
 	bool despawn;
