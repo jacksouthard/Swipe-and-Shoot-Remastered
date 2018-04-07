@@ -228,7 +228,7 @@ public class Health : MonoBehaviour {
 
 		state = State.Dying;
 		EndRegen ();
-		ResetColor();
+		//ResetColor();
 
 		if (fireEffect != null) {
 			fireEffect.End ();
@@ -330,7 +330,7 @@ public class Health : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other) {
-		if (!canFallOver) {
+		if (!canFallOver || state != State.Alive) {
 			return;
 		}	
 
@@ -341,14 +341,17 @@ public class Health : MonoBehaviour {
 
 		float appliedForce = otherRb.mass * (otherRb.velocity.magnitude / Time.deltaTime);
 
-		if (canBeKilledBySwiping && appliedForce >= durability) {
-			PlayerController pc = otherRb.GetComponent<PlayerController> ();
+		if (canBeKilledBySwiping) {
+			StartCoroutine (HitAnimation());
+			if (appliedForce >= durability) {
+				PlayerController pc = otherRb.GetComponent<PlayerController> ();
 
-			if (pc != null && onSwipeDeath != null) {
-				onSwipeDeath.Invoke ();
+				if (pc != null && onSwipeDeath != null) {
+					onSwipeDeath.Invoke ();
+				}
+
+				Die ();
 			}
-
-			Die ();
 		} else {
 			if (onKnockedOver != null) {
 				onKnockedOver.Invoke ();
