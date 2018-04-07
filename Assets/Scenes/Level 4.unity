@@ -16956,7 +16956,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4587788571780922, guid: 2d9913420c5b947c1a2c5764b7549e94, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2.47
+      value: -2.81
       objectReference: {fileID: 0}
     - target: {fileID: 4587788571780922, guid: 2d9913420c5b947c1a2c5764b7549e94, type: 2}
       propertyPath: m_LocalPosition.x
@@ -16964,7 +16964,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4587788571780922, guid: 2d9913420c5b947c1a2c5764b7549e94, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.62
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 198027763525221854, guid: 2d9913420c5b947c1a2c5764b7549e94,
         type: 2}
@@ -17013,7 +17013,8 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 82489405836432364, guid: 2d9913420c5b947c1a2c5764b7549e94, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 2d9913420c5b947c1a2c5764b7549e94, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1020042133 stripped
