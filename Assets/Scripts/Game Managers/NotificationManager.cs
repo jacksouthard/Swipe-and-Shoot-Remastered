@@ -27,6 +27,8 @@ public class NotificationManager : MonoBehaviour {
 	List<SplashData> splashes = new List<SplashData> ();
 	List<string> banners = new List<string>();
 
+	AudioSource textBeepSound;
+
 	const float bannerTime = 2f;
 	const float bannerWait = 0.5f; //delay between successive banners
 	const float splashAnimTime = 0.5f; //delay before unpausing after the last splash screen
@@ -51,6 +53,8 @@ public class NotificationManager : MonoBehaviour {
 		bannerParent.SetActive (true);
 		splashParent.SetActive (true);
 		helpParent.SetActive (true);
+
+		textBeepSound = GetComponent<AudioSource> ();
 
 		instance = this;
 	}
@@ -126,9 +130,18 @@ public class NotificationManager : MonoBehaviour {
 		}
 
 		while (isSplashing && curCharacterIndex < messageLength) {
-			splashText.text += splashes [0].message[curCharacterIndex];
+			char nextChar = splashes [0].message [curCharacterIndex];
+			splashText.text += nextChar;
+			if (nextChar != ',' && nextChar != ' ') {
+				textBeepSound.Play ();
+			}
+			float delay = splashDelayBetweenCharacters;
+			if (nextChar == '.' || nextChar == '!') {
+				delay *= 4;
+			}
+
+			yield return new WaitForSecondsRealtime (delay);
 			curCharacterIndex++;
-			yield return new WaitForSecondsRealtime (splashDelayBetweenCharacters);
 		}
 
 		isSplashing = false;

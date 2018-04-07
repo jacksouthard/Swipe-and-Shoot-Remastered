@@ -314,6 +314,7 @@ public class LevelProgressManager : MonoBehaviour {
 		if (objectiveEdgeView != null) {
 			objectiveEdgeView.Hide ();
 		}
+		timerAnim.SetBool ("Open", false);
 	}
 
 	void UpdatePlayer() {
@@ -369,11 +370,15 @@ public class LevelProgressManager : MonoBehaviour {
 		TimeManager.SetPaused (true);
 		Camera newCamera = curObjective.objectiveObj.GetComponent<Camera> ();
 		bool movesCamera = newCamera == null;
+		AudioListener oldListener = GameObject.FindObjectOfType<AudioListener> ();
+		AudioListener newListener = null;
 
 		if (movesCamera) {
 			yield return StartCoroutine (CameraController.instance.ShowTarget (curObjective.objectiveObj.transform));
 		} else {
 			yield return StartCoroutine (SceneFader.FadeToCameraAndWait(newCamera, curObjective.fadeInColor));
+			oldListener.enabled = false;
+			newListener = newCamera.gameObject.AddComponent<AudioListener> ();
 		}
 
 		if (curObjective.animation != null) {
@@ -387,6 +392,8 @@ public class LevelProgressManager : MonoBehaviour {
 			if (movesCamera) {
 				CameraController.instance.Resume ();
 			} else {
+				oldListener.enabled = true;
+				Destroy (newListener);
 				yield return StartCoroutine (SceneFader.FadeToCameraAndWait (CameraController.instance.GetComponent<Camera> (), curObjective.fadeOutColor));
 			}
 		}
