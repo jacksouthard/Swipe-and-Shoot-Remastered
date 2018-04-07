@@ -10,11 +10,13 @@ public class Jetpack : Equipment {
 	float fuelPerJump { get { return (100f / jumps); } }
 
 	ParticleSystem[] particles;
+	AudioSource jetSound;
 
 	public override void Init (GameObject _go, EquipmentData _data) {
 		base.Init (_go, _data);
 		particles = GetComponentsInChildren<ParticleSystem> ();
 		player.verticalFactor += heightIncrease;
+		jetSound = GetComponent<AudioSource> ();
 	}
 
 	public override void OnJump () {
@@ -25,6 +27,8 @@ public class Jetpack : Equipment {
 		foreach (ParticleSystem jet in particles) {
 			jet.Play ();
 		}
+
+		jetSound.Play ();
 
 		yield return new WaitForSeconds (launchTime);
 
