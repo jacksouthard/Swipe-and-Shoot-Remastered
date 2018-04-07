@@ -27,7 +27,9 @@ public class NotificationManager : MonoBehaviour {
 	List<SplashData> splashes = new List<SplashData> ();
 	List<string> banners = new List<string>();
 
-	AudioSource textBeepSound;
+	public AudioSource textBeepSound;
+	public AudioSource menuOpenSound;
+	public AudioSource menuCloseSound;
 
 	const float bannerTime = 2f;
 	const float bannerWait = 0.5f; //delay between successive banners
@@ -53,8 +55,6 @@ public class NotificationManager : MonoBehaviour {
 		bannerParent.SetActive (true);
 		splashParent.SetActive (true);
 		helpParent.SetActive (true);
-
-		textBeepSound = GetComponent<AudioSource> ();
 
 		instance = this;
 	}
@@ -90,6 +90,7 @@ public class NotificationManager : MonoBehaviour {
 
 		if (splashes.Count == 1) {
 			DisplaySplash (true);
+			menuOpenSound.Play ();
 			SetAnim (splashAnim, true); //only play animation the first time
 		}
 	}
@@ -194,6 +195,7 @@ public class NotificationManager : MonoBehaviour {
 			SetAnim (splashAnim, false);
 			StartCoroutine (SwapCharacter());
 			StartCoroutine (UnpauseDelayed());
+			menuCloseSound.Play ();
 		} else {
 			DisplaySplash(); //keep going until all splashes have been cleared
 		}
