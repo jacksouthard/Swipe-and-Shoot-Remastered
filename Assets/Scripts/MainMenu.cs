@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour {
 	public GameObject leftButton;
 	public GameObject rightButton;
 	public Toggle autoSwipingToggle;
+	public Dropdown difficultyDropdown;
 
 	[Header("Transition")]
 	public AnimationCurve backgroundCurve;
@@ -31,6 +32,7 @@ public class MainMenu : MonoBehaviour {
 
 		mainCanvas = levelTitleText.GetComponentInParent<Canvas> ().GetComponent<RectTransform>();
 		autoSwipingToggle.isOn = GameSettings.autoSwiping;
+		difficultyDropdown.value = GameSettings.difficulty;
 	}
 
 	void Start() {
@@ -112,6 +114,10 @@ public class MainMenu : MonoBehaviour {
 		startingLevel = GameProgress.farthestLevel;
 		LoadFromFarthestLevel ();
 		OpenSettingsMenu (false);
+	}
+
+	public void ChangeDifficulty(int value) {
+		GameSettings.difficulty = value;
 	}
 
 	public static void LoadLevel(int levelIndex) {

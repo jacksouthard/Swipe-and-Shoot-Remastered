@@ -40,6 +40,7 @@ public class Health : MonoBehaviour {
 	public float dyingTimer;
 	public float decayTimer;
 	public bool endsGame;
+	public bool playsDeathSound;
 	public System.Action onDeath;
 
 	[Header("Swiping")]
@@ -77,6 +78,12 @@ public class Health : MonoBehaviour {
 	EffectFollow curRegenEffect;
 
 	void Start () {
+		if (tag == "Enemy") {
+			maxHealth *= Mathf.Pow (2f, (GameSettings.difficulty - 1));
+		} else if (tag == "Player" || GetComponent<EscortController>() != null) {
+			maxHealth /= Mathf.Pow (2f, (GameSettings.difficulty - 1));
+		}
+
 		health = maxHealth;
 		UpdateRenderers ();
 
@@ -246,6 +253,12 @@ public class Health : MonoBehaviour {
 			GameManager.instance.GameOver (objectName + " died");
 		}
 
+		if (playsDeathSound) {
+			AudioSource deathSound = GetComponent<AudioSource> ();
+			deathSound.clip = AudioManager.instance.GetRandomDeathSound ();
+			deathSound.Play ();
+		}
+
 		if (isPlayer) {
 			return;
 		}
@@ -351,6 +364,8 @@ public class Health : MonoBehaviour {
 				}
 
 				Die ();
+			} else if (onKnockedOver != null) {
+				onKnockedOver.Invoke ();
 			}
 		} else {
 			if (onKnockedOver != null) {

@@ -133,6 +133,9 @@ public class Rideable : MonoBehaviour {
 		AIController ai = newMounter.GetComponentInParent<AIController>();
 		if (ai != null) {
 			ai.enabled = false;
+			if (ai is EnemyController) {
+				tag = "Enemy";
+			}
 		}
 
 		if (isObjective && ridersRequiredForObjective == (seats.Count - remainingSeats) && !hasRopeOut) {

@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour {
 		instance = this;
 	}
 
-	public AudioClip GetRandomEnemyDeathSound() {
+	public AudioClip GetRandomDeathSound() {
 		int random = Random.Range (0, 100);
 		int randomTier = 0;
 

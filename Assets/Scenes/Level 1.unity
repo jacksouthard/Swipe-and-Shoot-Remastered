@@ -651,6 +651,10 @@ Prefab:
       propertyPath: destoryLastPickup
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1300268370610314, guid: 660d960f2c0db4ab98341d71d79b7708, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 660d960f2c0db4ab98341d71d79b7708, type: 2}
   m_IsPrefabParent: 0

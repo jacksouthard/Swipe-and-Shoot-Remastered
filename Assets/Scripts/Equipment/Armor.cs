@@ -18,7 +18,7 @@ public class Armor : Equipment {
 	}
 
 	public override void Remove () {
-		health.maxHealth -= resistance;
+		health.resistance -= resistance;
 		base.Remove ();
 	}
 }

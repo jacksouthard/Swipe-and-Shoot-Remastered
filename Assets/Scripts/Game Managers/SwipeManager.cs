@@ -25,7 +25,7 @@ public class SwipeManager : MonoBehaviour {
 	bool autoSwiping;
 	float swipeTime;
 
-	const float fastFlickLimit = 0.2f;
+	const float fastFlickLimit = 0.4f;
 
 	void Awake() {
 		instance = this;

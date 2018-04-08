@@ -188,6 +188,11 @@ public class AIController : MonoBehaviour {
 	IEnumerator GetUp(float originalHeight) {
 		yield return new WaitForSeconds (fallWaitTime);
 
+		if (inVehicle) {
+			fallenOver = false;
+			yield break;
+		}
+
 		if (navAgent != null) {
 			yield return new WaitUntil (() => (navAgent.isOnNavMesh || rb.velocity.magnitude < 0.5f));
 		}
@@ -201,8 +206,13 @@ public class AIController : MonoBehaviour {
 		}
 		rb.constraints = RigidbodyConstraints.FreezeAll;
 		rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-		transform.position = new Vector3 (transform.position.x, Mathf.Max(transform.position.y, originalHeight), transform.position.z);
-			
+		float finalHeight = transform.position.y;
+		transform.position = new Vector3 (transform.position.x, Mathf.Max(finalHeight, originalHeight), transform.position.z);
+
+		if (navAgent != null && !navAgent.isOnNavMesh) {
+			transform.position = new Vector3 (transform.position.x, (transform.position.y == finalHeight) ? originalHeight : finalHeight, transform.position.z);
+		}
+
 		transform.rotation = Quaternion.Euler (0f, transform.rotation.eulerAngles.y, 0f);
 		gettingUp = false;
 		fallenOver = false;

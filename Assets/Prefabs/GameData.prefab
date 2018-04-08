@@ -156,6 +156,22 @@ MonoBehaviour:
     tier: 0
   - sound: {fileID: 8300000, guid: ace952ac8d8c5491586726bf070a8ebf, type: 3}
     tier: 2
+  - sound: {fileID: 8300000, guid: be40d1aef953246578e31b2795f0c08b, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 6f8650b648d024bc985ae2b970db08c3, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 98bd82e796f144210972d5255afa1581, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: b980efac992274eba93812ef6852673e, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: c79b2ce2a8aab47219c79b695cff380d, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 0aae55a94d7d64de5990d16f050fab72, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 962012cdb45ce4a2983c8299b46ca30e, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 80a7e158a785240f5999e4d2e47cf9ea, type: 3}
+    tier: 0
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1

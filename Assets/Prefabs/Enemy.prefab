@@ -386,7 +386,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -491,6 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canRotateParent: 0
+  targetsToIgnore: []
   targetTag: Player
   verticalClampAngle: 60
   horizontalClampAngle: 60
@@ -520,6 +521,8 @@ MonoBehaviour:
   hasKnockback: 0
   dyingTimer: 1
   decayTimer: 2
+  endsGame: 0
+  playsDeathSound: 1
   canFallOver: 1
   canBeKilledBySwiping: 1
   durability: 20000

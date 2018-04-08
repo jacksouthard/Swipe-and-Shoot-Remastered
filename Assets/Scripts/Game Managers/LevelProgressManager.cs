@@ -90,6 +90,7 @@ public class LevelProgressManager : MonoBehaviour {
 	public Animator timerAnim;
 	public Transform topBar;
 	public Image barIcon;
+	AudioSource checkpointSound;
 
 	[Header("Debug")]
 	public int startingObjective = 0;
@@ -150,6 +151,8 @@ public class LevelProgressManager : MonoBehaviour {
 				}
 			}
 		}
+
+		checkpointSound = GetComponent<AudioSource> ();
 	}
 
 	void Start() {
@@ -436,6 +439,9 @@ public class LevelProgressManager : MonoBehaviour {
 
 		if (!string.IsNullOrEmpty(curObjective.completionBanner)) {
 			NotificationManager.instance.ShowBanner (curObjective.completionBanner);
+			if (!curObjective.doesNotSave) {
+				checkpointSound.Play ();
+			}
 		}
 
 		curObjectiveId++;

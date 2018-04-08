@@ -17,7 +17,7 @@ public class EndlessProgressManager : MonoBehaviour {
 	}
 
 	public void RecordEnemyDeath() {
-		totalKillCount += 10;
+		totalKillCount += 1;
 		killCounter.text = totalKillCount.ToString ();
 	}
 }

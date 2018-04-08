@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 114802767665828352}
   - component: {fileID: 54619242116936068}
   - component: {fileID: 65524705933604248}
+  - component: {fileID: 114868721660094622}
   - component: {fileID: 82261082919319560}
   - component: {fileID: 82693524738832264}
   m_Layer: 0
@@ -484,3 +485,37 @@ MonoBehaviour:
   saves: 0
   ridersRequiredForObjective: 1
   rb: {fileID: 0}
+--- !u!114 &114868721660094622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1729023859902792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016c887d302bd4fb28e07a889197c8d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  maxHealth: 0.1
+  immunity: 0
+  regenSpeed: 5
+  regenWait: 10
+  hitWait: 0.05
+  hitColor: {r: 0.5294118, g: 0, b: 0, a: 1}
+  resistance: 0
+  hasKnockback: 0
+  dyingTimer: 0
+  decayTimer: 2
+  endsGame: 0
+  playsDeathSound: 0
+  canFallOver: 0
+  canBeKilledBySwiping: 0
+  durability: 0
+  explodesOnDeath: 0
+  explosionDamage: 0
+  explosionForce: 0
+  smokes: 0
+  smokeCenter: {fileID: 0}
+  waitTimer: 0
+  health: 0
