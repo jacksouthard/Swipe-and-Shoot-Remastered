@@ -13,13 +13,22 @@ public class AudioManager : MonoBehaviour {
 	public static AudioManager instance;
 
 	public List<DeathSound> enemyDeathSounds;
+	public List<DeathSound> playerDeathSounds;
 	int[] tierValues = {0, 80, 98}; //hardcoded tier probabilities
 
 	void Awake() {
 		instance = this;
 	}
 
-	public AudioClip GetRandomDeathSound() {
+	public AudioClip GetRandomEnemyDeathSound() {
+		return GetRandomSoundFromList (enemyDeathSounds);
+	}
+
+	public AudioClip GetRandomPlayerDeathSound() {
+		return playerDeathSounds [Random.Range (0, playerDeathSounds.Count)].sound;
+	}
+
+	AudioClip GetRandomSoundFromList(List<DeathSound> list) {
 		int random = Random.Range (0, 100);
 		int randomTier = 0;
 
@@ -28,7 +37,7 @@ public class AudioManager : MonoBehaviour {
 		}
 
 		List<DeathSound> allDataOfTier = new List<DeathSound> ();
-		foreach (DeathSound deathSound in enemyDeathSounds) {
+		foreach (DeathSound deathSound in list) {
 			if (deathSound.tier == randomTier) {
 				allDataOfTier.Add (deathSound);
 			}

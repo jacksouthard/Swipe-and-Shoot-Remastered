@@ -255,7 +255,11 @@ public class Health : MonoBehaviour {
 
 		if (playsDeathSound) {
 			AudioSource deathSound = GetComponent<AudioSource> ();
-			deathSound.clip = AudioManager.instance.GetRandomDeathSound ();
+			if (tag != "Player") {
+				deathSound.clip = AudioManager.instance.GetRandomEnemyDeathSound ();
+			} else {
+				deathSound.clip = AudioManager.instance.GetRandomPlayerDeathSound ();
+			}
 			deathSound.Play ();
 		}
 

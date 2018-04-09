@@ -172,6 +172,25 @@ MonoBehaviour:
     tier: 0
   - sound: {fileID: 8300000, guid: 80a7e158a785240f5999e4d2e47cf9ea, type: 3}
     tier: 0
+  - sound: {fileID: 8300000, guid: 1a50240caef944dfeaa83916a669063b, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 6cf53f59424fc4ba2b50d438965a6b4c, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 35b2e4d0ace8b4d7d826914ec6329b56, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: f42824387eb9f41b886d208b29e4a2f4, type: 3}
+    tier: 2
+  playerDeathSounds:
+  - sound: {fileID: 8300000, guid: f956b6de7087a4cd787c513305194d06, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 9d74ba011d3aa40c1b36bf200fb56d0e, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 022f5d3c136834219a02ee741f96c09b, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: bbd1535ba7b5b460b8f96a210bdf072b, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 8ad72dc3f734d407584f99bbd6873068, type: 3}
+    tier: 0
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1
