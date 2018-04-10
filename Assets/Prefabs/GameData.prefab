@@ -180,6 +180,24 @@ MonoBehaviour:
     tier: 0
   - sound: {fileID: 8300000, guid: f42824387eb9f41b886d208b29e4a2f4, type: 3}
     tier: 2
+  - sound: {fileID: 8300000, guid: 3a577064b90e345ab8e3defb88daa9a3, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 31e779b889c324ef386f1644c118267c, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 284399bb05f4e42d39df07f3db22dae1, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 2c68b60ff43484dfbbe7d77d48a1d949, type: 3}
+    tier: 2
+  - sound: {fileID: 8300000, guid: 0bcc963c0fa7a4476a42b402284923f1, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 54f4c2938d1704067a81857ad08dbd4a, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: e5b61e35b40114d8e8ab9569051414b1, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: e591022c06902434caffcf383123f744, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 9f98273275e9f4a4687e823d2b73442f, type: 3}
+    tier: 2
   playerDeathSounds:
   - sound: {fileID: 8300000, guid: f956b6de7087a4cd787c513305194d06, type: 3}
     tier: 0

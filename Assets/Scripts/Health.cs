@@ -233,6 +233,7 @@ public class Health : MonoBehaviour {
 			return;
 		}
 
+		health = 0f;
 		state = State.Dying;
 		EndRegen ();
 		//ResetColor();
@@ -255,10 +256,12 @@ public class Health : MonoBehaviour {
 
 		if (playsDeathSound) {
 			AudioSource deathSound = GetComponent<AudioSource> ();
-			if (tag != "Player") {
-				deathSound.clip = AudioManager.instance.GetRandomEnemyDeathSound ();
-			} else {
-				deathSound.clip = AudioManager.instance.GetRandomPlayerDeathSound ();
+			if (deathSound.clip == null) {
+				if (tag != "Player") {
+					deathSound.clip = AudioManager.instance.GetRandomEnemyDeathSound ();
+				} else {
+					deathSound.clip = AudioManager.instance.GetRandomPlayerDeathSound ();
+				}
 			}
 			deathSound.Play ();
 		}

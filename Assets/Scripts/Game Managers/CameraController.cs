@@ -37,12 +37,13 @@ public class CameraController : MonoBehaviour {
 		isActive = false;
 		Vector3 startingPos = transform.position;
 		Vector3 targetPos = CalculateTargetPos (target.position);
+		float t = Time.fixedDeltaTime;
 
 		float p = 0;
 		while(p < 1f) {
-			yield return new WaitForSecondsRealtime(Time.fixedUnscaledDeltaTime);
+			yield return new WaitForSecondsRealtime(t);
 			transform.position = Vector3.Lerp (startingPos, targetPos + offset, p);
-			p += Time.fixedUnscaledDeltaTime * 2f;
+			p += t * 2f;
 		}
 	}
 

@@ -5609,7 +5609,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[3].startingSplashes.Array.data[0].message
-      value: They're preparing to launch! Retarget the missile before it's tooo late!
+      value: They're preparing to launch! Retarget the missile before it's too late!
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -28196,6 +28196,11 @@ Prefab:
         type: 2}
       propertyPath: defaultWeaponName
       value: RPG
+      objectReference: {fileID: 0}
+    - target: {fileID: 114739835484656106, guid: 16dba7d26b5bc4fc4abbb8473252e4a1,
+        type: 2}
+      propertyPath: maxHealth
+      value: 900
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16dba7d26b5bc4fc4abbb8473252e4a1, type: 2}
