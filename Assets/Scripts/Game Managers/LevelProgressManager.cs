@@ -128,6 +128,8 @@ public class LevelProgressManager : MonoBehaviour {
 
 		PrepareObjectives ();
 
+		checkpointSound = GetComponent<AudioSource> ();
+
 		if (gameTimer != null) {
 			gameTimer.enabled = curObjective.timerActiveState;
 
@@ -151,8 +153,6 @@ public class LevelProgressManager : MonoBehaviour {
 				}
 			}
 		}
-
-		checkpointSound = GetComponent<AudioSource> ();
 	}
 
 	void Start() {
