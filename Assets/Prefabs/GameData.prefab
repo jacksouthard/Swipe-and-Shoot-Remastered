@@ -198,6 +198,32 @@ MonoBehaviour:
     tier: 0
   - sound: {fileID: 8300000, guid: 9f98273275e9f4a4687e823d2b73442f, type: 3}
     tier: 2
+  - sound: {fileID: 8300000, guid: 8f3463c8ddf804634ba224de8966a692, type: 3}
+    tier: 2
+  - sound: {fileID: 8300000, guid: 3763d28cbd84f4460b8587cc97564690, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: a55347c2159204f25badc62c152227ab, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: a61343c4ffc5a48999f5e9f1104f0b93, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: a844cab7acfd345c886fc11182105348, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 1ecbc6c045686448299c4aed5d753fdd, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: f2d3a24b4445146d5b114c03a7326288, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 9019c020a31694614916cc33e7404f24, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 8edcd6a8e1aa5448d98b2bb8c29fd4da, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 12a04470f35b84b1c8cf05224ac38e80, type: 3}
+    tier: 1
+  - sound: {fileID: 8300000, guid: a2e3d4edc67e4424e84690a345382eb2, type: 3}
+    tier: 1
+  - sound: {fileID: 8300000, guid: b4c9a7ed30f3d467fb7d975f0abd2247, type: 3}
+    tier: 0
+  - sound: {fileID: 8300000, guid: 150eab9ba1e91470d91753b8b5fb2598, type: 3}
+    tier: 1
   playerDeathSounds:
   - sound: {fileID: 8300000, guid: f956b6de7087a4cd787c513305194d06, type: 3}
     tier: 0
