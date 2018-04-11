@@ -30,6 +30,13 @@ public class AIController : MonoBehaviour {
 	protected Rigidbody rb;
 
 	void Awake() {
+		DifficultyEnabler diff = GetComponent<DifficultyEnabler> ();
+		if (diff != null) {
+			if (diff.shouldDestroy) {
+				Destroy (this);
+				return;
+			}
+		}
 		LoadFromCheckpoint ();
 	}
 		

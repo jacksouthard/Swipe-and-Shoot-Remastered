@@ -78,16 +78,14 @@ public class Health : MonoBehaviour {
 	EffectFollow curRegenEffect;
 
 	void Start () {
-		if (tag == "Enemy") {
-			maxHealth *= Mathf.Pow (2f, (GameSettings.difficulty - 1));
-		} else if (tag == "Player" || GetComponent<EscortController>() != null) {
-			maxHealth /= Mathf.Pow (2f, (GameSettings.difficulty - 1));
-		}
-
-		health = maxHealth;
 		UpdateRenderers ();
 
 		isPlayer = (GetComponent<PlayerController> () != null);
+		if (isPlayer) {
+			maxHealth /= Mathf.Pow (1.5f, (GameSettings.difficulty - 1));
+		}
+
+		health = maxHealth;
 	}
 
 	//waits until next frame before updating MeshRenderers
