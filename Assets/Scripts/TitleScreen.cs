@@ -8,8 +8,11 @@ public class TitleScreen : MonoBehaviour {
 
 	public void StartGame () {
 		//for now, we assume that this is the user's first time if they haven't beaten boot camp
-		int levelToLoad = (GameProgress.farthestLevel != 0) ? 1 : 2; //1 = main menu scene, 2 = bootcamp
-		SceneFader.FadeToScene(levelToLoad, Color.black);
+		if (GameProgress.farthestLevel != 0) {
+			SceneFader.FadeToScene (1, Color.black); //load main menu
+		} else {
+			GetComponent<Animator>().SetTrigger ("ShowDifficulty");
+		}
 	}
 
 	public void StartRiser() {
@@ -19,5 +22,10 @@ public class TitleScreen : MonoBehaviour {
 	public void StartMusic() {
 		riser.Stop ();
 		music.Play ();
+	}
+
+	public void ChooseDifficulty(int difficulty) {
+		GameSettings.difficulty = difficulty;
+		SceneFader.FadeToScene (2, Color.black); //load boot camp
 	}
 }
