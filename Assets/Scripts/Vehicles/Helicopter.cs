@@ -195,6 +195,10 @@ public class Helicopter : Rideable {
 	}
 
 	void CalculateTargetHeight () {
+		if (hasRopeOut) {
+			return;
+		}
+
 		float maxHeight = 0;
 
 		foreach (var point in checkPoints) {

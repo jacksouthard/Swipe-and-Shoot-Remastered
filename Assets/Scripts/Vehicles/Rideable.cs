@@ -37,7 +37,7 @@ public class Rideable : MonoBehaviour {
 	Health health;
 
 	RopeMounter ropeMounter;
-	bool hasRopeOut = false;
+	protected bool hasRopeOut = false;
 
 	void Awake () {
 		Initiate ();
