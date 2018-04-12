@@ -741,7 +741,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 396641086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -80.79999, y: 0, z: -3}
+  m_LocalPosition: {x: -75, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2747,6 +2747,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'narayan bal
 
+    nicolas chin
+
     ian curry
 
     sawyer dobson
@@ -2754,6 +2756,8 @@ MonoBehaviour:
     luka hettenkofer
 
     nathan jew
+
+    avinash reddy
 
     jack southard
 
@@ -2833,6 +2837,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'narayan bal
 
+    nicolas chin
+
     ian curry
 
     sawyer dobson
@@ -2840,6 +2846,8 @@ MonoBehaviour:
     luka hettenkofer
 
     nathan jew
+
+    avinash reddy
 
     jack southard
 
@@ -3578,7 +3586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -75.8, y: 0}
+  m_AnchoredPosition: {x: -70, y: 0}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1609306450

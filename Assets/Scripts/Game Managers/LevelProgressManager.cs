@@ -90,7 +90,10 @@ public class LevelProgressManager : MonoBehaviour {
 	public Animator timerAnim;
 	public Transform topBar;
 	public Image barIcon;
-	AudioSource checkpointSound;
+
+	[Header("Audio")]
+	public AudioSource checkpointSound;
+	public AudioSource winSound;
 
 	[Header("Debug")]
 	public int startingObjective = 0;
@@ -127,8 +130,6 @@ public class LevelProgressManager : MonoBehaviour {
 		objectiveEdgeView.Hide ();
 
 		PrepareObjectives ();
-
-		checkpointSound = GetComponent<AudioSource> ();
 
 		if (gameTimer != null) {
 			gameTimer.enabled = curObjective.timerActiveState;
@@ -236,6 +237,9 @@ public class LevelProgressManager : MonoBehaviour {
 
 			foreach (NotificationManager.SplashData message in curObjective.startingSplashes) {
 				NotificationManager.instance.ShowSplash (message);
+			}
+			if (curObjective.startingSplashes.Count > 0) {
+				SwipeManager.instance.EndSwipe ();
 			}
 		}
 
@@ -491,6 +495,8 @@ public class LevelProgressManager : MonoBehaviour {
 		}
 		winScreen.SetActive (true);
 		isComplete = true;
+		winSound.Play ();
+		GameProgress.CompleteLevel (GameManager.instance.curLevelId);
 
 		GameManager.instance.EndLevel ();
 	}

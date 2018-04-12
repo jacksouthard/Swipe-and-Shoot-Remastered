@@ -1002,6 +1002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!1 &40393920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,6 +1908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!1 &84292242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,6 +2260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!1001 &104400354
 Prefab:
   m_ObjectHideFlags: 0
@@ -3791,6 +3794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!1 &215021302
 GameObject:
   m_ObjectHideFlags: 0
@@ -10964,6 +10968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!1 &552054127
 GameObject:
   m_ObjectHideFlags: 0
@@ -12573,6 +12578,88 @@ Transform:
   m_PrefabParentObject: {fileID: 4384624033642912, guid: 6b15d664535774638abc8b6899f90648,
     type: 2}
   m_PrefabInternal: {fileID: 625968402}
+--- !u!1001 &629246419
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 106.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.519
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 58.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.03925978
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.9992291
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920397931556818, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82288541190576018, guid: 3ec1756db85114a8c9053292e6d520aa,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755002622876324, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+      propertyPath: m_Name
+      value: BackupATV
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 3ec1756db85114a8c9053292e6d520aa, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &629246420 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1755002622876324, guid: 3ec1756db85114a8c9053292e6d520aa,
+    type: 2}
+  m_PrefabInternal: {fileID: 629246419}
+--- !u!114 &629246421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 629246420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb50433cd2c3474e9c82bf6c6403f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDifficulty: 0
+  maxDifficutly: 0
+  shouldDestroy: 0
 --- !u!1 &635518074
 GameObject:
   m_ObjectHideFlags: 0
@@ -12745,6 +12832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!1 &642049163
 GameObject:
   m_ObjectHideFlags: 0
@@ -15415,6 +15503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!1001 &760328672
 Prefab:
   m_ObjectHideFlags: 0
@@ -18234,7 +18323,7 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[2].completionBanner
-      value: PILOT FREED
+      value: CHECKPOINT REACHED
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
@@ -18319,6 +18408,11 @@ Prefab:
         type: 2}
       propertyPath: objectives.Array.data[4].showsScreenIndicator
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82426015391638672, guid: 6fc48da9e88b347e694fe886a9691487,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6fc48da9e88b347e694fe886a9691487, type: 2}
@@ -21611,6 +21705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!1 &1008502858
 GameObject:
   m_ObjectHideFlags: 0
@@ -27855,6 +27950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!4 &1297673834 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4229875499741050, guid: 9825be6ccbbb343b48a76a42c27dfe91,
@@ -39424,6 +39520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!1001 &1885596687
 Prefab:
   m_ObjectHideFlags: 0

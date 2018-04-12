@@ -164,6 +164,14 @@ public class SwipeManager : MonoBehaviour {
 		joystickVisual.gameObject.SetActive (false);
 		swipeLine.enabled = false;
 		isTapping = false;
+
+		if (player.inVehicle) {
+			if (player.currentVehicle is Vehicle) {
+				(player.currentVehicle as Vehicle).targetDirection = Vector2.zero;
+			} else if (player.currentVehicle is Helicopter) {
+				(player.currentVehicle as Helicopter).targetDirection = Vector2.zero;
+			}
+		}
 	}
 
 	bool CanLaunch (Vector2 dir) {

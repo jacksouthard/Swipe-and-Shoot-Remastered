@@ -14,6 +14,33 @@ public class GameProgress {
 		}
 	}
 
+	public static void CompleteLevel(int index) {
+		string curData = PlayerPrefs.GetString ("DifficultyData");
+		string newData;
+
+		int difficulty = GameSettings.difficulty;
+
+		if (curData.Length >= index + 1) {
+			int prevBest = int.Parse (curData [index].ToString ());
+			if (difficulty > prevBest) {
+				newData = curData.Substring (0, index) + difficulty.ToString ();
+				if (newData.Length < curData.Length) {
+					newData += curData.Substring (index + 1);
+				}
+			} else {
+				return;
+			}
+		} else {
+			newData = curData;
+			while(newData.Length < index) {
+				newData += "0";
+			}
+			newData += difficulty.ToString ();
+		}
+
+		PlayerPrefs.SetString ("DifficultyData", newData);
+	}
+
 	/*public static bool isFirstTime {
 		get {
 			return PlayerPrefs.GetInt ("IsFirstTime") == 0;
@@ -25,6 +52,7 @@ public class GameProgress {
 
 	public static void Reset() {
 		PlayerPrefs.SetInt ("FarthestLevel", 0);
+		PlayerPrefs.SetString ("DifficultyData", "");
 	}
 
 	public static void UnlockAll() {

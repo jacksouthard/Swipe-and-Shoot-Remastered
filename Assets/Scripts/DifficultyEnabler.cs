@@ -6,6 +6,7 @@ public class DifficultyEnabler : MonoBehaviour {
 	public int minDifficulty;
 	public int maxDifficutly;
 
+	[HideInInspector]
 	public bool shouldDestroy = false;
 
 	void Awake() {

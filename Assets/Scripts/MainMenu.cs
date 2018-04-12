@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour {
 	public GameObject leftButton;
 	public GameObject rightButton;
 	public Toggle autoSwipingToggle;
-	public Dropdown difficultyDropdown;
+	public Image[] difficultyButtons;
 
 	[Header("Transition")]
 	public AnimationCurve backgroundCurve;
@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour {
 
 		mainCanvas = levelTitleText.GetComponentInParent<Canvas> ().GetComponent<RectTransform>();
 		autoSwipingToggle.isOn = GameSettings.autoSwiping;
-		difficultyDropdown.value = GameSettings.difficulty;
+		UpdateDifficultyUI ();
 	}
 
 	void Start() {
@@ -105,8 +105,7 @@ public class MainMenu : MonoBehaviour {
 	public void ResetGame() {
 		GameProgress.Reset ();
 		startingLevel = 0;
-		LoadFromFarthestLevel ();
-		OpenSettingsMenu (false);
+		SceneFader.FadeToScene (0, Color.black); //return to title screen
 	}
 
 	public void BetaUnlock() {
@@ -117,7 +116,13 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void ChangeDifficulty(int value) {
+		difficultyButtons [GameSettings.difficulty].color = Color.gray;
 		GameSettings.difficulty = value;
+		UpdateDifficultyUI ();
+	}
+
+	void UpdateDifficultyUI() {
+		difficultyButtons [GameSettings.difficulty].color = new Color(0f, 0.5f, 1f);
 	}
 
 	public static void LoadLevel(int levelIndex) {
