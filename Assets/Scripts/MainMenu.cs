@@ -15,6 +15,8 @@ public class MainMenu : MonoBehaviour {
 	public GameObject rightButton;
 	public Toggle autoSwipingToggle;
 	public Image[] difficultyButtons;
+	public GameObject starParent;
+	Image[] stars;
 
 	[Header("Transition")]
 	public AnimationCurve backgroundCurve;
@@ -32,6 +34,7 @@ public class MainMenu : MonoBehaviour {
 
 		mainCanvas = levelTitleText.GetComponentInParent<Canvas> ().GetComponent<RectTransform>();
 		autoSwipingToggle.isOn = GameSettings.autoSwiping;
+		stars = starParent.GetComponentsInChildren<Image> ();
 		UpdateDifficultyUI ();
 	}
 
@@ -81,6 +84,16 @@ public class MainMenu : MonoBehaviour {
 			int bgLevelIndex = GetLevelIdInDir (i - 1);
 			if (bgLevelIndex >= 0 && bgLevelIndex < LevelManager.instance.levelData.Count) {
 				backgrounds [i].sprite = LevelManager.instance.levelData [bgLevelIndex].image;
+			}
+		}
+
+		if (curLevelIndex == 0 || data.type != LevelManager.LevelData.Type.Campaign) {
+			starParent.SetActive (false);
+		} else {
+			starParent.SetActive (true);
+			int bestDifficulty = (curLevelIndex < GameProgress.farthestLevel) ? GameProgress.GetBestDifficultyForIndex (curLevelIndex) : -1;
+			for (int i = 0; i < stars.Length; i++) {
+				stars [i].color = (i <= bestDifficulty) ? Color.yellow : new Color (0, 0, 0, 0.5f);
 			}
 		}
 	}

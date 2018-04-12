@@ -2760,6 +2760,11 @@ Prefab:
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 82695530112977162, guid: e32477048be2b4e30bf8cb30e045bfbf,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e32477048be2b4e30bf8cb30e045bfbf, type: 2}
   m_IsPrefabParent: 0
@@ -6701,13 +6706,13 @@ Prefab:
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[9].type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[9].objectiveObj
       value: 
-      objectReference: {fileID: 1596035634}
+      objectReference: {fileID: 1948653553}
     - target: {fileID: 114595244911099254, guid: 6fc48da9e88b347e694fe886a9691487,
         type: 2}
       propertyPath: objectives.Array.data[9].showsScreenIndicator
@@ -10261,6 +10266,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 1091460730061230, guid: 588123117859b47d7830ec9b52debaa5, type: 2}
+      propertyPath: m_Name
+      value: Debriefing
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 588123117859b47d7830ec9b52debaa5, type: 2}
   m_IsPrefabParent: 0
@@ -10782,7 +10791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1596035635
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12835,6 +12844,23 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04b4938f8660c4f799cd8b83649da604, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1948653553 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1091460730061230, guid: 588123117859b47d7830ec9b52debaa5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1509017137}
+--- !u!65 &1948653554
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1948653553}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.67, z: 0}
 --- !u!1001 &1950944624
 Prefab:
   m_ObjectHideFlags: 0

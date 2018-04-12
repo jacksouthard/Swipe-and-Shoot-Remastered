@@ -41,6 +41,16 @@ public class GameProgress {
 		PlayerPrefs.SetString ("DifficultyData", newData);
 	}
 
+	public static int GetBestDifficultyForIndex(int levelIndex) {
+		string curData = PlayerPrefs.GetString ("DifficultyData");
+
+		if (curData.Length < levelIndex + 1) {
+			return 0;
+		} else {
+			return int.Parse (curData[levelIndex].ToString());
+		}
+	}
+
 	/*public static bool isFirstTime {
 		get {
 			return PlayerPrefs.GetInt ("IsFirstTime") == 0;
