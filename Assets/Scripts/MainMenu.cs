@@ -35,6 +35,8 @@ public class MainMenu : MonoBehaviour {
 		mainCanvas = levelTitleText.GetComponentInParent<Canvas> ().GetComponent<RectTransform>();
 		autoSwipingToggle.isOn = GameSettings.autoSwiping;
 		stars = starParent.GetComponentsInChildren<Image> ();
+		GameProgress.LoadProgressData ();
+
 		UpdateDifficultyUI ();
 	}
 
@@ -91,7 +93,7 @@ public class MainMenu : MonoBehaviour {
 			starParent.SetActive (false);
 		} else {
 			starParent.SetActive (true);
-			int bestDifficulty = (curLevelIndex < GameProgress.farthestLevel) ? GameProgress.GetBestDifficultyForIndex (curLevelIndex) : -1;
+			int bestDifficulty = GameProgress.GetBestDifficultyForIndex (curLevelIndex);
 			for (int i = 0; i < stars.Length; i++) {
 				stars [i].color = (i <= bestDifficulty) ? Color.yellow : new Color (0, 0, 0, 0.5f);
 			}
