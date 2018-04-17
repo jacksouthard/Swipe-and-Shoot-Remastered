@@ -15485,6 +15485,10 @@ Prefab:
       propertyPath: m_Shadows.m_Resolution
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4695867689035704, guid: dab0b4a5d0e5347a59e73123a6d8237a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -11.66
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dab0b4a5d0e5347a59e73123a6d8237a, type: 2}
   m_IsPrefabParent: 0

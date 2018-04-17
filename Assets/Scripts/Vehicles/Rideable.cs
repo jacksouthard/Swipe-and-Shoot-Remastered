@@ -248,18 +248,26 @@ public class Rideable : MonoBehaviour {
 	}
 
 	IEnumerator IgnoreDriverCollisions(Collider driverCol) {
-		Collider mainCollider = gameObject.GetComponentInChildren<BoxCollider> () as Collider;
-		if (mainCollider == null || driverCol == null) {
+		Collider[] allColliders = gameObject.GetComponentsInChildren<Collider> ();
+		if (allColliders.Length == 0 || driverCol == null) {
 			yield break;
 		}
-		Physics.IgnoreCollision (mainCollider, driverCol);
+		foreach (Collider col in allColliders) {
+			if (col.tag != "Player") {
+				Physics.IgnoreCollision (col, driverCol);
+			}
+		}
 
 		yield return new WaitForSeconds (0.5f);
 
-		if (mainCollider == null || driverCol == null) {
+		if (allColliders.Length == 0 || driverCol == null) {
 			yield break;
 		}
-		Physics.IgnoreCollision (mainCollider, driverCol, false);
+		foreach (Collider col in allColliders) {
+			if (col != null && col.tag != "Player") {
+				Physics.IgnoreCollision (col, driverCol, false);
+			}
+		}
 	}
 
 	protected virtual void CompleteObjective() {

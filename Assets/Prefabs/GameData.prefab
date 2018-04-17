@@ -134,93 +134,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDeathSounds:
-  - sound: {fileID: 8300000, guid: 0e2edf782b26f41eb810098733d69b77, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 0911ea01dcc11466ca09916f3db421bb, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: cbd48c4acc98643128d27e5842da823c, type: 3}
-    tier: 1
-  - sound: {fileID: 8300000, guid: 5f1736d604809469b84462872439d3a2, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 15ce2d376c6ab45968746e8d4faaad62, type: 3}
-    tier: 2
-  - sound: {fileID: 8300000, guid: 46efcc3d151b94e519c21814bb1a9449, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: e28ee2ec514c046d1a92656d4336d3e7, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 2f4c31be841ad4661829611c4c2d3ad3, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 09f9f072132314b61b09e8afe121cbfe, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: ace952ac8d8c5491586726bf070a8ebf, type: 3}
-    tier: 2
-  - sound: {fileID: 8300000, guid: be40d1aef953246578e31b2795f0c08b, type: 3}
-    tier: 2
-  - sound: {fileID: 8300000, guid: 98bd82e796f144210972d5255afa1581, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: c79b2ce2a8aab47219c79b695cff380d, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 0aae55a94d7d64de5990d16f050fab72, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 962012cdb45ce4a2983c8299b46ca30e, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 80a7e158a785240f5999e4d2e47cf9ea, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 1a50240caef944dfeaa83916a669063b, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 6cf53f59424fc4ba2b50d438965a6b4c, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 35b2e4d0ace8b4d7d826914ec6329b56, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: f42824387eb9f41b886d208b29e4a2f4, type: 3}
-    tier: 2
-  - sound: {fileID: 8300000, guid: 3a577064b90e345ab8e3defb88daa9a3, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 31e779b889c324ef386f1644c118267c, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 284399bb05f4e42d39df07f3db22dae1, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 2c68b60ff43484dfbbe7d77d48a1d949, type: 3}
-    tier: 2
-  - sound: {fileID: 8300000, guid: 0bcc963c0fa7a4476a42b402284923f1, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 54f4c2938d1704067a81857ad08dbd4a, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: e5b61e35b40114d8e8ab9569051414b1, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: e591022c06902434caffcf383123f744, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 9f98273275e9f4a4687e823d2b73442f, type: 3}
-    tier: 2
-  - sound: {fileID: 8300000, guid: 3763d28cbd84f4460b8587cc97564690, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: a61343c4ffc5a48999f5e9f1104f0b93, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: a844cab7acfd345c886fc11182105348, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 1ecbc6c045686448299c4aed5d753fdd, type: 3}
-    tier: 1
-  - sound: {fileID: 8300000, guid: f2d3a24b4445146d5b114c03a7326288, type: 3}
-    tier: 2
-  - sound: {fileID: 8300000, guid: 8edcd6a8e1aa5448d98b2bb8c29fd4da, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 12a04470f35b84b1c8cf05224ac38e80, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: a2e3d4edc67e4424e84690a345382eb2, type: 3}
-    tier: 2
-  - sound: {fileID: 8300000, guid: b4c9a7ed30f3d467fb7d975f0abd2247, type: 3}
-    tier: 0
+  - {fileID: 8300000, guid: 0e2edf782b26f41eb810098733d69b77, type: 3}
+  - {fileID: 8300000, guid: 0911ea01dcc11466ca09916f3db421bb, type: 3}
+  - {fileID: 8300000, guid: 5f1736d604809469b84462872439d3a2, type: 3}
+  - {fileID: 8300000, guid: 46efcc3d151b94e519c21814bb1a9449, type: 3}
+  - {fileID: 8300000, guid: e28ee2ec514c046d1a92656d4336d3e7, type: 3}
+  - {fileID: 8300000, guid: be40d1aef953246578e31b2795f0c08b, type: 3}
+  - {fileID: 8300000, guid: c79b2ce2a8aab47219c79b695cff380d, type: 3}
+  - {fileID: 8300000, guid: 0aae55a94d7d64de5990d16f050fab72, type: 3}
+  - {fileID: 8300000, guid: 6cf53f59424fc4ba2b50d438965a6b4c, type: 3}
+  - {fileID: 8300000, guid: 3a577064b90e345ab8e3defb88daa9a3, type: 3}
+  - {fileID: 8300000, guid: 0bcc963c0fa7a4476a42b402284923f1, type: 3}
+  - {fileID: 8300000, guid: e5b61e35b40114d8e8ab9569051414b1, type: 3}
+  - {fileID: 8300000, guid: e591022c06902434caffcf383123f744, type: 3}
+  - {fileID: 8300000, guid: b61bddb5d897b4bd38327db6d02a9669, type: 3}
+  - {fileID: 8300000, guid: b4c9a7ed30f3d467fb7d975f0abd2247, type: 3}
   playerDeathSounds:
-  - sound: {fileID: 8300000, guid: f956b6de7087a4cd787c513305194d06, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 9d74ba011d3aa40c1b36bf200fb56d0e, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 022f5d3c136834219a02ee741f96c09b, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: bbd1535ba7b5b460b8f96a210bdf072b, type: 3}
-    tier: 0
-  - sound: {fileID: 8300000, guid: 8ad72dc3f734d407584f99bbd6873068, type: 3}
-    tier: 0
+  - {fileID: 8300000, guid: f956b6de7087a4cd787c513305194d06, type: 3}
+  - {fileID: 8300000, guid: 9d74ba011d3aa40c1b36bf200fb56d0e, type: 3}
+  - {fileID: 8300000, guid: 022f5d3c136834219a02ee741f96c09b, type: 3}
+  - {fileID: 8300000, guid: 8ad72dc3f734d407584f99bbd6873068, type: 3}
+  - {fileID: 8300000, guid: edd57d42bd37246e5ba12e77079dfaf8, type: 3}
 --- !u!114 &114994002116265576
 MonoBehaviour:
   m_ObjectHideFlags: 1

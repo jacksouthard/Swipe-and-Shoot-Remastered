@@ -8699,7 +8699,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4695867689035704, guid: dab0b4a5d0e5347a59e73123a6d8237a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -8
+      value: -4.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dab0b4a5d0e5347a59e73123a6d8237a, type: 2}
@@ -10312,6 +10312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDifficulty: 2
   maxDifficutly: 2
+  shouldDestroy: 0
 --- !u!4 &1926347189
 Transform:
   m_ObjectHideFlags: 0
