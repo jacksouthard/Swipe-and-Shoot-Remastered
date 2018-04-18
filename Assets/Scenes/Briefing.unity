@@ -755,6 +755,8 @@ MonoBehaviour:
   - {fileID: 1861713109}
   - {fileID: 441160815}
   starParent: {fileID: 482382462}
+  resetButton: {fileID: 404455263}
+  resetText: {fileID: 232032069}
   backgroundCurve:
     serializedVersion: 2
     m_Curve:
@@ -831,16 +833,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1310386217758092, guid: e32477048be2b4e30bf8cb30e045bfbf, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 82450530374162428, guid: e32477048be2b4e30bf8cb30e045bfbf,
+    - target: {fileID: 82351075627054834, guid: e32477048be2b4e30bf8cb30e045bfbf,
         type: 2}
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 82351075627054834, guid: e32477048be2b4e30bf8cb30e045bfbf,
+    - target: {fileID: 82450530374162428, guid: e32477048be2b4e30bf8cb30e045bfbf,
         type: 2}
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0

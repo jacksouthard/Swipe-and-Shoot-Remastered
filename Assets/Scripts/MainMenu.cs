@@ -16,6 +16,8 @@ public class MainMenu : MonoBehaviour {
 	public Toggle autoSwipingToggle;
 	public Image[] difficultyButtons;
 	public GameObject starParent;
+	public Image resetButton;
+	public Text resetText;
 	Image[] stars;
 
 	[Header("Transition")]
@@ -28,6 +30,7 @@ public class MainMenu : MonoBehaviour {
 
 	int curLevelIndex = 0;
 	bool transitioning = false;
+	bool resetConfirmed = false;
 
 	void Awake() {
 		TimeManager.SetPaused (false);
@@ -118,9 +121,24 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void ResetGame() {
-		GameProgress.Reset ();
-		startingLevel = 0;
-		SceneFader.FadeToScene (0, Color.black); //return to title screen
+		if (resetConfirmed) {
+			GameProgress.Reset ();
+			startingLevel = 0;
+			SceneFader.FadeToScene (0, Color.black); //return to title screen
+		} else {
+			resetConfirmed = true;
+			UpdateResetButton ();
+		}
+	}
+
+	void UpdateResetButton() {
+		if (resetConfirmed) {
+			resetButton.color = Color.red;
+			resetText.text = "Sure?";
+		} else {
+			resetButton.color = Color.gray;
+			resetText.text = "Reset game";
+		}
 	}
 
 	public void BetaUnlock() {
@@ -131,6 +149,9 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void ChangeDifficulty(int value) {
+		resetConfirmed = false;
+		UpdateResetButton ();
+
 		difficultyButtons [GameSettings.difficulty].color = Color.gray;
 		GameSettings.difficulty = value;
 		UpdateDifficultyUI ();
@@ -151,6 +172,11 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void OpenSettingsMenu(bool open) {
+		if (open) {
+			resetConfirmed = false;
+			UpdateResetButton ();
+		}
+
 		menuAnim.SetBool ("SettingsOpen", open);
 	}
 }
